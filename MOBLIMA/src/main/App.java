@@ -3,9 +3,7 @@ package main;
 import java.util.Scanner;
 
 public class App {
-    /** 
-     * @param args
-     */
+
     public static void main(String[] args){
         
         Scanner scan = new Scanner(System.in); //Scanner Object Instantiation
@@ -49,6 +47,7 @@ public class App {
             case 2:
                 User.start(); //Start User Module
                 break;
+            default:
         }
 
         System.out.println("Thank you for using MOBLIMA!");

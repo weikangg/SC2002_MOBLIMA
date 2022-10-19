@@ -1,30 +1,113 @@
 package main;
 
+import java.util.List;
 import java.util.Scanner;
-import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
+
+import com.opencsv.*;
+
+import main.Objects.Cineplex;
+
 
 public class Admin {
-    
+
+    private Admin(){
+        throw new IllegalStateException("Utility class");
+    }
+
     public static void start(){
-        
-        Scanner scan = new Scanner(System.in); //Scanner Object Instantiation
         
         System.out.println("");
         System.out.println("Starting Administrator Module...");
-        System.out.println("\n.\n.\n.\n");
+        System.out.println("\n.\n.\n.");
+        
+        int tries = 0; //Counter for number of tries
+        
+        while(!adminLogin()){ //Attempt login
+            
+            System.out.println("");
+            tries++;
+            if(tries > 2) { // Maximum tries
+                System.out.println("You have exceeded the maximum number of tries.");
+                return; //Exits the method and back to App
+            }
+            System.out.println("Login failed, please try again");
+            
+        }
+
+        System.out.println("");
+        System.out.println("Welcome!");
+        System.out.println("");
+        
+        //Create and list Cineplex Objects using cinplexes.csv File
+
+        try {
+
+            String path = System.getProperty("user.dir") +"\\rsc\\cineplexes.csv"; //FilePath for login.csv
+            FileReader filereader = new FileReader(path); //CSVReader Instantiation
+            CSVReader csvReader = new CSVReader(filereader); 
+
+            List<String[]> r = csvReader.readAll();
+    
+            Cineplex[] cn = new Cineplex[r.size()+1];
+            
+            for(int i = 0; i < r.size(); i++){
+                cn[i] = new Cineplex(r.get(i)[0],r.get(i)[1], Integer.valueOf(r.get(i)[2]));
+            }
+
+            
+            for(int i = 0; i < r.size(); i++){
+                System.out.println(cn[i].getName()+" "+cn[i].getLocation()+" "+ cn[i].getCinemas());
+            }
+
+            
+
+        } catch (Exception e) {
+            // TODO: handle exception
+        } 
+        //List out layouts of Cinemas in Cineplex 1
+        
+
+    }
+
+    public static boolean adminLogin(){
+
+        Scanner scan = new Scanner(System.in); //Scanner Object Instantiation
+    
+
+        System.out.println("");
         System.out.println("Please enter login details:");
         System.out.println("");
 
-        System.out.print("Enter Username: ");
+        System.out.print("Enter Username: "); //Prompt for Username and Password
         String username = scan.nextLine();
-        System.out.println("Enter Password: ");
-        String password = scan.nextLine();
+        System.out.print("Enter Password: ");
+        String password = scan.nextLine(); 
 
 
+        try {
+            String path = System.getProperty("user.dir") +"\\rsc\\login.csv"; //FilePath for login.csv
+            FileReader filereader = new FileReader(path); //CSVReader Instantiation
+            CSVReader csvReader = new CSVReader(filereader); 
 
+            String[] Record; //String array to store data from one line using readNext()
+            Record = csvReader.readNext();
+
+            if(username.equals(Record[0]) && password.equals(Record[1])){ //Checking if user and system records match
+                
+                filereader.close();
+                csvReader.close();
+                return true;
+            }
+
+            filereader.close();
+            csvReader.close();
+
+        } catch (Exception e) {
         
+        }
+        
+        return false;
 
     }
 
