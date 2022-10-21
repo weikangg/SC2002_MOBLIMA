@@ -60,12 +60,15 @@ public class Admin {
                 System.out.println(cn[i].getName()+" "+cn[i].getLocation()+" "+ cn[i].getCinemas());
             }
 
+            //Config Cinemas in Cineplex 1
+
+            cn[0].configCinema();
+
             
 
         } catch (Exception e) {
             // TODO: handle exception
         } 
-        //List out layouts of Cinemas in Cineplex 1
         
 
     }
