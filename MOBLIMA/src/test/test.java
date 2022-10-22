@@ -16,9 +16,10 @@ public class test {
             String[] nextRecord; 
             nextRecord = csvReader.readNext();
             System.out.println(nextRecord[0]);
-
+            csvReader.close();
         } catch (Exception e) {
             // TODO: handle exception
         }
+
     }
 }

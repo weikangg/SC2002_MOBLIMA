@@ -36,7 +36,7 @@ public class Cinema extends Cineplex{
 
                 }
             }
-            
+            csvReader.close();
         } catch (Exception e) {
             // TODO: handle exception
         }

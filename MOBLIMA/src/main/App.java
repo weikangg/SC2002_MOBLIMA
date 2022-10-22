@@ -2,6 +2,10 @@ package main;
 
 import java.util.Scanner;
 
+/* 
+ * Main app to run to choose either Customer or Staff App
+ */
+
 public class App {
 
     public static void main(String[] args){
@@ -9,14 +13,12 @@ public class App {
         Scanner scan = new Scanner(System.in); //Scanner Object Instantiation
         int input = -1; //User Input
         
-        System.out.println("");
-        System.out.println("Welcome to __ Cinemas!");
-        System.out.println("");
-        System.out.println("Please select an option:");
-        System.out.println("");       
-        System.out.println("(1) Admin Module");
-        System.out.println("(2) User Module");
-        System.out.println("(0) Exit");
+        System.out.println("======================= MOBLIMA APP =======================\n" + 
+                                        "Please select an option:\n" +        
+                                        "(1) Staff App           \n" +
+                                        "(2) Customer App        \n" + 
+                                        "(0) Exit \n " + 
+                                        "===========================================================");
         System.out.print("Enter your choice: ");
 
 
@@ -26,7 +28,7 @@ public class App {
             scan.nextLine(); //Flush input
         }
 
-        while(input < 0 || input > 2){ //Attempt User Input Again
+        while(input < 1 || input > 2){ //Attempt User Input Again
             
             System.out.println("Please enter a valid selection"); //Error Msg
             System.out.println("");
@@ -42,7 +44,7 @@ public class App {
 
         switch(input){ //Switch User Input
             case 1: 
-                Admin.start(); //Start Admin Module
+                Admin.getInstance().displayLoginMenu(); //Start Admin Module
                 break;
             case 2:
                 User.start(); //Start User Module
