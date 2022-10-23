@@ -2,11 +2,11 @@ package main.Object;
 import main.Object.Types.TicketType;
 
 public class TicketPrice {
-	private Double[] price = new Double[TicketType.getSize()];
+	private Double[] price;
 	
 	public TicketPrice(Double[] price)
 	{
-		this.price = price;
+		this.price = new Double[]{10.00,14.50,5.0,7.0};
 	}
 	
 	public Double getPrice(int price)
