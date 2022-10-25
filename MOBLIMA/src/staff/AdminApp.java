@@ -8,7 +8,7 @@ import com.opencsv.*;
 
 import cinema_entities.Cineplex;
 import managers.StaffManager;
-
+import managers.MovieManager;
 
 public class AdminApp {
 
@@ -116,6 +116,8 @@ public class AdminApp {
                 }
                 choice = sc.nextInt();
                 switch(choice){
+                    case 3:
+                    MovieManager.getInstance().staffMenu();
                     case 4: 
                     System.out.println("Exiting App, have a nice day!");
                     break;
