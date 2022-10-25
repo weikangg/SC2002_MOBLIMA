@@ -1,28 +1,29 @@
-package main;
+package staff;
 
 import java.util.List;
 import java.util.Scanner;
 import java.io.FileReader;
 
 import com.opencsv.*;
+
+import cinema_entities.Cineplex;
 import managers.StaffManager;
-import main.Objects.Cineplex;
 
 
-public class Admin {
+public class AdminApp {
 
-    private static Admin newInstance = null;
+    private static AdminApp newInstance = null;
     private static Scanner sc = new Scanner(System.in);
 
-    private Admin(){}
+    private AdminApp(){}
 
 // PUBLIC METHODS
 
     // If no previous instance of Admin has been created, we create one. Else use the previously
     // created one. Returns an instance of StaffApp.
-    public static Admin getInstance(){
+    public static AdminApp getInstance(){
         if (newInstance == null){
-            newInstance = new Admin();
+            newInstance = new AdminApp();
         }
         return newInstance;
     }
