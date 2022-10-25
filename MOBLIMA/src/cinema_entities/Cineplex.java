@@ -1,4 +1,4 @@
-package main.Objects;
+package cinema_entities;
 
 public class Cineplex {
     private String name;

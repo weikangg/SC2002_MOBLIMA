@@ -1,12 +1,10 @@
-package main.Objects;
+package cinema_entities;
 
 import java.util.List;
 import java.util.Scanner;
 import java.io.FileReader;
 
 import com.opencsv.*;
-
-import main.Objects.Cineplex;
 
 public class Cinema extends Cineplex{
 
@@ -36,7 +34,7 @@ public class Cinema extends Cineplex{
 
                 }
             }
-            csvReader.close();
+            
         } catch (Exception e) {
             // TODO: handle exception
         }

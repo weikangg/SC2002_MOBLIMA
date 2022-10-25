@@ -2,6 +2,8 @@ package main;
 
 import java.util.Scanner;
 
+import staff.AdminApp;
+
 /* 
  * Main app to run to choose either Customer or Staff App
  */
@@ -44,7 +46,7 @@ public class App {
 
         switch(input){ //Switch User Input
             case 1: 
-                Admin.getInstance().displayLoginMenu(); //Start Admin Module
+                AdminApp.getInstance().displayLoginMenu(); //Start Admin Module
                 break;
             case 2:
                 User.start(); //Start User Module
