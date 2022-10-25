@@ -1,76 +1,53 @@
-package main.Objects;
+package movie_entities;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Review {
-
-    //Attributes
-    private String reviewID; //ID Number of Review
-    private String nameOfReviewer; 
-    private String titleOfReview;
-    private String bodyOfReview;
+public class Review implements Serializable {
+    private String reviewID;
+    private String username;
+    private String reviewDescription;
+    private double ratingScore;
+    private LocalDateTime timestamp;
     private String movieID;
-    private double movieScore;
-    private LocalDateTime reviewDT; //Actual Date and Time of review
 
-    //Accessors
-    public String getReviewID() {
+    //Gettors
+    public String getReviewID(){
         return reviewID;
     }
-    public String getReviewerName() {
-        return nameOfReviewer;
+    public String getReviewer(){
+        return username;
     }
-    public String getReviewerTitle() {
-        return titleOfReview;
+    public String getDescription(){
+        return reviewDescription;
     }
-    public String getReviewBody() {
-        return bodyOfReview;
+    public double getRatingScore(){
+        return ratingScore;
     }
-    public String getMovieID() {
+    public LocalDateTime getTimeStamp(){
+        return timestamp;
+    }
+    public String getMovieID(){
         return movieID;
     }
-    public double getMovieScore() {
-        return movieScore;
-    }
-    public LocalDateTime getReviewDT() {
-        return reviewDT;
-    }
 
-    //Mutators
-    public String setReviewID(String reviewID) {
+    // Settors
+    public void setReviewID(String reviewID){
         this.reviewID = reviewID;
     }
-    public String setReviewerName(String nameOfReviewer) {
-        this.nameOfReviewer = nameOfReviewer;
+    public void setReviewer(String reviewerUsername){
+        this.username = reviewerUsername;
     }
-    public String setReviewTitle(String titleOfReview) {
-        this.titleOfReview = titleOfReview;
+    public void setDescription(String reviewDescription){
+        this.reviewDescription = reviewDescription;
     }
-    public String setReviewBody(String bodyOfReview) {
-        this.bodyOfReview = bodyOfReview;
+    public void setRatingScore(double ratingScore){
+        this.ratingScore = ratingScore;
     }
-    public String setMovieID(String movieID) {
+    public void setTimeStamp(LocalDateTime timestamp){
+        this.timestamp = timestamp;
+    }
+    public void setMovieID(String movieID){
         this.movieID = movieID;
     }
-    public String setMovieScore(double movieScore) {
-        this.movieScore = movieScore;
-    }
-    public LocalDateTime setReviewDT(LocalDateTime reviewDT) {
-        this.reviewDT = reviewDT;
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
