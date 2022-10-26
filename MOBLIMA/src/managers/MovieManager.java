@@ -5,10 +5,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import com.opencsv.*;
-import movie_entities.Movie;
-import movie_entities.Genre;
-import movie_entities.MovieRating;
-import movie_entities.ShowingStatus;
+
+import entities.Genre;
+import entities.Movie;
+import entities.MovieRating;
+import entities.ShowingStatus;
 public class MovieManager {    
     private Scanner sc = new Scanner(System.in);
     private Map <String,Movie>movies;

@@ -1,4 +1,4 @@
-package movie_entities;
+package entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

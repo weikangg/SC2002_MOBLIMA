@@ -1,5 +1,5 @@
-package movie_entities;
-import movie_entities.Types.TicketType;
+package entities;
+import entities.Types.TicketType;
 
 public class TicketPrice {
 	private Double[] price;

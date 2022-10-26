@@ -1,4 +1,5 @@
-package cinema_entities;
+package entities;
+
 
 /**
  * Status of the cinema, depending on the proportion of seats filled.

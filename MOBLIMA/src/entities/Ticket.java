@@ -1,5 +1,5 @@
-package movie_entities;
-import movie_entities.Types.*;
+package entities;
+import entities.Types.*;
 
 
 public class Ticket {

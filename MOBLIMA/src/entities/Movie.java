@@ -1,4 +1,4 @@
-package movie_entities;
+package entities;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

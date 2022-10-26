@@ -1,4 +1,4 @@
-package movie_entities;
+package entities;
 
 public enum MovieRating {
     G("G"),
