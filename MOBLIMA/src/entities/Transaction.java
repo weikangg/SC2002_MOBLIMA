@@ -5,14 +5,6 @@ import movie_entities.Ticket;
 public class Transaction {
     private String id;
     private String movieName;
-    private String movDateTime;
-    private String tranDateTime;
-    private float cost;
-
-    public Transaction(String id, String movname, String movDateTime, String tranDateTime, float cost)
-    {
-    private String id;
-    private String movieName;
     private String tranDateTime;
     private Ticket tix;
 
