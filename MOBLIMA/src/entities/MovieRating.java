@@ -3,10 +3,10 @@ package entities;
 public enum MovieRating {
     G("G"),
     PG("PG"),
-    PG13("PG-13"),
-    NC16("NC-16"),
-    M18("M-18"),
-    R21("R-21");
+    PG13("PG13"),
+    NC16("NC16"),
+    M18("M18"),
+    R21("R21");
 
     private final String movieRating;
 

@@ -103,30 +103,33 @@ public class adminApp {
         int choice;
             do {
                 System.out.println(	"==================== MOBLIMA STAFF APP ====================\n" +
-                                    " 1. View Top 5 Movies                                     \n" +
-                                    " 2. Configure System Settings                             \n" +
-                                    " 3. Movie Database                                        \n" +
-                                    " 4. Logout from StaffApp                                  \n"+
+                                    " 1. Manage Movie Listing & Movie Reviews                   \n" +
+                                    " 2. Manage Cinema Showtimes                                \n" +
+                                    " 3. Manage Ticket Rates                                    \n" +
+                                    " 4. Movie Database                                         \n" +
+                                    " 5. Configure System Settings                              \n" +
+                                    " 6. Logout from StaffApp                                  \n"+
                                     "===========================================================");
                 System.out.println("Enter choice: ");
     
                 while (!sc.hasNextInt()) {
-                    System.out.println("Error Input. Enter 1-3 only!!");
+                    System.out.println("Error Input. Enter 1-6 only!!");
                     sc.next(); // Remove newline character
                 }
                 choice = sc.nextInt();
                 switch(choice){
-                    case 3:
-                    MovieManager.getInstance().staffMenu();
-                    case 4: 
+                    case 1:
+                    MovieManager.getInstance().staffMenu(0);
+                    break;
+                    case 6: 
                     System.out.println("Exiting App, have a nice day!");
                     break;
                     
                     default:
-                        System.out.println("Error input, please only choose 1-3.");
+                        System.out.println("Error input, please only choose 1-6.");
                         break;
                 }
-            }while(choice != 4);
+            }while(choice != 6);
     }
 }
     //     int tries = 0; //Counter for number of tries

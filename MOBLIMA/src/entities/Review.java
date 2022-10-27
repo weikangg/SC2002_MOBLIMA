@@ -1,15 +1,26 @@
 package entities;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 public class Review implements Serializable {
     private String reviewID;
     private String username;
     private String reviewDescription;
     private double ratingScore;
-    private LocalDateTime timestamp;
-    private String movieID;
+    private String movieTitle;
+
+    // Constructor
+    public Review(){
+
+    }
+
+    public Review(String reviewID, String movieTitle, String username, String reviewDescription, double ratingScore){
+        this.reviewID = reviewID;
+        this.movieTitle = movieTitle;
+        this.username = username;
+        this.reviewDescription = reviewDescription;
+        this.ratingScore = ratingScore;
+    }
 
     //Gettors
     public String getReviewID(){
@@ -24,11 +35,8 @@ public class Review implements Serializable {
     public double getRatingScore(){
         return ratingScore;
     }
-    public LocalDateTime getTimeStamp(){
-        return timestamp;
-    }
-    public String getMovieID(){
-        return movieID;
+    public String getMovieTitle(){
+        return movieTitle;
     }
 
     // Settors
@@ -44,10 +52,7 @@ public class Review implements Serializable {
     public void setRatingScore(double ratingScore){
         this.ratingScore = ratingScore;
     }
-    public void setTimeStamp(LocalDateTime timestamp){
-        this.timestamp = timestamp;
-    }
-    public void setMovieID(String movieID){
-        this.movieID = movieID;
+    public void setMovieTitle(String movieTitle){
+        this.movieTitle = movieTitle;
     }
 }
