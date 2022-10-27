@@ -3,16 +3,16 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-public class StaffManager {
-    public static StaffManager object = null;
+public class StaffLogin {
+    public static StaffLogin object = null;
 
-    public static StaffManager getInstance(){
+    public static StaffLogin getInstance(){
         if (object == null){
-            object = new StaffManager();
+            object = new StaffLogin();
         }
         return object;
     }
-    private StaffManager(){}
+    private StaffLogin(){}
 
     public boolean checkLogin(String username , String password){
         try{

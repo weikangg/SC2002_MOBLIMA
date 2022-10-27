@@ -6,7 +6,7 @@ import java.util.List;
 import entities.*;
 import java.util.Scanner;
 
-public class StaffMovieListManager {
+public class StaffAddMovieToList {
     static String csv_Separator = ",";
 	static String splitter = ";";
 	static String converter = ":";

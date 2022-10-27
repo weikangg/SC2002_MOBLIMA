@@ -13,15 +13,15 @@ public class Movie {
     private MovieRating movieRating;
     private int movieDuration;
     private double profitEarned;
-
+    private double overallRatingScore;
+    private LocalDateTime releaseDateTime;
 
 
     // private List<String>pastReviews; // list of reviews
     // private List<String>pastReviewRating;
     // private double totalRatingScore;
     // private double totalNoOfReviews;
-    private double overallRatingScore;
-    private LocalDateTime releaseDateTime;
+
 
     // Constructor
     public Movie(){}

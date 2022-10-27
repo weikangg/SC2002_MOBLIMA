@@ -1,4 +1,4 @@
-package customer;
+package entities;
 
 import movie_entities.Ticket;
 

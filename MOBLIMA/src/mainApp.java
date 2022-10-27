@@ -2,6 +2,8 @@
 
 import java.util.Scanner;
 
+import entities.User;
+
 /* 
  * Main app to run to choose either Customer or Staff App
  */

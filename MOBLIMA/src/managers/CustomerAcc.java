@@ -1,6 +1,7 @@
-package customer;
+package managers;
 
 import java.util.LinkedList;
+import entities.*;
 
 public class CustomerAcc {
     private String name;

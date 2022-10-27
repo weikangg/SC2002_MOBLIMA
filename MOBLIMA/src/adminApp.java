@@ -7,7 +7,7 @@ import java.io.FileReader;
 import com.opencsv.*;
 
 import entities.Cineplex;
-import managers.StaffManager;
+import managers.StaffLogin;
 import managers.MovieManager;
 
 public class adminApp {
@@ -72,7 +72,7 @@ public class adminApp {
                 String passWord = sc.nextLine();
 
                 System.out.println("Username is " + userName + " and password is " + passWord );
-                boolean approved = StaffManager.getInstance().checkLogin(userName,passWord);
+                boolean approved = StaffLogin.getInstance().checkLogin(userName,passWord);
                 if(approved){
                     toQuit = true;
                     adminLoggedIn = true;
