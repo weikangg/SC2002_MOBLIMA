@@ -1,5 +1,7 @@
 package customer;
 
+import movie_entities.Ticket;
+
 public class Transaction {
     private String id;
     private String movieName;
@@ -9,11 +11,17 @@ public class Transaction {
 
     public Transaction(String id, String movname, String movDateTime, String tranDateTime, float cost)
     {
+    private String id;
+    private String movieName;
+    private String tranDateTime;
+    private Ticket tix;
+
+    public Transaction(String id, String movname, String tranDateTime, Ticket tix)
+    {
         this.id = id;
         this.movieName = movname;
-        this.movDateTime = movDateTime;
         this.tranDateTime = tranDateTime;
-        this.cost = cost;
+        this.tix = tix;
     }
 
     public String getID(){
@@ -22,22 +30,20 @@ public class Transaction {
     public String getMovieName(){
         return this.movieName;
     }
-    public String getMovDateTime(){
-        return this.movDateTime;
-    }
+    
     public String getTranDateTime(){
         return this.tranDateTime;
     }
-    public float getCost(){
-        return this.cost;
+    public Ticket getTicket(){
+        return this.tix;
     }
 
     //print transaction
     public void printTransaction() {
     	System.out.println(this.getID());
 		System.out.println(this.getMovieName());
-		System.out.println(this.getMovDateTime());
+		System.out.println(this.getTicket().getDate());
 		System.out.println(this.getTranDateTime());
-		System.out.println(this.getCost());
+		System.out.println(this.getTicket().getTicketPrice());
     }
 }
