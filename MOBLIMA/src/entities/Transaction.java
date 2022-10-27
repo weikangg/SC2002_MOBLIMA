@@ -1,7 +1,5 @@
 package entities;
 
-import movie_entities.Ticket;
-
 public class Transaction {
     private String id;
     private String movieName;
