@@ -37,10 +37,4 @@ public class Types {
 		
 		
 	}
-
-	enum MovieType{
-		IMAX,
-		THREED,
-		DOLBYATMOS;
-	}
 }
