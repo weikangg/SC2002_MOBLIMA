@@ -4,9 +4,9 @@ public class Transaction {
     private String id;
     private String movieName;
     private String tranDateTime;
-    private Ticket tix;
+    private ArrayList<Ticket> tix;
 
-    public Transaction(String id, String movname, String tranDateTime, Ticket tix)
+    public Transaction(String id, String movname, String tranDateTime, ArrayList<Ticket> tix)
     {
         this.id = id;
         this.movieName = movname;
@@ -24,16 +24,19 @@ public class Transaction {
     public String getTranDateTime(){
         return this.tranDateTime;
     }
-    public Ticket getTicket(){
+    public ArrayList<Ticket> getTicketList(){
         return this.tix;
     }
-
-    //print transaction
-    public void printTransaction() {
-    	System.out.println(this.getID());
-		System.out.println(this.getMovieName());
-		System.out.println(this.getTicket().getDate());
-		System.out.println(this.getTranDateTime());
-		System.out.println(this.getTicket().getTicketPrice());
+    
+    public Ticket getTicket(int index){
+    	return this.tix.get(index);
     }
+    
+    public void setID(String id) {this.id = id;}
+    public void setMovieName(String movname) {this.movieName= movname;}
+    public void setTranDateTime(String tdt) {this.tranDateTime=tdt;}
+    public void setTicketList(ArrayList<Ticket> tix) {this.tix = tix;}
+    public void setTicket(int index, Ticket ticket) {this.tix.set(index, ticket);}
+    
+ 
 }
