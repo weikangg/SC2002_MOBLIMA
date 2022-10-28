@@ -8,6 +8,7 @@ import com.opencsv.*;
 
 import entities.Cineplex;
 import entities.Cinema;
+import entities.Movie;
 import managers.StaffLogin;
 import managers.MovieManager;
 import managers.CineplexManager;
@@ -104,11 +105,14 @@ public class adminApp {
  */
     private void displayLoggedInMenu(){
 
-        Cineplex[] cineplexes = CineplexManager.configCineplexes();
+        Cineplex[] cineplexes = CineplexManager.configCineplexes(); //Function to get cineplexes object
 
-        Cinema[] cinemas = cineplexes[0].getCinemas();
+        Cinema[] cinemas = cineplexes[0].getCinemas(); //Function to get cinemas object of cineplexes[0]
 
-        cinemas[1].showSeats();
+        Movie[] movies = cinemas[0].getMovies(); //Function to get movies object of cinema[0]
+
+        movies[0].showSeats();
+        movies[1].showSeats();
 
         int choice;
             do {

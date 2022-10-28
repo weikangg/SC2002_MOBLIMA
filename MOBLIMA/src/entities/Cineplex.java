@@ -4,20 +4,32 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.List;
+
 
 import com.opencsv.*;
 
 public class Cineplex {
     private String name;
     private String location;
-    private int cinemas; 
-    private Cinema[] list;
+    private int numCinemas; 
+    private Cinema[] cinemas;
 
-    public Cineplex(String name, String location, int cinemas){
+    public Cineplex(String name, String location, int numCinemas){
         this.name = name;
         this.location = location;
+        this.numCinemas = numCinemas;
+    }
+
+    public void configCinema(){
+
+        Cinema[] cinemas = new Cinema[numCinemas]; //Creating object array for Cinema objects
+
+        for (int i = 0; i < numCinemas; i++){
+            cinemas[i] = new Cinema(name, location, numCinemas, i);
+        }
+
         this.cinemas = cinemas;
+
     }
 
     public String getName() {
@@ -28,26 +40,12 @@ public class Cineplex {
         return location;
     }
 
-    public int getCinemaNum() {
-        return cinemas;
+    public int getNumCinema() {
+        return numCinemas;
     }
 
     public Cinema[] getCinemas() {
-        return list;
-    }
-
-    
-
-    public void configCinema(){
-
-        Cinema list[] = new Cinema[cinemas]; //Creating object array for Cinema objects
-
-        for (int i = 0; i < cinemas; i++){
-            list[i] = new Cinema(name, location, cinemas, i);
-        }
-
-        this.list = list;
-
+        return cinemas;
     }
 
     // private void cineplexOpener(String name) {

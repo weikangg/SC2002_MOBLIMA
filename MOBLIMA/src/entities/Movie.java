@@ -1,9 +1,15 @@
 package entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Scanner;
+import java.io.FileReader;
 
-public class Movie {
+import com.opencsv.*;
+
+public class Movie extends Cinema{
     // Attributes
+    private int movieID;
     private String movieTitle;
     private ShowingStatus showingStatus;
     private String synopsis;
@@ -15,6 +21,7 @@ public class Movie {
     private double profitEarned;
     private double overallRatingScore;
     private LocalDateTime releaseDateTime;
+    private int[][] seats;
 
 
     // private List<String>pastReviews; // list of reviews
@@ -24,27 +31,77 @@ public class Movie {
 
 
     // Constructor
-    public Movie(){}
-    public Movie(String movieTitle,ShowingStatus showingStatus, String synopsis,String movieDirector, String cast, String genres, 
-                MovieRating movieRating,int movieDuration,  double profitEarned, double overallRatingScore, LocalDateTime releaseDateTime){
-        this.movieTitle = movieTitle;
-        this.showingStatus = showingStatus;
-        this.synopsis = synopsis;
-        this.movieDirector = movieDirector;
-        this.cast = cast;
-        this.genres = genres;
-        this.movieRating = movieRating;
-        this.movieDuration = movieDuration;
-        this.profitEarned = profitEarned;
-        // this.pastReviews = new ArrayList<String>();
-        // this.pastReviewRating = new ArrayList<String>();
-        // this.totalRatingScore = 0;
-        // this.totalNoOfReviews = 0;
-        this.overallRatingScore = overallRatingScore;
-        this.releaseDateTime = releaseDateTime; // gets current time.
+
+    // public Movie(String movieTitle,ShowingStatus showingStatus, String synopsis,String movieDirector, String cast, String genres, 
+    //             MovieRating movieRating,int movieDuration,  double profitEarned, double overallRatingScore, LocalDateTime releaseDateTime){
+    //     this.movieTitle = movieTitle;
+    //     this.showingStatus = showingStatus;
+    //     this.synopsis = synopsis;
+    //     this.movieDirector = movieDirector;
+    //     this.cast = cast;
+    //     this.genres = genres;
+    //     this.movieRating = movieRating;
+    //     this.movieDuration = movieDuration;
+    //     this.profitEarned = profitEarned;
+    //     // this.pastReviews = new ArrayList<String>();
+    //     // this.pastReviewRating = new ArrayList<String>();
+    //     // this.totalRatingScore = 0;
+    //     // this.totalNoOfReviews = 0;
+    //     this.overallRatingScore = overallRatingScore;
+    //     this.releaseDateTime = releaseDateTime; // gets current time.
+    // }
+
+    public Movie(String name, String location, int numCinemas, int cinemaID, int movieID){
+        super(name, location, numCinemas, cinemaID);
+        this.movieID = movieID;
+        
+        try {
+            
+            String path = System.getProperty("user.dir") +"\\data\\cineplexes\\"+name+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+getMovieID()+".csv"; //FilePath for login.csv
+            // System.out.println(path);
+            FileReader filereader = new FileReader(path); //CSVReader Instantiation
+            CSVReader csvReader = new CSVReader(filereader); 
+
+            List<String[]> r = csvReader.readAll(); //Read File
+
+            int[][] seats = new int[5][10];
+
+            for (int i = 0; i < 5; i++){
+                for(int j = 0; j < 10; j++){
+
+                    seats[i][j] = Integer.valueOf(r.get(i)[j]); //Copying individual lines into seats array
+
+                }
+            }
+
+            this.seats = seats;
+            
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+
+    }
+
+    public void showSeats(){ //Printer method for seats
+        System.out.println(super.getName()+", hall "+(super.getCinemaID()+1)+", movie " + getMovieID());
+        
+        for (int i = 0; i < 5; i++){
+            for(int j = 0; j < 10; j++){
+
+                System.out.print(seats[i][j]);
+
+            }
+            System.out.println("");
+        }
+
+        System.out.println("");
     }
 
     // Gettors
+    public int getMovieID(){
+        return movieID;
+    }
     public String getMovieTitle() {
         return this.movieTitle;
     }

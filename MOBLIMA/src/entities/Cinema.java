@@ -9,53 +9,39 @@ import com.opencsv.*;
 
 public class Cinema extends Cineplex{
 
-    private int cinemaNum;
+    private int cinemaID;
     private int cinemaClass;
-    private int[][] seats = new int [5][10];
+    private int[] numMovies;
+    private Movie[] movies;
 
-    public Cinema(String name, String location, int cinemas, int id) {
+    public Cinema(String name, String location, int cinemas, int cinemaID){
         super(name, location, cinemas);
-        //TODO Auto-generated constructor stub
 
-        cinemaNum = id;
-
-        try {
-            
-            String path = System.getProperty("user.dir") +"\\data\\cineplexes\\"+name+ "\\hall"+Integer.toString(cinemaNum+1)+ ".csv"; //FilePath for login.csv
-            // System.out.println(path);
-            FileReader filereader = new FileReader(path); //CSVReader Instantiation
-            CSVReader csvReader = new CSVReader(filereader); 
-
-            List<String[]> r = csvReader.readAll(); //Read File
-
-            for (int i = 0; i < 5; i++){
-                for(int j = 0; j < 10; j++){
-
-                    seats[i][j] = Integer.valueOf(r.get(i)[j]); //Copying individual lines into seats array
-
-                }
-            }
-            
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
+        this.cinemaID = cinemaID;
 
     }
 
-    public void showSeats(){ //Printer method for seats
-        System.out.println("hall"+(cinemaNum+1));
-        
-        for (int i = 0; i < 5; i++){
-            for(int j = 0; j < 10; j++){
+    public void configMovies(int[] numMovies){
 
-                System.out.print(seats[i][j]);
+        this.numMovies = numMovies;
 
-            }
-            System.out.println("");
+        Movie[] movies = new Movie[numMovies[cinemaID]]; //Creating object array for Movie objects
+
+        for (int i = 0; i < numMovies[cinemaID]; i++){
+            movies[i] = new Movie(super.getName(), super.getLocation(), super.getNumCinema(), cinemaID, i);
         }
 
-        System.out.println("");
+        this.movies = movies;
+
     }
+
+    public int getCinemaID(){
+        return cinemaID;
+    }
+    
+    public Movie[] getMovies(){
+        return movies;
+    } 
     
     
 }

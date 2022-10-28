@@ -18,7 +18,7 @@ public class StaffLogin {
         try{
             String line = "";
             String path = System.getProperty("user.dir") +"\\data\\staffs\\staffs.csv";
-            System.out.println(path);
+            // System.out.println(path);
             BufferedReader br = new BufferedReader(new FileReader(path));
             while((line = br.readLine()) != null){
                 String[] values = line.split(",");

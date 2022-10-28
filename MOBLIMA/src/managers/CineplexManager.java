@@ -10,6 +10,7 @@ import com.opencsv.*;
 import com.opencsv.exceptions.CsvException;
 
 import entities.Cineplex;
+import entities.Cinema;
 
 public class CineplexManager {
     
@@ -18,25 +19,42 @@ public class CineplexManager {
         try {
 
             String path = System.getProperty("user.dir") +"\\data\\cineplexes.csv"; //FilePath for login.csv
+            // System.out.println(path);
             FileReader filereader = new FileReader(path); //CSVReader Instantiation
             CSVReader csvReader = new CSVReader(filereader); 
 
             List<String[]> r = csvReader.readAll(); //Read File
     
-            Cineplex[] cn = new Cineplex[r.size()+1]; //Create list of Cineplex Objects
+            Cineplex[] cineplexes = new Cineplex[r.size()]; //Create list of Cineplex Objects
             
             for(int i = 0; i < r.size(); i++){ //Loop to transfer lines of data from file to objects
-                cn[i] = new Cineplex(r.get(i)[0],r.get(i)[1], Integer.valueOf(r.get(i)[2]));
+                cineplexes[i] = new Cineplex(r.get(i)[0],r.get(i)[1], Integer.valueOf(r.get(i)[2]));
             }
 
 
-            //Config Cinemas in Cineplex 1
+            //Config Cinemas in all Cineplexes
 
-            for(int i = 0; i <r.size(); i++){
-                cn[i].configCinema();
+            for(int i = 0; i < cineplexes.length; i++){
+                cineplexes[i].configCinema();
             }
-            
-            return cn;
+
+            //Config Movies in Cinemas in Cineplexes
+            for(int i = 0; i < cineplexes.length; i++){
+                Cinema[] cinemas = cineplexes[i].getCinemas();
+                
+                for(int j = 0; j < cinemas.length; j++){
+                    int numCinemas = Integer.valueOf(r.get(i)[2]);
+                    int[] numMovies = new int[numCinemas];
+                    for(int z = 3; z < 3 + numCinemas; z++){
+                        numMovies[z-3] = Integer.valueOf(r.get(i)[z]);
+                    }
+                    cinemas[j].configMovies(numMovies);
+                }
+                
+
+            }
+
+            return cineplexes;
 
             
 
