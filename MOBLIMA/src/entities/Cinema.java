@@ -21,8 +21,8 @@ public class Cinema extends Cineplex{
 
         try {
             
-            String path = System.getProperty("user.dir") +"\\rsc\\cineplexes\\"+name+ "\\hall"+Integer.toString(cinemaNum+1)+ ".csv"; //FilePath for login.csv
-            System.out.println(path);
+            String path = System.getProperty("user.dir") +"\\data\\cineplexes\\"+name+ "\\hall"+Integer.toString(cinemaNum+1)+ ".csv"; //FilePath for login.csv
+            // System.out.println(path);
             FileReader filereader = new FileReader(path); //CSVReader Instantiation
             CSVReader csvReader = new CSVReader(filereader); 
 

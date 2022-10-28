@@ -17,7 +17,8 @@ public class StaffLogin {
     public boolean checkLogin(String username , String password){
         try{
             String line = "";
-            String path = System.getProperty("user.dir") +"\\MOBLIMA\\data\\staffs\\staffs.csv";
+            String path = System.getProperty("user.dir") +"\\data\\staffs\\staffs.csv";
+            System.out.println(path);
             BufferedReader br = new BufferedReader(new FileReader(path));
             while((line = br.readLine()) != null){
                 String[] values = line.split(",");

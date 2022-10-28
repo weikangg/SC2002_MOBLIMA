@@ -7,8 +7,10 @@ import java.io.FileReader;
 import com.opencsv.*;
 
 import entities.Cineplex;
+import entities.Cinema;
 import managers.StaffLogin;
 import managers.MovieManager;
+import managers.CineplexManager;
 
 public class adminApp {
 
@@ -73,6 +75,7 @@ public class adminApp {
 
                 System.out.println("Username is " + userName + " and password is " + passWord );
                 boolean approved = StaffLogin.getInstance().checkLogin(userName,passWord);
+
                 if(approved){
                     toQuit = true;
                     adminLoggedIn = true;
@@ -100,6 +103,13 @@ public class adminApp {
  ***********************************************
  */
     private void displayLoggedInMenu(){
+
+        Cineplex[] cineplexes = CineplexManager.configCineplexes();
+
+        Cinema[] cinemas = cineplexes[0].getCinemas();
+
+        cinemas[1].showSeats();
+
         int choice;
             do {
                 System.out.println(	"==================== MOBLIMA STAFF APP ====================\n" +
@@ -119,11 +129,11 @@ public class adminApp {
                 choice = sc.nextInt();
                 switch(choice){
                     case 1:
-                    MovieManager.getInstance().staffMenu(0);
-                    break;
+                        MovieManager.getInstance().staffMenu(0);
+                        break;
                     case 6: 
-                    System.out.println("Exiting App, have a nice day!");
-                    break;
+                        System.out.println("Exiting App, have a nice day!");
+                        break;
                     
                     default:
                         System.out.println("Error input, please only choose 1-6.");
@@ -131,6 +141,8 @@ public class adminApp {
                 }
             }while(choice != 6);
     }
+
+    
 }
     //     int tries = 0; //Counter for number of tries
         
@@ -152,34 +164,7 @@ public class adminApp {
         
     //     //Create and list Cineplex Objects using cineplexes.csv File
 
-    //     try {
 
-    //         String path = System.getProperty("user.dir") +"\\rsc\\cineplexes.csv"; //FilePath for login.csv
-    //         FileReader filereader = new FileReader(path); //CSVReader Instantiation
-    //         CSVReader csvReader = new CSVReader(filereader); 
-
-    //         List<String[]> r = csvReader.readAll(); //Read File
-    
-    //         Cineplex[] cn = new Cineplex[r.size()+1]; //Create list of Cineplex Objects
-            
-    //         for(int i = 0; i < r.size(); i++){ //Loop to transfer lines of data from file to objects
-    //             cn[i] = new Cineplex(r.get(i)[0],r.get(i)[1], Integer.valueOf(r.get(i)[2]));
-    //         }
-
-            
-    //         for(int i = 0; i < r.size(); i++){ //Loop to print object data
-    //             System.out.println(cn[i].getName()+" "+cn[i].getLocation()+" "+ cn[i].getCinemas());
-    //         }
-
-    //         //Config Cinemas in Cineplex 1
-
-    //         cn[0].configCinema();
-
-            
-
-    //     } catch (Exception e) {
-    //         // TODO: handle exception
-    //     } 
         
 
     // }
