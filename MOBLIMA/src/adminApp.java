@@ -8,7 +8,7 @@ import com.opencsv.*;
 
 import entities.Cineplex;
 import entities.Cinema;
-import entities.Movie;
+import entities.Showtime;
 import managers.StaffLogin;
 import managers.MovieManager;
 import managers.CineplexManager;
@@ -109,10 +109,12 @@ public class adminApp {
 
         Cinema[] cinemas = cineplexes[0].getCinemas(); //Function to get cinemas object of cineplexes[0]
 
-        Movie[] movies = cinemas[0].getMovies(); //Function to get movies object of cinema[0]
+        Showtime[] showtimes = cinemas[0].getShowtimes(); //Function to get movies object of cinema[0]
 
-        movies[0].showSeats();
-        movies[1].showSeats();
+        
+
+        showtimes[0].showSeats();
+        showtimes[1].showSeats();
 
         int choice;
             do {

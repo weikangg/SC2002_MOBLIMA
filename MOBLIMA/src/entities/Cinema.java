@@ -12,7 +12,7 @@ public class Cinema extends Cineplex{
     private int cinemaID;
     private int cinemaClass;
     private int[] numMovies;
-    private Movie[] movies;
+    private Showtime[] showtimes;
 
     public Cinema(String name, String location, int cinemas, int cinemaID){
         super(name, location, cinemas);
@@ -25,13 +25,13 @@ public class Cinema extends Cineplex{
 
         this.numMovies = numMovies;
 
-        Movie[] movies = new Movie[numMovies[cinemaID]]; //Creating object array for Movie objects
+        Showtime[] showtimes = new Showtime[numMovies[cinemaID]]; //Creating object array for Movie objects
 
         for (int i = 0; i < numMovies[cinemaID]; i++){
-            movies[i] = new Movie(super.getName(), super.getLocation(), super.getNumCinema(), cinemaID, i);
+            showtimes[i] = new Showtime(super.getName(), super.getLocation(), super.getNumCinema(), cinemaID, i);
         }
 
-        this.movies = movies;
+        this.showtimes = showtimes;
 
     }
 
@@ -39,8 +39,8 @@ public class Cinema extends Cineplex{
         return cinemaID;
     }
     
-    public Movie[] getMovies(){
-        return movies;
+    public Showtime[] getShowtimes(){
+        return showtimes;
     } 
     
     

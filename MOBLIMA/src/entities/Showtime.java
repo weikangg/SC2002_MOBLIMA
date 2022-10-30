@@ -1,17 +1,20 @@
 package entities;
-//import entities.Cinema;
-//import entities.CinemaStatus;
-import java.io.Serializable;
+
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Scanner;
+import java.io.FileReader;
 
-public class Showtime implements Serializable {
+import com.opencsv.*;
 
-    private String showtimeID;
+public class Showtime extends Cinema{
+
+    private int showtimeID;
 
     private LocalDateTime dateTime;
 
     //Unique movieID to specify the movie being shown for that showtime.
-    private String movieID;
+    private String movieTitle;
     /**
      * Movie Format of the specific showtime.
      */
@@ -28,6 +31,54 @@ public class Showtime implements Serializable {
      * Status of the Showtime, whether its AVAILABLE, or SELLING_FAST etc.
      */
     private CinemaStatus cinemaStatus;
+    private int[][] seats;
+
+    public Showtime(String name, String location, int numCinemas, int cinemaID, int showtimeID){
+        super(name, location, numCinemas, cinemaID);
+        this.showtimeID = showtimeID;
+        
+        try {
+            
+            String path = System.getProperty("user.dir") +"\\data\\cineplexes\\"+name+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+getShowtimeID()+".csv"; //FilePath for login.csv
+            // System.out.println(path);
+            FileReader filereader = new FileReader(path); //CSVReader Instantiation
+            CSVReader csvReader = new CSVReader(filereader); 
+
+            List<String[]> r = csvReader.readAll(); //Read File
+
+            int[][] seats = new int[5][10];
+
+            for (int i = 0; i < 5; i++){
+                for(int j = 0; j < 10; j++){
+
+                    seats[i][j] = Integer.valueOf(r.get(i)[j]); //Copying individual lines into seats array
+
+                }
+            }
+
+            this.seats = seats;
+            
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+
+    }
+
+    public void showSeats(){ //Printer method for seats
+        System.out.println(super.getName()+", hall "+(super.getCinemaID()+1)+", movie " + getShowtimeID());
+        
+        for (int i = 0; i < 5; i++){
+            for(int j = 0; j < 10; j++){
+
+                System.out.print(seats[i][j]);
+
+            }
+            System.out.println("");
+        }
+
+        System.out.println("");
+    }
 
 
     //Methods
@@ -51,22 +102,12 @@ public class Showtime implements Serializable {
 
     //Getters
 
-    public String getShowtimeID() {return showtimeID;}
+    public int getShowtimeID() {return showtimeID;}
     public LocalDateTime getDateTime() {return dateTime;}
-    public String getMovieID() {return movieID;}
+    public String getMovieTitle() {return movieTitle;}
     public MovieResolution getMovieFormat() {return mR;}
     public Cinema getCinema() {return cinema;}
     public String getCineplexName() {return cineplexName;}
     public CinemaStatus getCinemaStatus() {return cinemaStatus;}
-
-    //Setters
-
-    public void setShowtimeID(String showtimeID) {this.showtimeID = showtimeID;} 
-    public void setDateTime(LocalDateTime dateTime) { this.dateTime = dateTime; }
-    public void setMovieID(String movieID) {this.movieID = movieID;}
-    public void setMovieFormat(MovieResolution mR) {this.mR = mR;}
-    public void setCinema(Cinema cinema) {this.cinema = cinema;}
-    public void setCineplexName(String cineplexName) {this.cineplexName = cineplexName;}
-    public void setCinemaStatus(CinemaStatus cinemaStatus) {this.cinemaStatus = cinemaStatus;}
 
 };

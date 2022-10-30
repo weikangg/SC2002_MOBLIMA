@@ -7,7 +7,7 @@ import java.io.FileReader;
 
 import com.opencsv.*;
 
-public class Movie extends Cinema{
+public class Movie {
     // Attributes
     private int movieID;
     private String movieTitle;
@@ -21,7 +21,7 @@ public class Movie extends Cinema{
     private double profitEarned;
     private double overallRatingScore;
     private LocalDateTime releaseDateTime;
-    private int[][] seats;
+
 
 
     // private List<String>pastReviews; // list of reviews
@@ -51,52 +51,9 @@ public class Movie extends Cinema{
     //     this.releaseDateTime = releaseDateTime; // gets current time.
     // }
 
-    public Movie(String name, String location, int numCinemas, int cinemaID, int movieID){
-        super(name, location, numCinemas, cinemaID);
-        this.movieID = movieID;
-        
-        try {
-            
-            String path = System.getProperty("user.dir") +"\\data\\cineplexes\\"+name+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+getMovieID()+".csv"; //FilePath for login.csv
-            // System.out.println(path);
-            FileReader filereader = new FileReader(path); //CSVReader Instantiation
-            CSVReader csvReader = new CSVReader(filereader); 
+    
 
-            List<String[]> r = csvReader.readAll(); //Read File
-
-            int[][] seats = new int[5][10];
-
-            for (int i = 0; i < 5; i++){
-                for(int j = 0; j < 10; j++){
-
-                    seats[i][j] = Integer.valueOf(r.get(i)[j]); //Copying individual lines into seats array
-
-                }
-            }
-
-            this.seats = seats;
-            
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
-
-
-    }
-
-    public void showSeats(){ //Printer method for seats
-        System.out.println(super.getName()+", hall "+(super.getCinemaID()+1)+", movie " + getMovieID());
-        
-        for (int i = 0; i < 5; i++){
-            for(int j = 0; j < 10; j++){
-
-                System.out.print(seats[i][j]);
-
-            }
-            System.out.println("");
-        }
-
-        System.out.println("");
-    }
+    
 
     // Gettors
     public int getMovieID(){
