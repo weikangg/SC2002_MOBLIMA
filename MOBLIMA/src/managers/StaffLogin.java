@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+
 public class StaffLogin {
     public static StaffLogin object = null;
 
@@ -17,7 +18,7 @@ public class StaffLogin {
     public boolean checkLogin(String username , String password){
         try{
             String line = "";
-            String path = System.getProperty("user.dir") +"\\data\\staffs\\staffs.csv";
+            String path = System.getProperty("user.dir") +"\\MOBLIMA\\data\\staffs\\staffs.csv";
             // System.out.println(path);
             BufferedReader br = new BufferedReader(new FileReader(path));
             while((line = br.readLine()) != null){
@@ -43,8 +44,13 @@ public class StaffLogin {
             System.out.println("Cannot find input file!");
             System.out.println(e.getMessage());
             System.exit(0);
-
-        } catch(IOException e){
+        }
+        catch (NullPointerException e){
+            System.out.println("Null Pointer Error!");
+            System.out.println(e.getMessage());
+            System.exit(0);
+        }
+        catch(IOException e){
             System.out.println("Input/Output Error!");
             e.printStackTrace();
             System.out.println(e.getMessage());
@@ -52,6 +58,7 @@ public class StaffLogin {
         }
         return false;
     }
+
     public boolean userLogOut(){
         return false;
     }

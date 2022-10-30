@@ -25,15 +25,16 @@ public class MovieManager {
             if(choice == 0){
                 System.out.println("=================== MOVIE MENU (STAFF) ==================\n" +
                                     " 1. Create Movies 						    		     \n" +
-                                    " 2. Update Movie Status		                             \n" +
-                                    " 3. Manage Reviews          	                         \n" +
-                                    " 4. Show Top 5 Movies                                     \n" +
-                                    " 5. Go Back                                               \n"+
+                                    " 2. View Full List Of Movies                            \n" +
+                                    " 3. Update Movie Status		                         \n" +
+                                    " 4. Manage Reviews          	                         \n" +
+                                    " 5. Show Top 5 Movies                                   \n" +
+                                    " 6. Go Back                                             \n" +
                                     "==========================================================");
                 System.out.println("Enter choice: ");
                 option = sc.nextInt();
-                if(!(option >= 1 && option <=5)){
-                    System.out.println("Please only enter a number from 1-5.");
+                if(!(option >= 1 && option <=6)){
+                    System.out.println("Please only enter a number from 1-6.");
                     staffMenu(0);
                 }
             }
@@ -54,14 +55,15 @@ public class MovieManager {
                 }
                 break;
             case 2:
+                StaffPrintMovieManager.printMovieList(movListManager.getMovieList());
                 break;
-            case 5:
+            case 6:
                 System.out.println("Back to StaffApp......");
                 movListManager = null;
                 reviewListManager = null;
                 return;
             default:
-                System.out.println("Invalid choice. Please enter a number between 1-5.");
+                System.out.println("Invalid choice. Please enter a number between 1-6.");
                 break;
         }
 

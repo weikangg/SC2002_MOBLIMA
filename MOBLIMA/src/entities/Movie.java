@@ -1,11 +1,6 @@
 package entities;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Scanner;
-import java.io.FileReader;
-
-import com.opencsv.*;
+import java.time.LocalDate;
 
 public class Movie {
     // Attributes
@@ -20,8 +15,8 @@ public class Movie {
     private int movieDuration;
     private double profitEarned;
     private double overallRatingScore;
-    private LocalDateTime releaseDateTime;
-
+    private LocalDate releaseDate;
+    private MovieType movieType;
 
 
     // private List<String>pastReviews; // list of reviews
@@ -32,28 +27,25 @@ public class Movie {
 
     // Constructor
 
-    // public Movie(String movieTitle,ShowingStatus showingStatus, String synopsis,String movieDirector, String cast, String genres, 
-    //             MovieRating movieRating,int movieDuration,  double profitEarned, double overallRatingScore, LocalDateTime releaseDateTime){
-    //     this.movieTitle = movieTitle;
-    //     this.showingStatus = showingStatus;
-    //     this.synopsis = synopsis;
-    //     this.movieDirector = movieDirector;
-    //     this.cast = cast;
-    //     this.genres = genres;
-    //     this.movieRating = movieRating;
-    //     this.movieDuration = movieDuration;
-    //     this.profitEarned = profitEarned;
-    //     // this.pastReviews = new ArrayList<String>();
-    //     // this.pastReviewRating = new ArrayList<String>();
-    //     // this.totalRatingScore = 0;
-    //     // this.totalNoOfReviews = 0;
-    //     this.overallRatingScore = overallRatingScore;
-    //     this.releaseDateTime = releaseDateTime; // gets current time.
-    // }
-
-    
-
-    
+    public Movie(String movieTitle,ShowingStatus showingStatus, String synopsis,String movieDirector, String cast, String genres, 
+                MovieRating movieRating,int movieDuration,  double profitEarned, double overallRatingScore, LocalDate releaseDate,MovieType movieType){
+        this.movieTitle = movieTitle;
+        this.showingStatus = showingStatus;
+        this.synopsis = synopsis;
+        this.movieDirector = movieDirector;
+        this.cast = cast;
+        this.genres = genres;
+        this.movieRating = movieRating;
+        this.movieDuration = movieDuration;
+        this.profitEarned = profitEarned;
+        // this.pastReviews = new ArrayList<String>();
+        // this.pastReviewRating = new ArrayList<String>();
+        // this.totalRatingScore = 0;
+        // this.totalNoOfReviews = 0;
+        this.overallRatingScore = overallRatingScore;
+        this.releaseDate = releaseDate; // gets current time.
+        this.movieType = movieType;
+    }
 
     // Gettors
     public int getMovieID(){
@@ -98,14 +90,17 @@ public class Movie {
     public ShowingStatus getShowingStatus() {
         return this.showingStatus;
     }
-    public LocalDateTime getReleaseDate() {
-        return this.releaseDateTime;
+    public LocalDate getReleaseDate() {
+        return this.releaseDate;
     }
 
     public double getProfitEarned() {
         return this.profitEarned;
     }
 
+    public MovieType getMovieType(){
+        return this.movieType;
+    }
     // Settors
 
     public void setMovieTitle(String movieTitle) {
@@ -147,13 +142,16 @@ public class Movie {
     public void setShowingStatus(ShowingStatus showingStatus) {
         this.showingStatus = showingStatus;
     }
-    public void setReleaseDateTime(LocalDateTime releaseDateTime) {
-        this.releaseDateTime = releaseDateTime;
+    public void setReleaseDateTime(LocalDate releaseDate) {
+        this.releaseDate = releaseDate;
     }
     public void setProfitEarned(double profitEarned) {
         this.profitEarned = profitEarned;
     }
 
+    public void setMovieType(MovieType movieType){
+        this.movieType = movieType;
+    }
     // // Methods
     // public void showMovieInfo() {
     // 	// Title

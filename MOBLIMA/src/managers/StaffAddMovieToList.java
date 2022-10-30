@@ -1,6 +1,6 @@
 package managers;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.InputMismatchException;
 import java.util.List;
 import entities.*;
@@ -19,7 +19,8 @@ public class StaffAddMovieToList {
 		double rating = 0.0;
         MovieRating movieRating = null;
 		int sale = 0;
-        LocalDateTime releaseDateTime = LocalDateTime.now();
+        LocalDate releaseDateTime = LocalDate.now();
+		MovieType movieType = null;
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Enter Movie Title: ");
 		movieTitleTmp = sc.nextLine();
@@ -115,8 +116,35 @@ public class StaffAddMovieToList {
 			System.out.println(e.getMessage());
 			movieDuration = 0;
 		}
-        releaseDateTime = LocalDateTime.now();
-		if (MovieListManager.addMovieList(mList, movieTitle, synopsis, movieDirector, cast, genres, movieDuration, status, sale, movieRating,rating, releaseDateTime)
+        releaseDateTime = LocalDate.now();
+		System.out.println("Choose Movie Type");
+		System.out.println("1: TWOD");
+		System.out.println("2: THREED");
+		System.out.println("3: IMAX");
+		System.out.println("4: BLOCKBUSTER");
+		choice = sc.nextInt();
+		switch (choice) {
+		case 1: {
+			movieType = MovieType.TWOD;
+			break;
+		}
+		case 2: {
+			movieType = MovieType.THREED;
+			break;
+		}
+		case 3: {
+			movieType = MovieType.IMAX;
+			break;
+		}
+		case 4: {
+			movieType = MovieType.BLOCKBUSTER;
+			break;
+        }
+        default:
+            System.out.println("Error Input! Please only input values from 1-4.\n");
+        }
+        sc.nextLine();
+		if (MovieListManager.addMovieList(mList, movieTitle, synopsis, movieDirector, cast, genres, movieDuration, status, sale, movieRating,rating, releaseDateTime,movieType)
 				&& ReviewListManager.addReviewList(rList, movieTitle))
 			return true;
 		 return false;

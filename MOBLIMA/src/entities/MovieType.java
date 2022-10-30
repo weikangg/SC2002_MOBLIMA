@@ -1,8 +1,9 @@
 package entities;
-public enum MovieResolution {
+public enum MovieType {
 	TWOD ("TWOD"),
     THREED ("THREED"),
-    IMAX ("IMAX");
+    IMAX ("IMAX"),
+    BLOCKBUSTER("BLOCKBUSTER");
 
     private final String name;
 
@@ -10,7 +11,7 @@ public enum MovieResolution {
      * Constructor for the MovieFormat enum, taking in the string value of the enum and setting it as an attribute.
      * @param s of the enum.
      */
-    private MovieResolution(String s) {
+    private MovieType(String s) {
         name = s;
     }
 

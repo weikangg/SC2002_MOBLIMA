@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,10 +29,11 @@ public class MovieListManager {
 				String[] moviecsv = line.split(separator);
 				if(!moviecsv[0].equals("MOVIE_TITLE")) {
 					movietmp = new Movie(moviecsv[0],ShowingStatus.valueOf(moviecsv[1]),moviecsv[2],moviecsv[3],moviecsv[4],moviecsv[5], MovieRating.valueOf(moviecsv[6]),
-							Integer.parseInt(moviecsv[7]),Double.parseDouble(moviecsv[8]),Double.parseDouble(moviecsv[9]), LocalDateTime.parse(moviecsv[10]));
+							Integer.parseInt(moviecsv[7]),Double.parseDouble(moviecsv[8]),Double.parseDouble(moviecsv[9]), LocalDate.parse(moviecsv[10]),MovieType.valueOf(moviecsv[11]));
 					movieList.add(movietmp);
 				}
 			}
+			br.close();
 		}
 		catch(ArrayIndexOutOfBoundsException e){
 			return movieList;
@@ -43,9 +44,9 @@ public class MovieListManager {
 		return movieList;
     }
 
-    public static boolean addMovieList(List<Movie> movieList, String movieTitle, String synopsis,String movieDirector, String cast, String genres, 
-                                       int movieDuration, ShowingStatus showingStatus, double profitEarned, MovieRating movieRating, double overallRatingScore, LocalDateTime releaseDateTime) {
-        Movie newMovie = new Movie(movieTitle,showingStatus,synopsis,movieDirector,cast, genres,movieRating,movieDuration,profitEarned,overallRatingScore,releaseDateTime);
+    public static boolean addMovieList(List<Movie> movieList, String movieTitle, String synopsis,String movieDirector, String cast, String genres, int movieDuration, 
+									   ShowingStatus showingStatus, double profitEarned, MovieRating movieRating, double overallRatingScore, LocalDate releaseDateTime, MovieType movieType) {
+        Movie newMovie = new Movie(movieTitle,showingStatus,synopsis,movieDirector,cast, genres,movieRating,movieDuration,profitEarned,overallRatingScore,releaseDateTime, movieType);
         movieList.add(newMovie);
         return updateMovieListCSV(movieList);
     }
@@ -73,7 +74,9 @@ public class MovieListManager {
 			csvWriter.append(separator);
 			csvWriter.append("OVERALL_RATING_SCORE");
             csvWriter.append(separator);
-			csvWriter.append("RELEASE_DATE_TIME");
+			csvWriter.append("RELEASE_DATE");
+			csvWriter.append(separator);
+			csvWriter.append("MOVIE_TYPE");
 			csvWriter.append("\n");
 
 			for (Movie movie : movieList) {
@@ -99,6 +102,8 @@ public class MovieListManager {
 				sb.append(movie.getOverallRatingScore());
                 sb.append(separator);
 				sb.append(movie.getReleaseDate());
+				sb.append(separator);
+				sb.append(movie.getMovieType());
 				sb.append('\n');
 				csvWriter.append(sb.toString());
 			}

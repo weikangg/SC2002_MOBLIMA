@@ -18,7 +18,7 @@ public class CineplexManager {
 
         try {
 
-            String path = System.getProperty("user.dir") +"\\data\\cineplexes.csv"; //FilePath for login.csv
+            String path = System.getProperty("user.dir") +"\\MOBLIMA\\data\\cineplexes.csv"; //FilePath for login.csv
             // System.out.println(path);
             FileReader filereader = new FileReader(path); //CSVReader Instantiation
             CSVReader csvReader = new CSVReader(filereader); 

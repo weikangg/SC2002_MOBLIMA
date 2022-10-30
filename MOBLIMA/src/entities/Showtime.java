@@ -18,7 +18,7 @@ public class Showtime extends Cinema{
     /**
      * Movie Format of the specific showtime.
      */
-    private MovieResolution mR;
+    private MovieType mR;
     /**
      * Cinema object with access to a seating plan. Cinema held is the cinema at which the movie is showing.
      */
@@ -39,7 +39,7 @@ public class Showtime extends Cinema{
         
         try {
             
-            String path = System.getProperty("user.dir") +"\\data\\cineplexes\\"+name+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+getShowtimeID()+".csv"; //FilePath for login.csv
+            String path = System.getProperty("user.dir") +"\\MOBLIMA\\data\\cineplexes\\"+name+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+getShowtimeID()+".csv"; //FilePath for login.csv
             // System.out.println(path);
             FileReader filereader = new FileReader(path); //CSVReader Instantiation
             CSVReader csvReader = new CSVReader(filereader); 
@@ -105,7 +105,7 @@ public class Showtime extends Cinema{
     public int getShowtimeID() {return showtimeID;}
     public LocalDateTime getDateTime() {return dateTime;}
     public String getMovieTitle() {return movieTitle;}
-    public MovieResolution getMovieFormat() {return mR;}
+    public MovieType getMovieFormat() {return mR;}
     public Cinema getCinema() {return cinema;}
     public String getCineplexName() {return cineplexName;}
     public CinemaStatus getCinemaStatus() {return cinemaStatus;}
