@@ -1,10 +1,10 @@
 
 import java.util.Scanner;
-public class CustomerApp {
-    private static CustomerApp newInstance = null;
-    public static CustomerApp getInstance(){
+public class customerApp {
+    private static customerApp newInstance = null;
+    public static customerApp getInstance(){
         if (newInstance == null){
-            newInstance = new CustomerApp();
+            newInstance = new customerApp();
         }
         return newInstance;
     }
