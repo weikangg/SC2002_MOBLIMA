@@ -1,6 +1,6 @@
 package entities;
 
-import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.io.FileReader;
 import java.nio.file.Path;
@@ -12,25 +12,18 @@ public class Showtime extends Cinema{
 
     private int showtimeID;
     private int movieID;
-    private LocalDateTime dateTime;
+    private SimpleDateFormat dateTime;
 
     //Unique movieID to specify the movie being shown for that showtime.
     private String movieTitle;
     /**
      * Movie Format of the specific showtime.
      */
-    private MovieType movieReso;
+    private String movieReso;
     /**
      * Cinema object with access to a seating plan. Cinema held is the cinema at which the movie is showing.
      */
-    private Cinema cinema;
-    /**
-     * Name of the cineplex where the movie is showing at this specific showtime.
-     */
-    private String cineplexName;
-    /**
-     * Status of the Showtime, whether its AVAILABLE, or SELLING_FAST etc.
-     */
+
     private CinemaStatus cinemaStatus;
     private int[][] seats;
 
@@ -48,17 +41,25 @@ public class Showtime extends Cinema{
 
             List<String[]> r = csvReader.readAll(); //Read File
 
+
+            //Set all variables with data from csv file
+            this.movieID = Integer.valueOf(r.get(0)[0]);
+            this.dateTime = new SimpleDateFormat(r.get(0)[1]);
+            this.movieReso = r.get(0)[2];
+
             int[][] seats = new int[5][10];
 
             for (int i = 0; i < 5; i++){
                 for(int j = 0; j < 10; j++){
 
-                    seats[i][j] = Integer.valueOf(r.get(i)[j]); //Copying individual lines into seats array
+                    seats[i][j] = Integer.valueOf(r.get(i+1)[j]); //Copying individual lines into seats array
 
                 }
             }
 
             this.seats = seats;
+
+            this.updateCinemaStatus();
             
         } catch (Exception e) {
             // TODO: handle exception
@@ -67,28 +68,24 @@ public class Showtime extends Cinema{
 
     }
 
-    public void showSeats(){ //Printer method for seats
-        System.out.println(super.getName()+", hall "+(super.getCinemaID()+1)+", movie " + getShowtimeID());
-        
-        for (int i = 0; i < 5; i++){
-            for(int j = 0; j < 10; j++){
-
-                System.out.print(seats[i][j]);
-
-            }
-            System.out.println("");
-        }
-
-        System.out.println("");
-    }
-
-
     //Methods
 
 
-    /* Updates the status of the cinema depending on proportion of seats filled.
+    // Updates the status of the cinema depending on proportion of seats filled.
     public void updateCinemaStatus() {
-    	double percentageFilled = (double) getCinema().getOccupiedSeatsNo() / (double) getCinema().getTotalSeatNo();
+
+        int seatsFilled = 0;
+
+        for (int i = 0; i < 5; i++){
+            for(int j = 0; j < 10; j++){
+
+                if (seats[i][j] == 1) seatsFilled++;
+
+            }
+        }
+       
+        double percentageFilled = (double)seatsFilled/50;
+
     	if (percentageFilled <= 0.50) {
     		setCinemaStatus(CinemaStatus.AVAILABLE);
     	}
@@ -99,28 +96,68 @@ public class Showtime extends Cinema{
     		setCinemaStatus(CinemaStatus.SOLD_OUT);
     	}
     }
-    */
+
+    public void show(){ //Printer method for information
+        System.out.println(super.getName()+", hall "+(super.getCinemaID()+1)+", movie " + getShowtimeID());
+
+        System.out.println("Showtime ID: " + getShowtimeID());
+        System.out.println("Movie ID: " + getMovieID());
+        System.out.println("Date and Time: " + getDateTime());
+        System.out.println("Type: " + getMovieFormat());
+        System.out.println("Cinema Status: " + getCinemaStatus());
+        
+        for (int i = 0; i < 5; i++){
+            for(int j = 0; j < 10; j++){
+
+                System.out.print(seats[i][j]);
+
+            }
+            System.out.println("");
+        }
+
+    }
+
+    public void showInfo(){ //Printer method for information
+        System.out.println(super.getName()+", hall "+(super.getCinemaID()+1)+", movie " + getShowtimeID());
+
+        System.out.println("Showtime ID: " + getShowtimeID());
+        System.out.println("Movie ID: " + getMovieID());
+        System.out.println("Date and Time: " + getDateTime());
+        System.out.println("Type: " + getMovieFormat());
+        System.out.println("Cinema Status: " + getCinemaStatus());
+        
+    }
+
+    public void showSeats(){
+
+        for (int i = 0; i < 5; i++){
+            for(int j = 0; j < 10; j++){
+
+                System.out.print(seats[i][j]);
+
+            }
+            System.out.println("");
+        }
+
+    }
 
 
     //Getters
 
     public Integer getShowtimeID() {return showtimeID;}
     public Integer getMovieID() {return movieID;}
-    public LocalDateTime getDateTime() {return dateTime;}
+    public String getDateTime() {return dateTime.toPattern();}
     public String getMovieTitle() {return movieTitle;}
-    public MovieType getMovieFormat() {return movieReso;}
-    public Cinema getCinema() {return cinema;}
-    public String getCineplexName() {return cineplexName;}
-    public CinemaStatus getCinemaStatus() {return cinemaStatus;}
+    public String getMovieFormat() {return movieReso;}
+    public String getCinemaStatus() {return cinemaStatus.toString();}
 
     //Setters
 
     public void setShowtimeID(Integer showtimeID) {this.showtimeID = showtimeID;}
-    public void setDateTime(LocalDateTime dateTime) { this.dateTime = dateTime; }
+    public void setMovieID() {this.movieID = movieID;}
+    public void setDateTime(SimpleDateFormat dateTime) { this.dateTime = dateTime; }
     public void setMovieID(Integer movieID) {this.movieID = movieID;}
-    public void setMovieFormat(MovieType movieReso) {this.movieReso = movieReso;}
-    public void setCinema(Cinema cinema) {this.cinema = cinema;}
-    public void setCineplexName(String cineplexName) {this.cineplexName = cineplexName;}
+    public void setMovieFormat(String movieReso) {this.movieReso = movieReso;}
     public void setCinemaStatus(CinemaStatus cinemaStatus) {this.cinemaStatus = cinemaStatus;}
 
 };

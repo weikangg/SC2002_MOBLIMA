@@ -105,16 +105,24 @@ public class adminApp {
  */
     private void displayLoggedInMenu(){
 
+        System.out.println("");
+
         Cineplex[] cineplexes = CineplexManager.configCineplexes(); //Function to get cineplexes object
 
         Cinema[] cinemas = cineplexes[0].getCinemas(); //Function to get cinemas object of cineplexes[0]
 
         Showtime[] showtimes = cinemas[0].getShowtimes(); //Function to get movies object of cinema[0]
 
-        
+        cinemas[0].showShowtimes(); //Show Showtimes in cinemas[0] of cineplexes[0]
 
-        // showtimes[0].showSeats(); //Function to showSeats of showtime[0] in cinema[0] in cineplex[0]
-        // showtimes[1].showSeats(); //Function to showSeats of showtime[1] in cinema[0] in cineplex[0]
+        System.out.println("Information about showtimes[0]");
+        showtimes[0].showInfo(); //Show info of showtimes[0] in cinemas[0] of cineplexes[0]
+        System.out.println("");
+
+        System.out.println("Seats available in showtimes[0]");
+        showtimes[0].showSeats(); //Show seats of showtimes[0] in cinemas[0] of cineplexes[0]
+        System.out.println("");
+
 
         int choice;
             do {

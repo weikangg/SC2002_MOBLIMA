@@ -48,11 +48,7 @@ public class CineplexManager {
                 
                 for(int j = 0; j < cinemas.length; j++){
                     int numCinemas = Integer.valueOf(r.get(i)[2]);
-                    int[] numMovies = new int[numCinemas];
-                    for(int z = 3; z < 3 + numCinemas; z++){
-                        numMovies[z-3] = Integer.valueOf(r.get(i)[z]);
-                    }
-                    cinemas[j].configMovies(numMovies);
+                    cinemas[j].configMovies(Integer.valueOf(r.get(i)[j+3]));
                 }
                 
 
