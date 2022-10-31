@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.ArrayList;
+
 public class Transaction {
     private String id;
     private String movieName;
@@ -38,5 +40,19 @@ public class Transaction {
     public void setTicketList(ArrayList<Ticket> tix) {this.tix = tix;}
     public void setTicket(int index, Ticket ticket) {this.tix.set(index, ticket);}
     
+    public void printTransaction() {
+    	System.out.println("ID: " +this.getID());
+		System.out.println("Movie Title: " +this.getMovieName());
+		System.out.println("Date & Time: " + this.getTranDateTime());
+
+        //print out the information for each ticket
+        for(int i = 0; i < tix.size(); i++)
+        {
+            System.out.print("Ticket " + (i+1) + ":");
+            System.out.println("    " + this.getTicket(i).getDate());
+            System.out.println("    " + this.getTicket(i).getTicketPrice());
+        }
+		
+    }
  
 }
