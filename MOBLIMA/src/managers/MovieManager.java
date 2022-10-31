@@ -48,7 +48,7 @@ public class MovieManager {
         ReviewListManager reviewListManager = new ReviewListManager();
         switch (option) {
             case 1:
-                if (StaffAddMovieToList.staffAddMovie(movListManager.getMovieList(), reviewListManager.getReviewList())) {
+                if (StaffAddMovieToList.staffAddMovie(movListManager.getMovieList())) {
                     System.out.println("Movie created!");
                 } 
                 else {

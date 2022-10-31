@@ -11,7 +11,7 @@ public class StaffAddMovieToList {
 	static String splitter = ";";
 	static String converter = ":";
 
-    public static boolean staffAddMovie(List<Movie> mList, List<Review> rList) {
+    public static boolean staffAddMovie(List<Movie> mList) {
 		ShowingStatus status = null;
 		String movieTitle, synopsis, movieDirector, cast, genres, synopsisTmp, movieDirectorTmp, castTmp, genreTmp, movieTitleTmp;
 		int choice;
@@ -146,8 +146,7 @@ public class StaffAddMovieToList {
             System.out.println("Error Input! Please only input values from 1-4.\n");
         }
         sc.nextLine();
-		if (MovieListManager.addMovieList(mList, movieTitle, synopsis, movieDirector, cast, genres, movieDuration, status, sale, movieRating,rating, releaseDateTime,movieType)
-				&& ReviewListManager.addReviewList(rList, movieTitle))
+		if (MovieListManager.addMovieList(mList, movieTitle, synopsis, movieDirector, cast, genres, movieDuration, status, sale, movieRating,rating, releaseDateTime,movieType))
 			return true;
 		 return false;
     }

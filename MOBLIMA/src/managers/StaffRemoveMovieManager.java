@@ -21,6 +21,20 @@ public class StaffRemoveMovieManager {
         List<Movie>newList = new ArrayList<Movie>();
         System.out.println("Enter Movie Title: ");
         title = sc.next();
+        
+        // Search if movie exists first
+
+        Movie temp = null;
+        for(Movie m: mList){
+            if(m.getMovieTitle().equalsIgnoreCase(title)){
+                 temp = m;
+            }
+        }
+        if(!mList.contains(temp)){
+            System.out.println("Movie does not exist!");
+            return false;
+        }
+
         if(confirm("Remove Title:")){
             for(Movie m : mList){
                 if(!m.getMovieTitle().equals(title)){

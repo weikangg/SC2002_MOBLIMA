@@ -102,7 +102,7 @@ public class customerApp {
                 break;
 
                 default:
-                System.out.println("Please enter a vaild option");
+                System.out.println("Please enter a valid option");
             }
         }while(exit == false);
     }
