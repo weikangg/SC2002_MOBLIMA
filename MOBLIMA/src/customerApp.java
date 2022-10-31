@@ -75,7 +75,8 @@ public class customerApp {
             "1. Book and Purchase Ticket\n"+
             "2. Booking History\n"+
             "3. Seat Availability\n"+
-            "4. Exit\n"+
+            "4. Review Movie\n"+
+            "0. Exit\n"+
             "========================================================\n"+
             "Please Enter Your Choice:");
 
@@ -91,8 +92,11 @@ public class customerApp {
 
                 case 3:
                 //show seat availability
-
+                    
                 case 4:
+                //review movie
+
+                case 0:
                 System.out.println("Exiting Customer App...");
                 exit = true;
                 break;
