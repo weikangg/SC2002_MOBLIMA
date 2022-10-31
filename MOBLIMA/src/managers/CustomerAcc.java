@@ -20,11 +20,11 @@ public class CustomerAcc {
         this.age = age;
     }
 
-    public void updateHistory(String movieName, String movDateTime, String tranDateTime, float cost, String cinID){
+    public void updateHistory(ArrayList<Ticket> tix, String movieName, String tranDateTime, String cinID){
         //creates transaction id
         String id =  cinID + tranDateTime;
         //create transaction history
-        Transaction x = new Transaction(id, movieName, movDateTime, tranDateTime, cost);
+        Transaction x = new Transaction(id, movieName, tranDateTime, tix);
         //add the new transaction to history
         bookingHistory.addFirst(x);
         System.out.println("Transaction Complete!");
