@@ -113,8 +113,8 @@ public class adminApp {
 
         
 
-        showtimes[0].showSeats();
-        showtimes[1].showSeats();
+        // showtimes[0].showSeats(); //Function to showSeats of showtime[0] in cinema[0] in cineplex[0]
+        // showtimes[1].showSeats(); //Function to showSeats of showtime[1] in cinema[0] in cineplex[0]
 
         int choice;
             do {

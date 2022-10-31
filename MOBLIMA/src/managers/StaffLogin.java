@@ -3,6 +3,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class StaffLogin {
     public static StaffLogin object = null;
@@ -18,9 +20,11 @@ public class StaffLogin {
     public boolean checkLogin(String username , String password){
         try{
             String line = "";
-            String path = System.getProperty("user.dir") +"\\MOBLIMA\\data\\staffs\\staffs.csv";
-            // System.out.println(path);
-            BufferedReader br = new BufferedReader(new FileReader(path));
+
+            Path path = Paths.get("data\\staffs\\staffs.csv");
+            // System.out.println(path.toAbsolutePath().toString());
+
+            BufferedReader br = new BufferedReader(new FileReader(path.toAbsolutePath().toString()));
             while((line = br.readLine()) != null){
                 String[] values = line.split(",");
                 // System.out.println("IN DATABASE..");

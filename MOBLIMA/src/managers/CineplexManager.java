@@ -5,6 +5,8 @@ import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import com.opencsv.*;
 import com.opencsv.exceptions.CsvException;
@@ -18,9 +20,11 @@ public class CineplexManager {
 
         try {
 
-            String path = System.getProperty("user.dir") +"\\MOBLIMA\\data\\cineplexes.csv"; //FilePath for login.csv
-            // System.out.println(path);
-            FileReader filereader = new FileReader(path); //CSVReader Instantiation
+            Path path = Paths.get("data\\cineplexes.csv");
+            // System.out.println(path.toAbsolutePath().toString());
+
+            
+            FileReader filereader = new FileReader(path.toAbsolutePath().toString()); //CSVReader Instantiation
             CSVReader csvReader = new CSVReader(filereader); 
 
             List<String[]> r = csvReader.readAll(); //Read File
