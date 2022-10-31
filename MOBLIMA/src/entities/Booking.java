@@ -3,44 +3,44 @@ import java.util.ArrayList;
 
 
 public class Booking {
-	private String TID;
+	private String bookingID;
 	private double totalPrice;
 	private Movie movie;
 	private Cinema cinema;
 	private ArrayList<Ticket> tt;
 	private User user;
-	//private Slot slot;
+	private Showtime showtime;
 	
-	/*public Booking(String tid, double totalPrice, Movie movie, Cinema cinema, ArrayList<Ticket> tt, User user, Slot slot)
+	public Booking(String bookingID, double totalPrice, Movie movie, Cinema cinema, ArrayList<Ticket> tt, User user, Showtime showtime)
 	{
-		this.TID = tid;
+		this.bookingID = bookingID;
 		this.totalPrice = totalPrice;
 		this.movie = movie;
 		this.cinema = cinema;
 		this.tt = tt;
 		this.user = user;
-		//this.slot = slot;
+		this.showtime = showtime;
 	}
-	*/
+
 	
 	
-	public String getTID() {return this.TID;}
+	public String getbookingID() {return this.bookingID;}
 	public double getTotalPrice() {return this.totalPrice;}
 	public Movie getMovie() {return this.movie;}
 	public Cinema getCinema() {return this.cinema;}
 	public ArrayList<Ticket> getTicketList() {return this.tt;}
 	public Ticket getTicket(int index) {return this.tt.get(index);}
 	public User getUser() {return this.user;}
-	//public Slot getSlot() {return this.slot;}
+	public Showtime getShowtime() {return this.showtime;}
 	
-	public void setTID(String TID){this.TID = TID;}
+	public void setbookingID(String bookingID){this.bookingID = bookingID;}
 	public void setTotalPrice(double totalPrice){this.totalPrice = totalPrice;}
 	public void setMovie(Movie movie){this.movie = movie;}
 	public void setCinema(Cinema cinema){this.cinema = cinema;}
 	public void setTicketList(ArrayList<Ticket> tt){this.tt = tt;}
 	public void setTicket(int index, Ticket ticket) {this.tt.set(index, ticket);}
 	public void setUser(User user){this.user = user;}
-	//public void setSlot(Slot slot){this.slot = slot;}
+	public void setShowTime(Showtime showtime){this.showtime = showtime;}
 	
 	public void addTicket(Ticket tt)
 	{
