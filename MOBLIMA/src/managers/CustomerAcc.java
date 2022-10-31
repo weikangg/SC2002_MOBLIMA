@@ -1,6 +1,7 @@
 package managers;
 
 import java.util.LinkedList;
+import java.util.ArrayList;
 import entities.*;
 
 public class CustomerAcc {
