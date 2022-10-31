@@ -16,7 +16,10 @@ import entities.Cinema;
 
 public class CineplexManager {
     
-    public static Cineplex[] configCineplexes(){
+    /**
+     * Function to configure the cineplexes
+     */
+    public static Cineplex[] configCineplexes(){ 
 
         try {
 
@@ -48,7 +51,7 @@ public class CineplexManager {
                 
                 for(int j = 0; j < cinemas.length; j++){
                     int numCinemas = Integer.valueOf(r.get(i)[2]);
-                    cinemas[j].configMovies(Integer.valueOf(r.get(i)[j+3]));
+                    cinemas[j].configShowtimes((Integer.valueOf(r.get(i)[j+3])));
                 }
                 
 

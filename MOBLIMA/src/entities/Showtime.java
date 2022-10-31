@@ -70,8 +70,9 @@ public class Showtime extends Cinema{
 
     //Methods
 
-
-    // Updates the status of the cinema depending on proportion of seats filled.
+    /**
+     * Updates the status of the cinema depending on proportion of seats filled.
+     */
     public void updateCinemaStatus() {
 
         int seatsFilled = 0;
@@ -97,7 +98,10 @@ public class Showtime extends Cinema{
     	}
     }
 
-    public void show(){ //Printer method for information
+    /**
+     * Printer method for information and seats
+     */
+    public void show(){ 
         System.out.println(super.getName()+", hall "+(super.getCinemaID()+1)+", movie " + getShowtimeID());
 
         System.out.println("Showtime ID: " + getShowtimeID());
@@ -117,7 +121,10 @@ public class Showtime extends Cinema{
 
     }
 
-    public void showInfo(){ //Printer method for information
+    /**
+     * Printer method for information
+     */
+    public void showInfo(){ 
         System.out.println(super.getName()+", hall "+(super.getCinemaID()+1)+", movie " + getShowtimeID());
 
         System.out.println("Showtime ID: " + getShowtimeID());
@@ -128,6 +135,9 @@ public class Showtime extends Cinema{
         
     }
 
+    /**
+     * Printer method for seats
+     */
     public void showSeats(){
 
         for (int i = 0; i < 5; i++){
