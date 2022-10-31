@@ -142,7 +142,7 @@ public class Movie {
     public void setShowingStatus(ShowingStatus showingStatus) {
         this.showingStatus = showingStatus;
     }
-    public void setReleaseDateTime(LocalDate releaseDate) {
+    public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
     }
     public void setProfitEarned(double profitEarned) {

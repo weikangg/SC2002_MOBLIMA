@@ -1,5 +1,6 @@
 package managers;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -51,7 +52,9 @@ public class StaffPrintMovieManager {
 				System.out.println("Genres: "+ genre);
 				System.out.println("Movie Rating: " + m.getMovieRating());
 				System.out.println("Movie Duration: " + m.getMovieDuration());
-				System.out.println("Profit Earned: " + m.getProfitEarned());
+				double profitEarned = m.getProfitEarned();
+				BigDecimal bd = new BigDecimal(profitEarned);
+				System.out.println("Profit Earned: " + bd.toPlainString());
 				System.out.println("Overall Rating Score: " + m.getOverallRatingScore());
 				System.out.println("Release Date: " + m.getReleaseDate().toString());
 				System.out.println("Movie Type: " + m.getMovieType());

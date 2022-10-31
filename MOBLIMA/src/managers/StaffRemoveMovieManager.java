@@ -10,7 +10,6 @@ import static managers.MovieListManager.*;
 
 public class StaffRemoveMovieManager {
     private static Scanner sc = new Scanner(System.in);
-    static String path = System.getProperty("user.dir") +"\\MOBLIMA\\data\\movies\\movies.csv";
 
     public static boolean removeMovie(List<Movie> mList){
         System.out.println("#########################################################");
@@ -41,7 +40,7 @@ public class StaffRemoveMovieManager {
                     newList.add(newMovie);
                 }
             }
-            return updateMovieListCSV(newList,1);
+            return updateMovieListCSV(newList);
         }
         else{
             System.out.println("Removing Movie Cancelled, Returning to Original Menu...");

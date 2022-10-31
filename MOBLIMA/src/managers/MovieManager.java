@@ -58,6 +58,14 @@ public class MovieManager {
             case 2:
                 StaffPrintMovieManager.printMovieList(movListManager.getMovieList());
                 break;
+            case 3:
+                if(StaffUpdateMovieManager.updateMovie(movListManager.getMovieList())){
+                    System.out.println("Movie Updated!");
+                }
+                else{
+                    System.out.println("Failed to update movie!");
+                }
+                break;
             case 4:
                 if(StaffRemoveMovieManager.removeMovie(movListManager.getMovieList())){
                     System.out.println("Movie removed!");

@@ -48,17 +48,12 @@ public class MovieListManager {
 									   ShowingStatus showingStatus, double profitEarned, MovieRating movieRating, double overallRatingScore, LocalDate releaseDateTime, MovieType movieType) {
         Movie newMovie = new Movie(movieTitle,showingStatus,synopsis,movieDirector,cast, genres,movieRating,movieDuration,profitEarned,overallRatingScore,releaseDateTime, movieType);
         movieList.add(newMovie);
-        return updateMovieListCSV(movieList,0);
+        return updateMovieListCSV(movieList);
     }
-    public static boolean updateMovieListCSV(List<Movie> movieList, int removingMovie) {
+    public static boolean updateMovieListCSV(List<Movie> movieList) {
 		FileWriter csvWriter;
 		try {
-			if(removingMovie == 1){
-				csvWriter = new FileWriter(path,false);
-			}
-			else{
-				csvWriter = new FileWriter(path,true);
-			}
+			csvWriter = new FileWriter(path,false);
 			csvWriter.append("MOVIE_TITLE");
 			csvWriter.append(separator);
 			csvWriter.append("SHOWING_STATUS");
