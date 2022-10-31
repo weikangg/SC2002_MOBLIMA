@@ -1,8 +1,7 @@
 package entities;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.io.FileReader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,7 +11,7 @@ import com.opencsv.*;
 public class Showtime extends Cinema{
 
     private int showtimeID;
-
+    private int movieID;
     private LocalDateTime dateTime;
 
     //Unique movieID to specify the movie being shown for that showtime.
@@ -20,7 +19,7 @@ public class Showtime extends Cinema{
     /**
      * Movie Format of the specific showtime.
      */
-    // private MovieType mR;
+    private MovieType movieReso;
     /**
      * Cinema object with access to a seating plan. Cinema held is the cinema at which the movie is showing.
      */
@@ -105,12 +104,23 @@ public class Showtime extends Cinema{
 
     //Getters
 
-    public int getShowtimeID() {return showtimeID;}
+    public Integer getShowtimeID() {return showtimeID;}
+    public Integer getMovieID() {return movieID;}
     public LocalDateTime getDateTime() {return dateTime;}
     public String getMovieTitle() {return movieTitle;}
-    // public MovieType getMovieFormat() {return mR;}
+    public MovieType getMovieFormat() {return movieReso;}
     public Cinema getCinema() {return cinema;}
     public String getCineplexName() {return cineplexName;}
     public CinemaStatus getCinemaStatus() {return cinemaStatus;}
+
+    //Setters
+
+    public void setShowtimeID(Integer showtimeID) {this.showtimeID = showtimeID;}
+    public void setDateTime(LocalDateTime dateTime) { this.dateTime = dateTime; }
+    public void setMovieID(Integer movieID) {this.movieID = movieID;}
+    public void setMovieFormat(MovieType movieReso) {this.movieReso = movieReso;}
+    public void setCinema(Cinema cinema) {this.cinema = cinema;}
+    public void setCineplexName(String cineplexName) {this.cineplexName = cineplexName;}
+    public void setCinemaStatus(CinemaStatus cinemaStatus) {this.cinemaStatus = cinemaStatus;}
 
 };
