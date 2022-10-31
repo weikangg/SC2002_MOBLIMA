@@ -9,9 +9,9 @@ public class Booking {
 	private Cinema cinema;
 	private ArrayList<Ticket> tt;
 	private User user;
-	private Slot slot;
+	//private Slot slot;
 	
-	public Booking(String TID, double totalPrice, Movie movie, Cinema cinema, ArrayList<Ticket> tt, User user, Slot slot)
+	/*public Booking(String tid, double totalPrice, Movie movie, Cinema cinema, ArrayList<Ticket> tt, User user, Slot slot)
 	{
 		this.TID = tid;
 		this.totalPrice = totalPrice;
@@ -19,9 +19,9 @@ public class Booking {
 		this.cinema = cinema;
 		this.tt = tt;
 		this.user = user;
-		this.slot = slot;
+		//this.slot = slot;
 	}
-	
+	*/
 	
 	
 	public String getTID() {return this.TID;}
@@ -31,16 +31,16 @@ public class Booking {
 	public ArrayList<Ticket> getTicketList() {return this.tt;}
 	public Ticket getTicket(int index) {return this.tt.get(index);}
 	public User getUser() {return this.user;}
-	public Slot getSlot() {return this.slot;}
+	//public Slot getSlot() {return this.slot;}
 	
 	public void setTID(String TID){this.TID = TID;}
 	public void setTotalPrice(double totalPrice){this.totalPrice = totalPrice;}
 	public void setMovie(Movie movie){this.movie = movie;}
 	public void setCinema(Cinema cinema){this.cinema = cinema;}
 	public void setTicketList(ArrayList<Ticket> tt){this.tt = tt;}
-	public voud setTicket(int index, Ticket ticket) {this.tt.set(index, ticket);}
+	public void setTicket(int index, Ticket ticket) {this.tt.set(index, ticket);}
 	public void setUser(User user){this.user = user;}
-	public void setSlot(Slot slot){this.slot = slot;}
+	//public void setSlot(Slot slot){this.slot = slot;}
 	
 	public void addTicket(Ticket tt)
 	{
