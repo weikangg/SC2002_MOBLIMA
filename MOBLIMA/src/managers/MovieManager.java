@@ -26,8 +26,9 @@ public class MovieManager {
                 System.out.println("=================== MOVIE MENU (STAFF) ==================\n" +
                                     " 1. Create Movies 						    		     \n" +
                                     " 2. View Full List Of Movies                            \n" +
-                                    " 3. Update Movie Status		                         \n" +
-                                    " 4. Manage Reviews          	                         \n" +
+                                    " 3. Update Movies       		                         \n" +
+                                    " 4. Remove Movies                                       \n" +
+                                    // " 4. Manage Reviews          	                         \n" +
                                     " 5. Show Top 5 Movies                                   \n" +
                                     " 6. Go Back                                             \n" +
                                     "==========================================================");
@@ -56,6 +57,14 @@ public class MovieManager {
                 break;
             case 2:
                 StaffPrintMovieManager.printMovieList(movListManager.getMovieList());
+                break;
+            case 4:
+                if(StaffRemoveMovieManager.removeMovie(movListManager.getMovieList())){
+                    System.out.println("Movie removed!");
+                }
+                else{
+                    System.out.println("Failed to remove movie!");
+                }
                 break;
             case 6:
                 System.out.println("Back to StaffApp......");

@@ -22,11 +22,13 @@ public class StaffAddMovieToList {
         LocalDate releaseDateTime = LocalDate.now();
 		MovieType movieType = null;
 		Scanner sc = new Scanner(System.in);
+		System.out.println("#########################################################");
+		System.out.println("#################### ADDING MOVIES ######################");
+		System.out.println("#########################################################");
 		System.out.print("Enter Movie Title: ");
 		movieTitleTmp = sc.nextLine();
 		if (mList.stream().filter(o -> o.getMovieTitle().equalsIgnoreCase(movieTitleTmp)).findFirst().isPresent()) {
 			System.out.println("Movie Already Exists!");
-            sc.close();
 			return false;
 		}
 		movieTitle = movieTitleTmp.replaceAll(csv_Separator, converter);

@@ -29,6 +29,10 @@ public class StaffPrintMovieManager {
 		System.out.println("#########################################################");
 		System.out.println("");
 
+		if (mList.size() == 0){
+			System.out.println("No Movies to display.");
+		}
+
 		for(Movie m : mList) {
 				String cast, genre;
 				String casttmp = m.getCast();

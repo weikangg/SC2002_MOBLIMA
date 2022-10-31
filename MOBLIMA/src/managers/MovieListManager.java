@@ -14,7 +14,7 @@ public class MovieListManager {
     // Constructor
     public MovieListManager(){}
 
-    static String path = System.getProperty("user.dir") +"\\MOBLIMA\\data\\movies\\movies.csv";
+    static String path = System.getProperty("user.dir") +"\\data\\movies\\movies.csv";
     // static String path = "src/data/movies/movies.csv";
     static String separator = ",";
 
@@ -48,12 +48,17 @@ public class MovieListManager {
 									   ShowingStatus showingStatus, double profitEarned, MovieRating movieRating, double overallRatingScore, LocalDate releaseDateTime, MovieType movieType) {
         Movie newMovie = new Movie(movieTitle,showingStatus,synopsis,movieDirector,cast, genres,movieRating,movieDuration,profitEarned,overallRatingScore,releaseDateTime, movieType);
         movieList.add(newMovie);
-        return updateMovieListCSV(movieList);
+        return updateMovieListCSV(movieList,0);
     }
-    public static boolean updateMovieListCSV(List<Movie> movieList) {
+    public static boolean updateMovieListCSV(List<Movie> movieList, int removingMovie) {
 		FileWriter csvWriter;
 		try {
-			csvWriter = new FileWriter(path);
+			if(removingMovie == 1){
+				csvWriter = new FileWriter(path,false);
+			}
+			else{
+				csvWriter = new FileWriter(path,true);
+			}
 			csvWriter.append("MOVIE_TITLE");
 			csvWriter.append(separator);
 			csvWriter.append("SHOWING_STATUS");

@@ -10,7 +10,7 @@ import java.io.IOException;
 import entities.*;
 
 public class ReviewListManager {
-	static String path = System.getProperty("user.dir") +"\\MOBLIMA\\data\\reviews\\reviews.csv";
+	static String path = System.getProperty("user.dir") +"\\data\\reviews\\reviews.csv";
     // static String path = "src/data/reviews/reviews.csv";
 
     // csv separator
