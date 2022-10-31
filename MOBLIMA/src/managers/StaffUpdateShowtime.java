@@ -1,9 +1,7 @@
 package managers;
+import java.text.SimpleDateFormat;
 import java.util.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-// import entities.Showtime;
+import entities.Showtime;
 // import entities.MovieType;
 // import entities.Cinema;
 // import entities.CinemaStatus;
@@ -37,11 +35,10 @@ public class StaffUpdateShowtime {
                         sc.nextLine();
                         System.out.println("Enter new Showtime datetime (dd/MM/yyyy HH:mm): ");
                         String newDateTime = sc.nextLine();
-                        LocalDateTime localDateTime = this.dateTimeParser(newDateTime);
-                        while (localDateTime == null) {
+                        //Showtime.setDateTime((SimpleDateFormat) newDateTime);
+                        while (newDateTime == null) {
                             System.out.println("Enter new Showtime datetime (dd/MM/yyyy HH:mm): ");
                             newDateTime = sc.nextLine();
-                            localDateTime = this.dateTimeParser(newDateTime);
                         }
                         //showtimeToUpdate.setDateTime(this.dateTimeParser(newDateTime));
                         break;
@@ -93,15 +90,4 @@ public class StaffUpdateShowtime {
         }
     }
 
-    private LocalDateTime dateTimeParser(String dateTimeString) {
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-            LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, formatter);
-            return dateTime;
-        }
-        catch (DateTimeParseException dtpe) {
-            System.out.println("Wrong date time format entered!");
-            return null;
-        }
-    }
 }

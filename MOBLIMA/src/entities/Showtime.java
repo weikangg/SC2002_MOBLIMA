@@ -164,7 +164,6 @@ public class Showtime extends Cinema{
     //Setters
 
     public void setShowtimeID(Integer showtimeID) {this.showtimeID = showtimeID;}
-    public void setMovieID() {this.movieID = movieID;}
     public void setDateTime(SimpleDateFormat dateTime) { this.dateTime = dateTime; }
     public void setMovieID(Integer movieID) {this.movieID = movieID;}
     public void setMovieFormat(String movieReso) {this.movieReso = movieReso;}
