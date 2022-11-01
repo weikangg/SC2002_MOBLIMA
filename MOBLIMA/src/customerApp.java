@@ -91,7 +91,7 @@ public class customerApp {
             switch(input){
                 case 1:
                 //book ticket
-                    
+                this.booking();
                 //after showing user the seats for a movie, call bookingmenu in booking manager
 
                 case 2:
@@ -114,20 +114,51 @@ public class customerApp {
         }while(exit == false);
     }
     
-    /*public void findSeats(){
-        String movieName;
+    public void booking(){
         int cineplex;
-
-        System.out.println("Please choose a Cineplex:")
-        cineplex = scan.nextInt();
+        int count = 0;
+        List<Movie> movie;
 
         
 
-        System.out.println("Please enter movie name:");
-        movieName = scan.nextLine();
+        System.out.println("Please choose a Cineplex:");
+        cineplex = scan.nextInt();
+        
+        movie = new MovieListManager().getMovieList();
+        System.out.println("Please choose a movie:");
+        for(Movie m : movie) {
+            String cast, genre;
+            String casttmp = m.getCast();
+            String genretmp = m.getGenres();
+            String[] rating;
 
-        //ask user for movie and find movie seating file
-        //open csv file
-        //go through the csv file, for if seat is occupied print [X], if seat is not occupied print [0]
-    }*/
+            System.out.printf("----------------- MOVIE %d -----------------\n", count);
+            System.out.println("Movie Title: "+ m.getMovieTitle());
+            /*System.out.println("Showing Status: "+ m.getShowingStatus());
+            System.out.println("Synopsis: " + m.getSynopsis());
+            System.out.println("Movie Director: "+ m.getMovieDirector());
+            cast = casttmp.replaceAll(SplitBy, cvsSplitBy);
+            System.out.println("Casts: "+ cast);
+            cast = casttmp.replaceAll(SplitBy, cvsSplitBy);
+            genre = genretmp.replaceAll(SplitBy, cvsSplitBy);
+            System.out.println("Genres: "+ genre);
+            System.out.println("Movie Rating: " + m.getMovieRating());
+            System.out.println("Movie Duration: " + m.getMovieDuration());
+            double profitEarned = m.getProfitEarned();
+            BigDecimal bd = new BigDecimal(profitEarned);
+            System.out.println("Profit Earned: " + bd.toPlainString());
+            System.out.println("Overall Rating Score: " + m.getOverallRatingScore());
+            System.out.println("Release Date: " + m.getReleaseDate().toString());
+            System.out.println("Movie Type: " + m.getMovieType());
+            count++;*/
+            System.out.println("");
+        }
+        
+        //link the movie to showtime
+
+        //show user movie timing
+
+        //ask user to choose a movie timing
+        //call bookingmanager
+    }
 }
