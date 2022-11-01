@@ -160,7 +160,7 @@ public class Showtime extends Cinema{
     public String getMovieTitle() {return movieTitle;}
     public String getMovieFormat() {return movieReso;}
     public String getCinemaStatus() {return cinemaStatus.toString();}
-
+    public int[][] getSeats(){return seats;}
     //Setters
 
     public void setShowtimeID(Integer showtimeID) {this.showtimeID = showtimeID;}
