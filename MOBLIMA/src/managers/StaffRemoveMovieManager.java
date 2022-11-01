@@ -11,7 +11,8 @@ import static managers.MovieListManager.*;
 public class StaffRemoveMovieManager {
     private static Scanner sc = new Scanner(System.in);
 
-    public static boolean removeMovie(List<Movie> mList){
+    // Remove movie from database entirely
+    public static boolean removeMovieFromDatabase(List<Movie> mList){
         System.out.println("#########################################################");
 		System.out.println("#################### REMOVING MOVIES ####################");
 		System.out.println("#########################################################");
@@ -61,5 +62,29 @@ public class StaffRemoveMovieManager {
             System.out.println("Removing Movie Cancelled, Returning to Original Menu...");
             return true;
         }
+    }
+
+    // Remove Movie by setting status to "End of showing" as per request of question
+    public static boolean removeMovie(List<Movie>mList){
+        System.out.println("#########################################################");
+		System.out.println("#################### REMOVING MOVIES ####################");
+		System.out.println("#########################################################");
+		System.out.println("");
+
+        
+        String title; 
+        System.out.println("Enter Movie Title: ");
+        title = sc.next();
+    
+        for(Movie m: mList){
+            if(m.getMovieTitle().equalsIgnoreCase(title)){
+                m.setShowingStatus(ShowingStatus.FINISHED_SHOWING);
+                updateMovieListCSV(mList);
+                return true;
+            }
+        }
+        
+        System.out.println("Movie not found!");
+        return false;
     }
 }

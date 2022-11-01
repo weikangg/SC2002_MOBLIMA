@@ -103,7 +103,7 @@ public class StaffUpdateMovieManager {
                     sc.nextLine();
                     for(Movie m:movieList){
                         if(m.getMovieTitle().equals(newTitle)){
-                            m.setShowingStatus(status);;
+                            m.setShowingStatus(status);
                         }
                     }
                 }

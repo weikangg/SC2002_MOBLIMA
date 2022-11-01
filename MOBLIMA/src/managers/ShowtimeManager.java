@@ -16,8 +16,8 @@ public class ShowtimeManager {
 
     public void staffMenu(int choice){
         int option = 0;
-        int showtimeID, cinemaNo;
-        String cineplexName;
+        int showtimeID, hallNo;
+        String cinemaName;
         try{
             if(choice == 0){
                 System.out.println("==================== SHOWTIME STAFF APP ====================\n" +
@@ -42,14 +42,14 @@ public class ShowtimeManager {
         switch (option) {
             case 1:
                 sc.nextLine();
-                System.out.println("Enter Cineplex Name:");
-                cineplexName = sc.nextLine();
-                System.out.println("Enter Cinema No:");
-                cinemaNo = sc.nextInt();
+                System.out.println("Enter Cinema Name:");
+                cinemaName = sc.nextLine();
+                System.out.println("Enter Hall No:");
+                hallNo = sc.nextInt();
                 System.out.println("Enter ShowTime ID: ");
                 showtimeID = sc.nextInt();
                 sc.nextLine();
-                StaffViewShowTime.viewShowTime(cineplexName, cinemaNo, showtimeID);
+                StaffViewShowTime.viewShowTime(cinemaName, hallNo, showtimeID);
                 //this.viewShowtime(showtimeID);
                 break;
         case 2:
