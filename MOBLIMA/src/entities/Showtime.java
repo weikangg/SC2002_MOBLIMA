@@ -160,6 +160,7 @@ public class Showtime extends Cinema{
     public String getMovieTitle() {return movieTitle;}
     public String getMovieFormat() {return movieReso;}
     public String getCinemaStatus() {return cinemaStatus.toString();}
+    public int[][] getSeats() {return seats;}
 
     //Setters
 
@@ -168,5 +169,6 @@ public class Showtime extends Cinema{
     public void setMovieID(Integer movieID) {this.movieID = movieID;}
     public void setMovieFormat(String movieReso) {this.movieReso = movieReso;}
     public void setCinemaStatus(CinemaStatus cinemaStatus) {this.cinemaStatus = cinemaStatus;}
+    public void setSeats(int[][] seats) {this.seats = seats;}
 
 };
