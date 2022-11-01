@@ -7,7 +7,7 @@ import entities.Showtime;
 // import entities.CinemaStatus;
 
 public class StaffUpdateShowtime {
-    private void updateShowtime(int showtimeID){
+    public static void updateShowtime(int showtimeID){
         int choice;
         Scanner sc = new Scanner(System.in);
         //Showtime showtimeToUpdate = this.showtimes.get(showtimeID);

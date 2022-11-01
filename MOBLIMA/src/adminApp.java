@@ -4,6 +4,7 @@ import entities.Cinema;
 import entities.Showtime;
 import managers.StaffLogin;
 import managers.MovieManager;
+import managers.ShowtimeManager;
 import managers.CineplexManager;
 
 public class adminApp {
@@ -137,6 +138,9 @@ public class adminApp {
                 switch(choice){
                     case 1:
                         MovieManager.getInstance().staffMenu(0);
+                        break;
+                    case 2:
+                        ShowtimeManager.getInstance().staffMenu(0);
                         break;
                     case 6: 
                         System.out.println("Exiting App, have a nice day!");

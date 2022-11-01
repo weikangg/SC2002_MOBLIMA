@@ -27,9 +27,9 @@ public class MovieListManager {
 			br = new BufferedReader(new FileReader(path));
 			while((line = br.readLine()) !=null ) {
 				String[] moviecsv = line.split(separator);
-				if(!moviecsv[0].equals("MOVIE_TITLE")) {
-					movietmp = new Movie(moviecsv[0],ShowingStatus.valueOf(moviecsv[1]),moviecsv[2],moviecsv[3],moviecsv[4],moviecsv[5], MovieRating.valueOf(moviecsv[6]),
-							Integer.parseInt(moviecsv[7]),Double.parseDouble(moviecsv[8]),Double.parseDouble(moviecsv[9]), LocalDate.parse(moviecsv[10]),MovieType.valueOf(moviecsv[11]));
+				if(!moviecsv[0].equals("MOVIE_ID")) {
+					movietmp = new Movie(Integer.parseInt(moviecsv[0]) ,moviecsv[1],ShowingStatus.valueOf(moviecsv[2]),moviecsv[3],moviecsv[4],moviecsv[5],moviecsv[6], MovieRating.valueOf(moviecsv[7]),
+							Integer.parseInt(moviecsv[8]),Double.parseDouble(moviecsv[9]),Double.parseDouble(moviecsv[10]), LocalDate.parse(moviecsv[11]),MovieType.valueOf(moviecsv[12]));
 					movieList.add(movietmp);
 				}
 			}
@@ -44,9 +44,9 @@ public class MovieListManager {
 		return movieList;
     }
 
-    public static boolean addMovieList(List<Movie> movieList, String movieTitle, String synopsis,String movieDirector, String cast, String genres, int movieDuration, 
+    public static boolean addMovieList(List<Movie> movieList, int movieID,String movieTitle, String synopsis,String movieDirector, String cast, String genres, int movieDuration, 
 									   ShowingStatus showingStatus, double profitEarned, MovieRating movieRating, double overallRatingScore, LocalDate releaseDateTime, MovieType movieType) {
-        Movie newMovie = new Movie(movieTitle,showingStatus,synopsis,movieDirector,cast, genres,movieRating,movieDuration,profitEarned,overallRatingScore,releaseDateTime, movieType);
+        Movie newMovie = new Movie(movieID, movieTitle,showingStatus,synopsis,movieDirector,cast, genres,movieRating,movieDuration,profitEarned,overallRatingScore,releaseDateTime, movieType);
         movieList.add(newMovie);
         return updateMovieListCSV(movieList);
     }
@@ -54,6 +54,8 @@ public class MovieListManager {
 		FileWriter csvWriter;
 		try {
 			csvWriter = new FileWriter(path,false);
+			csvWriter.append("MOVIE_ID");
+			csvWriter.append(separator);
 			csvWriter.append("MOVIE_TITLE");
 			csvWriter.append(separator);
 			csvWriter.append("SHOWING_STATUS");
@@ -81,6 +83,8 @@ public class MovieListManager {
 
 			for (Movie movie : movieList) {
 				StringBuilder sb = new StringBuilder();
+				sb.append(movie.getMovieID());
+				sb.append(separator);
 				sb.append(movie.getMovieTitle());
 				sb.append(separator);
                 sb.append(movie.getShowingStatus().toString());

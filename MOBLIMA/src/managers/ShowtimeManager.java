@@ -21,9 +21,10 @@ public class ShowtimeManager {
             if(choice == 0){
                 System.out.println("==================== SHOWTIME STAFF APP ====================\n" +
             					" 1. View Showtime Details                                      \n" +
-			            		" 2. Update a Showtime                                          \n" +
-			                    " 3. Remove a Showtime                                          \n" +
-			                    " 4. Back to ShowtimeManager                                    \n"+
+                                " 2. Create a Showtime                                          \n" + 
+			            		" 3. Update a Showtime                                          \n" +
+			                    " 4. Remove a Showtime                                          \n" +
+			                    " 5. Back to ShowtimeManager                                    \n"+
                                 "==============================================================");
                 System.out.println("Enter choice: ");
                 option = sc.nextInt();
@@ -48,7 +49,7 @@ public class ShowtimeManager {
         case 2:
             System.out.println("Enter showtimeID: ");
             showtimeID = sc.nextInt();
-            //this.updateShowtime(showtimeID);
+            StaffUpdateShowtime.updateShowtime(showtimeID);
             break;
         case 3:
             System.out.println("Enter showtimeID: ");

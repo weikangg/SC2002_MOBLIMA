@@ -15,7 +15,7 @@ public class StaffAddMovieToList {
 		ShowingStatus status = null;
 		String movieTitle, synopsis, movieDirector, cast, genres, synopsisTmp, movieDirectorTmp, castTmp, genreTmp, movieTitleTmp;
 		int choice;
-		int movieDuration = 0;
+		int movieDuration = 0,movieID;
 		double rating = 0.0;
         MovieRating movieRating = null;
 		int sale = 0;
@@ -25,6 +25,16 @@ public class StaffAddMovieToList {
 		System.out.println("#########################################################");
 		System.out.println("#################### ADDING MOVIES ######################");
 		System.out.println("#########################################################");
+
+		// If movie List is empty, we assign it an ID of 1.
+		if(mList.size() == 0){
+			movieID = 1;
+		}
+		// Else if it's not empty, we find the last ID in the list and add 1.
+		else{ 
+			movieID = mList.get((mList.size()-1)).getMovieID() + 1;
+		}
+
 		System.out.print("Enter Movie Title: ");
 		movieTitleTmp = sc.nextLine();
 		if (mList.stream().filter(o -> o.getMovieTitle().equalsIgnoreCase(movieTitleTmp)).findFirst().isPresent()) {
@@ -146,7 +156,7 @@ public class StaffAddMovieToList {
             System.out.println("Error Input! Please only input values from 1-4.\n");
         }
         sc.nextLine();
-		if (MovieListManager.addMovieList(mList, movieTitle, synopsis, movieDirector, cast, genres, movieDuration, status, sale, movieRating,rating, releaseDateTime,movieType))
+		if (MovieListManager.addMovieList(mList,movieID, movieTitle, synopsis, movieDirector, cast, genres, movieDuration, status, sale, movieRating,rating, releaseDateTime,movieType))
 			return true;
 		 return false;
     }

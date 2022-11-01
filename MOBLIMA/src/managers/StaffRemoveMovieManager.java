@@ -38,6 +38,7 @@ public class StaffRemoveMovieManager {
         if(confirm("Remove Title:")){
             for(Movie m : mList){
                 if(!m.getMovieTitle().equals(title)){
+                    int movieID = m.getMovieID();
                     String movieTitle = m.getMovieTitle();
                     ShowingStatus showingStatus =  m.getShowingStatus();
                     String synopsis = m.getSynopsis();
@@ -50,7 +51,7 @@ public class StaffRemoveMovieManager {
                     double overallRatingScore =  m.getOverallRatingScore();
                     LocalDate releaseDate =  m.getReleaseDate();
                     MovieType movieType = m.getMovieType();
-                    Movie newMovie = new Movie(movieTitle,showingStatus, synopsis, movieDirector, casts, genres, movieRating, movieDuration, profitEarned,  overallRatingScore, releaseDate, movieType);
+                    Movie newMovie = new Movie(movieID,movieTitle,showingStatus, synopsis, movieDirector, casts, genres, movieRating, movieDuration, profitEarned,  overallRatingScore, releaseDate, movieType);
                     newList.add(newMovie);
                 }
             }

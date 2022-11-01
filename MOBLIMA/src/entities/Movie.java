@@ -27,8 +27,9 @@ public class Movie {
 
     // Constructor
 
-    public Movie(String movieTitle,ShowingStatus showingStatus, String synopsis,String movieDirector, String cast, String genres, 
+    public Movie(int movieID,String movieTitle,ShowingStatus showingStatus, String synopsis,String movieDirector, String cast, String genres, 
                 MovieRating movieRating,int movieDuration,  double profitEarned, double overallRatingScore, LocalDate releaseDate,MovieType movieType){
+        this.movieID = movieID;
         this.movieTitle = movieTitle;
         this.showingStatus = showingStatus;
         this.synopsis = synopsis;
@@ -101,7 +102,11 @@ public class Movie {
     public MovieType getMovieType(){
         return this.movieType;
     }
+    
     // Settors
+    public void setMovieID(int movieID){
+        this.movieID = movieID;
+    }
 
     public void setMovieTitle(String movieTitle) {
         this.movieTitle = movieTitle;

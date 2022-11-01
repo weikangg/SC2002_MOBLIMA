@@ -26,16 +26,17 @@ public class MovieManager {
                 System.out.println("=================== MOVIE MENU (STAFF) ==================\n" +
                                     " 1. Create Movies 						    		     \n" +
                                     " 2. View Full List Of Movies                            \n" +
-                                    " 3. Update Movies       		                         \n" +
-                                    " 4. Remove Movies                                       \n" +
+                                    " 3. View Movie By ID                                    \n" +
+                                    " 4. Update Movies       		                         \n" +
+                                    " 5. Remove Movies                                       \n" +
                                     // " 4. Manage Reviews          	                         \n" +
-                                    " 5. Show Top 5 Movies                                   \n" +
-                                    " 6. Go Back                                             \n" +
+                                    " 6. Show Top 5 Movies                                   \n" +
+                                    " 7. Go Back                                             \n" +
                                     "==========================================================");
                 System.out.println("Enter choice: ");
                 option = sc.nextInt();
-                if(!(option >= 1 && option <=6)){
-                    System.out.println("Please only enter a number from 1-6.");
+                if(!(option >= 1 && option <=7)){
+                    System.out.println("Please only enter a number from 1-7.");
                     staffMenu(0);
                 }
             }
@@ -59,6 +60,11 @@ public class MovieManager {
                 StaffPrintMovieManager.printMovieList(movListManager.getMovieList());
                 break;
             case 3:
+                System.out.println("Enter MovieID: ");
+                int movieID = sc.nextInt();
+                StaffPrintMovieManager.printMovieByID(movListManager.getMovieList(), movieID);
+                break;
+            case 4:
                 if(StaffUpdateMovieManager.updateMovie(movListManager.getMovieList())){
                     System.out.println("Movie Updated!");
                 }
@@ -66,7 +72,7 @@ public class MovieManager {
                     System.out.println("Failed to update movie!");
                 }
                 break;
-            case 4:
+            case 5:
                 if(StaffRemoveMovieManager.removeMovie(movListManager.getMovieList())){
                     System.out.println("Movie removed!");
                 }
@@ -74,13 +80,13 @@ public class MovieManager {
                     System.out.println("Failed to remove movie!");
                 }
                 break;
-            case 6:
+            case 7:
                 System.out.println("Back to StaffApp......");
                 movListManager = null;
                 reviewListManager = null;
                 return;
             default:
-                System.out.println("Invalid choice. Please enter a number between 1-6.");
+                System.out.println("Invalid choice. Please enter a number between 1-7.");
                 break;
         }
 
