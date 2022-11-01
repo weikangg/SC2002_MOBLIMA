@@ -1,18 +1,22 @@
 package entities;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import com.opencsv.*;
+import com.opencsv.exceptions.CsvException;
 
 public class Showtime extends Cinema{
 
     private int showtimeID;
     private int movieID;
-    private SimpleDateFormat dateTime;
+    private LocalDateTime dateTime;
 
     //Unique movieID to specify the movie being shown for that showtime.
     private String movieTitle;
@@ -44,7 +48,11 @@ public class Showtime extends Cinema{
 
             //Set all variables with data from csv file
             this.movieID = Integer.valueOf(r.get(0)[0]);
-            this.dateTime = new SimpleDateFormat(r.get(0)[1]);
+            String str = r.get(0)[1];
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
+            this.dateTime = dateTime;
+
             this.movieType = r.get(0)[2];
 
             int[][] seats = new int[5][10];
@@ -61,11 +69,16 @@ public class Showtime extends Cinema{
 
             this.updateCinemaStatus();
             csvReader.close();
-        } catch (Exception e) {
-            // TODO: handle exception
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found!");
+            System.out.println(e.getMessage());
+        } catch (IOException e){
+            System.out.println("IO Error!");
+            System.out.println(e.getMessage());
+        } catch (CsvException e){
+            System.out.println("CSV Error!");
+            System.out.println(e.getMessage());
         }
-
-
     }
 
     //Methods
@@ -156,7 +169,7 @@ public class Showtime extends Cinema{
 
     public Integer getShowtimeID() {return showtimeID;}
     public Integer getMovieID() {return movieID;}
-    public String getDateTime() {return dateTime.toPattern();}
+    public LocalDateTime getDateTime() {return dateTime;}
     public String getMovieTitle() {return movieTitle;}
     public String getMovieType() {return movieType;}
     public String getCinemaStatus() {return cinemaStatus.toString();}
@@ -164,7 +177,7 @@ public class Showtime extends Cinema{
     //Setters
 
     public void setShowtimeID(Integer showtimeID) {this.showtimeID = showtimeID;}
-    public void setDateTime(SimpleDateFormat dateTime) { this.dateTime = dateTime; }
+    public void setDateTime(LocalDateTime dateTime) { this.dateTime = dateTime; }
     public void setMovieID(Integer movieID) {this.movieID = movieID;}
     public void setMovieType(String movieReso) {this.movieType = movieReso;}
     public void setCinemaStatus(CinemaStatus cinemaStatus) {this.cinemaStatus = cinemaStatus;}

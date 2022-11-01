@@ -16,20 +16,21 @@ public class ShowtimeManager {
 
     public void staffMenu(int choice){
         int option = 0;
-        int showtimeID;
+        int showtimeID, cinemaNo;
+        String cineplexName;
         try{
             if(choice == 0){
                 System.out.println("==================== SHOWTIME STAFF APP ====================\n" +
             					" 1. View Showtime Details                                      \n" +
-                                " 2. Create a Showtime                                          \n" + 
+                                " 2. Add a Showtime                                             \n" + 
 			            		" 3. Update a Showtime                                          \n" +
 			                    " 4. Remove a Showtime                                          \n" +
 			                    " 5. Back to ShowtimeManager                                    \n"+
                                 "==============================================================");
                 System.out.println("Enter choice: ");
                 option = sc.nextInt();
-                if(!(option >= 1 && option <=4)){
-                    System.out.println("Please only enter a number from 1-4.");
+                if(!(option >= 1 && option <=5)){
+                    System.out.println("Please only enter a number from 1-5.");
                     staffMenu(0);
                 }
             }
@@ -38,31 +39,42 @@ public class ShowtimeManager {
             System.out.println("Invalid Input.");
             staffMenu(0);
         }
-        // MovieListManager movListManager = new MovieListManager();
-        // ReviewListManager reviewListManager = new ReviewListManager();
         switch (option) {
             case 1:
-            System.out.println("Enter showtimeID: ");
-            showtimeID = sc.nextInt();
-            //this.viewShowtime(showtimeID);
-            break;
+                sc.nextLine();
+                System.out.println("Enter Cineplex Name:");
+                cineplexName = sc.nextLine();
+                System.out.println("Enter Cinema No:");
+                cinemaNo = sc.nextInt();
+                System.out.println("Enter ShowTime ID: ");
+                showtimeID = sc.nextInt();
+                sc.nextLine();
+                StaffViewShowTime.viewShowTime(cineplexName, cinemaNo, showtimeID);
+                //this.viewShowtime(showtimeID);
+                break;
         case 2:
             System.out.println("Enter showtimeID: ");
             showtimeID = sc.nextInt();
-            StaffUpdateShowtime.updateShowtime(showtimeID);
             break;
         case 3:
             System.out.println("Enter showtimeID: ");
             showtimeID = sc.nextInt();
-            //this.deleteShowtime(showtimeID);
+            StaffUpdateShowtime.updateShowtime(showtimeID);
             break;
         case 4:
-            System.out.println("Back to ShowtimesList......");
+            System.out.println("Enter showtimeID: ");
+            showtimeID = sc.nextInt();
+            //this.deleteShowtime(showtimeID);
+            break;
+        case 5:
+            System.out.println("Back to Staff App......");
             break;
         default:
-            System.out.println("Invalid choice. Please choose between 0-3.");
+            System.out.println("Invalid choice. Please choose between 1-5.");
             break;
         }
+        // MovieListManager movListManager = new MovieListManager();
+        // ReviewListManager reviewListManager = new ReviewListManager();
 
         // clear garbage
         // movListManager = null;
