@@ -45,7 +45,7 @@ public class MovieManager {
             System.out.println("Invalid Input.");
             staffMenu(0);
         }
-        MovieListManager movListManager = new MovieListManager();
+        MovieListManager movListManager = MovieListManager.getInstance();
         ReviewListManager reviewListManager = new ReviewListManager();
         switch (option) {
             case 1:

@@ -11,6 +11,15 @@ import java.util.List;
 import entities.*;
 
 public class MovieListManager {
+	
+    private static MovieListManager single_instance = null;
+	public static MovieListManager getInstance()
+    {
+        if (single_instance == null)
+            single_instance = new MovieListManager();
+        return single_instance;
+    }
+	
     // Constructor
     public MovieListManager(){}
 
