@@ -99,7 +99,7 @@ public class Showtime extends Cinema{
     }
 
     /**
-     * Printer method for information and seats
+     * Printer method for showtime information and seats
      */
     public void show(){ 
         System.out.println(super.getName()+", hall "+(super.getCinemaID()+1)+", movie " + getShowtimeID());
@@ -122,7 +122,7 @@ public class Showtime extends Cinema{
     }
 
     /**
-     * Printer method for information
+     * Printer method for showtime information
      */
     public void showInfo(){ 
         System.out.println(super.getName()+", hall "+(super.getCinemaID()+1)+", movie " + getShowtimeID());
@@ -136,7 +136,7 @@ public class Showtime extends Cinema{
     }
 
     /**
-     * Printer method for seats
+     * Printer method for showtime seats
      */
     public void showSeats(){
 
@@ -160,15 +160,14 @@ public class Showtime extends Cinema{
     public String getMovieTitle() {return movieTitle;}
     public String getMovieFormat() {return movieReso;}
     public String getCinemaStatus() {return cinemaStatus.toString();}
-    public int[][] getSeats() {return seats;}
 
     //Setters
 
     public void setShowtimeID(Integer showtimeID) {this.showtimeID = showtimeID;}
+    public void setMovieID() {this.movieID = movieID;}
     public void setDateTime(SimpleDateFormat dateTime) { this.dateTime = dateTime; }
     public void setMovieID(Integer movieID) {this.movieID = movieID;}
     public void setMovieFormat(String movieReso) {this.movieReso = movieReso;}
     public void setCinemaStatus(CinemaStatus cinemaStatus) {this.cinemaStatus = cinemaStatus;}
-    public void setSeats(int[][] seats) {this.seats = seats;}
 
 };

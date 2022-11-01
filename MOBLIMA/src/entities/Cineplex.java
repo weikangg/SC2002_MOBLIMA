@@ -20,7 +20,10 @@ public class Cineplex {
         this.numCinemas = numCinemas;
     }
 
-    public void configCinema(){
+    /**
+     * Function to configure the list of cinemas
+     */
+    public void configCinema(){ 
 
         Cinema[] cinemas = new Cinema[numCinemas]; //Creating object array for Cinema objects
 
