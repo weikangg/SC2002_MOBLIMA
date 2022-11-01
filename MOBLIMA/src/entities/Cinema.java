@@ -20,8 +20,11 @@ public class Cinema extends Cineplex{
         this.cinemaID = cinemaID;
 
     }
-
-    public void configMovies(int numShowtimes){
+    
+    /**
+     * Function to configure the list of showtimes
+     */
+    public void configShowtimes(int numShowtimes){ 
 
         this.numShowtimes = numShowtimes;
 
@@ -35,7 +38,11 @@ public class Cinema extends Cineplex{
 
     }
 
-    public void showShowtimes(){
+
+    /**
+     * Function to show details of all showtimes
+     */
+    public void showShowtimes(){ 
         
         System.out.println("Showtimes: " + numShowtimes);
 

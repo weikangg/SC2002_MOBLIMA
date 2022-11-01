@@ -51,7 +51,7 @@ public class CineplexManager {
                 
                 for(int j = 0; j < cinemas.length; j++){
                     int numCinemas = Integer.valueOf(r.get(i)[2]);
-                    cinemas[j].configShowtimes((Integer.valueOf(r.get(i)[j+3])));
+                    cinemas[j].configShowtimes(numCinemas);
                 }
                 
 
