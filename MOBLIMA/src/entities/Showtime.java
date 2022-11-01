@@ -60,7 +60,7 @@ public class Showtime extends Cinema{
             this.seats = seats;
 
             this.updateCinemaStatus();
-            
+            csvReader.close();
         } catch (Exception e) {
             // TODO: handle exception
         }

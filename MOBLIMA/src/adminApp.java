@@ -1,11 +1,4 @@
-
-
-import java.util.List;
 import java.util.Scanner;
-import java.io.FileReader;
-
-import com.opencsv.*;
-
 import entities.Cineplex;
 import entities.Cinema;
 import entities.Showtime;

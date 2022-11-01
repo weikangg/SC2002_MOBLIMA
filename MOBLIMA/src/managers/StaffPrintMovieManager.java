@@ -38,7 +38,7 @@ public class StaffPrintMovieManager {
 				String cast, genre;
 				String casttmp = m.getCast();
 				String genretmp = m.getGenres();
-				String[] rating;
+
 
 				System.out.printf("----------------- MOVIE %d -----------------\n", count);
 				System.out.println("Movie Title: "+ m.getMovieTitle());
