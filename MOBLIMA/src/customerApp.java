@@ -1,5 +1,10 @@
 
 import java.util.Scanner;
+
+import entities.Movie;
+import managers.CustomerMovieManager;
+import managers.MovieListManager;
+
 import java.util.List;
 public class customerApp {
     private static customerApp newInstance = null;
@@ -14,7 +19,8 @@ public class customerApp {
 
     public void customerMenu(){
         
-        List<Movie> movie = new MovieListManager().getMovieList();
+        new MovieListManager();
+        List<Movie> movie = MovieListManager.getMovieList();
         boolean exit = false;
         String strinput;
         int input;
