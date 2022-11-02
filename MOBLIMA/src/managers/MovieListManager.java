@@ -28,7 +28,7 @@ public class MovieListManager {
     // static String path = "src/data/movies/movies.csv";
     static String separator = ",";
 
-    public List<Movie>getMovieList(){
+    public static List<Movie>getMovieList(){
     	List<Movie>movieList = new ArrayList<>();
     	BufferedReader br = null;
 		String line = "";
@@ -55,6 +55,20 @@ public class MovieListManager {
 		}
 		return movieList;
     }
+
+	public static Movie getMovie(int id){
+		List<Movie> movies = getMovieList();
+
+		for(int i = 0; i < movies.size(); i++){
+
+			
+
+            if(movies.get(i).getMovieID() == id){
+				return movies.get(i);
+			}
+        }
+		return null;
+	}
 
     public static boolean addMovieList(List<Movie> movieList, int movieID,String movieTitle, String synopsis,String movieDirector, String cast, String genres, int movieDuration, 
 									   ShowingStatus showingStatus, double profitEarned, MovieRating movieRating, double overallRatingScore, LocalDate releaseDateTime, MovieType movieType) {

@@ -1,11 +1,15 @@
 import java.util.Scanner;
+import java.util.List;
 import entities.Cineplex;
 import entities.Cinema;
 import entities.Showtime;
+import entities.Movie;
 import managers.StaffLogin;
 import managers.MovieManager;
 import managers.ShowtimeManager;
 import managers.CineplexManager;
+import managers.MovieListManager;
+
 
 public class adminApp {
 
@@ -99,7 +103,7 @@ public class adminApp {
  */
     private void displayLoggedInMenu(){
 
-        System.out.println("");
+        // System.out.println("");
 
         // Cineplex[] cineplexes = CineplexManager.configCineplexes(); //Function to get cineplexes object
 
@@ -110,12 +114,18 @@ public class adminApp {
         // cinemas[0].showShowtimes(); //Show Showtimes in cinemas[0] of cineplexes[0]
 
         // System.out.println("Information about showtimes[0]");
-        // showtimes[0].showInfo(); //Show info of showtimes[0] in cinemas[0] of cineplexes[0]
+        // // showtimes[1].showInfo(); //Show info of showtimes[0] in cinemas[0] of cineplexes[0]
         // System.out.println("");
 
         // System.out.println("Seats available in showtimes[0]");
-        // showtimes[0].showSeats(); //Show seats of showtimes[0] in cinemas[0] of cineplexes[0]
+        // showtimes[2].showSeats(); //Show seats of showtimes[0] in cinemas[0] of cineplexes[0]
         // System.out.println("");
+
+        // List<Movie> movies = MovieListManager.getMovieList();
+        // for(int i = 0; i < movies.size(); i++){
+            
+        //     System.out.println(": "+movies.get(i).getMovieTitle());
+        // }
 
 
         int choice;
@@ -155,68 +165,3 @@ public class adminApp {
 
     
 }
-    //     int tries = 0; //Counter for number of tries
-        
-    //     while(!adminLogin()){ //Attempt login
-            
-    //         System.out.println("");
-    //         tries++;
-    //         if(tries > 2) { // Maximum tries
-    //             System.out.println("You have exceeded the maximum number of tries.");
-    //             return; //Exits the method and back to App
-    //         }
-    //         System.out.println("Login failed, please try again");
-            
-    //     }
-
-    //     System.out.println("");
-    //     System.out.println("Welcome!");
-    //     System.out.println("");
-        
-    //     //Create and list Cineplex Objects using cineplexes.csv File
-
-
-        
-
-    // }
-
-    // public static boolean adminLogin(){
-
-    //     Scanner scan = new Scanner(System.in); //Scanner Object Instantiation
-    
-
-    //     System.out.println("");
-    //     System.out.println("Please enter login details:");
-    //     System.out.println("");
-
-    //     System.out.print("Enter Username: "); //Prompt for Username and Password
-    //     String username = scan.nextLine();
-    //     System.out.print("Enter Password: ");
-    //     String password = scan.nextLine(); 
-
-
-    //     try {
-    //         String path = System.getProperty("user.dir") +"\\rsc\\login.csv"; //FilePath for login.csv
-    //         FileReader filereader = new FileReader(path); //CSVReader Instantiation
-    //         CSVReader csvReader = new CSVReader(filereader); 
-
-    //         String[] Record; //String array to store data from one line using readNext()
-    //         Record = csvReader.readNext();
-
-    //         if(username.equals(Record[0]) && password.equals(Record[1])){ //Checking if user and system records match
-                
-    //             filereader.close();
-    //             csvReader.close();
-    //             return true;
-    //         }
-
-    //         filereader.close();
-    //         csvReader.close();
-
-    //     } catch (Exception e) {
-        
-    //     }
-        
-    //     return false;
-
-    // }
