@@ -35,7 +35,7 @@ public class CineplexManager {
             Cineplex[] cineplexes = new Cineplex[r.size()-1]; //Create list of Cineplex Objects
             
             for(int i = 0; i < r.size()-1; i++){ //Loop to transfer lines of data from file to objects
-                cineplexes[i] = new Cineplex(r.get(i+1)[0],r.get(i+1)[1], Integer.valueOf(r.get(i+1)[2]));
+                cineplexes[i] = new Cineplex(r.get(i+1)[0],r.get(i+1)[1], Integer.valueOf(r.get(i+1)[2]), i);
             }
 
 

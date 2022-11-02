@@ -34,8 +34,8 @@ public class Showtime extends Cinema{
     private int[][] seats;
     private Movie movie;
 
-    public Showtime(String name, String location, int numCinemas, int cinemaID, int showtimeID){
-        super(name, location, numCinemas, cinemaID);
+    public Showtime(String name, String location, int numCinemas, int cineplexID, int cinemaID, int showtimeID){
+        super(name, location, numCinemas, cineplexID, cinemaID);
         this.showtimeID = showtimeID;
         
         try {
