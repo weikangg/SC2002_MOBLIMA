@@ -11,6 +11,31 @@ import static managers.MovieListManager.*;
 public class StaffRemoveMovieManager {
     private static Scanner sc = new Scanner(System.in);
 
+    public static boolean removeMovie(List<Movie>mList){
+        System.out.println("#########################################################");
+		System.out.println("#################### REMOVING MOVIES ####################");
+		System.out.println("#########################################################");
+		System.out.println("");
+
+        
+        String title; 
+        System.out.println("Enter Movie Title: ");
+        title = sc.next();
+    
+        for(Movie m: mList){
+            if(m.getMovieTitle().equalsIgnoreCase(title)){
+                if(confirm("Confirm Remove Title ")){
+                    m.setShowingStatus(ShowingStatus.FINISHED_SHOWING);
+                    updateMovieListCSV(mList);
+                    return true;
+                }
+            }
+        }
+        
+        System.out.println("Movie not found!");
+        return false;
+    }
+
     // Remove movie from database entirely
     public static boolean removeMovieFromDatabase(List<Movie> mList){
         System.out.println("#########################################################");
@@ -20,7 +45,7 @@ public class StaffRemoveMovieManager {
 
         String title;
         List<Movie>newList = new ArrayList<Movie>();
-        System.out.println("Enter Movie Title: ");
+        System.out.println("Enter Movie Title ");
         title = sc.next();
         
         // Search if movie exists first
@@ -36,7 +61,7 @@ public class StaffRemoveMovieManager {
             return false;
         }
 
-        if(confirm("Remove Title:")){
+        if(confirm("Confirm Remove Title: ")){
             for(Movie m : mList){
                 if(!m.getMovieTitle().equals(title)){
                     int movieID = m.getMovieID();
@@ -65,26 +90,5 @@ public class StaffRemoveMovieManager {
     }
 
     // Remove Movie by setting status to "End of showing" as per request of question
-    public static boolean removeMovie(List<Movie>mList){
-        System.out.println("#########################################################");
-		System.out.println("#################### REMOVING MOVIES ####################");
-		System.out.println("#########################################################");
-		System.out.println("");
-
-        
-        String title; 
-        System.out.println("Enter Movie Title: ");
-        title = sc.next();
-    
-        for(Movie m: mList){
-            if(m.getMovieTitle().equalsIgnoreCase(title)){
-                m.setShowingStatus(ShowingStatus.FINISHED_SHOWING);
-                updateMovieListCSV(mList);
-                return true;
-            }
-        }
-        
-        System.out.println("Movie not found!");
-        return false;
-    }
+   
 }

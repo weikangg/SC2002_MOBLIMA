@@ -80,6 +80,8 @@ public class MovieManager {
                     System.out.println("Failed to remove movie!");
                 }
                 break;
+            case 6:
+                break;
             case 7:
                 System.out.println("Back to StaffApp......");
                 movListManager = null;
