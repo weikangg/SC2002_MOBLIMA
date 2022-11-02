@@ -162,7 +162,6 @@ public class StaffAddMovieToList {
 				break;
 			}catch(DateTimeParseException e){
 				System.out.println("Wrong format, enter again!");
-				sc.nextLine();
 				continue;
 			}
 		}
