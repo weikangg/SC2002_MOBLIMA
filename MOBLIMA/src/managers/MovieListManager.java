@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,9 +38,11 @@ public class MovieListManager {
 			while((line = br.readLine()) !=null ) {
 				String[] moviecsv = line.split(separator);
 				if(!moviecsv[0].equals("MOVIE_ID")) {
+					String str = moviecsv[11];
+					LocalDate date = LocalDate.parse(str,DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 					movietmp = new Movie(Integer.parseInt(moviecsv[0]) ,moviecsv[1],ShowingStatus.valueOf(moviecsv[2]),moviecsv[3],moviecsv[4],moviecsv[5],moviecsv[6], MovieRating.valueOf(moviecsv[7]),
-							Integer.parseInt(moviecsv[8]),Double.parseDouble(moviecsv[9]),Double.parseDouble(moviecsv[10]), LocalDate.parse(moviecsv[11]),MovieType.valueOf(moviecsv[12]));
-					movieList.add(movietmp);
+							Integer.parseInt(moviecsv[8]),Double.parseDouble(moviecsv[9]),Double.parseDouble(moviecsv[10]), date,MovieType.valueOf(moviecsv[12]));
+					movieList.add(movietmp);		
 				}
 			}
 			br.close();

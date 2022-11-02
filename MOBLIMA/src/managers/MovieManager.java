@@ -65,8 +65,11 @@ public class MovieManager {
                 StaffPrintMovieManager.printMovieByID(movListManager.getMovieList(), movieID);
                 break;
             case 4:
-                if(StaffUpdateMovieManager.updateMovie(movListManager.getMovieList())){
+                if(StaffUpdateMovieManager.updateMovie(movListManager.getMovieList()) == 1){
                     System.out.println("Movie Updated!");
+                }
+                else if(StaffUpdateMovieManager.updateMovie(movListManager.getMovieList()) == 2){
+                    System.out.println("No updates made.");
                 }
                 else{
                     System.out.println("Failed to update movie!");
@@ -81,6 +84,7 @@ public class MovieManager {
                 }
                 break;
             case 6:
+                Top5Movies.top5Movies(movListManager.getMovieList());
                 break;
             case 7:
                 System.out.println("Back to StaffApp......");

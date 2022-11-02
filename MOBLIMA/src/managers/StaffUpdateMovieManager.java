@@ -17,13 +17,11 @@ public class StaffUpdateMovieManager {
 
 
     
-    public static boolean updateMovie(List<Movie> movieList){
+    public static int updateMovie(List<Movie> movieList){
         System.out.println("#########################################################");
         System.out.println("#################### UPDATING MOVIES ####################");
         System.out.println("#########################################################");
         System.out.println("");
-
-        int updated = 0 ;
         System.out.println("Please enter Movie Title to update:");
         String newTitle = sc.nextLine();
         
@@ -37,27 +35,26 @@ public class StaffUpdateMovieManager {
         }
         if(!movieList.contains(temp)){
             System.out.println("Movie does not exist!");
-            return false;
+            return 0;
         }
 
         // Then do the updating if it exists
-
-        System.out.println("Please choose an option:");
-        System.out.println("1. Update Movie Title");
-        System.out.println("2. Update Showing Status");
-        System.out.println("3. Update Synopsis");
-        System.out.println("4. Update Movie Director");
-        System.out.println("5. Update Casts");
-        System.out.println("6. Update Genres");
-        System.out.println("7. Update Movie Rating");
-        System.out.println("8. Update Movie Duration");
-        System.out.println("9. Update Profit Earned");
-        System.out.println("10. Update Overall Rating Score");
-        System.out.println("11. Update Release Date");
-        System.out.println("12. Update Movie Type");
-        System.out.println("13. Exit");
-        int option = sc.nextInt();
         while (true){
+            System.out.println("Please choose an option:");
+            System.out.println("1. Update Movie Title");
+            System.out.println("2. Update Showing Status");
+            System.out.println("3. Update Synopsis");
+            System.out.println("4. Update Movie Director");
+            System.out.println("5. Update Casts");
+            System.out.println("6. Update Genres");
+            System.out.println("7. Update Movie Rating");
+            System.out.println("8. Update Movie Duration");
+            System.out.println("9. Update Profit Earned");
+            System.out.println("10. Update Overall Rating Score");
+            System.out.println("11. Update Release Date");
+            System.out.println("12. Update Movie Type");
+            System.out.println("13. Exit");
+            int option = sc.nextInt();
             switch(option){
                 case 1:
                     if(confirm("Confirm Update Title")){
@@ -65,7 +62,7 @@ public class StaffUpdateMovieManager {
                         if (movieList.stream().filter(o -> o.getMovieTitle().equalsIgnoreCase(title)).findFirst().isPresent()) {
                             System.out.println("Movie Already Exists!");
                             sc.nextLine();
-                            return false;
+                            return 0;
                         }
                         for(Movie m:movieList){
                             if(m.getMovieTitle().equalsIgnoreCase(newTitle)){
@@ -73,6 +70,10 @@ public class StaffUpdateMovieManager {
                             }
                         }
                         sc.nextLine();
+                    }
+                    else{
+                        sc.nextLine();
+                        return 2;
                     }
                     break;
                 case 2:
@@ -112,6 +113,10 @@ public class StaffUpdateMovieManager {
                             }
                         }
                     }
+                    else{
+                        sc.nextLine();
+                        return 2;
+                    }
                     break;
                 case 3:
                     if(confirm("Confirm Update Synopsis")){
@@ -124,6 +129,10 @@ public class StaffUpdateMovieManager {
                         }
                         sc.nextLine();
                     }
+                    else{
+                        sc.nextLine();
+                        return 2;
+                    }
                     break;
                 case 4:
                     if(confirm("Confirm Update Movie Director")){
@@ -134,6 +143,10 @@ public class StaffUpdateMovieManager {
                             }
                         }
                         sc.nextLine();
+                    }
+                    else{
+                        sc.nextLine();
+                        return 2;
                     }
                     break;
                 case 5:
@@ -147,6 +160,10 @@ public class StaffUpdateMovieManager {
                         }
                         sc.nextLine();
                     }
+                    else{
+                        sc.nextLine();
+                        return 2;
+                    }
                     break;
                 case 6:
                     if(confirm("Confirm Update Genres")){
@@ -158,6 +175,10 @@ public class StaffUpdateMovieManager {
                             }
                         }
                         sc.nextLine();
+                    }
+                    else{
+                        sc.nextLine();
+                        return 2;
                     }
                     break;
                 case 7:
@@ -207,6 +228,10 @@ public class StaffUpdateMovieManager {
                             }
                         }
                     }
+                    else{
+                        sc.nextLine();
+                        return 2;
+                    }
                     break;
                 case 8:
                     if(confirm("Confirm Update Movie Duration")){
@@ -224,7 +249,10 @@ public class StaffUpdateMovieManager {
                             sc.nextLine();
                             continue;
                         }
-
+                    }
+                    else{
+                        sc.nextLine();
+                        return 2;
                     }
                     break;
                 case 9:
@@ -244,15 +272,24 @@ public class StaffUpdateMovieManager {
                             continue;
                         }
                     }
+                    else{
+                        sc.nextLine();
+                        return 2;
+                    }
                     break;
                 case 10:
                     if(confirm("Confirm Update Overall Rating Score")){
                         try{
                             print("New Overall Rating Score: ");
                             double overallRatingScore = sc.nextDouble();
+                            if(overallRatingScore < 0 || overallRatingScore > 5){
+                                print("Overall Rating can only be between 0 and 5!");
+                                sc.nextLine();
+                                continue;
+                            }
                             for(Movie m:movieList){
                                 if(m.getMovieTitle().equalsIgnoreCase(newTitle)){
-                                    m.setProfitEarned(overallRatingScore);
+                                    m.setOverallRatingScore(overallRatingScore);
                                 }
                             }
                             sc.nextLine();
@@ -261,6 +298,10 @@ public class StaffUpdateMovieManager {
                             sc.nextLine();
                             continue;
                         }
+                    }
+                    else{
+                        sc.nextLine();
+                        return 2;
                     }
                     break;
                 case 11:
@@ -274,13 +315,16 @@ public class StaffUpdateMovieManager {
                                     }
                                 }
                                 sc.nextLine();
-                                break;
                             }catch(DateTimeParseException e){
                                 System.out.println("Wrong format, enter again!");
                                 continue;
                             }
                     }
-
+                    else{
+                        sc.nextLine();
+                        return 2;
+                    }
+                    break;
                 case 12:
                     MovieType movieType = null;
                     if(confirm("Confirm Update Movie Type")){
@@ -318,11 +362,23 @@ public class StaffUpdateMovieManager {
                             }
                         }
                     }
+                    else{
+                        sc.nextLine();
+                        return 2;
+                    }
+                    break;
+                case 13:
+                    print("Returning to Movie Menu....");
+                    sc.nextLine();
+                    return 2;
+                default:
+                    print("Please enter a number from 1-13 only.");
+                    continue;
             }
             break;
         }
         
         updateMovieListCSV(movieList);
-        return true;
+        return 1;
     }
 }
