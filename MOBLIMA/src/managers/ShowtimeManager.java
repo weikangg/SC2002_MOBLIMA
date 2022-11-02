@@ -1,6 +1,11 @@
 package managers;
 import java.util.*;
 
+
+import entities.Cineplex;
+import entities.Cinema;
+import entities.Showtime;
+
 public class ShowtimeManager {
     private Scanner sc = new Scanner(System.in);
 
@@ -42,15 +47,55 @@ public class ShowtimeManager {
         switch (option) {
             case 1:
                 sc.nextLine();
-                System.out.println("Enter Cinema Name:");
-                cinemaName = sc.nextLine();
-                System.out.println("Enter Hall No:");
-                hallNo = sc.nextInt();
+
+                //Prompt Cineplexes
+                Cineplex[] cineplexes = CineplexManager.configCineplexes(); 
+                for(int i = 0; i < cineplexes.length; i++){
+                    System.out.println(i + ": " + cineplexes[i].getName());
+                }
+
+                System.out.println("Enter Cineplex ID:");
+                int cineplexID = sc.nextInt();
+
+                if(cineplexID<0||cineplexID>cineplexes.length){
+                    System.out.println("No such Cineplex");
+                    break;
+                }
+
+                //Prompt Cinemas
+                Cinema[] cinemas = cineplexes[cineplexID].getCinemas();
+                for(int i = 0; i < cinemas.length; i++){
+                    System.out.println(i + ": Hall " + cinemas[i].getCinemaID());
+                }
+
+                System.out.println("Enter Hall ID:");
+                int cinemaID = sc.nextInt();
+
+                if(cinemaID<0||cinemaID>cinemas.length){
+                    System.out.println("No such Cinema");
+                    break;
+                }
+
+                //Prompt Showtimes
+                Showtime[] showtimes = cinemas[cinemaID].getShowtimes();
+                for(int i = 0; i < showtimes.length; i++){
+                    System.out.println(showtimes[i].getShowtimeID() + ": " + showtimes[i].getMovieTitle()
+                                        + ", " + showtimes[i].getDateTime() + ", " + showtimes[i].getMovieType());
+                }
+                
                 System.out.println("Enter ShowTime ID: ");
                 showtimeID = sc.nextInt();
+
+                if(cinemaID<0||cinemaID>showtimes.length){
+                    System.out.println("No such Cinema");
+                    break;
+                }
+
+                showtimes[showtimeID].showInfo();
+                showtimes[showtimeID].showSeats();
+
                 sc.nextLine();
-                StaffViewShowTime.viewShowTime(cinemaName, hallNo, showtimeID);
-                //this.viewShowtime(showtimeID);
+
                 break;
         case 2:
             System.out.println("Enter showtimeID: ");

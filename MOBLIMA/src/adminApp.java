@@ -113,8 +113,8 @@ public class adminApp {
         // Showtime[] showtimes = cinemas[0].getShowtimes(); //Function to get movies object of cinema[0]
 
 
-        // showtimes[1].setMovieID(3);
-        // // cinemas[0].showShowtimes(); //Show Showtimes in cinemas[0] of cineplexes[0]
+        // showtimes[1].setMovieID(5);
+        // cinemas[0].showShowtimes(); //Show Showtimes in cinemas[0] of cineplexes[0]
 
         // System.out.println("Information about showtimes[0]");
         // // showtimes[1].showInfo(); //Show info of showtimes[0] in cinemas[0] of cineplexes[0]
