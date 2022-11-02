@@ -32,10 +32,10 @@ public class CineplexManager {
 
             List<String[]> r = csvReader.readAll(); //Read File
     
-            Cineplex[] cineplexes = new Cineplex[r.size()]; //Create list of Cineplex Objects
+            Cineplex[] cineplexes = new Cineplex[r.size()-1]; //Create list of Cineplex Objects
             
-            for(int i = 0; i < r.size(); i++){ //Loop to transfer lines of data from file to objects
-                cineplexes[i] = new Cineplex(r.get(i)[0],r.get(i)[1], Integer.valueOf(r.get(i)[2]));
+            for(int i = 0; i < r.size()-1; i++){ //Loop to transfer lines of data from file to objects
+                cineplexes[i] = new Cineplex(r.get(i+1)[0],r.get(i+1)[1], Integer.valueOf(r.get(i+1)[2]));
             }
 
 
@@ -47,14 +47,10 @@ public class CineplexManager {
 
             //Config Movies in Cinemas in Cineplexes
             for(int i = 0; i < cineplexes.length; i++){
-                Cinema[] cinemas = cineplexes[i].getCinemas();
-                
+                Cinema[] cinemas = cineplexes[i].getCinemas();  
                 for(int j = 0; j < cinemas.length; j++){
-                    int numCinemas = Integer.valueOf(r.get(i)[2]);
-                    cinemas[j].configShowtimes(numCinemas);
+                    cinemas[j].configShowtimes(Integer.valueOf(r.get(i+1)[j+3]));    
                 }
-                
-
             }
 
             return cineplexes;

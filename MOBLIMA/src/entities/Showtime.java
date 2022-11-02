@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import managers.MovieListManager;
+
 import com.opencsv.*;
 import com.opencsv.exceptions.CsvException;
 
@@ -19,7 +21,6 @@ public class Showtime extends Cinema{
     private LocalDateTime dateTime;
 
     //Unique movieID to specify the movie being shown for that showtime.
-    private String movieTitle;
     /**
      * Movie Format of the specific showtime.
      */
@@ -30,6 +31,7 @@ public class Showtime extends Cinema{
 
     private CinemaStatus cinemaStatus;
     private int[][] seats;
+    private Movie movie;
 
     public Showtime(String name, String location, int numCinemas, int cinemaID, int showtimeID){
         super(name, location, numCinemas, cinemaID);
@@ -45,27 +47,28 @@ public class Showtime extends Cinema{
 
             List<String[]> r = csvReader.readAll(); //Read File
 
-
             //Set all variables with data from csv file
-            this.movieID = Integer.valueOf(r.get(0)[0]);
-            String str = r.get(0)[1];
+            this.movieID = Integer.valueOf(r.get(1)[0]);
+            String str = r.get(1)[1];
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
             this.dateTime = dateTime;
-
-            this.movieType = r.get(0)[2];
+            this.movieType = r.get(1)[2];
 
             int[][] seats = new int[5][10];
 
             for (int i = 0; i < 5; i++){
                 for(int j = 0; j < 10; j++){
 
-                    seats[i][j] = Integer.valueOf(r.get(i+1)[j]); //Copying individual lines into seats array
+                    seats[i][j] = Integer.valueOf(r.get(i+2)[j]); //Copying individual lines into seats array
 
                 }
             }
 
             this.seats = seats;
+            
+            Movie movie = MovieListManager.getMovie(movieID);
+            this.movie = movie;
 
             this.updateCinemaStatus();
             csvReader.close();
@@ -119,6 +122,7 @@ public class Showtime extends Cinema{
 
         System.out.println("Showtime ID: " + getShowtimeID());
         System.out.println("Movie ID: " + getMovieID());
+        System.out.println("Movie Title: " + getMovieTitle());
         System.out.println("Date and Time: " + getDateTime());
         System.out.println("Type: " + getMovieType());
         System.out.println("Cinema Status: " + getCinemaStatus());
@@ -142,6 +146,7 @@ public class Showtime extends Cinema{
 
         System.out.println("Showtime ID: " + getShowtimeID());
         System.out.println("Movie ID: " + getMovieID());
+        System.out.println("Movie Title: " + getMovieTitle());
         System.out.println("Date and Time: " + getDateTime());
         System.out.println("Type: " + getMovieType());
         System.out.println("Cinema Status: " + getCinemaStatus());
@@ -170,7 +175,7 @@ public class Showtime extends Cinema{
     public Integer getShowtimeID() {return showtimeID;}
     public Integer getMovieID() {return movieID;}
     public LocalDateTime getDateTime() {return dateTime;}
-    public String getMovieTitle() {return movieTitle;}
+    public String getMovieTitle() {return movie.getMovieTitle();}
     public String getMovieType() {return movieType;}
     public String getCinemaStatus() {return cinemaStatus.toString();}
     public int[][] getSeats(){return seats;}
