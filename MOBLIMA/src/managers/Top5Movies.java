@@ -1,5 +1,6 @@
 package managers;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 import entities.*;
@@ -61,12 +62,16 @@ public class Top5Movies {
                             if(i > 5){
                                 break;
                             }
-                            print(i + ". " + key + " [Ticket Sales: " + sortedList.get(key) + " ]");
+                            double value = sortedList.get(key);
+                            BigDecimal bd = new BigDecimal(value);
+                            print(i + ". " + key + " [Ticket Sales: " + bd.toPlainString() + " ]");
                             i++;
                         }
                     } else {
                         for(String key:keys){
-                            print(i + ". " + key + " [Ticket Sales: " + sortedList.get(key) + " ]");
+                            double value = sortedList.get(key);
+                            BigDecimal bd = new BigDecimal(value);
+                            print(i + ". " + key + " [Ticket Sales: " + bd.toPlainString() + " ]");
                             i++;
                         }
                     }

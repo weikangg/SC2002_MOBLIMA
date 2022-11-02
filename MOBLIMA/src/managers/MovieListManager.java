@@ -60,9 +60,6 @@ public class MovieListManager {
 		List<Movie> movies = getMovieList();
 
 		for(int i = 0; i < movies.size(); i++){
-
-			
-
             if(movies.get(i).getMovieID() == id){
 				return movies.get(i);
 			}

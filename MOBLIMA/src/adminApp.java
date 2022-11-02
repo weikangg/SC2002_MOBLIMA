@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 import java.util.List;
 import entities.Cineplex;
 import entities.Cinema;
@@ -144,7 +145,16 @@ public class adminApp {
                     System.out.println("Error Input. Enter 1-6 only!!");
                     sc.next(); // Remove newline character
                 }
-                choice = sc.nextInt();
+                while(true){
+                    try{
+                        choice = sc.nextInt();
+                        break;
+                    }catch(InputMismatchException e){
+                        System.out.println("Enter numbers only!");
+                        sc.nextLine();
+                        continue;
+                    }
+                }
                 switch(choice){
                     case 1:
                         MovieManager.getInstance().staffMenu(0);

@@ -1,6 +1,6 @@
 package managers;
 
-
+import static managers.MovieListManager.*;
 import java.util.*;
 
 
@@ -43,13 +43,14 @@ public class MovieManager {
         }
         catch(InputMismatchException e){
             System.out.println("Invalid Input.");
+            sc.nextLine();
             staffMenu(0);
         }
         MovieListManager movListManager = MovieListManager.getInstance();
         ReviewListManager reviewListManager = new ReviewListManager();
         switch (option) {
             case 1:
-                if (StaffAddMovieToList.staffAddMovie(movListManager.getMovieList())) {
+                if (StaffAddMovieToList.staffAddMovie(MovieListManager.getMovieList())) {
                     System.out.println("Movie created!");
                 } 
                 else {
@@ -57,18 +58,28 @@ public class MovieManager {
                 }
                 break;
             case 2:
-                StaffPrintMovieManager.printMovieList(movListManager.getMovieList());
+                StaffPrintMovieManager.printMovieList(MovieListManager.getMovieList());
                 break;
             case 3:
                 System.out.println("Enter MovieID: ");
-                int movieID = sc.nextInt();
-                StaffPrintMovieManager.printMovieByID(movListManager.getMovieList(), movieID);
+                int movieID;
+                while(true){
+                    try{
+                        movieID = sc.nextInt();
+                        break;
+                    }catch(InputMismatchException e){
+                        System.out.println("Enter numbers only!");
+                        sc.nextLine();
+                        continue;
+                    }
+                }
+                StaffPrintMovieManager.printMovieByID(MovieListManager.getMovieList(), movieID);
                 break;
             case 4:
-                if(StaffUpdateMovieManager.updateMovie(movListManager.getMovieList()) == 1){
+                if(StaffUpdateMovieManager.updateMovie(MovieListManager.getMovieList()) == 1){
                     System.out.println("Movie Updated!");
                 }
-                else if(StaffUpdateMovieManager.updateMovie(movListManager.getMovieList()) == 2){
+                else if(StaffUpdateMovieManager.updateMovie(MovieListManager.getMovieList()) == 2){
                     System.out.println("No updates made.");
                 }
                 else{
@@ -76,7 +87,7 @@ public class MovieManager {
                 }
                 break;
             case 5:
-                if(StaffRemoveMovieManager.removeMovie(movListManager.getMovieList())){
+                if(StaffRemoveMovieManager.removeMovie(MovieListManager.getMovieList())){
                     System.out.println("Movie removed!");
                 }
                 else{
@@ -84,7 +95,7 @@ public class MovieManager {
                 }
                 break;
             case 6:
-                Top5Movies.top5Movies(movListManager.getMovieList());
+                Top5Movies.top5Movies(MovieListManager.getMovieList());
                 break;
             case 7:
                 System.out.println("Back to StaffApp......");
