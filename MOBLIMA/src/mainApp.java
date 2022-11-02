@@ -50,7 +50,7 @@ public class mainApp {
                 adminApp.getInstance().displayLoginMenu(); //Start Admin Module
                 break;
             case 2:
-                User.start(); //Start User Module
+                customerApp.getInstance().customerMenu(); //Start User Module
                 break;
             default:
         }
