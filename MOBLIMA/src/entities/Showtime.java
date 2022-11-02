@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -50,7 +51,7 @@ public class Showtime extends Cinema{
             //Set all variables with data from csv file
             this.movieID = Integer.valueOf(r.get(1)[0]);
             String str = r.get(1)[1];
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
             LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
             this.dateTime = dateTime;
             this.movieType = r.get(1)[2];
@@ -66,7 +67,7 @@ public class Showtime extends Cinema{
             }
 
             this.seats = seats;
-            
+
             Movie movie = MovieListManager.getMovie(movieID);
             this.movie = movie;
 
@@ -169,6 +170,48 @@ public class Showtime extends Cinema{
 
     }
 
+    public void update(){
+
+        try {
+
+            Path path = Paths.get("data\\cineplexes\\"+getName()+ "\\hall"+Integer.toString(getCinemaID()+1)+ "\\"+getShowtimeID()+".csv");
+            // System.out.println(path.toAbsolutePath().toString());
+
+            FileWriter filewriter = new FileWriter(path.toAbsolutePath().toString()); //CSVReader Instantiation
+            CSVWriter csvwriter = new CSVWriter(filewriter, 
+                                                CSVWriter.DEFAULT_SEPARATOR,
+                                                CSVWriter.NO_QUOTE_CHARACTER,
+                                                CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                                                CSVWriter.RFC4180_LINE_END);
+
+            ArrayList<String[]> data = new ArrayList<String[]>();
+            data.add(new String[] { "MovieID", "DateTime" , "MovieType" });
+            
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+            data.add(new String[] { Integer.toString(getMovieID()), getDateTime().toString(), getMovieType() });
+            
+            for (int i = 0; i < 5; i++){
+                String[] s = new String[10];
+                for(int j = 0; j < 10; j++){
+    
+                    s[j] = Integer.toString(seats[i][j]);
+    
+                }
+                data.add(s);
+            }
+
+            csvwriter.writeAll(data);
+
+            csvwriter.close();
+                
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        
+
+    }
+
 
     //Getters
 
@@ -181,10 +224,12 @@ public class Showtime extends Cinema{
     public int[][] getSeats(){return seats;}
     //Setters
 
-    public void setShowtimeID(Integer showtimeID) {this.showtimeID = showtimeID;}
-    public void setDateTime(LocalDateTime dateTime) { this.dateTime = dateTime; }
-    public void setMovieID(Integer movieID) {this.movieID = movieID;}
-    public void setMovieType(String movieReso) {this.movieType = movieReso;}
+
+    public void setDateTime(LocalDateTime dateTime) {this.dateTime = dateTime;update();}
+    public void setMovieID(Integer movieID) {this.movieID = movieID;update();}
+    public void setMovieType(String movieReso) {this.movieType = movieReso;update();}
     public void setCinemaStatus(CinemaStatus cinemaStatus) {this.cinemaStatus = cinemaStatus;}
+    public void reserveSeat(int i, int j){this.seats[i][j] = 1;update();}
+
 
 };
