@@ -1,64 +1,72 @@
 package entities;
-import entities.Types.*;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 
-public class Ticket {
-	private String date;
-	private Boolean promotion;
-	private TicketPrice tp;
+public class Ticket implements Serializable{
+	private LocalDateTime date;
+	//private Boolean promotion;
+	private double ticketPrice;
 	private TicketType tt;
 	private MovieType mt;
-	private int seat;
+	private int row;
+	private int col;
 	
 	//constructor
-	public Ticket(String date, MovieType mt, TicketType tt, int seat)
+	public Ticket(LocalDateTime date, MovieType mt, TicketType tt, int row, int col, double ticketPrice)
 	{
 		this.date = date;
 		this.mt = mt;
 		this.tt = tt;
-		this.seat = seat;
+		this.row = row;
+		this.col = col;
+		this.ticketPrice = ticketPrice;
 	}
 	//get
-	public String getDate()
+	public LocalDateTime getDate()
 	{
 		return this.date;
 	}
-	public Boolean isPromo()
+	/*public Boolean isPromo()
 	{
 		return this.promotion;
-	}	
+	}*/	
 	public TicketType getTicketType()
 	{
 		return this.tt;
 	}
-	public TicketPrice getTicketPrice()
+	public double getTicketPrice()
 	{
-		return this.tp;
+		return this.ticketPrice;
 	}
 	public MovieType getMovieType()
 	{
 		return this.mt;
 	}
-	public int getSeat()
+	public int getRow()
 	{
-		return this.seat;
+		return this.row;
+	}
+	public int getCol()
+	{
+		return this.col;
 	}
 	//set
-	public void setDate(String date)
+	public void setDate(LocalDateTime date)
 	{
 		this.date = date;
 	}
-	public void setPromo(Boolean promo)
+	/*public void setPromo(Boolean promo)
 	{
 		this.promotion = promo;
-	}
+	}*/
 	public void setTicketType(TicketType tt)
 	{
 		this.tt = tt;
 	}
-	public void setTicketPrice(TicketPrice tp)
+	public void setTicketPrice(double tp)
 	{
-		this.tp = tp;
+		this.ticketPrice = tp;
 	}
 	public void setMovieType(MovieType mt)
 	{
