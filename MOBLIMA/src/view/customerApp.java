@@ -57,16 +57,31 @@ public class customerApp {
             switch(input){
                 case 1:
                 counter = 0;
+                String username;
+                String password;
                 //check login information, once passed go to logined menu
-                this.logInMenu();
+                System.out.println("Please enter your username:");
+                username = scan.nextLine();
+                System.out.println("Please enter your password:");
+                password = scan.nextLine();
+                if(CustomerAccManager.checkLogin(username, password))
+                {
+                    this.logInMenu();
+                }
+                else{
+                    System.out.println("Wrong username/password");
+                }
+                break;
 
                 case 2:
                 counter = 0;
                 //ask user for information to create account
+                CustomerAccManager.createAcc();
+                break;
 
                 case 3:
-                    CustomerMovieManager.printMovieList(movie);
-                    break;
+                CustomerMovieManager.printMovieList(movie);
+                break;
 
                 case 4:
                 //search
