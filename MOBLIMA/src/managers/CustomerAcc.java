@@ -9,16 +9,18 @@ public class CustomerAcc {
     private String email;
     private int mobile;
     private int age;
+    private String password;
     //create transaction history using linked list
     private LinkedList<Transaction> bookingHistory = new LinkedList<Transaction>();
 
     //constructor
-    public CustomerAcc(String name, String email, int mobile, int age)
+    public CustomerAcc(String name, String email, String mobile, String age, String password)
     {
         this.name = name;
         this.email = email;
         this.mobile = mobile;
         this.age = age;
+        this.password = password;
     }
 
 /*    public ArrayList<CustomerAcc> readCustomerFile(){
@@ -91,6 +93,10 @@ public class CustomerAcc {
         this.age = a;
         return;
     }
+    public void setPassword(String p){
+        this.password = p;
+        return;
+    }
 
     public String getName(){
         return this.name;
@@ -103,5 +109,8 @@ public class CustomerAcc {
     }
     public int getAge(){
         return this.age;
+    }
+    public String getPassword(){
+        return this.password;
     }
 }
