@@ -228,6 +228,7 @@ public class Showtime extends Cinema{
         String[] str = dateTime.toString().split("T",2);
         return str[0]+" "+str[1];
     }
+    public LocalDateTime getDateTimeLDT(){return this.dateTime;}
     public String getMovieTitle() {return movie.getMovieTitle();}
     public MovieType getMovieType() {return movieType;}
     public String getCinemaStatus() {return cinemaStatus.toString();}
