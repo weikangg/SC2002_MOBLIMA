@@ -222,8 +222,8 @@ public class Showtime extends Cinema{
 
     //Getters
 
-    public Integer getShowtimeID() {return showtimeID;}
-    public Integer getMovieID() {return movieID;}
+    public int getShowtimeID() {return showtimeID;}
+    public int getMovieID() {return movieID;}
     public String getDateTime() {
         String[] str = dateTime.toString().split("T",2);
         return str[0]+" "+str[1];
@@ -242,4 +242,4 @@ public class Showtime extends Cinema{
     public void reserveSeat(int i, int j){this.seats[i][j] = 1;update();}
 
 
-};
+}
