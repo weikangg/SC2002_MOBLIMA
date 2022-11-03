@@ -1,11 +1,14 @@
 package view;
 
+import java.util.Scanner;
+
+import entities.Movie;
+import managers.CustomerMovieManager;
+import managers.MovieListManager;
+import managers.Top5Movies;
+import managers.*;
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Scanner;
-import entities.Movie;
-import managers.*;
-
 
 public class customerApp {
     private static customerApp newInstance = null;
