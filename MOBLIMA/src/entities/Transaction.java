@@ -1,8 +1,9 @@
 package entities;
+import java.io.Serializable;
 
 import java.util.ArrayList;
 
-public class Transaction {
+public class Transaction implements Serializable{
     private String id;
     private String movieName;
     private String tranDateTime;
