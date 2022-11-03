@@ -31,7 +31,7 @@ public class ShowtimeManager {
 			                    " 4. Remove a Showtime                                          \n" +
 			                    " 5. Back to ShowtimeManager                                    \n"+
                                 "==============================================================");
-                System.out.println("Enter choice: ");
+                System.out.print("Enter choice: ");
                 option = sc.nextInt();
                 if(!(option >= 1 && option <=5)){
                     System.out.println("Please only enter a number from 1-5.");
@@ -47,51 +47,65 @@ public class ShowtimeManager {
             case 1:
                 sc.nextLine();
 
-                //Prompt Cineplexes
-                Cineplex[] cineplexes = CineplexManager.configCineplexes(); 
-                for(int i = 0; i < cineplexes.length; i++){
-                    System.out.println(i + ": " + cineplexes[i].getName());
-                }
+                try {
 
-                System.out.println("Enter Cineplex ID:");
-                int cineplexID = sc.nextInt();
+                    //Prompt Cineplexes
+                    Cineplex[] cineplexes = CineplexManager.configCineplexes(); 
+                    for(int i = 0; i < cineplexes.length; i++){
+                        System.out.println(i + ": " + cineplexes[i].getName());
+                    }
 
-                if(cineplexID<0||cineplexID>cineplexes.length){
-                    System.out.println("No such Cineplex");
-                    break;
-                }
+                    System.out.println("");
+                    System.out.print("Enter Cineplex ID: ");
+                    int cineplexID = sc.nextInt();
+                    System.out.println("");
 
-                //Prompt Cinemas
-                Cinema[] cinemas = cineplexes[cineplexID].getCinemas();
-                for(int i = 0; i < cinemas.length; i++){
-                    System.out.println(i + ": Hall " + cinemas[i].getCinemaID());
-                }
+                    if(cineplexID<0||cineplexID>cineplexes.length){
+                        System.out.println("No such Cineplex");
+                        break;
+                    }
 
-                System.out.println("Enter Hall ID:");
-                int cinemaID = sc.nextInt();
+                    //Prompt Cinemas
+                    Cinema[] cinemas = cineplexes[cineplexID].getCinemas();
+                    for(int i = 0; i < cinemas.length; i++){
+                        System.out.println(i + ": Hall " + cinemas[i].getCinemaID());
+                    }
 
-                if(cinemaID<0||cinemaID>cinemas.length){
-                    System.out.println("No such Cinema");
-                    break;
-                }
+                    System.out.println("");
+                    System.out.print("Enter Hall ID: ");
+                    int cinemaID = sc.nextInt();
+                    System.out.println("");
 
-                //Prompt Showtimes
-                Showtime[] showtimes = cinemas[cinemaID].getShowtimes();
-                for(int i = 0; i < showtimes.length; i++){
-                    System.out.println(showtimes[i].getShowtimeID() + ": " + showtimes[i].getMovieTitle()
-                                        + ", " + showtimes[i].getDateTime() + ", " + showtimes[i].getMovieType());
+                    if(cinemaID<0||cinemaID>cinemas.length){
+                        System.out.println("No such Cinema");
+                        break;
+                    }
+
+                    //Prompt Showtimes
+                    Showtime[] showtimes = cinemas[cinemaID].getShowtimes();
+                    for(int i = 0; i < showtimes.length; i++){
+                        System.out.println(showtimes[i].getShowtimeID() + ": " + showtimes[i].getMovieTitle()
+                                            + ", " + showtimes[i].getDateTime() + ", " + showtimes[i].getMovieType());
+                    }
+                    
+                    System.out.println("");
+                    System.out.print("Enter ShowTime ID: ");
+                    showtimeID = sc.nextInt();
+                    System.out.println("");
+
+                    if(cinemaID<0||cinemaID>showtimes.length){
+                        System.out.println("No such Cinema");
+                        break;
+                    }
+
+                    showtimes[showtimeID].showInfo();
+                    showtimes[showtimeID].showSeats();
+                    
+                } catch (InputMismatchException e) {
+                    // TODO: handle exception
+                    System.out.println("Invalid Input");
                 }
                 
-                System.out.println("Enter ShowTime ID: ");
-                showtimeID = sc.nextInt();
-
-                if(cinemaID<0||cinemaID>showtimes.length){
-                    System.out.println("No such Cinema");
-                    break;
-                }
-
-                showtimes[showtimeID].showInfo();
-                showtimes[showtimeID].showSeats();
 
                 sc.nextLine();
 
