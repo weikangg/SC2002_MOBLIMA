@@ -112,25 +112,24 @@ public class adminApp {
 
         // Cineplex[] cineplexes = CineplexManager.configCineplexes(); //Function to get cineplexes object
 
-        // ArrayList<Showtime> list = cineplexes[0].searchMovie(5);
+        // // ArrayList<Showtime> list = cineplexes[0].searchMovie(5);
 
-        // for(int i = 0; i < list.size(); i++){
-        //     list.get(i).showInfo();
-        //     System.out.println("");
-        // }
+        // // for(int i = 0; i < list.size(); i++){
+        // //     list.get(i).showInfo();
+        // //     System.out.println("");
+        // // }
 
         // Cinema[] cinemas = cineplexes[0].getCinemas(); //Function to get cinemas object of cineplexes[0]
 
-        // Showtime[] showtimes = cinemas[0].getShowtimes(); //Function to get movies object of cinema[0]
+        // // Showtime[] showtimes = cinemas[0].getShowtimes(); //Function to get movies object of cinema[0]
 
 
         // String str = "2023-01-23 20:00";
         // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         // LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
-
         // MovieType movieType = MovieType.THREED;
 
-        // cinemas[1].addShowtime(4, dateTime, movieType);
+        // cinemas[2].addShowtime(4, dateTime, movieType);
 
         // cinemas[1].showShowtimes();
         

@@ -35,13 +35,14 @@ public class CineplexManager {
             
             for(int i = 0; i < r.size()-1; i++){ //Loop to transfer lines of data from file to objects
                 cineplexes[i] = new Cineplex(r.get(i+1)[0],r.get(i+1)[1], Integer.valueOf(r.get(i+1)[2]), i);
+
             }
 
 
             //Config Cinemas in all Cineplexes
 
             for(int i = 0; i < cineplexes.length; i++){
-                cineplexes[i].configCinema();
+                cineplexes[i].configCinema();                
             }
 
             //Config Movies in Cinemas in Cineplexes

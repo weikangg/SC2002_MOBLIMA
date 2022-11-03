@@ -24,7 +24,7 @@ public class Cineplex {
         Cinema[] cinemas = new Cinema[numCinemas]; //Creating object array for Cinema objects
 
         for (int i = 0; i < numCinemas; i++){
-            cinemas[i] = new Cinema(name, location, numCinemas, cineplexID,i);
+            cinemas[i] = new Cinema(this.name, this.location, this.numCinemas, this.cineplexID,i);
         }
 
         this.cinemas = cinemas;

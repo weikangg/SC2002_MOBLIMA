@@ -20,7 +20,7 @@ public class Cinema extends Cineplex{
     private Showtime[] showtimes;
 
     public Cinema(String name, String location, int numCinemas, int cineplexID, int cinemaID){
-        super(name, location, numCinemas, cinemaID);
+        super(name, location, numCinemas, cineplexID);
 
         this.cinemaID = cinemaID;
 
@@ -103,9 +103,11 @@ public class Cinema extends Cineplex{
 
             ArrayList<String[]> cineplexesFile = new ArrayList<String[]>(r);
             
-            String[] array= cineplexesFile.get(super.getCineplexID());
+            String[] array= cineplexesFile.get(super.getCineplexID()+1);
+            
             array[cinemaID+3] = Integer.toString(Integer.valueOf(array[cinemaID+3])+1);
-            cineplexesFile.set(super.getCineplexID(), array);
+
+            cineplexesFile.set(super.getCineplexID()+1, array);
 
             FileWriter filewriterTwo = new FileWriter(path.toAbsolutePath().toString()); //CSVReader Instantiation
             CSVWriter csvwriterTwo = new CSVWriter(filewriterTwo, 
@@ -159,9 +161,11 @@ public class Cinema extends Cineplex{
 
             ArrayList<String[]> cineplexesFile = new ArrayList<String[]>(r);
             
-            String[] array= cineplexesFile.get(super.getCineplexID());
+            String[] array= cineplexesFile.get(super.getCineplexID()+1);
+            
             array[cinemaID+3] = Integer.toString(Integer.valueOf(array[cinemaID+3])-1);
-            cineplexesFile.set(super.getCineplexID(), array);
+
+            cineplexesFile.set(super.getCineplexID()+1, array);
 
             FileWriter filewriterTwo = new FileWriter(path.toAbsolutePath().toString()); //CSVReader Instantiation
             CSVWriter csvwriterTwo = new CSVWriter(filewriterTwo, 

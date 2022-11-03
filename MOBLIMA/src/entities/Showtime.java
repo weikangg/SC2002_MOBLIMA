@@ -129,7 +129,7 @@ public class Showtime extends Cinema{
      * Printer method for showtime information and seats
      */
     public void show(){ 
-        System.out.println(super.getName()+", hall "+(super.getCinemaID()+1)+", movie " + getShowtimeID());
+        System.out.println(super.getName()+", Hall "+(super.getCinemaID()+1));
 
         System.out.println("Showtime ID: " + getShowtimeID());
         System.out.println("Movie ID: " + getMovieID());
@@ -137,6 +137,7 @@ public class Showtime extends Cinema{
         System.out.println("Date and Time: " + getDateTime().toString());
         System.out.println("Type: " + getMovieType().toString());
         System.out.println("Cinema Status: " + getCinemaStatus());
+        System.out.println("");
         
         for (int i = 0; i < 5; i++){
             for(int j = 0; j < 10; j++){
