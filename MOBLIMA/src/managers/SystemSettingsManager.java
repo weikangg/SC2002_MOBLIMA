@@ -163,10 +163,18 @@ public class SystemSettingsManager {
             int option = sc.nextInt();
             switch (option) {
                 case 1:
-                    //displayHolidayList();
+                    System.out.println("Current Holidays: ");
+                    Holidays.listHolidays();
                     break;
                 case 2:
-                    //addHoliday();
+                    if (confirm("Add a Holiday")){
+                        if (StaffAddHolidayToList.staffAddHoliday(HolidayListManager.getInstance().getHolidayList())) {
+                            System.out.println("Holiday Added!");
+                        } 
+                        else {
+                            System.out.println("Failed to add holiday!");
+                        }
+                    }
                     break;
                 case 3:
                     //removeHoliday();
@@ -206,74 +214,4 @@ public class SystemSettingsManager {
 			return false;
 		}
     }
-    // private void displayHolidayList() {
-    //     printHeader("Holiday list");
-    //     HashMap<String, Holiday> holidayList = getHolidayList();
-    //     HashMap<Integer, Holiday> searchIndex = new HashMap<>();
-    //     if (holidayList.isEmpty()) {
-    //         printMenu("No holiday exists", "");
-    //         readString("Press ENTER to go back");
-    //         configureHolidays();
-    //     }
-    //     else {
-    //         int index  = 0;
-    //         for (String date : holidayList.keySet()) {
-    //             System.out.println(++index + ". " + holidayList.get(date));
-    //             searchIndex.put(index, holidayList.get(date));
-    //         }
-    //         System.out.println(++index + ". Go back");
-    //         System.out.println();
-
-    //         int choice = readChoice(1, index);
-    //         if (choice == index) configureHolidays();
-    //         else displayHolidayDetail(searchIndex.get(choice));
-    //     }
-    // }
-
-    // /**
-    //  * This method is to display the detail of the holiday and ask user whether
-    //  * to remove the holiday.
-    //  * @param holiday the holiday whose detail to be displayed
-    //  */
-    // private void displayHolidayDetail(Holiday holiday) {
-    //     printHeader(holiday.getName());
-    //     printMenu(holiday.printDetail(), "");
-    //     if (askConfirm("Enter Y if you want to delete the holiday",
-    //             "Enter N to go back:")) {
-    //         getHolidayList().remove(formatTimeMMdd(holiday.getDate()));
-    //         try {
-    //             updateHolidayList();
-    //             System.out.println("Successfully deleted the holiday.");
-    //         } catch (IOException e) {
-    //             System.out.println("Failed to delete the holiday.");
-    //         }
-    //     }
-    //     displayHolidayList();
-    // }
-
-    /**
-     * This method is to add a holiday.
-     */
-    // private void addHoliday() {
-    //     String holName="";
-    //     String holDate="";
-    //     double discount;
-
-    //     System.out.println("Enter the name of the holiday:");
-    //     holName = sc.nextLine();
-    //     System.out.println("Enter the date of the holiday (MM-DD)");
-    //     discount = readDouble("Enter the price rate on that day:",
-    //             "e.g. 0.7 stands for ticket price * 0.7");
-
-    //     Holiday holiday = new Holiday(name, date, discount);
-
-    //     try {
-    //         CineplexManager.addHoliday(formatTimeMMdd(date), holiday);
-    //         System.out.println("Successfully added the holiday.");
-    //     } catch (IOException ex) {
-    //         System.out.println("Failed to add the holiday.");
-    //     }
-
-    //     displayHolidayList();
-    // }
 }
