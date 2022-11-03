@@ -75,23 +75,14 @@ public class CustomerAccManager {
 		password = scan.nextLine();
 
         CustomerAcc acc = new CustomerAcc(name, email, mobile, age, password);
-
+	customers.add(acc);
+	    
         FileWriter csvWriter;
 		String separator = ",";
 		try {
-			csvWriter = new FileWriter(path,true);
-			csvWriter.append("USERNAME");
-			csvWriter.append(separator);           
-			csvWriter.append("EMAIL");
-			csvWriter.append(separator);
-			csvWriter.append("MOBILE");
-			csvWriter.append(separator);
-			csvWriter.append("AGE");
-			csvWriter.append("PASSWORD");
-			csvWriter.append("\n");
 
-            for (CustomerAcc cust : customers){
-                StringBuilder sb = new StringBuilder();
+            		for (CustomerAcc cust : customers){
+                	StringBuilder sb = new StringBuilder();
 			    sb.append(cust.getName());
 			    sb.append(separator);
 			    sb.append(cust.getEmail());
@@ -101,7 +92,6 @@ public class CustomerAccManager {
 			    sb.append(cust.getAge());
 			    sb.append(separator);
 				sb.append(cust.getPassword());
-				sb.append(separator);
 			    sb.append('\n');
 			    csvWriter.append(sb.toString());
             }
