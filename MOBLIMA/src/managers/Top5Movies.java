@@ -136,14 +136,14 @@ public class Top5Movies {
                             }
                             double value = sortedList.get(key);
                             BigDecimal bd = new BigDecimal(value);
-                            print(i + ". " + key + " [Ticket Sales: " + bd.toPlainString() + " ]");
+                            print(i + ". " + key + " [Ticket Sales: " + bd.toPlainString() + "]");
                             i++;
                         }
                     } else {
                         for(String key:keys){
                             double value = sortedList.get(key);
                             BigDecimal bd = new BigDecimal(value);
-                            print(i + ". " + key + " [Ticket Sales: " + bd.toPlainString() + " ]");
+                            print(i + ". " + key + " [Ticket Sales: " + bd.toPlainString() + "]");
                             i++;
                         }
                     }
@@ -170,12 +170,12 @@ public class Top5Movies {
                             if(j > 5){
                                 break;
                             }
-                            print(j + ". " + key + " [Overall Rating Score: " + reverseSortedList.get(key) + " ]");
+                            print(j + ". " + key + " [Overall Rating Score: " + reverseSortedList.get(key) + "]");
                             j++;
                         }
                     } else {
                         for(String key:Keys){
-                            print(j + ". " + key + " [Overall Rating Score: " + reverseSortedList.get(key) + " ]");
+                            print(j + ". " + key + " [Overall Rating Score: " + reverseSortedList.get(key) + "]");
                             j++;
                         }
                     }
@@ -244,14 +244,14 @@ public class Top5Movies {
                             }
                             double value = sortedList.get(key);
                             BigDecimal bd = new BigDecimal(value);
-                            print(i + ". " + key + " [Ticket Sales: " + bd.toPlainString() + " ]");
+                            print(i + ". " + key + " [Ticket Sales: " + bd.toPlainString() + "]");
                             i++;
                         }
                     } else {
                         for(String key:keys){
                             double value = sortedList.get(key);
                             BigDecimal bd = new BigDecimal(value);
-                            print(i + ". " + key + " [Ticket Sales: " + bd.toPlainString() + " ]");
+                            print(i + ". " + key + " [Ticket Sales: " + bd.toPlainString() + "]");
                             i++;
                         }
                     }
@@ -325,12 +325,12 @@ public class Top5Movies {
                             if(j > 5){
                                 break;
                             }
-                            print(j + ". " + key + " [Overall Rating Score: " + reverseSortedList.get(key) + " ]");
+                            print(j + ". " + key + " [Overall Rating Score: " + reverseSortedList.get(key) + "]");
                             j++;
                         }
                     } else {
                         for(String key:Keys){
-                            print(j + ". " + key + " [Overall Rating Score: " + reverseSortedList.get(key) + " ]");
+                            print(j + ". " + key + " [Overall Rating Score: " + reverseSortedList.get(key) + "]");
                             j++;
                         }
                     }

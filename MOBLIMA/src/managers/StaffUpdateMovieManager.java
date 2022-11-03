@@ -15,8 +15,6 @@ public class StaffUpdateMovieManager {
 	static String splitter = ";";
 	static String converter = ":";
 
-
-    
     public static int updateMovie(List<Movie> movieList){
         System.out.println("#########################################################");
         System.out.println("#################### UPDATING MOVIES ####################");
@@ -54,7 +52,16 @@ public class StaffUpdateMovieManager {
             System.out.println("11. Update Release Date");
             System.out.println("12. Update Movie Type");
             System.out.println("13. Exit");
-            int option = sc.nextInt();
+            int option;
+            try{
+                option = sc.nextInt();
+                sc.nextLine();
+            }catch(InputMismatchException e){
+                System.out.println("Please only enter a number from 1-13 only!");
+                sc.nextLine();
+                continue;
+            }
+
             switch(option){
                 case 1:
                     if(confirm("Confirm Update Title")){
@@ -241,6 +248,7 @@ public class StaffUpdateMovieManager {
                             for(Movie m:movieList){
                                 if(m.getMovieTitle().equalsIgnoreCase(newTitle)){
                                     m.setMovieDuration(movieDuration);
+                                    break;
                                 }
                             }
                             sc.nextLine();
