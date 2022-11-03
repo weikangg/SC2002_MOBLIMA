@@ -290,7 +290,7 @@ public class BookingManager implements Serializable{
         getBooking().setCinemaID(getShowtime().getCinemaID());
         getBooking().setCineplexID(getShowtime().getCineplexID());
         getBooking().setMovie(getShowtime().getMovieTitle());
-        getBooking().setShowTime(getShowtime().getDateTime());
+        getBooking().setShowTime(getShowtime().getDateTimeLDT());
         getBooking().setTotalPrice(TransactionManager.getInstance().getTotalPrice());
         getBooking().setTransaction(TransactionManager.getInstance().getTransaction());
         updateShowtimeCSV();
