@@ -121,6 +121,8 @@ public class Cinema extends Cineplex{
             numShowtimes++;
             configShowtimes(numShowtimes);
             
+            System.out.println("Showtime added");
+            
         } catch (Exception e) {
             // TODO: handle exception
         }
@@ -140,7 +142,7 @@ public class Cinema extends Cineplex{
         File file = new File(path.toAbsolutePath().toString());
 
         if (file.delete()) { 
-            System.out.println("File deleted.");
+            // System.out.println("File deleted.");
           } else {
             System.out.println("Failed to delete the file.");
             return;
@@ -190,6 +192,8 @@ public class Cinema extends Cineplex{
 
         //Update Showtimes
         configShowtimes(numShowtimes);
+
+        System.out.println("Showtime Deleted");
 
     }
 
