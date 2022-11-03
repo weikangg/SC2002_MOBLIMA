@@ -7,6 +7,7 @@ import managers.CustomerMovieManager;
 import managers.MovieListManager;
 import managers.Top5Movies;
 
+import managers.*;
 import static managers.Top5Movies.*;
 
 import java.util.InputMismatchException;
