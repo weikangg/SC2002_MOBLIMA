@@ -1,16 +1,8 @@
 package entities;
 
-
-import java.util.List;
-import java.util.Scanner;
-import java.io.FileReader;
-
-import com.opencsv.*;
-
 public class Cinema extends Cineplex{
 
     private int cinemaID;
-    private int cinemaClass;
     private int numShowtimes;
     private Showtime[] showtimes;
 

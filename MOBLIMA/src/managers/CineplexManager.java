@@ -1,7 +1,6 @@
 package managers;
 
 import java.util.List;
-import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -52,10 +51,8 @@ public class CineplexManager {
                     cinemas[j].configShowtimes(Integer.valueOf(r.get(i+1)[j+3]));    
                 }
             }
-
+            csvReader.close();
             return cineplexes;
-
-            
 
         } catch (FileNotFoundException e) {
             System.out.println("File not found!");

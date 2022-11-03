@@ -1,7 +1,6 @@
 package managers;
 
 import java.util.List;
-import java.math.BigDecimal;
 import entities.*;
 
 public class CustomerMovieManager {
@@ -35,7 +34,6 @@ public class CustomerMovieManager {
 				String cast, genre;
 				String casttmp = m.getCast();
 				String genretmp = m.getGenres();
-				String[] rating;
 
 				System.out.printf("----------------- MOVIE %d -----------------\n", count);
 				System.out.println("Movie Title: "+ m.getMovieTitle());
@@ -61,7 +59,6 @@ public class CustomerMovieManager {
 	}
 
 	public static void searchMovie(List<Movie>mList, String name, boolean print){
-		int count = 1;
 		for(Movie m : mList){
 			String cast, genre;
 			String casttmp = m.getCast();
@@ -85,7 +82,6 @@ public class CustomerMovieManager {
 					System.out.println("Overall Rating Score: " + m.getOverallRatingScore());
 					System.out.println("Release Date: " + m.getReleaseDate().toString());
 					System.out.println("Movie Type: " + m.getMovieType());
-					count++;
 					System.out.println("");
 				}
 

@@ -17,7 +17,7 @@ public class StaffViewShowTime {
         String line = "";
         int count = 0;
         String datetime = "", movieID = "", movieType = "";
-        MovieListManager movListManager = MovieListManager.getInstance();
+        // MovieListManager movListManager = MovieListManager.getInstance();
 		try {
 			br = new BufferedReader(new FileReader(fullPath));
 			while((line = br.readLine()) !=null ) {
@@ -30,7 +30,7 @@ public class StaffViewShowTime {
                     datetime = showTimeCSV[1];
                     movieType = showTimeCSV[2];
                     System.out.println("Movie ID: " + movieID);
-                    printEssentialMovieInfo(movListManager.getMovieList(), Integer.parseInt(movieID));
+                    printEssentialMovieInfo(MovieListManager.getMovieList(), Integer.parseInt(movieID));
                     System.out.println("Date & Time: " + datetime);
                     System.out.println("Movie Type: " + movieType);
                     count++;

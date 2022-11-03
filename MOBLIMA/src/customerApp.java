@@ -4,6 +4,7 @@ import java.util.Scanner;
 import entities.Movie;
 import managers.CustomerMovieManager;
 import managers.MovieListManager;
+import managers.Top5Movies;
 
 import java.util.List;
 public class customerApp {
@@ -19,7 +20,6 @@ public class customerApp {
 
     public void customerMenu(){
         
-        new MovieListManager();
         List<Movie> movie = MovieListManager.getMovieList();
         boolean exit = false;
         String strinput;
@@ -54,8 +54,8 @@ public class customerApp {
                 //ask user for information to create account
 
                 case 3:
-                CustomerMovieManager.printMovieList(movie);
-                break;
+                    CustomerMovieManager.printMovieList(movie);
+                    break;
 
                 case 4:
                 //search
@@ -65,9 +65,8 @@ public class customerApp {
                 break;
 
                 case 5:
-                counter = 0;
-                //show top 5 movies
-                
+                    Top5Movies.top5Movies(MovieListManager.getMovieList()); 
+                    break;
                 case 0:
                 System.out.println("Exiting customer interface...");
                 exit = true;
@@ -111,7 +110,7 @@ public class customerApp {
                 int cineplex;
                 String name;
                 List<Movie> movie;
-                movie = new MovieListManager().getMovieList();
+                movie = MovieListManager.getMovieList();
 
                 //ask user for cineplex
                 System.out.println("Please choose a Cineplex:");

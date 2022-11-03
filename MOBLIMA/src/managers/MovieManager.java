@@ -1,6 +1,5 @@
 package managers;
 
-import static managers.MovieListManager.*;
 import java.util.*;
 
 
@@ -46,8 +45,8 @@ public class MovieManager {
             sc.nextLine();
             staffMenu(0);
         }
-        MovieListManager movListManager = MovieListManager.getInstance();
-        ReviewListManager reviewListManager = new ReviewListManager();
+        // MovieListManager movListManager = MovieListManager.getInstance();
+        // ReviewListManager reviewListManager = new ReviewListManager();
         switch (option) {
             case 1:
                 if (StaffAddMovieToList.staffAddMovie(MovieListManager.getMovieList())) {
@@ -99,8 +98,8 @@ public class MovieManager {
                 break;
             case 7:
                 System.out.println("Back to StaffApp......");
-                movListManager = null;
-                reviewListManager = null;
+                // movListManager = null;
+                // reviewListManager = null;
                 return;
             default:
                 System.out.println("Invalid choice. Please enter a number between 1-7.");
@@ -108,8 +107,8 @@ public class MovieManager {
         }
 
         // clear garbage
-        movListManager = null;
-        reviewListManager = null;
+        // movListManager = null;
+        // reviewListManager = null;
         staffMenu(0);
     }
 

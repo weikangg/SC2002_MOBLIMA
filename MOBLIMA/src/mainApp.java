@@ -1,9 +1,4 @@
-
-
 import java.util.Scanner;
-
-
-import entities.User;
 
 /* 
  * Main app to run to choose either Customer or Staff App
@@ -20,7 +15,7 @@ public class mainApp {
                                         "Please select an option:\n" +        
                                         "(1) Staff App           \n" +
                                         "(2) Customer App        \n" + 
-                                        "(0) Exit \n " + 
+                                        "(3) Exit \n " + 
                                         "===========================================================");
         System.out.print("Enter your choice: ");
 
@@ -31,7 +26,7 @@ public class mainApp {
             scan.nextLine(); //Flush input
         }
 
-        while(input < 1 || input > 2){ //Attempt User Input Again
+        while(input < 1 || input > 3){ //Attempt User Input Again
             
             System.out.println("Please enter a valid selection"); //Error Msg
             System.out.println("");

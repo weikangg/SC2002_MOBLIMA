@@ -1,7 +1,5 @@
 package managers;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import entities.Showtime;
 // import entities.MovieType;
 // import entities.Cinema;
 // import entities.CinemaStatus;

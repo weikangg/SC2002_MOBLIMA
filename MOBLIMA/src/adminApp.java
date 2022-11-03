@@ -1,15 +1,9 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
-import java.util.List;
-import entities.Cineplex;
-import entities.Cinema;
-import entities.Showtime;
-import entities.Movie;
 import managers.StaffLogin;
+import managers.SystemSettingsManager;
 import managers.MovieManager;
 import managers.ShowtimeManager;
-import managers.CineplexManager;
-import managers.MovieListManager;
 
 
 public class adminApp {
@@ -58,38 +52,38 @@ public class adminApp {
 
             switch(choice){
                 case 1:
-                System.out.println("Enter Username: ");
-                while(!sc.hasNext()){
-                    System.out.println("Error, please try again!");
-                    sc.next();
-                }
+                    System.out.println("Enter Username: ");
+                    while(!sc.hasNext()){
+                        System.out.println("Error, please try again!");
+                        sc.next();
+                    }
 
-                String userName = sc.nextLine();
-                System.out.println("Enter password: ");
-                while(!sc.hasNext()){
-                    System.out.println("Error, please try again!");
-                    sc.next();
-                }
+                    String userName = sc.nextLine();
+                    System.out.println("Enter password: ");
+                    while(!sc.hasNext()){
+                        System.out.println("Error, please try again!");
+                        sc.next();
+                    }
 
-                String passWord = sc.nextLine();
+                    String passWord = sc.nextLine();
 
-                System.out.println("Username is " + userName + " and password is " + passWord );
-                boolean approved = StaffLogin.getInstance().checkLogin(userName,passWord);
+                    System.out.println("Username is " + userName + " and password is " + passWord );
+                    boolean approved = StaffLogin.getInstance().checkLogin(userName,passWord);
 
-                if(approved){
-                    toQuit = true;
-                    adminLoggedIn = true;
-                    this.displayLoggedInMenu();
-                }
-                else{
-                    System.out.print("Wrong Username/Password.");
-                    System.out.println(" Try again!");
-                }
-                break;
-            case 0:
-                System.out.println("Heading back to Main Menu....");
-                toQuit = true;
-                break;
+                    if(approved){
+                        toQuit = true;
+                        adminLoggedIn = true;
+                        this.displayLoggedInMenu();
+                    }
+                    else{
+                        System.out.print("Wrong Username/Password.");
+                        System.out.println(" Try again!");
+                    }
+                    break;
+                case 0:
+                    System.out.println("Heading back to Main Menu....");
+                    mainApp.main(null);
+                    break;
             }
             
         } while(toQuit == false && adminLoggedIn == false);
@@ -134,17 +128,16 @@ public class adminApp {
         int choice;
             do {
                 System.out.println(	"==================== MOBLIMA STAFF APP ====================\n" +
-                                    " 1. Manage Movie Listing & Movie Reviews                   \n" +
-                                    " 2. Manage Cinema Showtimes                                \n" +
-                                    " 3. Manage Ticket Rates                                    \n" +
-                                    " 4. Movie Database                                         \n" +
-                                    " 5. Configure System Settings                              \n" +
-                                    " 6. Logout from StaffApp                                  \n"+
+                                    " 1. Manage Movie Listings                                  \n" +
+                                    " 2. Manage Movie Reviews                                   \n" +
+                                    " 3. Manage Cinema Showtimes                                \n" +
+                                    " 4. Configure System Settings                              \n" +
+                                    " 5. Logout from StaffApp                                  \n"+
                                     "===========================================================");
                 System.out.println("Enter choice: ");
     
                 while (!sc.hasNextInt()) {
-                    System.out.println("Error Input. Enter 1-6 only!!");
+                    System.out.println("Error Input. Enter 1-5 only!!");
                     sc.next(); // Remove newline character
                 }
                 while(true){
@@ -161,18 +154,22 @@ public class adminApp {
                     case 1:
                         MovieManager.getInstance().staffMenu(0);
                         break;
-                    case 2:
+                    case 3:
                         ShowtimeManager.getInstance().staffMenu(0);
                         break;
-                    case 6: 
-                        System.out.println("Exiting App, have a nice day!");
+                    case 4:
+                        SystemSettingsManager.getInstance().staffMenu(0);
+                        break;
+                    case 5: 
+                        System.out.println("Exiting StaffApp, have a nice day!");
+                        mainApp.main(null);
                         break;
                     
                     default:
-                        System.out.println("Error input, please only choose 1-6.");
+                        System.out.println("Error input, please only choose 1-5.");
                         break;
                 }
-            }while(choice != 6);
+            }while(choice != 5);
     }
 
     

@@ -11,6 +11,7 @@ public class Booking implements Serializable{
 	private ArrayList<Ticket> tt;
 	//private User user;
 	private Showtime showtime;
+	private Transaction transaction;
 	
 	public Booking(String bookingID, double totalPrice, String movie, Cinema cinema, ArrayList<Ticket> tt, Showtime showtime, Transaction transaction)
 	{
@@ -34,6 +35,7 @@ public class Booking implements Serializable{
 	public Ticket getTicket(int index) {return this.tt.get(index);}
 	//public User getUser() {return this.user;}
 	public Showtime getShowtime() {return this.showtime;}
+	public Transaction getTransaction(){return this.transaction;}
 	
 	public void setbookingID(String bookingID){this.bookingID = bookingID;}
 	public void setTotalPrice(double totalPrice){this.totalPrice = totalPrice;}
@@ -43,6 +45,7 @@ public class Booking implements Serializable{
 	public void setTicket(int index, Ticket ticket) {this.tt.set(index, ticket);}
 	//public void setUser(User user){this.user = user;}
 	public void setShowTime(Showtime showtime){this.showtime = showtime;}
+	public void setTransaction(Transaction transaction){this.transaction = transaction;}
 	
 	public void addTicket(Ticket tt)
 	{

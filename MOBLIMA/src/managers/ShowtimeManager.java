@@ -21,8 +21,7 @@ public class ShowtimeManager {
 
     public void staffMenu(int choice){
         int option = 0;
-        int showtimeID, hallNo;
-        String cinemaName;
+        int showtimeID;
         try{
             if(choice == 0){
                 System.out.println("==================== SHOWTIME STAFF APP ====================\n" +
