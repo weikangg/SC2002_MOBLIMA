@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 
+import entities.Holidays;
 import view.adminApp;
 
 import static utils.IOUtils.*;
@@ -160,34 +161,47 @@ public class SystemSettingsManager {
             System.out.println("2. Add a Holiday");
             System.out.println("3. Remove a Holiday");
             System.out.println("4. Back to SystemSettingsManager");
-            int option = sc.nextInt();
+            int option; 
+            try{
+                option = sc.nextInt();
+                sc.nextLine();
+            }
+            catch(InputMismatchException e){
+                System.out.println("Please enter integers only.");
+                sc.nextLine();
+                continue;
+            }
             switch (option) {
                 case 1:
                     System.out.println("Current Holidays: ");
                     Holidays.listHolidays();
                     break;
                 case 2:
-                    if (confirm("Add a Holiday")){
-                        if (StaffAddHolidayToList.staffAddHoliday(HolidayListManager.getInstance().getHolidayList())) {
-                            System.out.println("Holiday Added!");
-                        } 
-                        else {
-                            System.out.println("Failed to add holiday!");
-                        }
+                    if (StaffAddHolidayToList.staffAddHoliday(HolidayListManager.getInstance().getHolidayList())) {
+                        System.out.println("Holiday Added!");
+                    } 
+                    else {
+                        System.out.println("Failed to add holiday!");
                     }
                     break;
                 case 3:
-                    //removeHoliday();
+                    if(StaffRemoveHolidayManager.removeHolidayFromDatabase(HolidayListManager.getInstance().getHolidayList())){
+                        System.out.println("Holiday successfully removed!");
+                    }
+                    else{
+                        System.out.println("Failed to remove holiday!");
+                    }
                     break;
                 case 4:
                     System.out.println("Back to Staff App......");
                     break;
                 default:
                     System.out.println("Invalid choice. Please choose between 1-5.");
-                    break;
+                    continue;
             }
             break;
         }
+        staffMenu(0);
     }
 
     public static boolean updateSystemSettingsCSV(Top5Movies top5MoviesObj){

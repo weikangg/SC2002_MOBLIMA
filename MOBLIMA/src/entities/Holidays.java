@@ -1,16 +1,16 @@
-package managers;
+package entities;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.*;
+//import java.util.*;
 
 public class Holidays {
     private String nameOfHoliday;
     private LocalDate dateOfHoliday;
-    private Scanner sc = new Scanner(System.in);
+    //private static Scanner sc = new Scanner(System.in);
     // Ensure single instance
 
     //Constructor
