@@ -77,12 +77,12 @@ public class CustomerAccManager {
         CustomerAcc acc = new CustomerAcc(name, email, mobile, age, password);
 	customers.add(acc);
 	    
-        FileWriter csvWriter;
+
 		String separator = ",";
 		try {
-
-            		for (CustomerAcc cust : customers){
-                	StringBuilder sb = new StringBuilder();
+            FileWriter csvWriter = new FileWriter(path);
+            for (CustomerAcc cust : customers){
+                StringBuilder sb = new StringBuilder();
 			    sb.append(cust.getName());
 			    sb.append(separator);
 			    sb.append(cust.getEmail());
