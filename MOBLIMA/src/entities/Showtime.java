@@ -196,9 +196,6 @@ public class Showtime extends Cinema{
 
             ArrayList<String[]> data = new ArrayList<String[]>();
             data.add(new String[] { "MovieID", "DateTime" , "MovieType" });
-            
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
             data.add(new String[] { Integer.toString(getMovieID()), getDateTime().toString(), getMovieType().toString() });
             
             for (int i = 0; i < 5; i++){
@@ -228,7 +225,6 @@ public class Showtime extends Cinema{
     public Integer getShowtimeID() {return showtimeID;}
     public Integer getMovieID() {return movieID;}
     public String getDateTime() {
-        
         String[] str = dateTime.toString().split("T",2);
         return str[0]+" "+str[1];
     }

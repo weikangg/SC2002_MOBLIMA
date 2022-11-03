@@ -9,6 +9,11 @@ import managers.SystemSettingsManager;
 import managers.MovieManager;
 import managers.ShowtimeManager;
 
+import entities.*;
+import managers.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class adminApp {
 
@@ -110,6 +115,17 @@ public class adminApp {
 
         // Showtime[] showtimes = cinemas[0].getShowtimes(); //Function to get movies object of cinema[0]
 
+
+        // String str = "2023-01-23 20:00";
+        // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        // LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
+
+        // MovieType movieType = MovieType.THREED;
+        
+        // cinemas[1].addShowtime(3, dateTime, movieType);
+
+        // cinemas[1].showShowtimes();
+        
         // showtimes[0].reserveSeat(0, 0);
 
         // showtimes[1].setMovieID(5);
@@ -163,7 +179,7 @@ public class adminApp {
                         ShowtimeManager.getInstance().staffMenu(0);
                         break;
                     case 4:
-                        // SystemSettingsManager.getInstance().staffMenu(0);
+                        SystemSettingsManager.getInstance().staffMenu(0);
                         break;
                     case 5: 
                         System.out.println("Exiting StaffApp, have a nice day!");
