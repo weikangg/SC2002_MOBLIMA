@@ -1,6 +1,7 @@
 package managers;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -46,6 +47,9 @@ public class MovieListManager {
 				}
 			}
 			br.close();
+		}
+		catch(FileNotFoundException e){
+			System.out.println("File not found!");
 		}
 		catch(ArrayIndexOutOfBoundsException e){
 			return movieList;

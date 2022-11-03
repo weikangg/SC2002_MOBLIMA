@@ -94,7 +94,7 @@ public class MovieManager {
                 }
                 break;
             case 6:
-                Top5Movies.top5Movies(MovieListManager.getMovieList());
+                Top5Movies.getInstance().top5Movies(MovieListManager.getMovieList());
                 break;
             case 7:
                 System.out.println("Back to StaffApp......");

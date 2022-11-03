@@ -6,6 +6,8 @@ import managers.CustomerMovieManager;
 import managers.MovieListManager;
 import managers.Top5Movies;
 
+import static managers.Top5Movies.*;
+
 import java.util.InputMismatchException;
 import java.util.List;
 public class customerApp {
@@ -73,7 +75,47 @@ public class customerApp {
                 break;
 
                 case 5:
-                    Top5Movies.top5Movies(MovieListManager.getMovieList()); 
+                    int displaySetting;
+                    Top5Movies top5Movies = Top5Movies.getInstance();
+                    
+                    // Getting permissions
+                    top5Movies.updatePermissions();
+
+                    // Setting display setting
+                    if(top5Movies.getTop5OverallRatingPermission().equalsIgnoreCase("Y")  && top5Movies.getTop5SalesPermission().equalsIgnoreCase("Y") ){
+                        displaySetting = 0;
+                    }
+                    else if(top5Movies.getTop5OverallRatingPermission().equalsIgnoreCase("N")  && top5Movies.getTop5SalesPermission().equalsIgnoreCase("Y")){
+                        displaySetting = 1;
+                    }
+                    else if(top5Movies.getTop5OverallRatingPermission().equalsIgnoreCase("Y")  && top5Movies.getTop5SalesPermission().equalsIgnoreCase("N")){
+                        displaySetting = 2;
+                    }
+                    else{
+                        displaySetting = 3;
+                    }
+                    switch(displaySetting){
+                        
+                        // Normal setting
+                        case 0:
+                            Top5Movies.getInstance().top5Movies(MovieListManager.getMovieList());
+                            break;
+                        
+                        // Only view top 5 sales
+                        case 1:
+                            Top5Movies.getInstance().top5SalesOnly(MovieListManager.getMovieList());
+                            break;
+                        
+                        // Only view top 5 overall Rating score
+                        case 2:
+                            Top5Movies.getInstance().top5RatingsOnly(MovieListManager.getMovieList());
+                            break;
+                        // Else both cannot display (if the movie has very bad sales & ratings)
+                        case 3:
+                            Top5Movies.getInstance().viewNone();
+                            break;
+                    }
+                    
                     break;
                 case 6:
                 System.out.println("Exiting customer interface...");
