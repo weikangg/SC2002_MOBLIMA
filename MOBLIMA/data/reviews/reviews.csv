@@ -8,3 +8,4 @@ REVIEW_ID,MOVIE_TITLE,REVIEWER,REVIEW_DESCRIPTION,RATING_SCORE
 7,test4,test,Very the good,4.0
 8,test1,Bot1,Very the good,4.3
 9,test1,Bot2,Very the good,4.5
+10,Test10,Bot2,Very the good,4.5

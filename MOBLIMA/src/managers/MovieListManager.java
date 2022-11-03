@@ -46,6 +46,9 @@ public class MovieListManager {
 					movieList.add(movietmp);		
 				}
 			}
+			updateMovieRatingScores(movieList, ReviewListManager.getInstance().getReviewList());
+			updateMovieSales(movieList);
+			updateEndOfShowing(movieList);
 			br.close();
 		}
 		catch(FileNotFoundException e){
@@ -77,6 +80,39 @@ public class MovieListManager {
         movieList.add(newMovie);
         return updateMovieListCSV(movieList);
     }
+
+	// Gets all the rating scores from complete review list, calculate the average rating score & sets it as the overall rating score for the movie.
+
+	public static boolean updateMovieRatingScores(List<Movie>movieList, List<Review>reviewList){
+		for (Movie m: movieList){
+			int movieExists = 0;
+			double totalMovies = 0, TotalRating = 0;
+			for(Review r : reviewList){
+				if(r.getMovieTitle().equalsIgnoreCase(m.getMovieTitle())){
+					movieExists = 1;
+					totalMovies++;
+					TotalRating += r.getRatingScore();
+				}
+			}
+			if(movieExists == 1){
+				m.setOverallRatingScore(TotalRating/totalMovies);
+			}
+			else{
+				m.setOverallRatingScore(0);
+			}
+		}
+		return updateMovieListCSV(movieList);
+	}
+
+	// TO DO
+	public static boolean updateMovieSales(List<Movie>movieList){
+		return true;
+	}
+	// TO DO
+	public static boolean updateEndOfShowing(List<Movie>movieList){
+		return true;
+	}
+
     public static boolean updateMovieListCSV(List<Movie> movieList) {
 		FileWriter csvWriter;
 		try {
