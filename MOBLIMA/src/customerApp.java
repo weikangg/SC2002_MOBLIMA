@@ -6,6 +6,7 @@ import managers.CustomerMovieManager;
 import managers.MovieListManager;
 import managers.Top5Movies;
 
+import java.util.InputMismatchException;
 import java.util.List;
 public class customerApp {
     private static customerApp newInstance = null;
@@ -29,18 +30,25 @@ public class customerApp {
         do{
             //main menu
             System.out.print("================= MOBLIMA CUSTOMER INTERFACE =================\n"+
-            "1. Log In\n"+
-            "2. Create account\n"+
-            "3. Show all movies\n"+
-            "4. Search\n"+
-            "5. Top 5 Movies\n"+
-            "0. Back to main menu\n"+
-            "==============================================================\n"+
-            "Please Enter Your Choice:");
-
+                                "1. Log In\n"+
+                                "2. Create account\n"+
+                                "3. Show all movies\n"+
+                                "4. Search\n"+
+                                "5. Top 5 Movies\n"+
+                                "6. Back to main menu\n"+
+                            "==============================================================\n");
             //scanner
-            input = scan.nextInt();
-            scan.nextLine();
+            while(true){
+                try{
+                    System.out.println("Please Enter Your Choice: ");
+                    input = scan.nextInt();
+                    break;
+                }catch(InputMismatchException e){
+                    scan.nextLine();
+                    System.out.println("Please enter numbers only!");
+                    continue;
+                }
+            }
 
             //cases for each input
             switch(input){
@@ -67,9 +75,9 @@ public class customerApp {
                 case 5:
                     Top5Movies.top5Movies(MovieListManager.getMovieList()); 
                     break;
-                case 0:
+                case 6:
                 System.out.println("Exiting customer interface...");
-                exit = true;
+                mainApp.main(null);
                 break;
                 
                 default:
@@ -97,9 +105,9 @@ public class customerApp {
             "2. Booking History\n"+
             "3. Seat Availability\n"+
             "4. Review Movie\n"+
-            "0. Exit\n"+
-            "========================================================\n"+
-            "Please Enter Your Choice:");
+            "5. Exit\n"+
+            "========================================================\n");
+            System.out.println("Please Enter Your Choice:\n");
 
             input = scan.nextInt();
             scan.nextLine();
@@ -138,9 +146,9 @@ public class customerApp {
                 case 4:
                 //review movie
 
-                case 0:
-                System.out.println("Exiting Customer App...");
-                exit = true;
+                case 5:
+                    System.out.println("Exiting Customer App...");
+                    customerApp.getInstance().customerMenu();
                 break;
 
                 default:
