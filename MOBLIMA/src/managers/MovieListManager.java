@@ -29,7 +29,7 @@ public class MovieListManager {
     // static String path = "src/data/movies/movies.csv";
     static String separator = ",";
 
-    public static List<Movie>getMovieList(){
+    public List<Movie>getMovieList(){
     	List<Movie>movieList = new ArrayList<>();
     	BufferedReader br = null;
 		String line = "";
@@ -61,7 +61,7 @@ public class MovieListManager {
     }
 
 	public static Movie getMovie(int id){
-		List<Movie> movies = getMovieList();
+		List<Movie> movies = getInstance().getMovieList();
 
 		for(int i = 0; i < movies.size(); i++){
             if(movies.get(i).getMovieID() == id){

@@ -3,6 +3,7 @@ package view;
 import java.util.Scanner;
 
 import entities.Movie;
+import entities.User;
 import managers.CustomerMovieManager;
 import managers.MovieListManager;
 import managers.Top5Movies;
@@ -23,7 +24,7 @@ public class customerApp {
 
     public void customerMenu(){
         
-        List<Movie> movie = MovieListManager.getMovieList();
+        List<Movie> movie = MovieListManager.getInstance().getMovieList();
         boolean exit = false;
         String strinput;
         int input;
@@ -66,7 +67,8 @@ public class customerApp {
                     password = scan.nextLine();
                     if(CustomerAccManager.checkLogin(username, password))
                     {
-                        this.logInMenu();
+                        User user = new User(username);
+                        this.logInMenu(user);
                     }
                     else{
                         System.out.println("Wrong username/password");
@@ -114,17 +116,17 @@ public class customerApp {
                         
                         // Normal setting
                         case 0:
-                            Top5Movies.getInstance().top5Movies(MovieListManager.getMovieList());
+                            Top5Movies.getInstance().top5Movies(MovieListManager.getInstance().getMovieList());
                             break;
                         
                         // Only view top 5 sales
                         case 1:
-                            Top5Movies.getInstance().top5SalesOnly(MovieListManager.getMovieList());
+                            Top5Movies.getInstance().top5SalesOnly(MovieListManager.getInstance().getMovieList());
                             break;
                         
                         // Only view top 5 overall Rating score
                         case 2:
-                            Top5Movies.getInstance().top5RatingsOnly(MovieListManager.getMovieList());
+                            Top5Movies.getInstance().top5RatingsOnly(MovieListManager.getInstance().getMovieList());
                             break;
                         // Else both cannot display (if the movie has very bad sales & ratings)
                         case 3:
@@ -152,7 +154,7 @@ public class customerApp {
         }while(exit == false);
     }
 
-    public void logInMenu(){
+    public void logInMenu(User user){
         int input;
         boolean exit = false;
        
@@ -176,7 +178,7 @@ public class customerApp {
                 int cineplex;
                 String name;
                 List<Movie> movie;
-                movie = MovieListManager.getMovieList();
+                movie = MovieListManager.getInstance().getMovieList();
 
                 //ask user for cineplex
                 System.out.println("Please choose a Cineplex:");
@@ -203,7 +205,7 @@ public class customerApp {
                     
                 case 4:
                 //review movie
-                    ReviewManager.getInstance().reviewMenu(0);
+                    ReviewManager.getInstance().reviewMenu(0, user);
                     break;
 
                 case 5:

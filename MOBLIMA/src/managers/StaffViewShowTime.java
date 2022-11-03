@@ -30,7 +30,7 @@ public class StaffViewShowTime {
                     datetime = showTimeCSV[1];
                     movieType = showTimeCSV[2];
                     System.out.println("Movie ID: " + movieID);
-                    printEssentialMovieInfo(MovieListManager.getMovieList(), Integer.parseInt(movieID));
+                    printEssentialMovieInfo(MovieListManager.getInstance().getMovieList(), Integer.parseInt(movieID));
                     System.out.println("Date & Time: " + datetime);
                     System.out.println("Movie Type: " + movieType);
                     count++;

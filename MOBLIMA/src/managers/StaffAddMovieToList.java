@@ -11,7 +11,6 @@ import java.util.Scanner;
 public class StaffAddMovieToList {
     static String csv_Separator = ",";
 	static String splitter = ";";
-	static String converter = ":";
 
     public static boolean staffAddMovie(List<Movie> mList) {
 		ShowingStatus status = null;
@@ -27,7 +26,7 @@ public class StaffAddMovieToList {
 		System.out.println("#########################################################");
 		System.out.println("#################### ADDING MOVIES ######################");
 		System.out.println("#########################################################");
-
+		System.out.println("");
 		// If movie List is empty, we assign it an ID of 1.
 		if(mList.size() == 0){
 			movieID = 1;
@@ -43,7 +42,7 @@ public class StaffAddMovieToList {
 			System.out.println("Movie Already Exists!");
 			return false;
 		}
-		movieTitle = movieTitleTmp.replaceAll(csv_Separator, converter);
+		movieTitle = movieTitleTmp.replaceAll(csv_Separator, splitter);
 		while(true){
 			System.out.println("Choose Movie Status");
 			System.out.println("1: COMING_SOON");

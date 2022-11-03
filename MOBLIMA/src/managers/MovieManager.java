@@ -49,7 +49,7 @@ public class MovieManager {
         }
         switch (option) {
             case 1:
-                if (StaffAddMovieToList.staffAddMovie(MovieListManager.getMovieList())) {
+                if (StaffAddMovieToList.staffAddMovie(MovieListManager.getInstance().getMovieList())) {
                     System.out.println("Movie created!");
                 } 
                 else {
@@ -57,7 +57,7 @@ public class MovieManager {
                 }
                 break;
             case 2:
-                StaffPrintMovieManager.printMovieList(MovieListManager.getMovieList());
+                StaffPrintMovieManager.printMovieList(MovieListManager.getInstance().getMovieList());
                 break;
             case 3:
                 System.out.println("Enter MovieID: ");
@@ -72,13 +72,13 @@ public class MovieManager {
                         continue;
                     }
                 }
-                StaffPrintMovieManager.printMovieByID(MovieListManager.getMovieList(), movieID);
+                StaffPrintMovieManager.printMovieByID(MovieListManager.getInstance().getMovieList(), movieID);
                 break;
             case 4:
-                if(StaffUpdateMovieManager.updateMovie(MovieListManager.getMovieList()) == 1){
+                if(StaffUpdateMovieManager.updateMovie(MovieListManager.getInstance().getMovieList()) == 1){
                     System.out.println("Movie Updated!");
                 }
-                else if(StaffUpdateMovieManager.updateMovie(MovieListManager.getMovieList()) == 2){
+                else if(StaffUpdateMovieManager.updateMovie(MovieListManager.getInstance().getMovieList()) == 2){
                     System.out.println("No updates made.");
                 }
                 else{
@@ -86,7 +86,7 @@ public class MovieManager {
                 }
                 break;
             case 5:
-                if(StaffRemoveMovieManager.removeMovie(MovieListManager.getMovieList())){
+                if(StaffRemoveMovieManager.removeMovie(MovieListManager.getInstance().getMovieList())){
                     System.out.println("Movie removed!");
                 }
                 else{
@@ -94,7 +94,7 @@ public class MovieManager {
                 }
                 break;
             case 6:
-                Top5Movies.getInstance().top5Movies(MovieListManager.getMovieList());
+                Top5Movies.getInstance().top5Movies(MovieListManager.getInstance().getMovieList());
                 break;
             case 7:
                 System.out.println("Back to StaffApp......");

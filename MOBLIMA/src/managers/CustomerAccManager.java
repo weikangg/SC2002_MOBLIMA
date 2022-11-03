@@ -8,8 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class CustomerAccManager {
     
@@ -82,7 +80,7 @@ public class CustomerAccManager {
 		String separator = ",";
 		try {
 			csvWriter = new FileWriter(path,true);
-			csvWriter.append("NAME");
+			csvWriter.append("USERNAME");
 			csvWriter.append(separator);           
 			csvWriter.append("EMAIL");
 			csvWriter.append(separator);

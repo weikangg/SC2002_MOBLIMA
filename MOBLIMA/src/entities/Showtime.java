@@ -224,7 +224,7 @@ public class Showtime extends Cinema{
 
     public int getShowtimeID() {return showtimeID;}
     public int getMovieID() {return movieID;}
-    public String getDateTime() {
+    public LocalDateTime getDateTime() {
         String[] str = dateTime.toString().split("T",2);
         return str[0]+" "+str[1];
     }
