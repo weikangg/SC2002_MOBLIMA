@@ -146,7 +146,7 @@ public class TicketManager {
             int row = Integer.parseInt(tokens[0]);
             int col = Integer.parseInt(tokens[1]);
             TicketType newTT = getTicketType();
-            Ticket newTicket = new Ticket(getShowtime().getDateTime(), getShowtime().getMovieType(),newTT,row,col,calcTicketPrice(newTT));
+            Ticket newTicket = new Ticket(getShowtime().getDateTimeLDT(), getShowtime().getMovieType(),newTT,row,col,calcTicketPrice(newTT));
             addToTicketArray(newTicket);
         }
 
