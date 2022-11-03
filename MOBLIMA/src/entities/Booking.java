@@ -1,5 +1,6 @@
 package entities;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 
@@ -7,18 +8,20 @@ public class Booking implements Serializable{
 	private String bookingID;
 	private double totalPrice;
 	private String movieTitle;
-	private Cinema cinema;
+	private int cineplexID;
+	private int cinemaID;
 	private ArrayList<Ticket> tt;
 	//private User user;
-	private Showtime showtime;
+	private LocalDateTime showtime;
 	private Transaction transaction;
 	
-	public Booking(String bookingID, double totalPrice, String movie, Cinema cinema, ArrayList<Ticket> tt, Showtime showtime, Transaction transaction)
+	public Booking(String bookingID, double totalPrice, String movie, int cinema, int cineplexID, ArrayList<Ticket> tt, /*User user, */LocalDateTime showtime, Transaction transaction)
 	{
 		this.bookingID = bookingID;
 		this.totalPrice = totalPrice;
 		this.movieTitle = movie;
-		this.cinema = cinema;
+		this.cinemaID = cinema;
+		this.cineplexID = cineplexID;
 		this.tt = tt;
 		//this.user = user;
 		this.showtime = showtime;
@@ -30,21 +33,23 @@ public class Booking implements Serializable{
 	public String getbookingID() {return this.bookingID;}
 	public double getTotalPrice() {return this.totalPrice;}
 	public String getMovie() {return this.movieTitle;}
-	public Cinema getCinema() {return this.cinema;}
+	public int getCinemaID() {return this.cinemaID;}
+	public int getCineplexID() {return this.cineplexID;}
 	public ArrayList<Ticket> getTicketList() {return this.tt;}
 	public Ticket getTicket(int index) {return this.tt.get(index);}
 	//public User getUser() {return this.user;}
-	public Showtime getShowtime() {return this.showtime;}
-	public Transaction getTransaction(){return this.transaction;}
+	public LocalDateTime getShowtime() {return this.showtime;}
+	public Transaction getTransaction() {return this.transaction;}
 	
 	public void setbookingID(String bookingID){this.bookingID = bookingID;}
 	public void setTotalPrice(double totalPrice){this.totalPrice = totalPrice;}
 	public void setMovie(String movie){this.movieTitle = movie;}
-	public void setCinema(Cinema cinema){this.cinema = cinema;}
+	public void setCinemaID(int cinema){this.cinemaID = cinema;}
+	public void setCineplexID(int cineplex){this.cineplexID = cineplex;}
 	public void setTicketList(ArrayList<Ticket> tt){this.tt = tt;}
 	public void setTicket(int index, Ticket ticket) {this.tt.set(index, ticket);}
 	//public void setUser(User user){this.user = user;}
-	public void setShowTime(Showtime showtime){this.showtime = showtime;}
+	public void setShowTime(LocalDateTime showtime){this.showtime = showtime;}
 	public void setTransaction(Transaction transaction){this.transaction = transaction;}
 	
 	public void addTicket(Ticket tt)
