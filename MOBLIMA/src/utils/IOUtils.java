@@ -18,11 +18,17 @@ public class IOUtils {
     public static boolean confirm(String message) {
         while (true) {
             String in = read(message + " (Y/N): ");
-            if (in.equalsIgnoreCase("y"))
+            if (in.equalsIgnoreCase("y")){
                 return true;
-            else if (in.equalsIgnoreCase("n"))
+            }
+            else if (in.equalsIgnoreCase("n")){
                 System.out.println("Returning Back....");
                 return false;
+            }
+            else{
+                System.out.println("Invalid Input! Please only enter 'Y' for Yes or 'N' for No!");
+                continue;
+            }
         }
     }
     /**

@@ -1,4 +1,8 @@
+package view;
 import java.util.Scanner;
+
+
+
 import java.util.InputMismatchException;
 import managers.StaffLogin;
 import managers.SystemSettingsManager;

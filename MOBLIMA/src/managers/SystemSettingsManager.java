@@ -1,5 +1,13 @@
 package managers;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.*;
+
+import view.adminApp;
+
+import static utils.IOUtils.*;
 
 public class SystemSettingsManager {
     private Scanner sc = new Scanner(System.in);
@@ -13,6 +21,8 @@ public class SystemSettingsManager {
     }
 
     private SystemSettingsManager(){}
+    static String path = System.getProperty("user.dir") +"\\data\\staffs\\staffsSettings.csv";
+    static String separator = ",";
 
     public void staffMenu(int choice){
         int option = 0;
@@ -35,12 +45,14 @@ public class SystemSettingsManager {
         }
         catch(InputMismatchException e){
             System.out.println("Invalid Input.");
+            sc.nextLine();
             staffMenu(0);
         }
         switch (option) {
             case 1:
                 break;
             case 2:
+                configureTop5();
                 break;
             case 3:
                 configureHolidays();
@@ -48,14 +60,94 @@ public class SystemSettingsManager {
 
             case 4:
                 System.out.println("Back to Staff App......");
+                sc.nextLine();
+                adminApp a = adminApp.getInstance();
+                try{
+                    Method m = adminApp.class.getDeclaredMethod("displayLoggedInMenu");
+                    m.setAccessible(true);
+                    m.invoke(a);
+                }catch(NoSuchMethodException e){
+                    System.out.println("No such menu!");
+                }catch(InvocationTargetException e){
+                    System.out.println("Invocation error!");
+                }catch(Exception e){
+                    System.out.println("Error!");
+                }
                 break;
+
             default:
-                System.out.println("Invalid choice. Please choose between 1-5.");
+                System.out.println("Invalid choice. Please choose between 1-4.");
                 break;
         }
     }
 
-    private void configureHolidays(){
+    public void configureTop5(){
+        System.out.println("###########################################################");
+		System.out.println("#################### CONFIGURING TOP 5 ####################");
+		System.out.println("###########################################################");
+		System.out.println("");
+        Top5Movies top5MoviesObj = Top5Movies.getInstance();
+        while (true){
+            System.out.println("Please choose an option:");
+            System.out.println("1. Configure Top 5 Movies Settings");
+            System.out.println("2. Back to SystemSettingsManager");
+            int option = sc.nextInt();
+            switch (option) {
+                case 1:
+                    sc.nextLine();
+                    if(confirm("Confirm To Configure Top 5 Movies Settings")){
+                        while(true){
+                            System.out.println("Should customers be able to see Top 5 Movies by Sales? (Y/N)");
+                            String input = sc.nextLine();
+                            if(input.equalsIgnoreCase("y")){
+                                top5MoviesObj.setTop5SalesPermission("Y");
+                                break;
+                            }
+                            else if(input.equalsIgnoreCase("n")){
+                                top5MoviesObj.setTop5SalesPermission("N");
+                                break;
+                            }
+                            else{
+                                System.out.println("Please enter 'Y' for Yes or 'N' for No only!");
+                            }
+                        }
+                        while(true){
+                            System.out.println("Should customers be able to see Top 5 Movies by Overall Rating Score? (Y/N)");
+                            String input = sc.nextLine();
+                            if(input.equalsIgnoreCase("y")){
+                                top5MoviesObj.setTop5OverallRatingPermission("Y");
+                                break;
+                            }
+                            else if(input.equalsIgnoreCase("n")){
+                                top5MoviesObj.setTop5OverallRatingPermission("N");
+                                break;
+                            }
+                            else{
+                                System.out.println("Please enter 'Y' for Yes or 'N' for No only!");
+                            }
+                        }
+                        updateSystemSettingsCSV(top5MoviesObj);
+                    }
+                    else{
+                        System.out.println("Returning Back..");
+                        continue;
+                    }
+                    break;
+                case 2:
+                    sc.nextLine();
+                    System.out.println("Back to System Settings......");
+                    this.staffMenu(0);
+                default:
+                    System.out.println("Invalid choice. Please choose between 1 or 2 only.");
+                    continue;
+            }
+            break;
+        }
+
+    }
+
+
+    public void configureHolidays(){
         
         System.out.println("###########################################################");
 		System.out.println("################## CONFIGURING HOLIDAYS ###################");
@@ -90,6 +182,30 @@ public class SystemSettingsManager {
         }
     }
 
+    public static boolean updateSystemSettingsCSV(Top5Movies top5MoviesObj){
+        FileWriter csvWriter;
+        try {
+			csvWriter = new FileWriter(path,false);
+			csvWriter.append("top5SalesPermission");
+			csvWriter.append(separator);
+			csvWriter.append("top5OverallRatingPermission");
+			csvWriter.append("\n");
+
+            StringBuilder sb = new StringBuilder();
+            sb.append(top5MoviesObj.getTop5SalesPermission());
+            sb.append(separator);
+            sb.append(top5MoviesObj.getTop5OverallRatingPermission());
+            sb.append('\n');
+            csvWriter.append(sb.toString());
+			csvWriter.flush();
+			csvWriter.close();
+			return true;
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+    }
     // private void displayHolidayList() {
     //     printHeader("Holiday list");
     //     HashMap<String, Holiday> holidayList = getHolidayList();

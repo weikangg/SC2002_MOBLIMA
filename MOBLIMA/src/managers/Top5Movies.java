@@ -42,10 +42,10 @@ public class Top5Movies {
     }
 
     // Settors
-    private void setTop5SalesPermission(String permission){
+    public void setTop5SalesPermission(String permission){
         this.customerViewTop5Sales = permission;
     }
-    private void setTop5OverallRatingPermission(String permission){
+    public void setTop5OverallRatingPermission(String permission){
         this.customerViewTop5OverallRating = permission;
     }
 
@@ -390,6 +390,5 @@ public class Top5Movies {
             }
             break;
         }
-
     }
 }

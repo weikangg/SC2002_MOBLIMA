@@ -1,7 +1,9 @@
 package managers;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.*;
-
+import view.adminApp;
 
 public class MovieManager {    
     private Scanner sc = new Scanner(System.in);
@@ -28,7 +30,6 @@ public class MovieManager {
                                     " 3. View Movie By ID                                    \n" +
                                     " 4. Update Movies       		                         \n" +
                                     " 5. Remove Movies                                       \n" +
-                                    // " 4. Manage Reviews          	                         \n" +
                                     " 6. Show Top 5 Movies                                   \n" +
                                     " 7. Go Back                                             \n" +
                                     "==========================================================");
@@ -36,17 +37,16 @@ public class MovieManager {
                 option = sc.nextInt();
                 if(!(option >= 1 && option <=7)){
                     System.out.println("Please only enter a number from 1-7.");
+                    sc.nextLine();
                     staffMenu(0);
                 }
             }
         }
         catch(InputMismatchException e){
-            System.out.println("Invalid Input.");
+            System.out.println("Invalid Input. Please input a number from 1-7 only!");
             sc.nextLine();
             staffMenu(0);
         }
-        // MovieListManager movListManager = MovieListManager.getInstance();
-        // ReviewListManager reviewListManager = new ReviewListManager();
         switch (option) {
             case 1:
                 if (StaffAddMovieToList.staffAddMovie(MovieListManager.getMovieList())) {
@@ -98,17 +98,25 @@ public class MovieManager {
                 break;
             case 7:
                 System.out.println("Back to StaffApp......");
-                // movListManager = null;
-                // reviewListManager = null;
-                return;
+                sc.nextLine();
+                adminApp a = adminApp.getInstance();
+                try{
+                    Method m = adminApp.class.getDeclaredMethod("displayLoggedInMenu");
+                    m.setAccessible(true);
+                    m.invoke(a);
+                }catch(NoSuchMethodException e){
+                    System.out.println("No such menu!");
+                }catch(InvocationTargetException e){
+                    System.out.println("Invocation error!");
+                }catch(Exception e){
+                    System.out.println("Error!");
+                }
+                break;
             default:
                 System.out.println("Invalid choice. Please enter a number between 1-7.");
                 break;
         }
 
-        // clear garbage
-        // movListManager = null;
-        // reviewListManager = null;
         staffMenu(0);
     }
 
