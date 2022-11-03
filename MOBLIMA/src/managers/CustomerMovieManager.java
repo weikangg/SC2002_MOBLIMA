@@ -16,11 +16,11 @@ public class CustomerMovieManager {
 	 * The seperator that represent "," when stored in csv
 	 */
 	static String SplitByColon = ":";
-	public static void printMovieList(List<Movie>mList) {
-		
-		int count = 1;
-		// ReviewListManager file = new ReviewListManager();
-		// List<Review> rlist = file.getReviewList();
+
+	// Displays all info about movie + limited 3 reviews on each movie. If 0 reviews, prints a placeholder message
+
+	public static void printMovieList(List<Movie>mList, List<Review>rList) {
+		int movieCount = 1;
 		System.out.println("#########################################################");
 		System.out.println("################## DISPLAYING MOVIES ####################");
 		System.out.println("#########################################################");
@@ -34,8 +34,8 @@ public class CustomerMovieManager {
 				String cast, genre;
 				String casttmp = m.getCast();
 				String genretmp = m.getGenres();
-
-				System.out.printf("----------------- MOVIE %d -----------------\n", count);
+				int reviewCount = 1, hasReviews = 0;
+				System.out.printf("----------------- MOVIE %d -----------------\n", movieCount);
 				System.out.println("Movie Title: "+ m.getMovieTitle());
 				System.out.println("Showing Status: "+ m.getShowingStatus());
 				System.out.println("Synopsis: " + m.getSynopsis());
@@ -53,17 +53,35 @@ public class CustomerMovieManager {
 				System.out.println("Overall Rating Score: " + m.getOverallRatingScore());
 				System.out.println("Release Date: " + m.getReleaseDate().toString());
 				System.out.println("Movie Type: " + m.getMovieType());
-				count++;
 				System.out.println("");
+				System.out.println("Some Review Information of " + m.getMovieTitle() + ":");
+				for(Review r: rList){
+					if(reviewCount > 3 ){
+						break;
+					}
+					if(r.getMovieTitle().equalsIgnoreCase(m.getMovieTitle())){
+						System.out.println(Integer.toString(reviewCount)+". " + r.getDescription() + " [" + r.getRatingScore() + "/5.0]" + " - " + r.getReviewer());
+						hasReviews = 1;
+						reviewCount++;
+					}
+				}
+				if(hasReviews == 0){
+					System.out.println("No reviews available for this movie right now!");
+				}
+				System.out.println("");
+				movieCount++;
 			}
 	}
 
-	public static void searchMovie(List<Movie>mList, String name, boolean print){
+	public static int searchMovie(List<Movie>mList, List<Review> rList, String name, boolean print){
+		int found = 0;
 		for(Movie m : mList){
 			String cast, genre;
 			String casttmp = m.getCast();
 			String genretmp = m.getGenres();
+			int count = 1, hasReviews = 0;
 			if(m.getMovieTitle().equalsIgnoreCase(name)){
+				found = 1;
 				if(print){
 					System.out.println("Movie Title: "+ m.getMovieTitle());
 					System.out.println("Showing Status: "+ m.getShowingStatus());
@@ -76,18 +94,35 @@ public class CustomerMovieManager {
 					System.out.println("Genres: "+ genre);
 					System.out.println("Movie Rating: " + m.getMovieRating());
 					System.out.println("Movie Duration: " + m.getMovieDuration());
-					//double profitEarned = m.getProfitEarned();
-					//BigDecimal bd = new BigDecimal(profitEarned);
-					//System.out.println("Profit Earned: " + bd.toPlainString());
 					System.out.println("Overall Rating Score: " + m.getOverallRatingScore());
 					System.out.println("Release Date: " + m.getReleaseDate().toString());
 					System.out.println("Movie Type: " + m.getMovieType());
 					System.out.println("");
-				}
 
-				return;
-				
+					System.out.println("Some Review Information of " + m.getMovieTitle() + ":");
+					for(Review r: rList){
+						if(count > 3 ){
+							break;
+						}
+						if(r.getMovieTitle().equalsIgnoreCase(m.getMovieTitle())){
+							System.out.println(Integer.toString(count)+". " + r.getDescription() + " [" + r.getRatingScore() + "/5.0]" + " - " + r.getReviewer());
+							hasReviews = 1;
+							count++;
+						}
+					}
+					if(hasReviews == 0){
+						System.out.println("No reviews available for this movie right now!");
+					}
+					System.out.println("");
+					break;
+				}
 		   }
 		}
+		if(found == 0){
+			return 0;
+		}else{
+			return 1;
+		}
+
 	}
 }

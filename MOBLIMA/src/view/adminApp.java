@@ -188,6 +188,9 @@ public class adminApp {
                     case 1:
                         MovieManager.getInstance().staffMenu(0);
                         break;
+                    case 2:
+                        // Hide from viewer?
+                        break;
                     case 3:
                         ShowtimeManager.getInstance().staffMenu(0);
                         break;

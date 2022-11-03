@@ -2,8 +2,7 @@ package view;
 
 import java.util.Scanner;
 
-import entities.Movie;
-import entities.User;
+import entities.*;
 import managers.CustomerMovieManager;
 import managers.MovieListManager;
 import managers.Top5Movies;
@@ -24,7 +23,8 @@ public class customerApp {
 
     public void customerMenu(){
         
-        List<Movie> movie = MovieListManager.getInstance().getMovieList();
+        List<Movie> movieList = MovieListManager.getInstance().getMovieList();
+        List<Review> reviewList = ReviewListManager.getInstance().getReviewList();
         boolean exit = false;
         String strinput;
         int input;
@@ -36,7 +36,7 @@ public class customerApp {
                                 "1. Log In\n"+
                                 "2. Create account\n"+
                                 "3. Show all movies\n"+
-                                "4. Search\n"+
+                                "4. Search Movie by Name\n"+
                                 "5. Top 5 Movies\n"+
                                 "6. Back to main menu\n"+
                             "==============================================================\n");
@@ -57,7 +57,6 @@ public class customerApp {
             //cases for each input
             switch(input){
                 case 1:
-                    counter = 0;
                     String username;
                     String password;
                     //check login information, once passed go to logined menu
@@ -73,24 +72,25 @@ public class customerApp {
                     else{
                         System.out.println("Wrong username/password");
                     }
-                break;
+                    break;
 
                 case 2:
-                counter = 0;
-                //ask user for information to create account
-                CustomerAccManager.createAcc();
-                break;
+                    //ask user for information to create account
+                    CustomerAccManager.createAcc();
+                    break;
 
                 case 3:
-                CustomerMovieManager.printMovieList(movie);
-                break;
+                    CustomerMovieManager.printMovieList(movieList,reviewList);
+                    break;
 
                 case 4:
                 //search
-                System.out.println("Please enter the movie name:");
-                strinput = scan.nextLine();
-                CustomerMovieManager.searchMovie(movie, strinput, true);
-                break;
+                    System.out.println("Please enter the movie name:");
+                    strinput = scan.nextLine();
+                    if(CustomerMovieManager.searchMovie(movieList, reviewList, strinput, true) == 0){
+                        System.out.println("Movie not found!");
+                    }
+                    break;
 
                 case 5:
                     int displaySetting;
@@ -136,18 +136,13 @@ public class customerApp {
                     
                     break;
                 case 6:
-                System.out.println("Exiting customer interface...");
-                mainApp.main(null);
-                break;
+                    System.out.println("Exiting customer interface...");
+                    mainApp.main(null);
+                    break;
                 
                 default:
-                counter++;
-                System.out.println("Please enter a valid option");
-                if(counter == 4)
-                {
-                    System.out.println("Exiting customer interface...");
-                    exit = true;
-                }
+                    System.out.println("Please enter a valid option");
+                    customerMenu();
             }
 
 
@@ -183,8 +178,8 @@ public class customerApp {
                 //book ticket
                 int cineplex;
                 String name;
-                List<Movie> movie;
-                movie = MovieListManager.getInstance().getMovieList();
+                List<Movie> movieList = MovieListManager.getInstance().getMovieList();
+                List<Review> reviewList = ReviewListManager.getInstance().getReviewList();
 
                 //ask user for cineplex
                 System.out.println("Please choose a Cineplex:");
@@ -192,7 +187,7 @@ public class customerApp {
                 
                 //ask user for movie
                 System.out.println("Please choose a movie:");
-                CustomerMovieManager.printMovieList(movie);
+                CustomerMovieManager.printMovieList(movieList, reviewList);
                 name = scan.nextLine();
 
                 //link the movie to showtime

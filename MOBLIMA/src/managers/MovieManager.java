@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 import view.adminApp;
+import entities.*;
 
 public class MovieManager {    
     private Scanner sc = new Scanner(System.in);
@@ -48,9 +49,11 @@ public class MovieManager {
             sc.nextLine();
             staffMenu(0);
         }
+        List<Movie>movieList = MovieListManager.getInstance().getMovieList();
+        List<Review>reviewList = ReviewListManager.getInstance().getReviewList();
         switch (option) {
             case 1:
-                if (StaffAddMovieToList.staffAddMovie(MovieListManager.getInstance().getMovieList())) {
+                if (StaffAddMovieToList.staffAddMovie(movieList)) {
                     System.out.println("Movie created!");
                 } 
                 else {
@@ -58,7 +61,7 @@ public class MovieManager {
                 }
                 break;
             case 2:
-                StaffPrintMovieManager.printMovieList(MovieListManager.getInstance().getMovieList());
+                StaffPrintMovieManager.printMovieList(movieList, reviewList);
                 break;
             case 3:
                 System.out.println("Enter MovieID: ");
@@ -73,13 +76,15 @@ public class MovieManager {
                         continue;
                     }
                 }
-                StaffPrintMovieManager.printMovieByID(MovieListManager.getInstance().getMovieList(), movieID);
+                if(StaffPrintMovieManager.printMovieByID(movieList,reviewList, movieID) == 0){
+                    System.out.println("Movie not found!");
+                }
                 break;
             case 4:
-                if(StaffUpdateMovieManager.updateMovie(MovieListManager.getInstance().getMovieList()) == 1){
+                if(StaffUpdateMovieManager.updateMovie(movieList) == 1){
                     System.out.println("Movie Updated!");
                 }
-                else if(StaffUpdateMovieManager.updateMovie(MovieListManager.getInstance().getMovieList()) == 2){
+                else if(StaffUpdateMovieManager.updateMovie(movieList) == 2){
                     System.out.println("No updates made.");
                 }
                 else{
@@ -87,10 +92,10 @@ public class MovieManager {
                 }
                 break;
             case 5:
-                if(StaffRemoveMovieManager.setToEndShowing(MovieListManager.getInstance().getMovieList()) == 1){
+                if(StaffRemoveMovieManager.setToEndShowing(movieList) == 1){
                     System.out.println("Movie successfully set to end showing!");
                 }
-                else if (StaffRemoveMovieManager.setToEndShowing(MovieListManager.getInstance().getMovieList()) == 2){
+                else if (StaffRemoveMovieManager.setToEndShowing(movieList) == 2){
                     ;
                 }
                 else{
@@ -98,13 +103,13 @@ public class MovieManager {
                 }
                 break;
             case 6:
-                Top5Movies.getInstance().top5Movies(MovieListManager.getInstance().getMovieList());
+                Top5Movies.getInstance().top5Movies(movieList);
                 break;
             case 7:
-                if(StaffRemoveMovieManager.removeMovieFromDatabase(MovieListManager.getInstance().getMovieList()) == 1){
+                if(StaffRemoveMovieManager.removeMovieFromDatabase(movieList) == 1){
                     System.out.println("Movie successfully removed!");
                 }
-                else if (StaffRemoveMovieManager.removeMovieFromDatabase(MovieListManager.getInstance().getMovieList()) == 2){
+                else if (StaffRemoveMovieManager.removeMovieFromDatabase(movieList) == 2){
                     ;
                 }
                 else{

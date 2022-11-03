@@ -14,9 +14,9 @@ public class StaffPrintMovieManager {
 	 */
 	static String csvSplitBy = ",";
 
-	public static void printMovieList(List<Movie>mList) {
+	public static void printMovieList(List<Movie>mList, List<Review>rList) {
 		
-		int count = 1;
+		int movieCount = 1;
 		// ReviewListManager file = new ReviewListManager();
 		// List<Review> rlist = file.getReviewList();
 		System.out.println("#########################################################");
@@ -33,9 +33,9 @@ public class StaffPrintMovieManager {
 				String cast, genre;
 				String casttmp = m.getCast();
 				String genretmp = m.getGenres();
+				int reviewCount = 1, hasReviews = 0;
 
-
-				System.out.printf("----------------- MOVIE %d -----------------\n", count);
+				System.out.printf("----------------- MOVIE %d -----------------\n", movieCount);
 				System.out.println("Movie Title: "+ m.getMovieTitle());
 				System.out.println("Showing Status: "+ m.getShowingStatus());
 				System.out.println("Synopsis: " + m.getSynopsis());
@@ -53,14 +53,28 @@ public class StaffPrintMovieManager {
 				System.out.println("Overall Rating Score: " + m.getOverallRatingScore());
 				System.out.println("Release Date: " + m.getReleaseDate().toString());
 				System.out.println("Movie Type: " + m.getMovieType());
-				count++;
+				movieCount++;
+				System.out.println("");
+				System.out.println("Some Review Information of " + m.getMovieTitle() + ":");
+				for(Review r: rList){
+					if(reviewCount > 3 ){
+						break;
+					}
+					if(r.getMovieTitle().equalsIgnoreCase(m.getMovieTitle())){
+						System.out.println(Integer.toString(reviewCount)+". " + r.getDescription() + " [" + r.getRatingScore() + "/5.0]" + " - " + r.getReviewer());
+						hasReviews = 1;
+						reviewCount++;
+					}
+				}
+				if(hasReviews == 0){
+					System.out.println("No reviews available for this movie right now!");
+				}
 				System.out.println("");
 			}
 	}
 
-	public static void printMovieByID(List<Movie>mList, int movieID) {
-		// ReviewListManager file = new ReviewListManager();
-		// List<Review> rlist = file.getReviewList();
+	public static int printMovieByID(List<Movie>mList, List<Review>rList, int movieID) {
+		int found = 0;
 		System.out.println("#########################################################");
 		System.out.println("################## DISPLAYING MOVIES ####################");
 		System.out.println("#########################################################");
@@ -72,10 +86,11 @@ public class StaffPrintMovieManager {
 
 		for(Movie m : mList) {
 			if(m.getMovieID() == movieID){
+				found = 1;
 				String cast, genre;
 				String casttmp = m.getCast();
 				String genretmp = m.getGenres();
-
+				int reviewCount = 1, hasReviews = 0;
 				System.out.printf("----------------- MOVIE %d -----------------\n", movieID);
 				System.out.println("Movie Title: "+ m.getMovieTitle());
 				System.out.println("Showing Status: "+ m.getShowingStatus());
@@ -95,8 +110,27 @@ public class StaffPrintMovieManager {
 				System.out.println("Release Date: " + m.getReleaseDate().toString());
 				System.out.println("Movie Type: " + m.getMovieType());
 				System.out.println("");
+				System.out.println("Some Review Information of " + m.getMovieTitle() + ":");
+				for(Review r: rList){
+					if(reviewCount > 3 ){
+						break;
+					}
+					if(r.getMovieTitle().equalsIgnoreCase(m.getMovieTitle())){
+						System.out.println(Integer.toString(reviewCount)+". " + r.getDescription() + " [" + r.getRatingScore() + "/5.0]" + " - " + r.getReviewer());
+						hasReviews = 1;
+						reviewCount++;
+					}
+				}
+				if(hasReviews == 0){
+					System.out.println("No reviews available for this movie right now!");
+				}
+				System.out.println("");
 			}
 		}
+		if(found == 1){
+			return 1;
+		}
+		return 0;
 	}
 }
 
