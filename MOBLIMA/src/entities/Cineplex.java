@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.ArrayList;
+
 public class Cineplex {
     private String name;
     private int cineplexID;
@@ -27,6 +29,20 @@ public class Cineplex {
 
         this.cinemas = cinemas;
 
+    }
+
+    public ArrayList<Showtime> searchMovie(int movieID){
+        
+        ArrayList<Showtime> list = new ArrayList<Showtime>(); 
+        
+        for(int i = 0; i < cinemas.length; i++){
+            Showtime[] showtimes = cinemas[i].getShowtimes();
+            for(int j = 0; j < showtimes.length; j++){
+                if (showtimes[j].getMovieID() == movieID)list.add(showtimes[j]);
+            }
+        }
+
+        return list;
     }
 
     public String getName() {

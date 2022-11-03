@@ -65,7 +65,7 @@ public class Cinema extends Cineplex{
         try {
             //Create File
             Path path = Paths.get("data\\cineplexes\\"+super.getName()+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+numShowtimes+".csv");
-            File myObj = new File(path.toAbsolutePath().toString());
+            File file = new File(path.toAbsolutePath().toString());
 
             String[] str = dateTime.toString().split("T",2);
             String strDateTime = str[0]+" "+str[1];
@@ -93,18 +93,6 @@ public class Cinema extends Cineplex{
 
             csvwriter.writeAll(data);
             csvwriter.close();
-
-            //Create Object
-            Showtime showtime = new Showtime(super.getName(), super.getLocation(), super.getNumCinema(),super.getCineplexID(), cinemaID, numShowtimes);
-            //Update Variables (numShowtimes) and add object into list of objects
-            this.numShowtimes++;
-            Showtime[] newShowtimes = new Showtime[numShowtimes];
-            for(int i = 0; i < numShowtimes-1; i++){
-                newShowtimes[i] = this.showtimes[i];
-            }
-            newShowtimes[numShowtimes-1] = showtime;
-
-            this.showtimes = newShowtimes;
             
             //Write to cineplexes.csv
 
@@ -119,7 +107,61 @@ public class Cinema extends Cineplex{
             array[cinemaID+3] = Integer.toString(Integer.valueOf(array[cinemaID+3])+1);
             cineplexesFile.set(super.getCineplexID(), array);
 
-            System.out.println("here: "+array[cinemaID+3]);
+            FileWriter filewriterTwo = new FileWriter(path.toAbsolutePath().toString()); //CSVReader Instantiation
+            CSVWriter csvwriterTwo = new CSVWriter(filewriterTwo, 
+                                                CSVWriter.DEFAULT_SEPARATOR,
+                                                CSVWriter.NO_QUOTE_CHARACTER,
+                                                CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                                                CSVWriter.RFC4180_LINE_END);
+
+            csvwriterTwo.writeAll(cineplexesFile);
+            csvwriterTwo.close();
+
+            //Update Showtimes
+            numShowtimes++;
+            configShowtimes(numShowtimes);
+            
+            System.out.println("Showtime added");
+            
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+    }
+
+    public void deleteShowtime(int showtimeID){
+
+        //check if showtime exists
+        if (showtimeID >= numShowtimes||showtimeID < 0){
+            System.out.println("No such showtime");
+            return;
+        }
+
+        //Delete showtime csv file
+        Path path = Paths.get("data\\cineplexes\\"+super.getName()+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+showtimeID+".csv");
+        File file = new File(path.toAbsolutePath().toString());
+
+        if (file.delete()) { 
+            // System.out.println("File deleted.");
+          } else {
+            System.out.println("Failed to delete the file.");
+            return;
+          }
+
+        //Update cineplexes csv
+
+        try {
+
+            path = Paths.get("data\\cineplexes.csv");
+            FileReader filereader = new FileReader(path.toAbsolutePath().toString()); //CSVReader Instantiation
+            CSVReader csvReader = new CSVReader(filereader); 
+            List<String[]> r = csvReader.readAll(); //Read File
+
+            ArrayList<String[]> cineplexesFile = new ArrayList<String[]>(r);
+            
+            String[] array= cineplexesFile.get(super.getCineplexID());
+            array[cinemaID+3] = Integer.toString(Integer.valueOf(array[cinemaID+3])-1);
+            cineplexesFile.set(super.getCineplexID(), array);
 
             FileWriter filewriterTwo = new FileWriter(path.toAbsolutePath().toString()); //CSVReader Instantiation
             CSVWriter csvwriterTwo = new CSVWriter(filewriterTwo, 
@@ -135,9 +177,23 @@ public class Cinema extends Cineplex{
             // TODO: handle exception
         }
 
-        
-        
-        
+        //Update filename of showtimes after and update numShowtimes
+        for(int i = showtimeID + 1; i < numShowtimes; i++){
+            Path pathTwo = Paths.get("data\\cineplexes\\"+super.getName()+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+i+".csv");
+            File fileTwo = new File(pathTwo.toAbsolutePath().toString());
+
+            Path newPath = Paths.get("data\\cineplexes\\"+super.getName()+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+(i-1)+".csv");
+            File newFile = new File(newPath.toAbsolutePath().toString());
+
+            fileTwo.renameTo(newFile);
+
+        }
+        numShowtimes--;
+
+        //Update Showtimes
+        configShowtimes(numShowtimes);
+
+        System.out.println("Showtime Deleted");
 
     }
 

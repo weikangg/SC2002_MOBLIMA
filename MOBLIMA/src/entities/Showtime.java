@@ -158,7 +158,7 @@ public class Showtime extends Cinema{
         System.out.println("Showtime ID: " + getShowtimeID());
         System.out.println("Movie ID: " + getMovieID());
         System.out.println("Movie Title: " + getMovieTitle());
-        System.out.println("Date and Time: " + getDateTime().toString());
+        System.out.println("Date and Time: " + getDateTime());
         System.out.println("Type: " + getMovieType().toString());
         System.out.println("Cinema Status: " + getCinemaStatus());
         
@@ -196,7 +196,7 @@ public class Showtime extends Cinema{
 
             ArrayList<String[]> data = new ArrayList<String[]>();
             data.add(new String[] { "MovieID", "DateTime" , "MovieType" });
-            data.add(new String[] { Integer.toString(getMovieID()), getDateTime().toString(), getMovieType().toString() });
+            data.add(new String[] { Integer.toString(getMovieID()), getDateTime(), getMovieType().toString() });
             
             for (int i = 0; i < 5; i++){
                 String[] s = new String[10];
@@ -235,7 +235,7 @@ public class Showtime extends Cinema{
     public int[][] getSeats(){return seats;}
     //Setters
 
-
+    
     public void setDateTime(LocalDateTime dateTime) {this.dateTime = dateTime;update();}
     public void setMovieID(Integer movieID) {this.movieID = movieID;update();}
     public void setMovieType(MovieType movieReso) {this.movieType = movieReso;update();}
