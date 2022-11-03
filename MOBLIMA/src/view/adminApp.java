@@ -1,18 +1,12 @@
 package view;
 import java.util.Scanner;
 
-
-
 import java.util.InputMismatchException;
 import managers.StaffLogin;
 import managers.SystemSettingsManager;
 import managers.MovieManager;
 import managers.ShowtimeManager;
 
-import entities.*;
-import managers.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 
 public class adminApp {
@@ -182,8 +176,9 @@ public class adminApp {
                         SystemSettingsManager.getInstance().staffMenu(0);
                         break;
                     case 5: 
-                        System.out.println("Exiting StaffApp, have a nice day!");
-                        mainApp.main(null);
+                        System.out.println("Logging out from StaffApp, have a nice day!");
+                        sc.nextLine();
+                        displayLoginMenu();
                         break;
                     
                     default:

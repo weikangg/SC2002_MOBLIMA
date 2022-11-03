@@ -155,7 +155,7 @@ public class customerApp {
     }
 
     public void logInMenu(User user){
-        int input;
+        int input = 5;
         boolean exit = false;
        
         do{
@@ -169,8 +169,14 @@ public class customerApp {
             "========================================================\n");
             System.out.println("Please Enter Your Choice:\n");
 
-            input = scan.nextInt();
-            scan.nextLine();
+            try{
+                input = scan.nextInt();
+                scan.nextLine();
+            }catch(InputMismatchException e){
+                System.out.println("Please enter numbers only!");
+                scan.nextLine();
+                logInMenu(user);
+            }
 
             switch(input){
                 case 1:
@@ -214,7 +220,7 @@ public class customerApp {
                     break;
 
                 default:
-                System.out.println("Please enter a valid option");
+                System.out.println("Please enter a valid option (1-5) only.");
             }
         }while(exit == false);
     }

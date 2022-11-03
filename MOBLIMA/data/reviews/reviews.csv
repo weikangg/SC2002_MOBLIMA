@@ -4,3 +4,5 @@ REVIEW_ID,MOVIE_TITLE,REVIEWER,REVIEW_DESCRIPTION,RATING_SCORE
 3,test1,test1,Bad movie!,1.0
 4,Test2,test1,Good movie!,4.5
 5,Test3,test2,Fantastic Movie!,5.0
+6,Test3,test,Ok ,4.0
+7,test4,test,Good,4.5

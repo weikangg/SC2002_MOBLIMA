@@ -1,4 +1,5 @@
 package view;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /* 
@@ -23,18 +24,21 @@ public class mainApp {
 
         try { //Attempt User Input
             input = scan.nextInt(); 
-        } catch (Exception e) { //Catch bad inputs
+            scan.nextLine();
+        } catch (InputMismatchException e) { //Catch bad inputs
             scan.nextLine(); //Flush input
+            System.out.println("Please enter a valid selection (1-3) only.");
         }
 
         while(input < 1 || input > 3){ //Attempt User Input Again
             
-            System.out.println("Please enter a valid selection"); //Error Msg
+            System.out.println("Please enter a valid selection (1-3) only."); //Error Msg
             System.out.println("");
             System.out.print("Enter your choice: ");
 
             try {
                 input = scan.nextInt(); 
+                scan.nextLine();
             } catch (Exception e) {
                 scan.nextLine();
             }
@@ -48,13 +52,17 @@ public class mainApp {
             case 2:
                 customerApp.getInstance().customerMenu(); //Start User Module
                 break;
+            case 3:
+                scan.close();
+                System.out.println("Thank you for using MOBLIMA!");
+                System.out.println("Have a nice day.");
+                System.exit(0);
             default:
+                scan.close();
+                System.out.println("Thank you for using MOBLIMA!");
+                System.out.println("Have a nice day.");
+                System.exit(0);
         }
-
-        System.out.println("Thank you for using MOBLIMA!");
-        System.out.println("Have a nice day.");
-
-        scan.close();
 
     }
 
