@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 
 public class CustomerAccManager {
     
-    static String path = System.getProperty("user.dir") +"\\data\\customer\\account.csv";
+    static String path = System.getProperty("user.dir") +"/data/customer/account.csv";
     static String item_Separator = ",";	
 	static String row_Separator =";";
 	static String first_Item =" ;";
