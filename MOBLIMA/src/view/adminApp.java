@@ -7,10 +7,12 @@ import managers.SystemSettingsManager;
 import managers.MovieManager;
 import managers.ShowtimeManager;
 
+
 import entities.*;
 import managers.*;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 
 
@@ -108,26 +110,33 @@ public class adminApp {
 
         // System.out.println("");
 
-        Cineplex[] cineplexes = CineplexManager.configCineplexes(); //Function to get cineplexes object
+        // Cineplex[] cineplexes = CineplexManager.configCineplexes(); //Function to get cineplexes object
 
-        Cinema[] cinemas = cineplexes[0].getCinemas(); //Function to get cinemas object of cineplexes[0]
+        // ArrayList<Showtime> list = cineplexes[0].searchMovie(5);
 
-        Showtime[] showtimes = cinemas[0].getShowtimes(); //Function to get movies object of cinema[0]
+        // for(int i = 0; i < list.size(); i++){
+        //     list.get(i).showInfo();
+        //     System.out.println("");
+        // }
+
+        // Cinema[] cinemas = cineplexes[0].getCinemas(); //Function to get cinemas object of cineplexes[0]
+
+        // Showtime[] showtimes = cinemas[0].getShowtimes(); //Function to get movies object of cinema[0]
 
 
-        String str = "2023-01-23 20:00";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
+        // String str = "2023-01-23 20:00";
+        // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        // LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
 
-        MovieType movieType = MovieType.THREED;
+        // MovieType movieType = MovieType.THREED;
 
-        cinemas[1].addShowtime(4, dateTime, movieType);
+        // cinemas[1].addShowtime(4, dateTime, movieType);
 
-        cinemas[1].showShowtimes();
+        // cinemas[1].showShowtimes();
         
-        cinemas[1].deleteShowtime(2);
+        // cinemas[1].deleteShowtime(2);
 
-        cinemas[1].showShowtimes();
+        // cinemas[1].showShowtimes();
 
         // cinemas[1].showShowtimes();
         
