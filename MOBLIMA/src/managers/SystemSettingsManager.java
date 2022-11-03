@@ -127,9 +127,9 @@ public class SystemSettingsManager {
                             }
                         }
                         updateSystemSettingsCSV(top5MoviesObj);
+                        System.out.println("System Settings Updated!");
                     }
                     else{
-                        System.out.println("Returning Back..");
                         continue;
                     }
                     break;

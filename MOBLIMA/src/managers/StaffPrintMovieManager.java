@@ -2,24 +2,18 @@ package managers;
 
 import java.math.BigDecimal;
 import java.util.List;
-
-
-
 import entities.*;
 
 public class StaffPrintMovieManager {
-    	/**
-	 * The seperator for array of string in csv
+	/**
+	 * The separator for array of string in csv
 	 */
 	static String SplitBy = ";";
 	/**
 	 * The csv seperator
 	 */
-	static String cvsSplitBy = ",";
-	/**
-	 * The seperator that represent "," when stored in csv
-	 */
-	static String SplitByColon = ":";
+	static String csvSplitBy = ",";
+
 	public static void printMovieList(List<Movie>mList) {
 		
 		int count = 1;
@@ -32,6 +26,7 @@ public class StaffPrintMovieManager {
 
 		if (mList.size() == 0){
 			System.out.println("No Movies to display.");
+			return;
 		}
 
 		for(Movie m : mList) {
@@ -45,10 +40,10 @@ public class StaffPrintMovieManager {
 				System.out.println("Showing Status: "+ m.getShowingStatus());
 				System.out.println("Synopsis: " + m.getSynopsis());
 				System.out.println("Movie Director: "+ m.getMovieDirector());
-				cast = casttmp.replaceAll(SplitBy, cvsSplitBy);
+				cast = casttmp.replaceAll(SplitBy, csvSplitBy);
 				System.out.println("Casts: "+ cast);
-				cast = casttmp.replaceAll(SplitBy, cvsSplitBy);
-				genre = genretmp.replaceAll(SplitBy, cvsSplitBy);
+				cast = casttmp.replaceAll(SplitBy, csvSplitBy);
+				genre = genretmp.replaceAll(SplitBy, csvSplitBy);
 				System.out.println("Genres: "+ genre);
 				System.out.println("Movie Rating: " + m.getMovieRating());
 				System.out.println("Movie Duration: " + m.getMovieDuration());
@@ -86,10 +81,10 @@ public class StaffPrintMovieManager {
 				System.out.println("Showing Status: "+ m.getShowingStatus());
 				System.out.println("Synopsis: " + m.getSynopsis());
 				System.out.println("Movie Director: "+ m.getMovieDirector());
-				cast = casttmp.replaceAll(SplitBy, cvsSplitBy);
+				cast = casttmp.replaceAll(SplitBy, csvSplitBy);
 				System.out.println("Casts: "+ cast);
-				cast = casttmp.replaceAll(SplitBy, cvsSplitBy);
-				genre = genretmp.replaceAll(SplitBy, cvsSplitBy);
+				cast = casttmp.replaceAll(SplitBy, csvSplitBy);
+				genre = genretmp.replaceAll(SplitBy, csvSplitBy);
 				System.out.println("Genres: "+ genre);
 				System.out.println("Movie Rating: " + m.getMovieRating());
 				System.out.println("Movie Duration: " + m.getMovieDuration());

@@ -11,12 +11,17 @@ import entities.*;
 
 public class ReviewListManager {
 	static String path = System.getProperty("user.dir") +"\\data\\reviews\\reviews.csv";
-    // static String path = "src/data/reviews/reviews.csv";
 
     // csv separator
     static String item_Separator = ",";	
-	static String row_Separator =";";
-	static String first_Item =" ;";
+
+	private static ReviewListManager single_instance = null;
+	public static ReviewListManager getInstance()
+    {
+        if (single_instance == null)
+            single_instance = new ReviewListManager();
+        return single_instance;
+    }
 
 	// Constructor
 	public ReviewListManager(){}
@@ -32,15 +37,13 @@ public class ReviewListManager {
             while((line = br.readLine()) !=null) {
                 String[] reviewcsv = line.split(item_Separator);
                 if(!reviewcsv[0].equals("REVIEW_ID")) {
-                    reviewtmp = new Review(reviewcsv[0],reviewcsv[1],reviewcsv[2],reviewcsv[3],Double.parseDouble(reviewcsv[4]));
+                    reviewtmp = new Review(Integer.parseInt(reviewcsv[0]),reviewcsv[1],reviewcsv[2],reviewcsv[3],Double.parseDouble(reviewcsv[4]));
                     reviewList.add(reviewtmp);
                 }
             }
         }
 		catch(ArrayIndexOutOfBoundsException e){
 			return reviewList;
-			// System.out.println(e.getMessage());
-			// e.printStackTrace();
 		}
 		catch (IOException e) {
             e.printStackTrace();
@@ -48,14 +51,8 @@ public class ReviewListManager {
         return reviewList;
     }
 
-    public static boolean addReviewList(List<Review> reviewList, String movieTitle) {
-		Review review;
-		review = new Review();
-		review.setMovieTitle(movieTitle);
-        review.setReviewer(" ;");
-        review.setReviewID("-1");
-		review.setRatingScore(-1);
-		review.setDescription(" ;");
+    public static boolean addReviewList(List<Review> reviewList, int reviewID, String movieTitle, String username, String reviewDescription, double ratingScore) {
+		Review review = new Review(reviewID, movieTitle, username, reviewDescription, ratingScore);
 		reviewList.add(review);
 		return updateReviewInCSV(reviewList);
 	}
@@ -74,7 +71,7 @@ public class ReviewListManager {
 			csvWriter.append(separator);
 			csvWriter.append("REVIEW_DESCRIPTION");
 			csvWriter.append(separator);
-			csvWriter.append("OVERALL_RATING_SCORE");
+			csvWriter.append("RATING_SCORE");
 			csvWriter.append("\n");
 
 			for (Review reviewtmp : reviewList) {
@@ -88,7 +85,6 @@ public class ReviewListManager {
 				sb.append(reviewtmp.getDescription());
 				sb.append(separator);
 				sb.append(reviewtmp.getRatingScore());
-				sb.append(separator);
 				sb.append('\n');
 				csvWriter.append(sb.toString());
 			}

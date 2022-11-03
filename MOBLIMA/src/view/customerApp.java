@@ -1,16 +1,12 @@
 package view;
 
-import java.util.Scanner;
-
-import entities.Movie;
-import managers.CustomerMovieManager;
-import managers.MovieListManager;
-import managers.Top5Movies;
-
-import static managers.Top5Movies.*;
-
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Scanner;
+import entities.Movie;
+import managers.*;
+
+
 public class customerApp {
     private static customerApp newInstance = null;
     public static customerApp getInstance(){
@@ -188,11 +184,13 @@ public class customerApp {
                     
                 case 4:
                 //review movie
+                    ReviewManager.getInstance().reviewMenu(0);
+                    break;
 
                 case 5:
                     System.out.println("Exiting Customer App...");
                     customerApp.getInstance().customerMenu();
-                break;
+                    break;
 
                 default:
                 System.out.println("Please enter a valid option");

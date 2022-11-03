@@ -1,6 +1,6 @@
-REVIEW_ID,MOVIE_TITLE,REVIEWER,REVIEW_DESCRIPTION,OVERALL_RATING_SCORE
--1,Hello, ;, ;,-1.0,
--1,test2, ;, ;,-1.0,
--1,Test1, ;, ;,-1.0,
--1,Test1, ;, ;,-1.0,
--1,Test1, ;, ;,-1.0,
+REVIEW_ID,MOVIE_TITLE,REVIEWER,REVIEW_DESCRIPTION,RATING_SCORE
+1,test1,Hairy1,It was a dope movie,5.0
+2,Test2,Hairy1,It was a so-so movie,3.0
+3,test1,Hairy2,Bad movie!,1.0
+4,Test2,Hairy2,Good movie!,4.5
+5,Test3,Hairy2,Fantastic Movie!,5.0

@@ -3,7 +3,7 @@ package entities;
 import java.io.Serializable;
 
 public class Review implements Serializable {
-    private String reviewID;
+    private int reviewID;
     private String username;
     private String reviewDescription;
     private double ratingScore;
@@ -14,7 +14,7 @@ public class Review implements Serializable {
 
     }
 
-    public Review(String reviewID, String movieTitle, String username, String reviewDescription, double ratingScore){
+    public Review(int reviewID, String movieTitle, String username, String reviewDescription, double ratingScore){
         this.reviewID = reviewID;
         this.movieTitle = movieTitle;
         this.username = username;
@@ -23,7 +23,7 @@ public class Review implements Serializable {
     }
 
     //Gettors
-    public String getReviewID(){
+    public int getReviewID(){
         return reviewID;
     }
     public String getReviewer(){
@@ -40,7 +40,7 @@ public class Review implements Serializable {
     }
 
     // Settors
-    public void setReviewID(String reviewID){
+    public void setReviewID(int reviewID){
         this.reviewID = reviewID;
     }
     public void setReviewer(String reviewerUsername){
