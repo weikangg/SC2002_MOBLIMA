@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import managers.MovieListManager;
+import entities.MovieType;
 
 import com.opencsv.*;
 import com.opencsv.exceptions.CsvException;
@@ -25,7 +26,7 @@ public class Showtime extends Cinema{
     /**
      * Movie Format of the specific showtime.
      */
-    private String movieType;
+    private MovieType movieType;
     /**
      * Cinema object with access to a seating plan. Cinema held is the cinema at which the movie is showing.
      */
@@ -51,10 +52,19 @@ public class Showtime extends Cinema{
             //Set all variables with data from csv file
             this.movieID = Integer.valueOf(r.get(1)[0]);
             String str = r.get(1)[1];
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
             this.dateTime = dateTime;
-            this.movieType = r.get(1)[2];
+
+            if(r.get(1)[2].equals("TWOD")){
+                this.movieType = MovieType.TWOD;
+            }else if(r.get(1)[2].equals("THREED")){
+                this.movieType = MovieType.THREED;
+            }else if(r.get(1)[2].equals("IMAX")){
+                this.movieType = MovieType.IMAX;
+            }else{
+                this.movieType = MovieType.BLOCKBUSTER;
+            }
 
             int[][] seats = new int[5][10];
 
@@ -124,8 +134,8 @@ public class Showtime extends Cinema{
         System.out.println("Showtime ID: " + getShowtimeID());
         System.out.println("Movie ID: " + getMovieID());
         System.out.println("Movie Title: " + getMovieTitle());
-        System.out.println("Date and Time: " + getDateTime());
-        System.out.println("Type: " + getMovieType());
+        System.out.println("Date and Time: " + getDateTime().toString());
+        System.out.println("Type: " + getMovieType().toString());
         System.out.println("Cinema Status: " + getCinemaStatus());
         
         for (int i = 0; i < 5; i++){
@@ -148,8 +158,8 @@ public class Showtime extends Cinema{
         System.out.println("Showtime ID: " + getShowtimeID());
         System.out.println("Movie ID: " + getMovieID());
         System.out.println("Movie Title: " + getMovieTitle());
-        System.out.println("Date and Time: " + getDateTime());
-        System.out.println("Type: " + getMovieType());
+        System.out.println("Date and Time: " + getDateTime().toString());
+        System.out.println("Type: " + getMovieType().toString());
         System.out.println("Cinema Status: " + getCinemaStatus());
         
     }
@@ -189,7 +199,7 @@ public class Showtime extends Cinema{
             
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-            data.add(new String[] { Integer.toString(getMovieID()), getDateTime().toString(), getMovieType() });
+            data.add(new String[] { Integer.toString(getMovieID()), getDateTime().toString(), getMovieType().toString() });
             
             for (int i = 0; i < 5; i++){
                 String[] s = new String[10];
@@ -217,9 +227,13 @@ public class Showtime extends Cinema{
 
     public Integer getShowtimeID() {return showtimeID;}
     public Integer getMovieID() {return movieID;}
-    public LocalDateTime getDateTime() {return dateTime;}
+    public String getDateTime() {
+        
+        String[] str = dateTime.toString().split("T",2);
+        return str[0]+" "+str[1];
+    }
     public String getMovieTitle() {return movie.getMovieTitle();}
-    public String getMovieType() {return movieType;}
+    public MovieType getMovieType() {return movieType;}
     public String getCinemaStatus() {return cinemaStatus.toString();}
     public int[][] getSeats(){return seats;}
     //Setters
@@ -227,7 +241,7 @@ public class Showtime extends Cinema{
 
     public void setDateTime(LocalDateTime dateTime) {this.dateTime = dateTime;update();}
     public void setMovieID(Integer movieID) {this.movieID = movieID;update();}
-    public void setMovieType(String movieReso) {this.movieType = movieReso;update();}
+    public void setMovieType(MovieType movieReso) {this.movieType = movieReso;update();}
     public void setCinemaStatus(CinemaStatus cinemaStatus) {this.cinemaStatus = cinemaStatus;}
     public void reserveSeat(int i, int j){this.seats[i][j] = 1;update();}
 

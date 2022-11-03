@@ -1,5 +1,8 @@
 package entities;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class Cinema extends Cineplex{
 
     private int cinemaID;
@@ -30,7 +33,6 @@ public class Cinema extends Cineplex{
 
     }
 
-
     /**
      * Function to show details of all showtimes
      */
@@ -42,6 +44,13 @@ public class Cinema extends Cineplex{
             showtimes[i].showInfo();
             System.out.println("");
         }
+
+    }
+
+    /**
+     * Function to add showtime
+     */
+    public void addShowtime(int MovieID, LocalDateTime dateTime, MovieType movieType){
 
     }
 

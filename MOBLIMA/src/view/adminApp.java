@@ -110,6 +110,7 @@ public class adminApp {
 
         // Showtime[] showtimes = cinemas[0].getShowtimes(); //Function to get movies object of cinema[0]
 
+        // showtimes[0].reserveSeat(0, 0);
 
         // showtimes[1].setMovieID(5);
         // cinemas[0].showShowtimes(); //Show Showtimes in cinemas[0] of cineplexes[0]
@@ -162,7 +163,7 @@ public class adminApp {
                         ShowtimeManager.getInstance().staffMenu(0);
                         break;
                     case 4:
-                        SystemSettingsManager.getInstance().staffMenu(0);
+                        // SystemSettingsManager.getInstance().staffMenu(0);
                         break;
                     case 5: 
                         System.out.println("Exiting StaffApp, have a nice day!");
