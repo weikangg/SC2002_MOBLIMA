@@ -44,6 +44,7 @@ public class customerApp {
                 try{
                     System.out.println("Please Enter Your Choice: ");
                     input = scan.nextInt();
+                    scan.nextLine();
                     break;
                 }catch(InputMismatchException e){
                     scan.nextLine();
@@ -55,21 +56,21 @@ public class customerApp {
             //cases for each input
             switch(input){
                 case 1:
-                counter = 0;
-                String username;
-                String password;
-                //check login information, once passed go to logined menu
-                System.out.println("Please enter your username:");
-                username = scan.nextLine();
-                System.out.println("Please enter your password:");
-                password = scan.nextLine();
-                if(CustomerAccManager.checkLogin(username, password))
-                {
-                    this.logInMenu();
-                }
-                else{
-                    System.out.println("Wrong username/password");
-                }
+                    counter = 0;
+                    String username;
+                    String password;
+                    //check login information, once passed go to logined menu
+                    System.out.println("Please enter your username:");
+                    username = scan.nextLine();
+                    System.out.println("Please enter your password:");
+                    password = scan.nextLine();
+                    if(CustomerAccManager.checkLogin(username, password))
+                    {
+                        this.logInMenu();
+                    }
+                    else{
+                        System.out.println("Wrong username/password");
+                    }
                 break;
 
                 case 2:

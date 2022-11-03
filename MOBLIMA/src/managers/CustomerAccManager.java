@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 
 public class CustomerAccManager {
     
-    static String path = System.getProperty("user.dir") +"/data/customer/account.csv";
+    static String path = System.getProperty("user.dir") +"\\data\\customer\\account.csv";
     static String item_Separator = ",";	
 	static String row_Separator =";";
 	static String first_Item =" ;";
@@ -127,20 +127,13 @@ public class CustomerAccManager {
         try{
             String line = "";
 
-            Path path = Paths.get("/data/customer/account.csv");
+            String path = System.getProperty("user.dir") +"\\data\\customer\\account.csv";
 
-            BufferedReader br = new BufferedReader(new FileReader(path.toAbsolutePath().toString()));
+            BufferedReader br = new BufferedReader(new FileReader(path));
             while((line = br.readLine()) != null){
                 String[] values = line.split(",");
-                // System.out.println("IN DATABASE..");
-                // System.out.println("Username: " + values[0].substring(1,values[0].length()) 
-                //                     + "\nPassword: " + values[1].substring(0, values[1].length()-1));
 
-                // IF USERNAME AND PASSWORD MATCH, here I take the substring of what's read in from
-                // THE CSV BECAUSE FOR SOME REASON WHEN IT READS IN THE LINE FROM THE CSV, IT HAS AN INVERTED COMMA AT THE START
-                // FOR THE USERNAME AND CLOSING COMMAS FOR THE PASSWORD.
-                if(values[0].substring(1,values[0].length()).equals(username) 
-                && values[1].substring(0, values[1].length()-1).equals(password)){
+                if(values[0].equals(username) && values[4].equals(password)){
                     br.close();
                     return true;
                 }
