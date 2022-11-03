@@ -6,6 +6,10 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
+import entities.Holidays;
+
+import static utils.IOUtils.*;
+
 public class StaffAddHolidayToList {
     static Scanner sc = new Scanner(System.in);
     static String csv_Separator = ",";
@@ -19,14 +23,6 @@ public class StaffAddHolidayToList {
 		System.out.println("#################### ADDING HOLIDAY #####################");
 		System.out.println("#########################################################");
 
-		// If movie List is empty, we assign it an ID of 1.
-		// if(hList.size() == 0){
-		// 	movieID = 1;
-		// }
-		// // Else if it's not empty, we find the last ID in the list and add 1.
-		// else{ 
-		// 	movieID = mList.get((mList.size()-1)).getMovieID() + 1;
-		// }
 
 		System.out.print("Enter Holiday Name: ");
 		holNametmp = sc.nextLine();
@@ -46,9 +42,12 @@ public class StaffAddHolidayToList {
 				continue;
 			}
         }
-		if (HolidayListManager.addHolidayList(hList,holName,holDate))
-			return true;
-		 return false;
+        if(confirm("Confirm Add Holiday: ")){
+            if (HolidayListManager.addHolidayList(hList,holName,holDate))
+                return true;
+            return false;
+        }
+        return false;
     }
 }
 
