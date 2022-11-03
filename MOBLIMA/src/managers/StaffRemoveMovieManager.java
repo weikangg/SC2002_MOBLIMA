@@ -11,7 +11,8 @@ import static managers.MovieListManager.*;
 public class StaffRemoveMovieManager {
     private static Scanner sc = new Scanner(System.in);
 
-    public static boolean removeMovie(List<Movie>mList){
+    // Remove Movie by setting status to "End of showing" as per request of question
+    public static int setToEndShowing(List<Movie>mList){
         System.out.println("#########################################################");
 		System.out.println("#################### REMOVING MOVIES ####################");
 		System.out.println("#########################################################");
@@ -20,24 +21,27 @@ public class StaffRemoveMovieManager {
         
         String title; 
         System.out.println("Enter Movie Title: ");
-        title = sc.next();
+        title = sc.nextLine();
     
         for(Movie m: mList){
             if(m.getMovieTitle().equalsIgnoreCase(title)){
                 if(confirm("Confirm Remove Title ")){
                     m.setShowingStatus(ShowingStatus.FINISHED_SHOWING);
                     updateMovieListCSV(mList);
-                    return true;
+                    return 1;
+                }
+                else{
+                    return 2;
                 }
             }
         }
         
         System.out.println("Movie not found!");
-        return false;
+        return 0;
     }
 
     // Remove movie from database entirely
-    public static boolean removeMovieFromDatabase(List<Movie> mList){
+    public static int removeMovieFromDatabase(List<Movie> mList){
         System.out.println("#########################################################");
 		System.out.println("#################### REMOVING MOVIES ####################");
 		System.out.println("#########################################################");
@@ -58,10 +62,10 @@ public class StaffRemoveMovieManager {
         }
         if(!mList.contains(temp)){
             System.out.println("Movie does not exist!");
-            return false;
+            return 0;
         }
 
-        if(confirm("Confirm Remove Title: ")){
+        if(confirm("Confirm Remove Title ")){
             for(Movie m : mList){
                 if(!m.getMovieTitle().equals(title)){
                     int movieID = m.getMovieID();
@@ -81,14 +85,17 @@ public class StaffRemoveMovieManager {
                     newList.add(newMovie);
                 }
             }
-            return updateMovieListCSV(newList);
+            if(updateMovieListCSV(mList)){
+                return 1;
+            }
+            else{
+                return 0;
+            }
         }
         else{
-            System.out.println("Removing Movie Cancelled, Returning to Original Menu...");
-            return true;
+            return 2;
         }
     }
 
-    // Remove Movie by setting status to "End of showing" as per request of question
    
 }

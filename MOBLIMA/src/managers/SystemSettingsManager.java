@@ -34,12 +34,13 @@ public class SystemSettingsManager {
             					" 1. Configure Ticket Prices                                           \n" +
                                 " 2. Configure Top 5 Rankings                                          \n" + 
 			            		" 3. Configure Holidays                                                \n" +
-			                    " 4. Back to MOBLIMA Staff App                                         \n" +
+                                " 4. Configure End of Showing Date for Movies                          \n" +
+			                    " 5. Back to MOBLIMA Staff App                                         \n" +
                                 "=======================================================================");
                 System.out.println("Enter choice: ");
                 option = sc.nextInt();
-                if(!(option >= 1 && option <=4)){
-                    System.out.println("Please only enter a number from 1-4.");
+                if(!(option >= 1 && option <=5)){
+                    System.out.println("Please only enter a number from 1-5.");
                     staffMenu(0);
                 }
             }
@@ -59,7 +60,7 @@ public class SystemSettingsManager {
                 configureHolidays();
                 break;
 
-            case 4:
+            case 5:
                 System.out.println("Back to Staff App......");
                 sc.nextLine();
                 adminApp a = adminApp.getInstance();

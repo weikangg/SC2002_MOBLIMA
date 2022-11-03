@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 import entities.*;
 import view.customerApp;
+import static utils.IOUtils.*;
 
 public class ReviewManager {
     private Scanner sc = new Scanner(System.in);
@@ -39,7 +40,7 @@ public class ReviewManager {
                                     " 1. Add Review 						    		     \n" +
                                     " 2. Edit Review                                         \n" +
                                     " 3. Delete Review                                       \n" +
-                                    " 4. Show All Past Reviews      		                         \n" +
+                                    " 4. Show All Past Reviews      		                  \n" +
                                     " 5. Go Back                                             \n" +
                                     "==========================================================");
                 System.out.println("Enter choice: ");
@@ -57,16 +58,38 @@ public class ReviewManager {
             reviewMenu(0,user);
         }
         sc.nextLine();
+        
+        List<Movie>movieList = MovieListManager.getInstance().getMovieList();
+        List<Review>reviewList = ReviewListManager.getInstance().getReviewList();
+        
         switch (option) {
             case 1:
-                List<Movie>movieList = MovieListManager.getInstance().getMovieList();
-                List<Review>reviewList = ReviewListManager.getInstance().getReviewList();
-                addReview(reviewList, movieList,user.getUsername());
+                if(addReview(reviewList, movieList,user.getUsername())){
+                    System.out.println("Review successfully added!");
+                }else{
+                    System.out.println("Failed to add review!");
+                }
                 break;
             case 2:
+                if(updateReview(reviewList,user.getUsername()) == 1){
+                    System.out.println("Review successfully updated!");
+                }else if(updateReview(reviewList,user.getUsername()) == 2){
+                    ;
+                }
+                else{
+                    System.out.println("Failed to update review!");
+                }
                 break;
             case 3:
-              
+                if(removeReview(reviewList,user.getUsername()) == 1){
+                    System.out.println("Review successfully removed!");
+                }
+                else if(removeReview(reviewList,user.getUsername()) == 2){
+                    ;
+                }
+                else{
+                    System.out.println("Failed to remove review!");
+                }
                 break;
             case 4:
                 showAllPastReviews(ReviewListManager.getInstance().getReviewList(), user.getUsername());
@@ -152,6 +175,154 @@ public class ReviewManager {
         }
 
     }   
+
+    // Update Reviews for the user
+
+    // Checks if user has given a review for the movie before.
+    public int updateReview(List<Review> reviewList, String username){
+        System.out.println("#########################################################");
+		System.out.println("#################### EDITING REVIEWS ####################");
+		System.out.println("#########################################################");
+        System.out.println("");
+
+        System.out.println("Please enter Movie Title to update:");
+        String movieTitle = sc.nextLine();
+        
+        if (reviewList.size() == 0){
+            System.out.println("You have not given a review for any movies yet!");
+        }
+
+        // Search if the user has made a review before
+
+        Review temp = null;
+        for(Review r: reviewList){
+            if(r.getMovieTitle().equalsIgnoreCase(movieTitle) && (r.getReviewer().equals(username))){
+                temp = r;
+            }
+        }
+        if(!reviewList.contains(temp)){
+            System.out.println("You have not given a review for this movie yet!");
+            return 0;
+        }
+
+        // Do the updating
+
+        while(true){
+            System.out.println("Please choose an option:");
+            System.out.println("1. Update Review Description");
+            System.out.println("2. Update Rating Score");
+            int option;
+            try{
+                option = sc.nextInt();
+                sc.nextLine();
+            }catch(InputMismatchException e){
+                System.out.println("Please enter a valid number from 1-2 only!");
+                sc.nextLine();
+                continue;
+            }
+            switch(option){
+                case 1:
+                    if(confirm("Confirm Update Review Description")){
+                        String newDescription = read("New Description:");
+                        for(Review r: reviewList){
+                            if(r.getMovieTitle().equalsIgnoreCase(movieTitle) && r.getReviewer().equals(username)){
+                                r.setDescription(newDescription);
+                            }
+                        }
+                    }
+                    else{
+                        System.out.println("No updates made!");
+                        return 2;
+                    }
+                    break;
+                case 2:
+                    if(confirm("Confirm Update Rating Score")){
+                        System.out.println("New Rating Score:");
+                        double newScore;
+                        try{
+                            newScore = sc.nextDouble();
+                            if(newScore < 1 || newScore > 5){
+                                System.out.println("Please input a valid Rating Score from 1-5 only!");
+                                continue;
+                            }
+                            for(Review r: reviewList){
+                                if(r.getMovieTitle().equalsIgnoreCase(movieTitle) && r.getReviewer().equals(username)){
+                                    r.setRatingScore(newScore);
+                                    break;
+                                }
+                            }
+                            sc.nextLine();
+                        }catch(InputMismatchException e){
+                            System.out.println("Please input a valid Rating Score from 1-5 only!");
+                            sc.nextLine();
+                            continue;
+                        }
+                    }
+                    else{
+                        System.out.println("No updates made!");
+                        return 2;
+                    }
+                    break;
+            }
+            break;
+        }
+
+        if(ReviewListManager.updateReviewInCSV(reviewList)){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
+    // Remove Review based on movie title
+    public int removeReview(List<Review> reviewList, String username){
+        System.out.println("#########################################################");
+		System.out.println("#################### REMOVING REVIEW ####################");
+		System.out.println("#########################################################");
+		System.out.println("");
+
+        String title; 
+        System.out.println("Enter Movie Title: ");
+        title = sc.next();
+        List<Review>newList = new ArrayList<Review>();
+
+         // Search if user has made a review for that particular movie
+
+         Review temp = null;
+         for(Review r: reviewList){
+             if(r.getMovieTitle().equalsIgnoreCase(title) && r.getReviewer().equals(username)){
+                  temp = r;
+             }
+         }
+         if(!reviewList.contains(temp)){
+             System.out.println("You have not made a review for this movie yet!");
+             return 0;
+         }
+
+         if(confirm("Confirm Remove Review ")){
+            for(Review r:reviewList){
+                if(!(r.getMovieTitle().equalsIgnoreCase(title) && r.getReviewer().equals(username))){
+                    int reviewID = r.getReviewID();
+                    String movieTitle = r.getMovieTitle();
+                    String reviewer = r.getReviewer();
+                    String reviewDescription = r.getDescription();
+                    double ratingScore = r.getRatingScore();
+                    Review newReview = new Review(reviewID,movieTitle,reviewer,reviewDescription,ratingScore);
+                    newList.add(newReview);
+                }
+            }
+            if(ReviewListManager.updateReviewInCSV(newList)){
+                return 1;
+            }
+            else{
+                return 0;
+            }
+         }
+         else{
+            return 2;
+         }
+
+    }
 
     // Show movie title, review description, and overall rating score based on user who logged in
     public void showAllPastReviews(List<Review> reviewList, String username){

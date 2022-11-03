@@ -46,7 +46,7 @@ public class StaffPrintMovieManager {
 				genre = genretmp.replaceAll(SplitBy, csvSplitBy);
 				System.out.println("Genres: "+ genre);
 				System.out.println("Movie Rating: " + m.getMovieRating());
-				System.out.println("Movie Duration: " + m.getMovieDuration());
+				System.out.println("Movie Duration: " + m.getMovieDuration() + " minutes");
 				double profitEarned = m.getProfitEarned();
 				BigDecimal bd = new BigDecimal(profitEarned);
 				System.out.println("Profit Earned: " + bd.toPlainString());
@@ -87,7 +87,7 @@ public class StaffPrintMovieManager {
 				genre = genretmp.replaceAll(SplitBy, csvSplitBy);
 				System.out.println("Genres: "+ genre);
 				System.out.println("Movie Rating: " + m.getMovieRating());
-				System.out.println("Movie Duration: " + m.getMovieDuration());
+				System.out.println("Movie Duration: " + m.getMovieDuration() + " minutes");
 				double profitEarned = m.getProfitEarned();
 				BigDecimal bd = new BigDecimal(profitEarned);
 				System.out.println("Profit Earned: " + bd.toPlainString());

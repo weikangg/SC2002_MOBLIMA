@@ -29,21 +29,22 @@ public class MovieManager {
                                     " 2. View Full List Of Movies                            \n" +
                                     " 3. View Movie By ID                                    \n" +
                                     " 4. Update Movies       		                         \n" +
-                                    " 5. Remove Movies                                       \n" +
+                                    " 5. Set Movie to End of Showing                         \n" +
                                     " 6. Show Top 5 Movies                                   \n" +
-                                    " 7. Go Back                                             \n" +
+                                    " 7. Remove Movie from Database                          \n" +
+                                    " 8. Go Back                                             \n" +
                                     "==========================================================");
                 System.out.println("Enter choice: ");
                 option = sc.nextInt();
-                if(!(option >= 1 && option <=7)){
-                    System.out.println("Please only enter a number from 1-7.");
+                if(!(option >= 1 && option <=8)){
+                    System.out.println("Please only enter a number from 1-8.");
                     sc.nextLine();
                     staffMenu(0);
                 }
             }
         }
         catch(InputMismatchException e){
-            System.out.println("Invalid Input. Please input a number from 1-7 only!");
+            System.out.println("Invalid Input. Please input a number from 1-8 only!");
             sc.nextLine();
             staffMenu(0);
         }
@@ -86,17 +87,32 @@ public class MovieManager {
                 }
                 break;
             case 5:
-                if(StaffRemoveMovieManager.removeMovie(MovieListManager.getInstance().getMovieList())){
-                    System.out.println("Movie removed!");
+                if(StaffRemoveMovieManager.setToEndShowing(MovieListManager.getInstance().getMovieList()) == 1){
+                    System.out.println("Movie successfully set to end showing!");
+                }
+                else if (StaffRemoveMovieManager.setToEndShowing(MovieListManager.getInstance().getMovieList()) == 2){
+                    ;
                 }
                 else{
-                    System.out.println("Failed to remove movie!");
+                    System.out.println("Failed to set movie to end showing!");
                 }
                 break;
             case 6:
                 Top5Movies.getInstance().top5Movies(MovieListManager.getInstance().getMovieList());
                 break;
             case 7:
+                if(StaffRemoveMovieManager.removeMovieFromDatabase(MovieListManager.getInstance().getMovieList()) == 1){
+                    System.out.println("Movie successfully removed!");
+                }
+                else if (StaffRemoveMovieManager.removeMovieFromDatabase(MovieListManager.getInstance().getMovieList()) == 2){
+                    ;
+                }
+                else{
+                    System.out.println("Failed to remove movie!");
+                }
+                break;
+            
+            case 8:
                 System.out.println("Back to StaffApp......");
                 sc.nextLine();
                 adminApp a = adminApp.getInstance();
@@ -113,7 +129,7 @@ public class MovieManager {
                 }
                 break;
             default:
-                System.out.println("Invalid choice. Please enter a number between 1-7.");
+                System.out.println("Invalid choice. Please enter a number between 1-8.");
                 break;
         }
 
