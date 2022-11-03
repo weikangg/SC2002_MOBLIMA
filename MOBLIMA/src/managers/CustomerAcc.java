@@ -7,18 +7,20 @@ import entities.*;
 public class CustomerAcc {
     private String name;
     private String email;
-    private int mobile;
-    private int age;
+    private String mobile;
+    private String age;
+    private String password;
     //create transaction history using linked list
     private LinkedList<Transaction> bookingHistory = new LinkedList<Transaction>();
 
     //constructor
-    public CustomerAcc(String name, String email, int mobile, int age)
+    public CustomerAcc(String name, String email, String mobile, String age, String password)
     {
         this.name = name;
         this.email = email;
         this.mobile = mobile;
         this.age = age;
+        this.password = password;
     }
 
 /*    public ArrayList<CustomerAcc> readCustomerFile(){
@@ -83,12 +85,16 @@ public class CustomerAcc {
         this.email = e;
         return;
     }
-    public void setMobile(int m){
+    public void setMobile(String m){
         this.mobile = m;
         return;
     }
-    public void setAge(int a){
+    public void setAge(String a){
         this.age = a;
+        return;
+    }
+    public void setPassword(String p){
+        this.password = p;
         return;
     }
 
@@ -98,10 +104,13 @@ public class CustomerAcc {
     public String getEmail(){
         return this.email;
     }
-    public int getMobile(){
+    public String getMobile(){
         return this.mobile;
     }
-    public int getAge(){
+    public String getAge(){
         return this.age;
+    }
+    public String getPassword(){
+        return this.password;
     }
 }
