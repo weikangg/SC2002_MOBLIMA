@@ -6,3 +6,5 @@ REVIEW_ID,MOVIE_TITLE,REVIEWER,REVIEW_DESCRIPTION,RATING_SCORE
 5,Test3,test2,Fantastic Movie!,5.0
 6,Test3,test,Ok ,4.0
 7,test4,test,Very the good,4.0
+8,test1,Bot1,Very the good,4.3
+9,test1,Bot2,Very the good,4.5
