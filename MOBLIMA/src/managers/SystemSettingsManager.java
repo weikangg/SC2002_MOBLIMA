@@ -21,7 +21,7 @@ public class SystemSettingsManager {
     }
 
     private SystemSettingsManager(){}
-    static String path = System.getProperty("user.dir") +"\\data\\staffs\\staffsSettings.csv";
+    static String path = System.getProperty("user.dir") +"\\data\\staffs\\top5Settings.csv";
     static String separator = ",";
 
     public void staffMenu(int choice){

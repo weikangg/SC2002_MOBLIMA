@@ -30,7 +30,7 @@ public class Top5Movies {
         this.customerViewTop5OverallRating = "Y";
     }
 
-    static String path = System.getProperty("user.dir") +"\\data\\staffs\\staffsSettings.csv";
+    static String path = System.getProperty("user.dir") +"\\data\\staffs\\top5Settings.csv";
     static String separator = ",";
 
     // Gettors

@@ -202,7 +202,7 @@ public class TicketManager {
             System.out.println("Enter valid option");
             tt = sc.nextInt();
         }
-        LocalDateTime time = getShowtime().getDateTime();
+        LocalDateTime time = getShowtime().getDateTimeLDT();
         DayOfWeek day = DayOfWeek.of(time.get(ChronoField.DAY_OF_WEEK));
         if(day == DayOfWeek.SUNDAY || day==DayOfWeek.SATURDAY)
         {
