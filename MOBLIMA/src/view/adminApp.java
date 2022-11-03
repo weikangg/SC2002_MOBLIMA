@@ -116,7 +116,7 @@ public class adminApp {
 
         // MovieType movieType = MovieType.THREED;
         
-        // cinemas[1].addShowtime(3, dateTime, movieType);
+        // cinemas[1].deleteShowtime(2);
 
         // cinemas[1].showShowtimes();
         
