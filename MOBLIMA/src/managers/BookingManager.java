@@ -1,6 +1,7 @@
 package managers;
 
 import java.util.Scanner;
+import java.io.Console;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -36,10 +37,12 @@ public class BookingManager implements Serializable{
 	
 	public void bookingMenu(Showtime showtime)
 	{
-        
+        ArrayList<String> bookedSeats = new ArrayList<>();
+        setBookedSeats(bookedSeats);
 
 		//display seats at show time
 		//get user input to choose seats
+        setShowTime(showtime);
 		setSeats(showtime.getSeats());
         getShowtime().showSeats();
         Boolean notQuit = true;
@@ -52,15 +55,16 @@ public class BookingManager implements Serializable{
              " 3. Confirm seat selections                          \n"+
              " 0. Exit			                                  \n"+
              "======================================================");
+            displayAddedSeats();
             System.out.println("Please select a choice:");
             int choice = 0;
             choice = sc.nextInt();
+            sc.nextLine();
             while(choice < 0 || choice >3)
             {
                 System.out.println("Invalid input type. Please enter an integer value.");
                 choice = sc.nextInt();
-            }
-            displayAddedSeats();
+            }   
             switch(choice)
             {
                 case 0:
@@ -74,7 +78,7 @@ public class BookingManager implements Serializable{
                     deleteSeat();
                     break;
                 case 3://check at least 1 seat selected
-                    if(confirmSelection(showtime)==true)
+                    if(confirmSelection(showtime))
                     {
                         TicketManager.newTM().ticketMenu(showtime, getBookedSeats(), getSeats());
                         //Call ticket manager
@@ -106,15 +110,15 @@ public class BookingManager implements Serializable{
 
     public void displayAddedSeats()
     {
-        if(this.bookedSeats.isEmpty())
+        if(getBookedSeats().isEmpty())
         {
             System.out.println("No seats have been added");
             return;
         }
         System.out.println("Booked Seats (Row/Col): ");
-        for(int i = 0; i<this.bookedSeats.size();i++)
+        for(int i = 0; i<getBookedSeats().size();i++)
         {
-            System.out.println("Seat " + (i+1) + ":" + this.bookedSeats.get(i));
+            System.out.println("Seat " + (i+1) + ":" + getBookedSeats().get(i));
         }
     }
 
@@ -142,8 +146,12 @@ public class BookingManager implements Serializable{
 			System.out.println("Seat " + row + " " + col + " added to cart");
 	    	updateSeats(row,col,1);
             String newSeat = row+"/"+col;
-            this.bookedSeats.add(newSeat);
+            getBookedSeats().add(newSeat);
 		}
+        else
+        {
+            System.out.println("Seat " + row + " " + col + " is either selected or unavailable");
+        }
     }
 
     public void deleteSeat()
@@ -183,30 +191,37 @@ public class BookingManager implements Serializable{
         }
         System.out.println("Confirm booking? (Yes/No)");
         String answer = sc.nextLine();
-        while(answer!="Yes" || answer!="No")
+        System.out.println(answer);
+        while(true)
         {
-            System.out.println("Confirm booking? (Yes/No)");
-            answer = sc.nextLine();
-        }
-        if(answer == "No")
-        {
-            return false;
-        }
-        else
-        {
-            for(int i = 0; i<getBookedSeats().size();i++)
+            System.out.println(answer);
+            if(answer.equals("No"))
             {
-                String rowcol = getBookedSeats().get(i);
-                String[] tokens = rowcol.split("/");
-                int row = Integer.parseInt(tokens[0]);
-                int col = Integer.parseInt(tokens[1]);        
-                updateSeats(row, col, 2);
+                return false;
             }
-        }
-        //getShowtime().setSeats(getSeats());
-        return true;
+            else if (answer.equals("Yes"))
+            {
+                for(int i = 0; i<getBookedSeats().size();i++)
+                {
+                    String rowcol = getBookedSeats().get(i);
+                    String[] tokens = rowcol.split("/");
+                    int row = Integer.parseInt(tokens[0]);
+                    int col = Integer.parseInt(tokens[1]);        
+                    updateSeats(row, col, 2);
+                    return true;
+                }
+            }
+            else
+            {
+                System.out.println("Please re enter choice (Yes/No)");
+                answer = sc.nextLine();
+            }
 
-    }
+        }
+
+    }       //getShowtime().setSeats(getSeats());
+
+
     public void updateSeats(int row, int col, int choice)
     {
         switch(choice)
@@ -216,7 +231,7 @@ public class BookingManager implements Serializable{
             case 2: //confirmed seats
                 getSeats()[row][col]=2;
             case 3: //remove seats
-                getSeats()[row][col]=1;
+                getSeats()[row][col]=0;
         }
     }
 
@@ -290,6 +305,8 @@ public class BookingManager implements Serializable{
         String finalFile = location +i+ filename;
         File check = new File(finalFile);
         TransactionManager.getInstance().makeTransaction();
+        Booking newB = new Booking(null,0,null,0,0,null,null,null);
+        setBooking(newB);
         getBooking().setTicketList(TransactionManager.getInstance().getTList());
         getBooking().setCinemaID(getShowtime().getCinemaID());
         getBooking().setCineplexID(getShowtime().getCineplexID());
@@ -318,6 +335,7 @@ public class BookingManager implements Serializable{
         }catch(IOException ex){
             System.out.println("IOException is caught");
         }
+        TransactionManager.getInstance().updateTotalSales();
         deleteBM();
 
         //try{
