@@ -25,6 +25,7 @@ public class TicketManager {
     private TicketPrice tp = new TicketPrice();
     private ArrayList<LocalDate> hlList;
     private List<Holidays> holiDates;
+    Boolean noQuit = true;
 	public static TicketManager newTM()
 	{
 	    if (tm == null) {
@@ -42,12 +43,14 @@ public class TicketManager {
         ArrayList<LocalDate> holidayLD = new ArrayList<LocalDate>();
         setHList(holidayLD);
         setHolidayDates();
-        Boolean noQuit = true;
         setShowtime(showtime);
         setCS(confirmedSeats);
-        printTransaction();
+        //printTransaction();
+        noQuit = true;
         while(noQuit)
         {
+            if(getCSArray().size()==0)
+                return;
             System.out.println(
                 "====================Confirm Purchase of Tickets====================\n"
             );
@@ -58,7 +61,7 @@ public class TicketManager {
                 int row = Integer.parseInt(tokens[0]);
                 int col = Integer.parseInt(tokens[1]);        
                 System.out.println(
-                "Ticket [" + i+1 + "]: Row- " + row + " Column- " + col + "."
+                "Ticket [" + (i+1) + "]: Row- " + row + " Column- " + col + "."
                 );
             }
     
@@ -80,13 +83,15 @@ public class TicketManager {
                     //Confirm tickets -> Calculate tickets based on ticket type -> calculate total price of tickets -> call transactionMgr
                     confirmTicket();
                     TransactionManager.getInstance().transactionMenu(getShowtime(), getTicketArray());
-                    noQuit = false;
+                    //deleteTicketM();
+                    //noQuit = false;
                     break;
                 case 2:
                     //Choose ticket to remove -> update arraylist -> check if empty
                     System.out.println("Enter ticket number to remove: ");
+                    printTransaction();
                     int ticketNo = sc.nextInt();
-                    ticketNo--;
+                    //ticketNo--;
                     sc.nextLine();
                     if(ticketNo>getCSArray().size())
                     {
@@ -94,26 +99,28 @@ public class TicketManager {
                         ticketNo = sc.nextInt();
                         sc.nextLine();
                     }
+                    System.out.println("Checkpt1");
                     deleteTicket(ticketNo, plan);
                     break;
                 case 3:
-                    deleteTicketM();
                     noQuit = false;
+                    //deleteTicketM();
                     break;
                 default:
                     System.out.println("Please enter an integer value from 1-3.");
+                    break;
             }
         }
     }
 
     public void deleteTicket(int index, int[][] plan)
     {
-        getCSArray().remove(index-1);
         String rowcol = getCS(index-1);
         String[] tokens = rowcol.split("/");
         int row = Integer.parseInt(tokens[0]);
         int col = Integer.parseInt(tokens[1]);
-        plan[row][col]=1;
+        plan[row][col]=0;
+        getCSArray().remove(index-1);
     }
 
     public double calcTicketPrice(TicketType tt)
@@ -312,4 +319,3 @@ public class TicketManager {
         return false;
     }
 }
-
