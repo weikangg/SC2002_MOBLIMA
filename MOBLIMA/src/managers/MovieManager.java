@@ -104,7 +104,7 @@ public class MovieManager {
                 }
                 break;
             case 6:
-                Top5Movies.getInstance().top5Movies(movieList);
+                SystemSettings.getInstance().top5Movies(movieList);
                 break;
             case 7:
                 if(StaffRemoveMovieManager.removeMovieFromDatabase(movieList) == 1){

@@ -5,7 +5,7 @@ import java.util.Scanner;
 import entities.*;
 import managers.CustomerMovieManager;
 import managers.MovieListManager;
-import managers.Top5Movies;
+import managers.SystemSettings;
 import managers.*;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -94,7 +94,7 @@ public class customerApp {
 
                 case 5:
                     int displaySetting;
-                    Top5Movies top5Movies = Top5Movies.getInstance();
+                    SystemSettings top5Movies = SystemSettings.getInstance();
                     
                     // Getting permissions
                     top5Movies.updatePermissions();
@@ -116,21 +116,21 @@ public class customerApp {
                         
                         // Normal setting
                         case 0:
-                            Top5Movies.getInstance().top5Movies(MovieListManager.getInstance().getMovieList());
+                            SystemSettings.getInstance().top5Movies(MovieListManager.getInstance().getMovieList());
                             break;
                         
                         // Only view top 5 sales
                         case 1:
-                            Top5Movies.getInstance().top5SalesOnly(MovieListManager.getInstance().getMovieList());
+                            SystemSettings.getInstance().top5SalesOnly(MovieListManager.getInstance().getMovieList());
                             break;
                         
                         // Only view top 5 overall Rating score
                         case 2:
-                            Top5Movies.getInstance().top5RatingsOnly(MovieListManager.getInstance().getMovieList());
+                            SystemSettings.getInstance().top5RatingsOnly(MovieListManager.getInstance().getMovieList());
                             break;
                         // Else both cannot display (if the movie has very bad sales & ratings)
                         case 3:
-                            Top5Movies.getInstance().viewNone();
+                            SystemSettings.getInstance().viewNone();
                             break;
                     }
                     

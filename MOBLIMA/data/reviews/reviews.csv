@@ -1,7 +1,7 @@
 REVIEW_ID,MOVIE_TITLE,REVIEWER,REVIEW_DESCRIPTION,RATING_SCORE
 1,test1,test,very good,4.0
 2,Test2,test,It was a so-so movie,3.0
-3,test1,test1,Bad movie!,1.0
+3,test7,test1,Bad movie!,1.0
 4,Test2,test1,Good movie!,4.5
 5,Test3,test2,Fantastic Movie!,5.0
 6,Test3,test,Ok ,4.0

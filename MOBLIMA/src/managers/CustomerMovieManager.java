@@ -19,12 +19,16 @@ public class CustomerMovieManager {
 
 	// Displays all info about movie + limited 3 reviews on each movie. If 0 reviews, prints a placeholder message
 	// Only shows info of movies which are preview or coming soon
+	// Shows reviews according to rating score limit pre-set by staff.
 	public static void printMovieList(List<Movie>mList, List<Review>rList) {
 		int movieCount = 1;
 		System.out.println("#########################################################");
 		System.out.println("################## DISPLAYING MOVIES ####################");
 		System.out.println("#########################################################");
 		System.out.println("");
+		SystemSettings systemSettings = SystemSettings.getInstance();
+		systemSettings.updatePermissions();
+		double ratingScoreLimit = systemSettings.getRatingScoreLimit();
 
 		if (mList.size() == 0){
 			System.out.println("No Movies to display.");
@@ -60,7 +64,7 @@ public class CustomerMovieManager {
 					if(reviewCount > 3 ){
 						break;
 					}
-					if(r.getMovieTitle().equalsIgnoreCase(m.getMovieTitle())){
+					if(r.getMovieTitle().equalsIgnoreCase(m.getMovieTitle()) && r.getRatingScore() >= ratingScoreLimit){
 						System.out.println(Integer.toString(reviewCount)+". " + r.getDescription() + " [" + r.getRatingScore() + "/5.0]" + " - " + r.getReviewer());
 						hasReviews = 1;
 						reviewCount++;

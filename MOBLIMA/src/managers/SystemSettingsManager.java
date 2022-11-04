@@ -22,7 +22,7 @@ public class SystemSettingsManager {
     }
 
     private SystemSettingsManager(){}
-    static String path = System.getProperty("user.dir") +"\\data\\staffs\\top5Settings.csv";
+    static String path = System.getProperty("user.dir") +"\\data\\staffs\\staffsSettings.csv";
     static String separator = ",";
 
     public void staffMenu(int choice){
@@ -34,7 +34,7 @@ public class SystemSettingsManager {
             					" 1. Configure Ticket Prices                                           \n" +
                                 " 2. Configure Top 5 Rankings                                          \n" + 
 			            		" 3. Configure Holidays                                                \n" +
-                                " 4. Configure End of Showing Date for Movies                          \n" +
+                                " 4. Configure Rating Score Limit for Movies                           \n" +
 			                    " 5. Back to MOBLIMA Staff App                                         \n" +
                                 "=======================================================================");
                 System.out.println("Enter choice: ");
@@ -59,7 +59,9 @@ public class SystemSettingsManager {
             case 3:
                 configureHolidays();
                 break;
-
+            case 4:
+                configureRatingScoreLimit();
+                break;
             case 5:
                 System.out.println("Back to Staff App......");
                 sc.nextLine();
@@ -83,30 +85,97 @@ public class SystemSettingsManager {
         }
     }
 
+    public void configureRatingScoreLimit(){
+        System.out.println("###########################################################");
+		System.out.println("############## CONFIGURING DISPLAY OF RATINGS #############");
+		System.out.println("###########################################################");
+		System.out.println("");
+        SystemSettings systemSettings = SystemSettings.getInstance();
+        systemSettings.updatePermissions();
+        while (true){
+            System.out.println("Please choose an option:");
+            System.out.println("1. Configure Rating Score Limit for Customers");
+            System.out.println("2. Back to SystemSettingsManager");
+            int option;
+            try{
+                option= sc.nextInt();
+                sc.nextLine();
+            }catch(InputMismatchException e){
+                System.out.println("Enter a number from 1-2 only!");
+                sc.nextLine();
+                continue;
+            }
+            switch (option) {
+                case 1:
+
+                    if(confirm("Confirm To Configure Rating Score Limit for Customers")){
+                        while(true){
+                           try{
+                                System.out.println("Enter Rating Score Limit for Customers:");
+                                double limit = sc.nextDouble();
+                                sc.nextLine();
+                                if(limit < 1 || limit > 5){
+                                    System.out.println("Enter a valid rating score from 1-5 only!");
+                                    continue;
+                                }
+                                systemSettings.setRatingScoreLimit(limit);
+                                break;
+                            }catch(InputMismatchException e){
+                                System.out.println("Enter a valid rating score from 1-5 only!");
+                                sc.nextLine();
+                                continue;
+                            }
+                        }
+                        updateSystemSettingsCSV(systemSettings);
+                        System.out.println("System Settings Updated!");
+                    }
+                    else{
+                        continue;
+                    }
+                    break;
+                case 2:
+                    System.out.println("Back to System Settings......");
+                    this.staffMenu(0);
+                default:
+                    System.out.println("Invalid choice. Please choose between 1 or 2 only.");
+                    continue;
+            }
+            break;
+        }
+    }
+
     public void configureTop5(){
         System.out.println("###########################################################");
 		System.out.println("#################### CONFIGURING TOP 5 ####################");
 		System.out.println("###########################################################");
 		System.out.println("");
-        Top5Movies top5MoviesObj = Top5Movies.getInstance();
+        SystemSettings systemSettings = SystemSettings.getInstance();
+        systemSettings.updatePermissions();
         while (true){
             System.out.println("Please choose an option:");
             System.out.println("1. Configure Top 5 Movies Settings");
             System.out.println("2. Back to SystemSettingsManager");
-            int option = sc.nextInt();
+            int option;
+            try{
+                option = sc.nextInt();
+                sc.nextLine();
+            }catch(InputMismatchException e){
+                System.out.println("Enter a number from 1-2 only!");
+                sc.nextLine();
+                continue;
+            }
             switch (option) {
                 case 1:
-                    sc.nextLine();
                     if(confirm("Confirm To Configure Top 5 Movies Settings")){
                         while(true){
                             System.out.println("Should customers be able to see Top 5 Movies by Sales? (Y/N)");
                             String input = sc.nextLine();
                             if(input.equalsIgnoreCase("y")){
-                                top5MoviesObj.setTop5SalesPermission("Y");
+                                systemSettings.setTop5SalesPermission("Y");
                                 break;
                             }
                             else if(input.equalsIgnoreCase("n")){
-                                top5MoviesObj.setTop5SalesPermission("N");
+                                systemSettings.setTop5SalesPermission("N");
                                 break;
                             }
                             else{
@@ -117,18 +186,18 @@ public class SystemSettingsManager {
                             System.out.println("Should customers be able to see Top 5 Movies by Overall Rating Score? (Y/N)");
                             String input = sc.nextLine();
                             if(input.equalsIgnoreCase("y")){
-                                top5MoviesObj.setTop5OverallRatingPermission("Y");
+                                systemSettings.setTop5OverallRatingPermission("Y");
                                 break;
                             }
                             else if(input.equalsIgnoreCase("n")){
-                                top5MoviesObj.setTop5OverallRatingPermission("N");
+                                systemSettings.setTop5OverallRatingPermission("N");
                                 break;
                             }
                             else{
                                 System.out.println("Please enter 'Y' for Yes or 'N' for No only!");
                             }
                         }
-                        updateSystemSettingsCSV(top5MoviesObj);
+                        updateSystemSettingsCSV(systemSettings);
                         System.out.println("System Settings Updated!");
                     }
                     else{
@@ -136,7 +205,6 @@ public class SystemSettingsManager {
                     }
                     break;
                 case 2:
-                    sc.nextLine();
                     System.out.println("Back to System Settings......");
                     this.staffMenu(0);
                 default:
@@ -205,19 +273,23 @@ public class SystemSettingsManager {
         staffMenu(0);
     }
 
-    public static boolean updateSystemSettingsCSV(Top5Movies top5MoviesObj){
+    public static boolean updateSystemSettingsCSV(SystemSettings systemSettings){
         FileWriter csvWriter;
         try {
 			csvWriter = new FileWriter(path,false);
 			csvWriter.append("top5SalesPermission");
 			csvWriter.append(separator);
 			csvWriter.append("top5OverallRatingPermission");
+            csvWriter.append(separator);
+			csvWriter.append("RatingScoreLimit");
 			csvWriter.append("\n");
 
             StringBuilder sb = new StringBuilder();
-            sb.append(top5MoviesObj.getTop5SalesPermission());
+            sb.append(systemSettings.getTop5SalesPermission());
             sb.append(separator);
-            sb.append(top5MoviesObj.getTop5OverallRatingPermission());
+            sb.append(systemSettings.getTop5OverallRatingPermission());
+            sb.append(separator);
+            sb.append(Double.toString(systemSettings.getRatingScoreLimit()));
             sb.append('\n');
             csvWriter.append(sb.toString());
 			csvWriter.flush();

@@ -1,2 +1,2 @@
-top5SalesPermission,top5OverallRatingPermission
-Y,N
+top5SalesPermission,top5OverallRatingPermission,RatingScoreLimit
+N,Y,3.0

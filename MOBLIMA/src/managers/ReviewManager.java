@@ -346,4 +346,8 @@ public class ReviewManager {
             }
         }
     }
+
+    public boolean hideReviews(){
+        return true;
+    }
 }

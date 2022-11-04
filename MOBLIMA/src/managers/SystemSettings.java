@@ -10,27 +10,29 @@ import java.util.*;
 import entities.*;
 import static utils.IOUtils.*;
 
-public class Top5Movies {
+public class SystemSettings {
     
     private String customerViewTop5Sales;
     private String customerViewTop5OverallRating;
+    private double ratingScoreLimit;
     private static Scanner sc = new Scanner(System.in);
     // Ensure single instance
-    private static Top5Movies single_instance = null;
-	public static Top5Movies getInstance()
+    private static SystemSettings single_instance = null;
+	public static SystemSettings getInstance()
     {
         if (single_instance == null)
-            single_instance = new Top5Movies();
+            single_instance = new SystemSettings();
         return single_instance;
     }
 
     // Constructor
-    public Top5Movies(){
-        this.customerViewTop5Sales = "Y";
-        this.customerViewTop5OverallRating = "Y";
+    public SystemSettings(){
+        // this.customerViewTop5Sales = "Y";
+        // this.customerViewTop5OverallRating = "Y";
+        // this.ratingScoreLimit = 1;
     }
 
-    static String path = System.getProperty("user.dir") +"\\data\\staffs\\top5Settings.csv";
+    static String path = System.getProperty("user.dir") +"\\data\\staffs\\staffsSettings.csv";
     static String separator = ",";
 
     // Gettors
@@ -41,6 +43,9 @@ public class Top5Movies {
         return this.customerViewTop5OverallRating;
     }
 
+    public double getRatingScoreLimit(){
+        return this.ratingScoreLimit;
+    }
     // Settors
     public void setTop5SalesPermission(String permission){
         this.customerViewTop5Sales = permission;
@@ -48,7 +53,9 @@ public class Top5Movies {
     public void setTop5OverallRatingPermission(String permission){
         this.customerViewTop5OverallRating = permission;
     }
-
+    public void setRatingScoreLimit(double ratingScoreLimit){
+        this.ratingScoreLimit = ratingScoreLimit;
+    }
 
     // Methods
     public void updatePermissions(){
@@ -61,8 +68,10 @@ public class Top5Movies {
 				if(!permissions[0].equals("top5SalesPermission")) {
                     String top5SalesPermission = permissions[0];
                     String top5OverallRatingPermission = permissions[1];
+                    String ratingScoreLimitStr = permissions[2];
 					this.setTop5SalesPermission(top5SalesPermission);
                     this.setTop5OverallRatingPermission(top5OverallRatingPermission);		
+                    this.setRatingScoreLimit(Double.parseDouble(ratingScoreLimitStr));
 				}
 			}
 			br.close();
@@ -78,7 +87,10 @@ public class Top5Movies {
 		catch (IOException e) {
             System.out.println("IO Error!");
 			return;
-		}
+		}catch(NumberFormatException e){
+            System.out.println("Change back the data format of rating score limit in database!");
+            return;
+        }
     }
 
     // View Top 5 Menu Normally
