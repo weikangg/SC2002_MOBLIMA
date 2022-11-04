@@ -44,10 +44,11 @@ public class BookingManager implements Serializable{
 		//get user input to choose seats
         setShowTime(showtime);
 		setSeats(showtime.getSeats());
-        getShowtime().showSeats();
+        //getShowtime().showSeats();
         Boolean notQuit = true;
         while(notQuit)
         {
+            showSeat();
             System.out.println
             ("====================BOOKING MENU=====================\n"+
              " 1. Add seats                                        \n"+
@@ -96,13 +97,15 @@ public class BookingManager implements Serializable{
 
     public Boolean isSeatEmpty(int row, int col) //Check for showtime seats
     {
-        //0 = available, 1 = unavailable, 2 = booked, 3 = added
+        //0 = available, 1 = unavailable, 2 = booked
         if(getSeats()[row][col] == 0)
         {
+            System.out.println("Its available");
             return true;
         }
         else
         {
+            System.out.println("Its unavailable");
             return false;
         }
 
@@ -115,10 +118,14 @@ public class BookingManager implements Serializable{
             System.out.println("No seats have been added");
             return;
         }
-        System.out.println("Booked Seats (Row/Col): ");
+        System.out.println("Booked Seats: ");
         for(int i = 0; i<getBookedSeats().size();i++)
         {
-            System.out.println("Seat " + (i+1) + ":" + getBookedSeats().get(i));
+            String rowcol = getBookedSeats().get(i);
+            String[] tokens = rowcol.split("/");
+            int row = Integer.parseInt(tokens[0]);
+            int col = Integer.parseInt(tokens[1]);
+            System.out.println("Seat " + (i+1) + ": " + (char)(row+65) + col);
         }
     }
 
@@ -143,14 +150,17 @@ public class BookingManager implements Serializable{
         col = sc.nextInt();
 
         if (isSeatEmpty(row, col)) {						
-			System.out.println("Seat " + row + " " + col + " added to cart");
+			System.out.println("Seat " + (char)(row+65)+ col + " added to cart");
 	    	updateSeats(row,col,1);
             String newSeat = row+"/"+col;
             getBookedSeats().add(newSeat);
 		}
         else
         {
-            System.out.println("Seat " + row + " " + col + " is either selected or unavailable");
+            if(getSeats()[row][col]==1)
+            System.out.println("Seat " + (char)(row+65) + col + " unavailable.");
+            else
+            System.out.println("Seat " + (char)(row+65) + col + " already selected.");
         }
     }
 
@@ -179,6 +189,7 @@ public class BookingManager implements Serializable{
         int col = Integer.parseInt(tokens[1]);        
         updateSeats(row, col, 3);
         getBookedSeats().remove(seat-1);
+        System.out.println("Seat removed...");
     }
 
     public Boolean confirmSelection(Showtime showtime)
@@ -227,11 +238,16 @@ public class BookingManager implements Serializable{
         switch(choice)
         {
             case 1: //add seats
-                getSeats()[row][col]=3;
-            case 2: //confirmed seats
                 getSeats()[row][col]=2;
+                break;
+            case 2: //confirmed seats
+                getSeats()[row][col]=1;
+                break;
             case 3: //remove seats
                 getSeats()[row][col]=0;
+                break;
+            default:
+                break;
         }
     }
 
@@ -297,7 +313,6 @@ public class BookingManager implements Serializable{
     public void createBooking()
     {
         ArrayList<Booking> userBookings = new ArrayList<Booking>();
-        updateShowtimeCSV();
         String username = "user1";
         String location = "MOBLIMA/data/bookings/" + username +"/";
         String filename = ".txt";
@@ -395,6 +410,29 @@ public class BookingManager implements Serializable{
         }
         return getUB;
     }*/
+
+
+    public void showSeat()
+    {
+
+        System.out.println("      Screen");
+
+        for (int i = 0; i < 5; i++){
+
+            System.out.print((char)(i+65)+"  ");
+
+            for(int j = 0; j < 10; j++){
+
+                if(j == 5) System.out.print("  ");
+
+                if(getSeats()[i][j] == 0) System.out.print("\u001B[32m" + "O" + "\u001B[0m");
+                else if(getSeats()[i][j] == 1) System.out.print("\u001B[31m" + "X" + "\u001B[0m");
+                else if(getSeats()[i][j] == 2) System.out.print("\u001B[34m" + "S" + "\u001B[0m");
+
+            }
+            System.out.println("  "+(char)(i+65));
+        }
+    }
 
 
 }
