@@ -27,7 +27,7 @@ public class CineplexManager {
             
 
             Path path = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes.csv");
-            System.out.println(path.toAbsolutePath().toString());
+            // System.out.println(path.toAbsolutePath().toString());
 
             
             FileReader filereader = new FileReader(path.toAbsolutePath().toString()); //CSVReader Instantiation
