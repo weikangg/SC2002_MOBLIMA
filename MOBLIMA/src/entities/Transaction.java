@@ -8,15 +8,15 @@ public class Transaction implements Serializable{
     private String movieName;
     private String tranDateTime;
     private ArrayList<Ticket> tix;
-    private double totalPrice;
+    private double totalPrice = 0;
 
-    public Transaction(String id, String movname, String tranDateTime, ArrayList<Ticket> tix, double totalPrice)
+    public Transaction(String id, String movname, String tranDateTime, ArrayList<Ticket> tix)
     {
         this.id = id;
         this.movieName = movname;
         this.tranDateTime = tranDateTime;
         this.tix = tix;
-        this.totalPrice = totalPrice;
+        //this.totalPrice = totalPrice;
     }
 
     public String getID(){
