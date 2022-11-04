@@ -109,10 +109,10 @@ public class MovieManager {
                 SystemSettings.getInstance().top5Movies(movieList);
                 break;
             case 7:
-                if(StaffRemoveMovieManager.removeMovieFromDatabase(movieList) == 1){
+                if(StaffRemoveMovieManager.removeMovieFromDatabase(movieList,reviewList) == 1){
                     System.out.println("Movie successfully removed!");
                 }
-                else if (StaffRemoveMovieManager.removeMovieFromDatabase(movieList) == 2){
+                else if (StaffRemoveMovieManager.removeMovieFromDatabase(movieList,reviewList) == 2){
                     ;
                 }
                 else{

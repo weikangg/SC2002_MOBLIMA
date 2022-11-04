@@ -14,6 +14,8 @@ public class StaffPrintMovieManager {
 	 */
 	static String csvSplitBy = ",";
 
+	// STAFF CAN PRINT EVERYTHING & SEE ALL MOVIES REGARDLESS OF MOVIE STATUS 
+	// STAFF CAN ALSO VIEW ALL REVIEWS
 	public static void printMovieList(List<Movie>mList, List<Review>rList) {
 		
 		int movieCount = 1;
@@ -33,8 +35,7 @@ public class StaffPrintMovieManager {
 				String cast, genre;
 				String casttmp = m.getCast();
 				String genretmp = m.getGenres();
-				int reviewCount = 1, hasReviews = 0;
-
+				int reviewCount = 0, hasReviews = 0, printOverallRating = 0;
 				System.out.printf("----------------- MOVIE %d -----------------\n", movieCount);
 				System.out.println("Movie Title: "+ m.getMovieTitle());
 				System.out.println("Showing Status: "+ m.getShowingStatus());
@@ -50,18 +51,29 @@ public class StaffPrintMovieManager {
 				double profitEarned = m.getProfitEarned();
 				BigDecimal bd = new BigDecimal(profitEarned);
 				System.out.println("Profit Earned: " + bd.toPlainString());
-				System.out.printf("Overall Rating Score: %.2f/5\n", m.getOverallRatingScore());
+				for(Review r: rList){
+					if(reviewCount > 1 ){
+						printOverallRating = 1;
+						break;
+					}
+					if(r.getMovieTitle().equalsIgnoreCase(m.getMovieTitle())){
+						reviewCount++;
+					}
+				}
+				if(printOverallRating == 1){
+					System.out.printf("Overall Rating Score: %.1f/5\n" , m.getOverallRatingScore() );
+				}else{
+					System.out.println("Overall Rating Score: NA");
+				}
+				reviewCount = 0;
 				System.out.println("Release Date: " + m.getReleaseDate().toString());
 				System.out.println("Movie Type: " + m.getMovieType());
 				movieCount++;
 				System.out.println("");
 				System.out.println("Some Review Information of " + m.getMovieTitle() + ":");
 				for(Review r: rList){
-					if(reviewCount > 3 ){
-						break;
-					}
 					if(r.getMovieTitle().equalsIgnoreCase(m.getMovieTitle())){
-						System.out.println(Integer.toString(reviewCount)+". " + r.getDescription() + " [" + r.getRatingScore() + "/5.0]" + " - " + r.getReviewer());
+						System.out.println(Integer.toString(reviewCount+1)+". " + r.getDescription() + " [" + r.getRatingScore() + "/5.0]" + " - " + r.getReviewer());
 						hasReviews = 1;
 						reviewCount++;
 					}
@@ -90,7 +102,7 @@ public class StaffPrintMovieManager {
 				String cast, genre;
 				String casttmp = m.getCast();
 				String genretmp = m.getGenres();
-				int reviewCount = 1, hasReviews = 0;
+				int reviewCount = 0, hasReviews = 0, printOverallRating = 0;
 				System.out.printf("----------------- MOVIE %d -----------------\n", movieID);
 				System.out.println("Movie Title: "+ m.getMovieTitle());
 				System.out.println("Showing Status: "+ m.getShowingStatus());
@@ -106,17 +118,28 @@ public class StaffPrintMovieManager {
 				double profitEarned = m.getProfitEarned();
 				BigDecimal bd = new BigDecimal(profitEarned);
 				System.out.println("Profit Earned: " + bd.toPlainString());
-				System.out.printf("Overall Rating Score: %.2f/5\n", m.getOverallRatingScore());
+				for(Review r: rList){
+					if(reviewCount > 1 ){
+						printOverallRating = 1;
+						break;
+					}
+					if(r.getMovieTitle().equalsIgnoreCase(m.getMovieTitle())){
+						reviewCount++;
+					}
+				}
+				if(printOverallRating == 1){
+					System.out.printf("Overall Rating Score: %.1f/5\n" , m.getOverallRatingScore() );
+				}else{
+					System.out.println("Overall Rating Score: NA");
+				}
+				reviewCount = 0;
 				System.out.println("Release Date: " + m.getReleaseDate().toString());
 				System.out.println("Movie Type: " + m.getMovieType());
 				System.out.println("");
 				System.out.println("Some Review Information of " + m.getMovieTitle() + ":");
 				for(Review r: rList){
-					if(reviewCount > 3 ){
-						break;
-					}
 					if(r.getMovieTitle().equalsIgnoreCase(m.getMovieTitle())){
-						System.out.println(Integer.toString(reviewCount)+". " + r.getDescription() + " [" + r.getRatingScore() + "/5.0]" + " - " + r.getReviewer());
+						System.out.println(Integer.toString(reviewCount+1)+". " + r.getDescription() + " [" + r.getRatingScore() + "/5.0]" + " - " + r.getReviewer());
 						hasReviews = 1;
 						reviewCount++;
 					}

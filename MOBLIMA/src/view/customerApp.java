@@ -85,7 +85,7 @@ public class customerApp {
                 //search
                     System.out.println("Please enter the movie name:");
                     strinput = scan.nextLine();
-                    if(CustomerMovieManager.searchMovie(movieList, reviewList, strinput, true) == 0){
+                    if(CustomerMovieManager.searchMovie(movieList, reviewList, strinput) == 0){
                         System.out.println("Movie not found!");
                     }
                     break;
@@ -196,7 +196,7 @@ public class customerApp {
                 //search
                     System.out.println("Please enter the movie name:");
                     strinput = scan.nextLine();
-                    if(CustomerMovieManager.searchMovie(movieList, reviewList, strinput, true) == 0){
+                    if(CustomerMovieManager.searchMovie(movieList, reviewList, strinput) == 0){
                         System.out.println("Movie not found!");
                     }
                     break;

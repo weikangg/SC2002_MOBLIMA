@@ -7,6 +7,7 @@ import entities.*;
 import static utils.IOUtils.*;
 import java.util.Scanner;
 import static managers.MovieListManager.*;
+import static managers.ReviewListManager.*;
 
 public class StaffRemoveMovieManager {
     private static Scanner sc = new Scanner(System.in);
@@ -40,8 +41,8 @@ public class StaffRemoveMovieManager {
         return 0;
     }
 
-    // Remove movie from database entirely
-    public static int removeMovieFromDatabase(List<Movie> mList){
+    // Remove movie from database entirely, if a movie is removed from the database, all reviews regarding it are deleted as well.
+    public static int removeMovieFromDatabase(List<Movie> mList, List<Review> rList){
         System.out.println("#########################################################");
 		System.out.println("#################### REMOVING MOVIES ####################");
 		System.out.println("#########################################################");
@@ -49,6 +50,7 @@ public class StaffRemoveMovieManager {
 
         String title;
         List<Movie>newList = new ArrayList<Movie>();
+        List<Review>newList2 = new ArrayList<Review>();
         System.out.println("Enter Movie Title: ");
         title = sc.next();
         
@@ -85,7 +87,18 @@ public class StaffRemoveMovieManager {
                     newList.add(newMovie);
                 }
             }
-            if(updateMovieListCSV(newList)){
+            for(Review r: rList){
+                if(!r.getMovieTitle().equals(title)){
+                    int reviewID = r.getReviewID();
+                    String movieTitle = r.getMovieTitle();
+                    String reviewer = r.getReviewer();
+                    String reviewDescription = r.getDescription();
+                    double ratingScore = r.getRatingScore();
+                    Review newReview = new Review(reviewID,movieTitle,reviewer,reviewDescription,ratingScore);
+                    newList2.add(newReview);
+                }
+            }
+            if(updateMovieListCSV(newList) && updateReviewInCSV(newList2)){
                 return 1;
             }
             else{
