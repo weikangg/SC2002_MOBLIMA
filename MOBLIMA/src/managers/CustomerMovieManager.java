@@ -55,7 +55,7 @@ public class CustomerMovieManager {
 				//double profitEarned = m.getProfitEarned();
 				//BigDecimal bd = new BigDecimal(profitEarned);
 				//System.out.println("Profit Earned: " + bd.toPlainString());
-				System.out.println("Overall Rating Score: " + m.getOverallRatingScore());
+				System.out.printf("Overall Rating Score: %.2f/5\n" , m.getOverallRatingScore() );
 				System.out.println("Release Date: " + m.getReleaseDate().toString());
 				System.out.println("Movie Type: " + m.getMovieType());
 				System.out.println("");
@@ -100,7 +100,7 @@ public class CustomerMovieManager {
 					System.out.println("Genres: "+ genre);
 					System.out.println("Movie Rating: " + m.getMovieRating());
 					System.out.println("Movie Duration: " + m.getMovieDuration());
-					System.out.println("Overall Rating Score: " + m.getOverallRatingScore());
+					System.out.printf("Overall Rating Score: %.2f/5\n", m.getOverallRatingScore());
 					System.out.println("Release Date: " + m.getReleaseDate().toString());
 					System.out.println("Movie Type: " + m.getMovieType());
 					System.out.println("");

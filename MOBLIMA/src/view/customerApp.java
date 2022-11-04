@@ -135,7 +135,7 @@ public class customerApp {
                     break;
                 case 6:
                     System.out.println("Exiting customer interface...");
-                    mainApp2.main(null);
+                    mainApp.main(null);
                     break;
                 
                 default:
@@ -246,7 +246,7 @@ public class customerApp {
                     break;
                 case 6:
                     System.out.println("Exiting customer interface...");
-                    mainApp2.main(null);
+                    mainApp.main(null);
                     break;
                 
                 default:

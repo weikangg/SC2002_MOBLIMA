@@ -50,7 +50,7 @@ public class StaffPrintMovieManager {
 				double profitEarned = m.getProfitEarned();
 				BigDecimal bd = new BigDecimal(profitEarned);
 				System.out.println("Profit Earned: " + bd.toPlainString());
-				System.out.println("Overall Rating Score: " + m.getOverallRatingScore());
+				System.out.printf("Overall Rating Score: %.2f/5\n", m.getOverallRatingScore());
 				System.out.println("Release Date: " + m.getReleaseDate().toString());
 				System.out.println("Movie Type: " + m.getMovieType());
 				movieCount++;
@@ -106,7 +106,7 @@ public class StaffPrintMovieManager {
 				double profitEarned = m.getProfitEarned();
 				BigDecimal bd = new BigDecimal(profitEarned);
 				System.out.println("Profit Earned: " + bd.toPlainString());
-				System.out.println("Overall Rating Score: " + m.getOverallRatingScore());
+				System.out.printf("Overall Rating Score: %.2f/5\n", m.getOverallRatingScore());
 				System.out.println("Release Date: " + m.getReleaseDate().toString());
 				System.out.println("Movie Type: " + m.getMovieType());
 				System.out.println("");

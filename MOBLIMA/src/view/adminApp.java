@@ -212,7 +212,7 @@ public class adminApp {
                         break;
                     case 7: 
                         System.out.println("Logging out from StaffApp, have a nice day!");
-                        mainApp2.main(null);
+                        mainApp.main(null);
                         break;
                     
                     default:
