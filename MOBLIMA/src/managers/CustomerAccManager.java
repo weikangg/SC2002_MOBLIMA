@@ -3,7 +3,7 @@ package managers;
 import java.util.Scanner;
 
 import entities.CustomerAcc;
-
+import managers.PasswordStrengthChecker;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -60,7 +60,8 @@ public class CustomerAccManager {
         String email;
         int mobile;
         int age;
-		String password;
+		String password="";
+        String pwStrength="Weak";
         Scanner scan = new Scanner(System.in);
         List<CustomerAcc> customers = CustomerAccManager.getCustomerList();
 
@@ -97,8 +98,17 @@ public class CustomerAccManager {
             }
         }
 
-		System.out.println("Enter password:");
-		password = scan.nextLine();
+        while (pwStrength!="Strong"){
+		    System.out.println("Enter password:");
+		    password = scan.nextLine();
+            pwStrength=PasswordStrengthChecker.passwordStrength(password);
+            if (pwStrength=="Weak" || pwStrength=="Medium"){
+                System.out.println("Your password strength is " + pwStrength);
+                System.out.println("Please enter a stronger password: ");
+                System.out.println("Length must be at least 8 characters,inclusive of 1 special character,1 uppercase, 1 lowercase and 1 digit.");
+            }
+        }
+
         String accessLevel = "C";
         CustomerAcc acc = new CustomerAcc(name, email, mobile, age, password,accessLevel);
 	    customers.add(acc);
