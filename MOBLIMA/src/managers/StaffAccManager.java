@@ -3,6 +3,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 import entities.*;
+import utils.PasswordStrengthChecker;
+
 import static utils.IOUtils.*;
 
 public class StaffAccManager {
@@ -37,7 +39,8 @@ public class StaffAccManager {
         String email;
         int mobile;
         int age;
-		String password;
+		String password="";
+        String pwStrength="";
         while(true){
             System.out.println("Enter username: ");
             name = scan.nextLine();
@@ -78,8 +81,16 @@ public class StaffAccManager {
             }
         }
 
-		System.out.println("Enter password:");
-		password = scan.nextLine();
+        while (pwStrength!="Strong"){
+		    System.out.println("Enter password:");
+            System.out.println("(Length must be at least 8 characters,inclusive of 1 special character (!@#$%^&*),1 uppercase, 1 lowercase and 1 digit)");
+		    password = scan.nextLine();
+            pwStrength=PasswordStrengthChecker.passwordStrength(password);
+            if (pwStrength=="Weak" || pwStrength=="Medium"){
+                System.out.println("Password Strength: " + pwStrength);
+                System.out.println("Please enter a stronger password. ");
+            }
+        }
         String accessLevel = "A";
         StaffAcc acc = new StaffAcc(name, email, mobile, age, password,accessLevel);
         accountList.add(acc);

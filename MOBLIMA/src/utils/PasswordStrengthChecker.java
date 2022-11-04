@@ -1,4 +1,4 @@
-package managers;
+package utils;
 
 public class PasswordStrengthChecker {
     
@@ -16,12 +16,13 @@ public class PasswordStrengthChecker {
             if (Character.isDigit(password[i])){
                 hasDigit=true;
             }
-            if (password[i]=='$'||password[i]=='!'||password[i]=='#'||password[i]=='*'||password[i]=='%'||password[i]=='@'||password[i]=='^'||password[i]=='('||password[i]==')'){
+            if (password[i]=='$'||password[i]=='!'||password[i]=='#'||password[i]=='*'||password[i]=='%'||password[i]=='@'||password[i]=='^'){
                 hasSpecChar=true;
             }
         }
         
         if (hasDigit && hasLower && hasUpper && hasSpecChar && (pwlen>=8)){
+            System.out.println("Password Strength: Strong");
             return "Strong";
         }
 

@@ -4,7 +4,8 @@ import java.util.Scanner;
 
 import entities.Account;
 import entities.CustomerAcc;
-import managers.PasswordStrengthChecker;
+import utils.PasswordStrengthChecker;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -111,12 +112,12 @@ public class CustomerAccManager {
 
         while (pwStrength!="Strong"){
 		    System.out.println("Enter password:");
+            System.out.println("(Length must be at least 8 characters,inclusive of 1 special character (!@#$%^&*),1 uppercase, 1 lowercase and 1 digit)");
 		    password = scan.nextLine();
             pwStrength=PasswordStrengthChecker.passwordStrength(password);
             if (pwStrength=="Weak" || pwStrength=="Medium"){
-                System.out.println("Your password strength is " + pwStrength);
-                System.out.println("Please enter a stronger password: ");
-                System.out.println("Length must be at least 8 characters,inclusive of 1 special character,1 uppercase, 1 lowercase and 1 digit.");
+                System.out.println("Password Strength: " + pwStrength);
+                System.out.println("Please enter a stronger password. ");
             }
         }
 
