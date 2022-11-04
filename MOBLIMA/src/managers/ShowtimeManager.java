@@ -1,13 +1,8 @@
 package managers;
+
 import java.util.*;
-
-import javax.swing.text.AbstractDocument.BranchElement;
-
-import entities.Cineplex;
-import entities.MovieType;
-import entities.Cinema;
-import entities.Showtime;
-import managers.MovieListManager;
+import entities.*;
+import view.adminApp;
 
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
@@ -25,7 +20,7 @@ public class ShowtimeManager {
 
     private ShowtimeManager() {}
 
-    public void staffMenu(int choice){
+    public void staffMenu(int choice,Account account){
         
         int option = 0;
         try{
@@ -35,20 +30,20 @@ public class ShowtimeManager {
                                 " 2. Add a Showtime                                             \n" + 
 			            		" 3. Update a Showtime                                          \n" +
 			                    " 4. Remove a Showtime                                          \n" +
-			                    " 5. Back to ShowtimeManager                                    \n"+
+			                    " 5. Go Back                                                    \n"+
                                 "==============================================================");
                 System.out.print("Enter choice: ");
                 option = sc.nextInt();
 
                 if(!(option >= 1 && option <=5)){
                     System.out.println("Please only enter a number from 1-5.");
-                    staffMenu(0);
+                    staffMenu(0,account);
                 }
             }
         }
         catch(InputMismatchException e){
             System.out.println("Invalid Input.");
-            staffMenu(0);
+            staffMenu(0,account);
         }
 
         Cinema cinema;
@@ -130,6 +125,7 @@ public class ShowtimeManager {
                 break;
             case 5:
                 System.out.println("Back to Staff App......");
+                adminApp.getInstance().displayLoggedInMenu(account);
                 break;
             default:
                 System.out.println("Invalid choice. Please choose between 1-5.");

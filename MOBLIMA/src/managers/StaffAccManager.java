@@ -41,7 +41,6 @@ public class StaffAccManager {
         int age;
 		String password="";
         String pwStrength="";
-        scan.nextLine();
         while(true){
             System.out.println("Enter username: ");
             name = scan.nextLine();

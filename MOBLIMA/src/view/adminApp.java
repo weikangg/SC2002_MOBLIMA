@@ -185,16 +185,16 @@ public class adminApp {
                 }
                 switch(choice){
                     case 1:
-                        MovieManager.getInstance().staffMenu(0);
+                        MovieManager.getInstance().staffMenu(0,account);
                         break;
                     case 2:
                         // Hide from viewer?
                         break;
                     case 3:
-                        ShowtimeManager.getInstance().staffMenu(0);
+                        ShowtimeManager.getInstance().staffMenu(0,account);
                         break;
                     case 4:
-                        SystemSettingsManager.getInstance().staffMenu(0);
+                        SystemSettingsManager.getInstance().staffMenu(0,account);
                         break;
                     case 5:
                         if(account.getAccessLevel().equals("SA")){

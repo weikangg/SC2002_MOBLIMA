@@ -1,7 +1,5 @@
 package managers;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.*;
 import view.adminApp;
 import entities.*;
@@ -21,7 +19,7 @@ public class MovieManager {
     private MovieManager(){
     }
 
-    public void staffMenu(int choice){
+    public void staffMenu(int choice,Account account){
         int option = 0;
         try{
             if(choice == 0){
@@ -40,14 +38,14 @@ public class MovieManager {
                 if(!(option >= 1 && option <=8)){
                     System.out.println("Please only enter a number from 1-8.");
                     sc.nextLine();
-                    staffMenu(0);
+                    staffMenu(0, account);
                 }
             }
         }
         catch(InputMismatchException e){
             System.out.println("Invalid Input. Please input a number from 1-8 only!");
             sc.nextLine();
-            staffMenu(0);
+            staffMenu(0, account);
         }
         sc.nextLine();
         List<Movie>movieList = MovieListManager.getInstance().getMovieList();
@@ -122,25 +120,13 @@ public class MovieManager {
             
             case 8:
                 System.out.println("Back to StaffApp......");
-                adminApp a = adminApp.getInstance();
-                try{
-                    Method m = adminApp.class.getDeclaredMethod("displayLoggedInMenu");
-                    m.setAccessible(true);
-                    m.invoke(a);
-                }catch(NoSuchMethodException e){
-                    System.out.println("No such menu!");
-                }catch(InvocationTargetException e){
-                    System.out.println("Invocation error!");
-                }catch(Exception e){
-                    System.out.println("Error!");
-                }
-                break;
+                adminApp.getInstance().displayLoggedInMenu(account);
             default:
                 System.out.println("Invalid choice. Please enter a number between 1-8.");
                 break;
         }
 
-        staffMenu(0);
+        staffMenu(0, account);
     }
 
 }

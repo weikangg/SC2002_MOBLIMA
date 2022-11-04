@@ -1,11 +1,9 @@
 package managers;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.*;
 
-import entities.Holidays;
+import entities.*;
 import view.adminApp;
 
 import static utils.IOUtils.*;
@@ -25,7 +23,7 @@ public class SystemSettingsManager {
     static String path = System.getProperty("user.dir") +"\\data\\staffs\\staffsSettings.csv";
     static String separator = ",";
 
-    public void staffMenu(int choice){
+    public void staffMenu(int choice,Account account){
         int option = 0;
         
         try{
@@ -35,57 +33,45 @@ public class SystemSettingsManager {
                                 " 2. Configure Top 5 Rankings                                          \n" + 
 			            		" 3. Configure Holidays                                                \n" +
                                 " 4. Configure Rating Score Limit for Movies                           \n" +
-			                    " 5. Back to MOBLIMA Staff App                                         \n" +
+			                    " 5. Back to Staff App                                                 \n" +
                                 "=======================================================================");
                 System.out.println("Enter choice: ");
                 option = sc.nextInt();
                 if(!(option >= 1 && option <=5)){
                     System.out.println("Please only enter a number from 1-5.");
-                    staffMenu(0);
+                    staffMenu(0, account);
                 }
             }
         }
         catch(InputMismatchException e){
             System.out.println("Invalid Input.");
             sc.nextLine();
-            staffMenu(0);
+            staffMenu(0, account);
         }
         switch (option) {
             case 1:
                 break;
             case 2:
-                configureTop5();
+                configureTop5(account);
                 break;
             case 3:
-                configureHolidays();
+                configureHolidays(account);
                 break;
             case 4:
-                configureRatingScoreLimit();
+                configureRatingScoreLimit(account);
                 break;
             case 5:
                 System.out.println("Back to Staff App......");
                 sc.nextLine();
-                adminApp a = adminApp.getInstance();
-                try{
-                    Method m = adminApp.class.getDeclaredMethod("displayLoggedInMenu");
-                    m.setAccessible(true);
-                    m.invoke(a);
-                }catch(NoSuchMethodException e){
-                    System.out.println("No such menu!");
-                }catch(InvocationTargetException e){
-                    System.out.println("Invocation error!");
-                }catch(Exception e){
-                    System.out.println("Error!");
-                }
-                break;
+                adminApp.getInstance().displayLoggedInMenu(account);
 
             default:
                 System.out.println("Invalid choice. Please choose between 1-4.");
-                break;
+                staffMenu(0,account);
         }
     }
 
-    public void configureRatingScoreLimit(){
+    public void configureRatingScoreLimit(Account account){
         System.out.println("###########################################################");
 		System.out.println("############## CONFIGURING DISPLAY OF RATINGS #############");
 		System.out.println("###########################################################");
@@ -135,7 +121,7 @@ public class SystemSettingsManager {
                     break;
                 case 2:
                     System.out.println("Back to System Settings......");
-                    this.staffMenu(0);
+                    this.staffMenu(0, account);
                 default:
                     System.out.println("Invalid choice. Please choose between 1 or 2 only.");
                     continue;
@@ -144,7 +130,7 @@ public class SystemSettingsManager {
         }
     }
 
-    public void configureTop5(){
+    public void configureTop5(Account account){
         System.out.println("###########################################################");
 		System.out.println("#################### CONFIGURING TOP 5 ####################");
 		System.out.println("###########################################################");
@@ -206,7 +192,7 @@ public class SystemSettingsManager {
                     break;
                 case 2:
                     System.out.println("Back to System Settings......");
-                    this.staffMenu(0);
+                    this.staffMenu(0, account);
                 default:
                     System.out.println("Invalid choice. Please choose between 1 or 2 only.");
                     continue;
@@ -217,7 +203,7 @@ public class SystemSettingsManager {
     }
 
 
-    public void configureHolidays(){
+    public void configureHolidays(Account account){
         
         System.out.println("###########################################################");
 		System.out.println("################## CONFIGURING HOLIDAYS ###################");
@@ -262,7 +248,8 @@ public class SystemSettingsManager {
                     }
                     break;
                 case 4:
-                    System.out.println("Back to Staff App......");
+                    System.out.println("Back to Systems Settings......");
+                    this.staffMenu(0,account);
                     break;
                 default:
                     System.out.println("Invalid choice. Please choose between 1-5.");
@@ -270,7 +257,7 @@ public class SystemSettingsManager {
             }
             break;
         }
-        staffMenu(0);
+        staffMenu(0,account);
     }
 
     public static boolean updateSystemSettingsCSV(SystemSettings systemSettings){
