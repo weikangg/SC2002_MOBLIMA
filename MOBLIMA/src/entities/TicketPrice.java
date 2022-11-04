@@ -16,7 +16,7 @@ public class TicketPrice implements Serializable{
 	 */
 	public TicketPrice()
 	{
-		this.price = new Double[]{8.50,9.50,9.50,11.0,11.0,4.0,7.0};
+		this.price = new Double[]{8.50,9.50,9.50,11.0,11.0,4.0,7.0,12.0};
 		this.mtPrice = new Double[]{1.00,1.29,1.45,1.50};
 		int x = 0;
 		for(TicketType type: TicketType.values())

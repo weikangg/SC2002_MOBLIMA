@@ -3,9 +3,12 @@ package managers;
 
 import java.time.LocalDateTime;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.temporal.ChronoField;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.List;
+
 import entities.Showtime;
 import entities.TicketPrice;
 import entities.Ticket;
@@ -19,6 +22,8 @@ public class TicketManager {
     private ArrayList<String> cS;
     private Showtime showtime;
     private TicketPrice tp = new TicketPrice();
+    private ArrayList<LocalDate> hlList;
+    private List<Holidays> holiDates;
 	
 	public static TicketManager newTM()
 	{
@@ -31,6 +36,10 @@ public class TicketManager {
 	
 	public void ticketMenu(Showtime showtime, ArrayList<String> confirmedSeats, int[][] plan)
 	{
+        setH(HolidayListManager.getInstance().getHolidayList());
+        ArrayList<LocalDate> holidayLD = new ArrayList<LocalDate>();
+        setHList(holidayLD);
+        setHolidayDates();
         Boolean noQuit = true;
         setShowtime(showtime);
         setCS(confirmedSeats);
@@ -40,7 +49,7 @@ public class TicketManager {
             System.out.println(
                 "====================Confirm Purchase of Tickets====================\n"
             );
-            for(int i = 0; i<confirmedSeats.size();i++)
+            for(int i = 0; i<getCSArray().size();i++)
             {
                 String rowcol = confirmedSeats.get(i);
                 String[] tokens = rowcol.split("/");
@@ -74,13 +83,13 @@ public class TicketManager {
                     //Choose ticket to remove -> update arraylist -> check if empty
                     System.out.println("Enter ticket number to remove: ");
                     int ticketNo = sc.nextInt();
-                    if(ticketNo>confirmedSeats.size())
+                    if(ticketNo>getCSArray().size())
                     {
                         System.out.println("Enter a valid ticket number");
                         ticketNo = sc.nextInt();
     
                     }
-                    deleteTicket(ticketNo, confirmedSeats, plan);
+                    deleteTicket(ticketNo, plan);
                     break;
                 case 3:
                     deleteTicketM();
@@ -92,7 +101,7 @@ public class TicketManager {
         }
     }
 
-    public void deleteTicket(int index, ArrayList<String> confirmedSeats, int[][] plan)
+    public void deleteTicket(int index, int[][] plan)
     {
         getCSArray().remove(index-1);
         String rowcol = getCS(index-1);
@@ -146,7 +155,7 @@ public class TicketManager {
             int row = Integer.parseInt(tokens[0]);
             int col = Integer.parseInt(tokens[1]);
             TicketType newTT = getTicketType();
-            Ticket newTicket = new Ticket(getShowtime().getDateTimeLDT(), getShowtime().getMovieType(),newTT,row,col,calcTicketPrice(newTT));
+            Ticket newTicket = new Ticket(getShowtime().getDateTime(), getShowtime().getMovieType(),newTT,row,col,calcTicketPrice(newTT));
             addToTicketArray(newTicket);
         }
 
@@ -190,6 +199,10 @@ public class TicketManager {
     }
     public TicketType getTicketType()
     {
+        if(isHoliday())
+        {
+            return TicketType.HOLIDAY;
+        }
         System.out.println(
             "Choose Ticket Type:" +
             "1. Normal" +
@@ -202,7 +215,7 @@ public class TicketManager {
             System.out.println("Enter valid option");
             tt = sc.nextInt();
         }
-        LocalDateTime time = getShowtime().getDateTimeLDT();
+        LocalDateTime time = getShowtime().getDateTime();
         DayOfWeek day = DayOfWeek.of(time.get(ChronoField.DAY_OF_WEEK));
         if(day == DayOfWeek.SUNDAY || day==DayOfWeek.SATURDAY)
         {
@@ -251,5 +264,46 @@ public class TicketManager {
         ticketList.clear();
         cS.clear();
         showtime = null;
+    }
+
+    public void setHList(ArrayList<LocalDate>HList)
+    {
+        this.hlList = HList;
+    }
+
+    public ArrayList<LocalDate> getHList()
+    {
+        return this.hlList;
+    }
+
+
+    public void setH(List<Holidays>HList)
+    {
+        this.holiDates = HList;
+    }
+
+    public List<Holidays> getH()
+    {
+        return this.holiDates;
+    }
+
+
+    public void setHolidayDates()
+    {
+        for(Holidays h : getH())
+        {
+            getHList().add(h.getHolidayDate());
+        }
+    }
+
+    public Boolean isHoliday()
+    {
+        LocalDate lDate = getShowtime().getDateTime().toLocalDate();
+        for(LocalDate ld : getHList())
+        {
+            if(lDate.isEqual(ld))
+                return true;
+        }
+        return false;
     }
 }

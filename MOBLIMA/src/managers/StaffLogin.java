@@ -21,7 +21,7 @@ public class StaffLogin {
         try{
             String line = "";
 
-            Path path = Paths.get("data\\staffs\\staffsAccount.csv");
+            Path path = Paths.get(System.getProperty("user.dir")+"\\data\\staffs\\staffsAccount.csv");
             // System.out.println(path.toAbsolutePath().toString());
 
             BufferedReader br = new BufferedReader(new FileReader(path.toAbsolutePath().toString()));

@@ -177,26 +177,49 @@ public class customerApp {
                 case 1:
                 //book ticket
                 int cineplex;
+                int idx = 1;
+                Showtime movst;
                 String name;
                 List<Movie> movieList = MovieListManager.getInstance().getMovieList();
                 List<Review> reviewList = ReviewListManager.getInstance().getReviewList();
+                List<Showtime> showtime;
 
                 //ask user for cineplex
                 System.out.println("Please choose a Cineplex:");
                 cineplex = scan.nextInt();
+                scan.nextLine();
                 
                 //ask user for movie
-                System.out.println("Please choose a movie:");
                 CustomerMovieManager.printMovieList(movieList, reviewList);
+                System.out.println("Please choose a movie:");
                 name = scan.nextLine();
+                
 
                 //link the movie to showtime
-
+                showtime = CustomerShowtime.searchMovieID(name);
+                if(showtime.isEmpty())
+                {
+                    break;
+                }
+                
                 //show user movie timing
-
+                for(Showtime st: showtime)
+                {
+                    System.out.println(idx + ". " + st.getDateTime());
+                    idx++;
+                }
                 //ask user to choose a movie timing
+                System.out.println("Please choose a timing:");
+                input = scan.nextInt();
+                movst = showtime.get(input - 1);
 
+                //debug
+                System.out.println(movst.getMovieID());
+                System.out.println(movst.getMovieTitle());
+    
                 //call bookingmenu in booking manager
+                BookingManager.newBM().bookingMenu(movst);
+                break;
 
                 case 2:
                 //show booking history

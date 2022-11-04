@@ -41,7 +41,7 @@ public class Showtime extends Cinema{
         
         try {
             
-            Path path = Paths.get("data\\cineplexes\\"+name+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+getShowtimeID()+".csv");
+            Path path = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes\\"+name+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+getShowtimeID()+".csv");
             // System.out.println(path.toAbsolutePath().toString());
 
             FileReader filereader = new FileReader(path.toAbsolutePath().toString()); //CSVReader Instantiation
@@ -170,13 +170,20 @@ public class Showtime extends Cinema{
      */
     public void showSeats(){
 
+        System.out.println("      Screen");
+
         for (int i = 0; i < 5; i++){
+
+            System.out.print((char)(i+65)+"  ");
+
             for(int j = 0; j < 10; j++){
+
+                if(j == 5) System.out.print("  ");
 
                 System.out.print(seats[i][j]);
 
             }
-            System.out.println("");
+            System.out.println("  "+(char)(i+65));
         }
 
     }
@@ -185,7 +192,7 @@ public class Showtime extends Cinema{
 
         try {
 
-            Path path = Paths.get("data\\cineplexes\\"+getName()+ "\\hall"+Integer.toString(getCinemaID()+1)+ "\\"+getShowtimeID()+".csv");
+            Path path = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes\\"+getName()+ "\\hall"+Integer.toString(getCinemaID()+1)+ "\\"+getShowtimeID()+".csv");
             // System.out.println(path.toAbsolutePath().toString());
 
             FileWriter filewriter = new FileWriter(path.toAbsolutePath().toString()); //CSVReader Instantiation
