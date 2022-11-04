@@ -3,6 +3,8 @@ import java.util.*;
 import entities.Transaction;
 import entities.Ticket;
 import entities.Showtime;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;  
 import java.time.format.DateTimeFormatter;
 
@@ -72,11 +74,12 @@ public class TransactionManager
                 switch (option) 
                 {
                     case 1: //Make payment
-                        double totalPrice = getTotalPrice();
-                        System.out.println("Total payment will be $" + totalPrice);
+                        setTotalPrice();
+                        System.out.println("Total payment will be $" + getTotalPrice());
                         BookingManager.newBM().createBooking();
                         break;
                     case 2: //Apply vouchers
+                        usePromo();
                         break;
                     case 3:
                         System.out.println("Back to Ticketing Page......");
@@ -102,6 +105,7 @@ public class TransactionManager
         getTransaction().setMovieName(moviename);
         getTransaction().setTranDateTime(dateportion);
         getTransaction().setTicketList(getTList());
+        getTransaction().setTotalPrice(getTotalPrice());
     }
 
 
@@ -169,4 +173,5 @@ public class TransactionManager
         totalPrice = 0;
         isPromo = false;
     }
+
 }
