@@ -18,11 +18,11 @@ public class customerApp {
         }
         return newInstance;
     }
-
+    static AccountManager accountManager = AccountManager.getInstance();
     Scanner scan = new Scanner(System.in);
 
     public void customerGuestMenu(){
-        AccountManager accountManager = AccountManager.getInstance();
+
         List<Movie> movieList = MovieListManager.getInstance().getMovieList();
         List<Review> reviewList = ReviewListManager.getInstance().getReviewList();
         boolean exit = false;
@@ -74,7 +74,7 @@ public class customerApp {
 
                 case 2:
                     //ask user for information to create account
-                    CustomerAccManager.createAcc();
+                    CustomerAccManager.createAcc(accountManager.getAccountList());
                     break;
 
                 case 3:
@@ -185,7 +185,7 @@ public class customerApp {
 
                 case 2:
                     //ask user for information to create account
-                    CustomerAccManager.createAcc();
+                    CustomerAccManager.createAcc(accountManager.getAccountList());
                     break;
 
                 case 3:

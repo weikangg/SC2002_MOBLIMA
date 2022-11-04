@@ -2,6 +2,7 @@ package managers;
 
 import java.util.Scanner;
 
+import entities.Account;
 import entities.CustomerAcc;
 import managers.PasswordStrengthChecker;
 import java.util.List;
@@ -17,7 +18,7 @@ public class CustomerAccManager {
     
     static String path = System.getProperty("user.dir") +"\\data\\accounts\\accounts.csv";
     static String item_Separator = ",";	
-
+    static AccountManager accountManager = AccountManager.getInstance();
     Scanner scan = new Scanner(System.in);
 
     /*public ArrayList<CustomerAcc> readCustomerFile(){
@@ -25,37 +26,37 @@ public class CustomerAccManager {
 
     }*/
 
-    public static List<CustomerAcc> getCustomerList(){
-        List<CustomerAcc>customers = new ArrayList<>();
-    	BufferedReader br = null;
-		String line = "";
-		CustomerAcc custemp;
-		try {
-			br = new BufferedReader(new FileReader(path));
-			while((line = br.readLine()) !=null ) {
-				String[] custcsv = line.split(item_Separator);
-				if(!custcsv[0].equals("USERNAME")) {
-                    int customerMobile = Integer.parseInt(custcsv[2]);
-                    int customerAge = Integer.parseInt(custcsv[3]);
-					custemp = new CustomerAcc(custcsv[0],custcsv[1],customerMobile,customerAge,custcsv[4],custcsv[5]);
-					customers.add(custemp);
-				}
-			}
-			br.close();
-		}
-        catch(NumberFormatException e){
-            System.out.println("Check age and mobile are numbers in database!");
-        }
-		catch(ArrayIndexOutOfBoundsException e){
-			return customers;
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		return customers;
-    }
+    // public static List<CustomerAcc> getCustomerList(){
+    //     List<CustomerAcc>customers = new ArrayList<>();
+    // 	BufferedReader br = null;
+	// 	String line = "";
+	// 	CustomerAcc custemp;
+	// 	try {
+	// 		br = new BufferedReader(new FileReader(path));
+	// 		while((line = br.readLine()) !=null ) {
+	// 			String[] custcsv = line.split(item_Separator);
+	// 			if(!custcsv[0].equals("USERNAME")) {
+    //                 int customerMobile = Integer.parseInt(custcsv[2]);
+    //                 int customerAge = Integer.parseInt(custcsv[3]);
+	// 				custemp = new CustomerAcc(custcsv[0],custcsv[1],customerMobile,customerAge,custcsv[4],custcsv[5]);
+	// 				customers.add(custemp);
+	// 			}
+	// 		}
+	// 		br.close();
+	// 	}
+    //     catch(NumberFormatException e){
+    //         System.out.println("Check age and mobile are numbers in database!");
+    //     }
+	// 	catch(ArrayIndexOutOfBoundsException e){
+	// 		return customers;
+	// 	}
+	// 	catch (IOException e) {
+	// 		e.printStackTrace();
+	// 	}
+	// 	return customers;
+    // }
 
-    public static CustomerAcc createAcc(){
+    public static CustomerAcc createAcc(List<Account>accountList){
         String name;
         String email;
         int mobile;
@@ -63,12 +64,22 @@ public class CustomerAccManager {
 		String password="";
         String pwStrength="Weak";
         Scanner scan = new Scanner(System.in);
-        List<CustomerAcc> customers = CustomerAccManager.getCustomerList();
+
 
         //ask for user information and use try to check if name or email or mobile exists
         //to add exceptions
-        System.out.println("Enter username: ");
-        name = scan.nextLine();
+        while(true){
+            System.out.println("Enter username: ");
+            name = scan.nextLine();
+            if(accountManager.checkAccountExists(accountList, name)){
+                System.out.println("Account already exists! Try another username!");
+                continue;
+            }
+            else{
+                break;
+            }
+        }
+
          
         System.out.println("Enter your email:");
         email = scan.nextLine();
@@ -111,7 +122,7 @@ public class CustomerAccManager {
 
         String accessLevel = "C";
         CustomerAcc acc = new CustomerAcc(name, email, mobile, age, password,accessLevel);
-	    customers.add(acc);
+	    accountList.add(acc);
 	    
 
 		String separator = ",";
@@ -129,23 +140,22 @@ public class CustomerAccManager {
             csvWriter.append(separator);
 			csvWriter.append("ACCESS_LEVEL");
 			csvWriter.append("\n");
-            for (CustomerAcc cust : customers){
+            for (Account a : accountList){
                 StringBuilder sb = new StringBuilder();
-			    sb.append(cust.getUsername());
+			    sb.append(a.getUsername());
 			    sb.append(separator);
-			    sb.append(cust.getEmail());
+			    sb.append(a.getEmail());
 			    sb.append(separator);
-			    sb.append(cust.getMobile());
+			    sb.append(a.getMobile());
 			    sb.append(separator);
-			    sb.append(cust.getAge());
+			    sb.append(a.getAge());
 			    sb.append(separator);
-				sb.append(cust.getPassword());
+				sb.append(a.getPassword());
                 sb.append(separator);
-				sb.append(cust.getAccessLevel());
+				sb.append(a.getAccessLevel());
 			    sb.append('\n');
 			    csvWriter.append(sb.toString());
             }
-			
 			csvWriter.flush();
 			csvWriter.close();
 			//return true;
