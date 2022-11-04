@@ -71,8 +71,6 @@ public class AccountManager {
             }
             // IF NO MATCH
             br.close();
-            System.out.println("User not found!");
-            System.out.println("Create a new account?");
             return false;
         }catch(FileNotFoundException e){
             System.out.println("Cannot find input file!");
@@ -99,5 +97,14 @@ public class AccountManager {
             }
         }
         return null;        
+    }
+
+    public boolean checkAccountExists(List<Account>accountList, String username){
+        for(Account a: accountList){
+            if(a.getUsername().equalsIgnoreCase(username)){
+                return true;
+            }
+        }
+        return false;
     }
 }

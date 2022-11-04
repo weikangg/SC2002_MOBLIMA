@@ -98,6 +98,7 @@ public class mainApp {
                     }
                     else{
                         System.out.println("Incorrect Username/Password! Try again!");
+                        System.out.println("Create a new account by going into Guest Menu?");
                         continue;
                     }
             case 2:
