@@ -119,6 +119,7 @@ public class CustomerAccManager {
                 System.out.println("Password Strength: " + pwStrength);
                 System.out.println("Please enter a stronger password. ");
             }
+            else{System.out.println("Password Strength: " + pwStrength);}
         }
 
         String accessLevel = "C";

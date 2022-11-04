@@ -90,7 +90,9 @@ public class StaffAccManager {
                 System.out.println("Password Strength: " + pwStrength);
                 System.out.println("Please enter a stronger password. ");
             }
+            else{System.out.println("Password Strength: " + pwStrength);}
         }
+
         String accessLevel = "A";
         StaffAcc acc = new StaffAcc(name, email, mobile, age, password,accessLevel);
         accountList.add(acc);

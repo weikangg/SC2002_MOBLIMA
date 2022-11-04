@@ -22,7 +22,6 @@ public class PasswordStrengthChecker {
         }
         
         if (hasDigit && hasLower && hasUpper && hasSpecChar && (pwlen>=8)){
-            System.out.println("Password Strength: Strong");
             return "Strong";
         }
 
