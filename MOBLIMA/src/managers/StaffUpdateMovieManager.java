@@ -58,7 +58,7 @@ public class StaffUpdateMovieManager {
                 option = sc.nextInt();
                 sc.nextLine();
             }catch(InputMismatchException e){
-                System.out.println("Please only enter a number from 1-13 only!");
+                System.out.println("Please only enter a number from 1-14 only!");
                 sc.nextLine();
                 continue;
             }
@@ -75,24 +75,39 @@ public class StaffUpdateMovieManager {
                         for(Movie m:movieList){
                             if(m.getMovieTitle().equalsIgnoreCase(newTitle)){
                                 m.setMovieTitle(title);
+                                break;
                             }
                         }
-                        sc.nextLine();
+
                     }
                     else{
-                        sc.nextLine();
                         return 2;
                     }
                     break;
                 case 2:
                     ShowingStatus status = null;
                     if(confirm("Confirm Update Showing Status")){
-                        System.out.println("Choose Movie Status");
-                        System.out.println("1: COMING_SOON");
-                        System.out.println("2: PREVIEW");
-                        System.out.println("3: NOW_SHOWING");
-                        System.out.println("4: FINISHED_SHOWING");
-                        int choice = sc.nextInt();
+                        int choice;
+                        while(true){
+                            System.out.println("Choose Movie Status");
+                            System.out.println("1: COMING_SOON");
+                            System.out.println("2: PREVIEW");
+                            System.out.println("3: NOW_SHOWING");
+                            System.out.println("4: FINISHED_SHOWING");
+                            try{
+                                choice = sc.nextInt();
+                                sc.nextLine();
+                                if(choice < 1 || choice > 4){
+                                    System.out.println("Please only input values from 1-4 only.");
+                                    continue;
+                                }
+                                break;
+                            }catch(InputMismatchException e){
+                                System.out.println("Please only input values from 1-4 only");
+                                sc.nextLine();
+                                continue;
+                            }
+                        }
                         switch (choice) {
                             case 1: {
                                 status = ShowingStatus.COMING_SOON;
@@ -114,15 +129,14 @@ public class StaffUpdateMovieManager {
                                 System.out.println("Error Input! Please only input values from 1-4.\n");
                                 continue;
                         }    
-                        sc.nextLine();
                         for(Movie m:movieList){
                             if(m.getMovieTitle().equalsIgnoreCase(newTitle)){
                                 m.setShowingStatus(status);
+                                break;
                             }
                         }
                     }
                     else{
-                        sc.nextLine();
                         return 2;
                     }
                     break;
@@ -133,12 +147,11 @@ public class StaffUpdateMovieManager {
                         for(Movie m:movieList){
                             if(m.getMovieTitle().equalsIgnoreCase(newTitle)){
                                 m.setSynopsis(synopsis);
+                                break;
                             }
                         }
-                        sc.nextLine();
                     }
                     else{
-                        sc.nextLine();
                         return 2;
                     }
                     break;
@@ -148,12 +161,11 @@ public class StaffUpdateMovieManager {
                         for(Movie m:movieList){
                             if(m.getMovieTitle().equalsIgnoreCase(newTitle)){
                                 m.setMovieDirector(movieDirector);
+                                break;
                             }
                         }
-                        sc.nextLine();
                     }
                     else{
-                        sc.nextLine();
                         return 2;
                     }
                     break;
@@ -164,12 +176,11 @@ public class StaffUpdateMovieManager {
                         for(Movie m:movieList){
                             if(m.getMovieTitle().equalsIgnoreCase(newTitle)){
                                 m.setCast(casts);
+                                break;
                             }
                         }
-                        sc.nextLine();
                     }
                     else{
-                        sc.nextLine();
                         return 2;
                     }
                     break;
@@ -180,26 +191,40 @@ public class StaffUpdateMovieManager {
                         for(Movie m:movieList){
                             if(m.getMovieTitle().equalsIgnoreCase(newTitle)){
                                 m.setGenres(genres);
+                                break;
                             }
                         }
-                        sc.nextLine();
                     }
                     else{
-                        sc.nextLine();
                         return 2;
                     }
                     break;
                 case 7:
                     MovieRating movieRating = null;
                     if(confirm("Confirm Update Movie Rating")){
-                        System.out.println("Choose Movie Rating");
-                        System.out.println("1: G");
-                        System.out.println("2: PG");
-                        System.out.println("3: PG-13");
-                        System.out.println("4: NC-16");
-                        System.out.println("5: M-18");
-                        System.out.println("6: R-21");
-                        int choice = sc.nextInt();
+                        int choice;
+                        while(true){
+                            System.out.println("Choose Movie Rating");
+                            System.out.println("1: G");
+                            System.out.println("2: PG");
+                            System.out.println("3: PG-13");
+                            System.out.println("4: NC-16");
+                            System.out.println("5: M-18");
+                            System.out.println("6: R-21");
+                            try{
+                                choice = sc.nextInt();
+                                sc.nextLine();
+                                if (choice < 1 || choice > 6){
+                                    System.out.println("Please only input values from 1-6 only.");
+                                    continue;
+                                }
+                                break;
+                            }catch(InputMismatchException e){
+                                System.out.println("Please only input values from 1-6 only.");
+                                sc.nextLine();
+                                continue;
+                            }
+                        }
                         switch (choice) {
                         case 1: {
                             movieRating = MovieRating.G;
@@ -229,139 +254,204 @@ public class StaffUpdateMovieManager {
                             System.out.println("Error Input! Please only input values from 1-6.\n");
                             continue;
                         }
-                        sc.nextLine();
                         for(Movie m:movieList){
                             if(m.getMovieTitle().equalsIgnoreCase(newTitle)){
                                 m.setMovieRating(movieRating);
+                                break;
                             }
                         }
                     }
                     else{
-                        sc.nextLine();
                         return 2;
                     }
                     break;
                 case 8:
                     if(confirm("Confirm Update Movie Duration")){
-                        try{
-                            print("New Movie Duration: ");
-                            int movieDuration = sc.nextInt();
-                            for(Movie m:movieList){
-                                if(m.getMovieTitle().equalsIgnoreCase(newTitle)){
-                                    m.setMovieDuration(movieDuration);
-                                    break;
+                        while(true){
+                            try{
+                                print("New Movie Duration: ");
+                                int movieDuration = sc.nextInt();
+                                if(movieDuration < 0 || movieDuration > 1440){ // 1 day
+                                    System.out.println("Please input a valid movie duration!");
+                                    sc.nextLine();
+                                    continue;
                                 }
+                                for(Movie m:movieList){
+                                    if(m.getMovieTitle().equalsIgnoreCase(newTitle)){
+                                        m.setMovieDuration(movieDuration);
+                                        break;
+                                    }
+                                }
+                                sc.nextLine();
+                                break;
+                            }catch(InputMismatchException e){
+                                print("Please input a valid Movie Duration.");
+                                sc.nextLine();
+                                continue;
                             }
-                            sc.nextLine();
-                        }catch(InputMismatchException e){
-                            print("Please input a valid Integer number.");
-                            sc.nextLine();
-                            continue;
                         }
+
                     }
                     else{
-                        sc.nextLine();
                         return 2;
                     }
                     break;
                 case 9:
                     if(confirm("Confirm Update Profit Earned")){
-                        try{
-                            print("New Profit Earned: ");
-                            double profitEarned = sc.nextDouble();
-                            for(Movie m:movieList){
-                                if(m.getMovieTitle().equalsIgnoreCase(newTitle)){
-                                    m.setProfitEarned(profitEarned);
+                        while(true){
+                            try{
+                                print("New Profit Earned: ");
+                                double profitEarned = sc.nextDouble();
+                                if(profitEarned < 0){
+                                    System.out.println("Please enter a valid amount of profit earned!");
+                                    sc.nextLine();
+                                    continue;
                                 }
+                                for(Movie m:movieList){
+                                    if(m.getMovieTitle().equalsIgnoreCase(newTitle)){
+                                        m.setProfitEarned(profitEarned);
+                                        break;
+                                    }
+                                }
+                                sc.nextLine();
+                                break;
+                            }catch(InputMismatchException e){
+                                print("Please input a valid amount of profit earned!");
+                                sc.nextLine();
+                                continue;
                             }
-                            sc.nextLine();
-                        }catch(InputMismatchException e){
-                            print("Please input a valid Double number");
-                            sc.nextLine();
-                            continue;
                         }
+
                     }
                     else{
-                        sc.nextLine();
                         return 2;
                     }
                     break;
                 case 10:
                     if(confirm("Confirm Update Overall Rating Score")){
-                        try{
-                            print("New Overall Rating Score: ");
-                            double overallRatingScore = sc.nextDouble();
-                            if(overallRatingScore < 0 || overallRatingScore > 5){
+                        while(true){
+                            try{
+                                print("New Overall Rating Score: ");
+                                double overallRatingScore = sc.nextDouble();
+                                if(overallRatingScore < 0 || overallRatingScore > 5){
+                                    print("Overall Rating can only be between 0 and 5!");
+                                    sc.nextLine();
+                                    continue;
+                                }
+                                for(Movie m:movieList){
+                                    if(m.getMovieTitle().equalsIgnoreCase(newTitle)){
+                                        m.setOverallRatingScore(overallRatingScore);
+                                        break;
+                                    }
+                                }
+                                sc.nextLine();
+                                break;
+                            }catch(InputMismatchException e){
                                 print("Overall Rating can only be between 0 and 5!");
                                 sc.nextLine();
                                 continue;
                             }
-                            for(Movie m:movieList){
-                                if(m.getMovieTitle().equalsIgnoreCase(newTitle)){
-                                    m.setOverallRatingScore(overallRatingScore);
-                                }
-                            }
-                            sc.nextLine();
-                        }catch(InputMismatchException e){
-                            print("Please input a valid Double number");
-                            sc.nextLine();
-                            continue;
                         }
+
                     }
                     else{
-                        sc.nextLine();
                         return 2;
                     }
                     break;
                 case 11:
+                    int valid = 0;
                     if(confirm("Confirm Update Release Date")){
-                        String releaseDateStr = read("New Overall Release Date (YYYY-MM-DD): ");
+                        while(true){
+                            String releaseDateStr = read("New Overall Release Date (YYYY-MM-DD): ");
                             try{
                                 LocalDate releaseDate = LocalDate.parse(releaseDateStr);
                                 for(Movie m:movieList){
                                     if(m.getMovieTitle().equalsIgnoreCase(newTitle)){
-                                        m.setReleaseDate(releaseDate);
+                                        if(releaseDate.isAfter(m.getEndOfShowingDate())){
+                                            System.out.println("Invalid! Release Date should only be before or same as end of showing date!");
+                                            break;
+                                        }
+                                        else{
+                                            m.setReleaseDate(releaseDate);
+                                            valid = 1;
+                                            break;
+                                        }
                                     }
+                                }
+                                if(valid == 1){
+                                    break;
+                                }else{
+                                    continue;
                                 }
                             }catch(DateTimeParseException e){
                                 System.out.println("Wrong format, enter again!");
                                 continue;
                             }
+                        }
                     }
                     else{
-                        sc.nextLine();
                         return 2;
                     }
                     break;
                 case 12:
+                    int valid2 = 0;
                     if(confirm("Confirm Update End Of Showing Date")){
-                        String endShowingStr = read("New Overall End Of Showing Date (YYYY-MM-DD): ");
+                        while(true){
+                            String endShowingStr = read("New Overall End Of Showing Date (YYYY-MM-DD): ");
                             try{
                                 LocalDate endOfShowingDate = LocalDate.parse(endShowingStr);
                                 for(Movie m:movieList){
                                     if(m.getMovieTitle().equalsIgnoreCase(newTitle)){
-                                        m.setEndOfShowingDate(endOfShowingDate);
+                                        if(endOfShowingDate.isAfter(m.getReleaseDate()) || endOfShowingDate.isEqual(m.getReleaseDate())){
+                                            m.setEndOfShowingDate(endOfShowingDate);
+                                            valid2 = 1;
+                                            break;
+                                        }
+                                        else{
+                                            System.out.println("Invalid Input! End of Showing Date must be after Release Date!");
+                                            break;
+                                        }
                                     }
+                                }
+                                if(valid2 == 1){
+                                    break;
+                                }else{
+                                    continue;
                                 }
                             }catch(DateTimeParseException e){
                                 System.out.println("Wrong format, enter again!");
                                 continue;
                             }
+                        }
                     }
                     else{
-                        sc.nextLine();
                         return 2;
                     }
                     break;
                 case 13:
                     MovieType movieType = null;
                     if(confirm("Confirm Update Movie Type")){
-                        System.out.println("Choose Movie Type");
-                        System.out.println("1: TWOD");
-                        System.out.println("2: THREED");
-                        System.out.println("3: IMAX");
-                        System.out.println("4: BLOCKBUSTER");
-                        int choice = sc.nextInt();
+                        int choice;
+                        while(true){
+                            System.out.println("Choose Movie Type");
+                            System.out.println("1: TWOD");
+                            System.out.println("2: THREED");
+                            System.out.println("3: IMAX");
+                            System.out.println("4: BLOCKBUSTER");
+                            try{
+                                choice = sc.nextInt();
+                                sc.nextLine();
+                                if(choice < 1 || choice > 4){
+                                    System.out.println("Please only input values from 1-4 only.");
+                                    continue;
+                                }
+                                break;
+                            }catch(InputMismatchException e){
+                                System.out.println("Please only input values from 1-4 only.");
+                                sc.nextLine();
+                                continue;
+                            }
+                        }
                         switch (choice) {
                         case 1: {
                             movieType = MovieType.TWOD;
@@ -383,15 +473,14 @@ public class StaffUpdateMovieManager {
                             System.out.println("Error Input! Please only input values from 1-4.\n");
                             continue;
                         }
-                        sc.nextLine();
                         for(Movie m:movieList){
                             if(m.getMovieTitle().equalsIgnoreCase(newTitle)){
                                 m.setMovieType(movieType);
+                                break;
                             }
                         }
                     }
                     else{
-                        sc.nextLine();
                         return 2;
                     }
                     break;
@@ -406,7 +495,9 @@ public class StaffUpdateMovieManager {
             break;
         }
         
-        updateMovieListCSV(movieList);
-        return 1;
+        if(updateMovieListCSV(movieList)){
+            return 1;
+        }
+        return 0;
     }
 }

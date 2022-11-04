@@ -168,19 +168,15 @@ public class adminApp {
                                     "===========================================================");
                 System.out.println("Enter choice: ");
     
-                while (!sc.hasNextInt()) {
-                    System.out.println("Error Input. Enter 1-7 only!!");
-                    sc.next(); // Remove newline character
-                }
                 while(true){
                     try{
                         choice = sc.nextInt();
                         sc.nextLine();
                         break;
                     }catch(InputMismatchException e){
-                        System.out.println("Enter numbers only!");
+                        System.out.println("Invalid Input! Enter 1-7 only!");
                         sc.nextLine();
-                        continue;
+                        displayLoggedInMenu(account);
                     }
                 }
                 switch(choice){

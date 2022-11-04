@@ -140,10 +140,15 @@ public class StaffAddMovieToList {
 			break;
 		}
         sc.nextLine();
+		//  Checks movie duration
 		while (true){
 			System.out.println("Enter Movie Duration (minutes):");
 			try{
 				movieDuration = sc.nextInt();
+				if(movieDuration < 0 || movieDuration > 1440){
+					System.out.println("Movie Duration invalid! Re-enter correct movie Duration!");
+					continue;
+				}
 				break;
 			}
 			catch(InputMismatchException e){
@@ -153,6 +158,7 @@ public class StaffAddMovieToList {
 			}
 		}
 		sc.nextLine();
+		
 		while (true){
 			try{
 				System.out.println("Enter Release Date (DD/MM/YYYY)");
@@ -170,6 +176,10 @@ public class StaffAddMovieToList {
 				System.out.println("Enter End Of Showing Date (DD/MM/YYYY)");
 				str = sc.nextLine();
 				endofShowingDate = LocalDate.parse(str,DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+				if(endofShowingDate.isBefore(releaseDate) || endofShowingDate.isEqual(releaseDate)){
+					System.out.println("Invalid End of showing date! End of showing date should be after Release Date!");
+					continue;
+				}
 				break;
 			}catch(DateTimeParseException e){
 				System.out.println("Wrong format, enter again!");

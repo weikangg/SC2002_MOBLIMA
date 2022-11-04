@@ -50,6 +50,7 @@ public class MovieManager {
         sc.nextLine();
         List<Movie>movieList = MovieListManager.getInstance().getMovieList();
         List<Review>reviewList = ReviewListManager.getInstance().getReviewList();
+        int result;
         switch (option) {
             case 1:
                 if (StaffAddMovieToList.staffAddMovie(movieList)) {
@@ -77,15 +78,17 @@ public class MovieManager {
                         continue;
                     }
                 }
-                if(StaffPrintMovieManager.printMovieByID(movieList,reviewList, movieID) == 0){
+                result = StaffPrintMovieManager.printMovieByID(movieList,reviewList, movieID);
+                if(result == 0){
                     System.out.println("Movie not found!");
                 }
                 break;
             case 4:
-                if(StaffUpdateMovieManager.updateMovie(movieList) == 1){
+                result = StaffUpdateMovieManager.updateMovie(movieList);
+                if(result == 1){
                     System.out.println("Movie Updated!");
                 }
-                else if(StaffUpdateMovieManager.updateMovie(movieList) == 2){
+                else if(result == 2){
                     System.out.println("No updates made.");
                 }
                 else{
@@ -93,10 +96,11 @@ public class MovieManager {
                 }
                 break;
             case 5:
-                if(StaffRemoveMovieManager.setToEndShowing(movieList) == 1){
+                result = StaffRemoveMovieManager.setToEndShowing(movieList);
+                if(result == 1){
                     System.out.println("Movie successfully set to end showing!");
                 }
-                else if (StaffRemoveMovieManager.setToEndShowing(movieList) == 2){
+                else if (result == 2){
                     ;
                 }
                 else{
@@ -107,10 +111,11 @@ public class MovieManager {
                 SystemSettings.getInstance().top5Movies(movieList);
                 break;
             case 7:
-                if(StaffRemoveMovieManager.removeMovieFromDatabase(movieList,reviewList) == 1){
+                result = StaffRemoveMovieManager.removeMovieFromDatabase(movieList,reviewList);
+                if(result == 1){
                     System.out.println("Movie successfully removed!");
                 }
-                else if (StaffRemoveMovieManager.removeMovieFromDatabase(movieList,reviewList) == 2){
+                else if (result == 2){
                     ;
                 }
                 else{

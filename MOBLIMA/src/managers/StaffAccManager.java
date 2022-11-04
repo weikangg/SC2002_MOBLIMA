@@ -163,7 +163,7 @@ public class StaffAccManager {
             System.out.println("Staff does not exist!");
             return 0;
         }
-
+        scan.nextLine();
         // if yes , remove user
         if(confirm("Confirm Remove Account")){
             for(Account a : accountList){

@@ -48,6 +48,7 @@ public class mainApp {
             } catch (InputMismatchException e) { //Catch bad inputs
                 sc.nextLine(); //Flush input
                 System.out.println("Please enter a valid selection (1-3) only.");
+                continue;
             }
 
             while(input < 1 || input > 3){ //Attempt User Input Again
@@ -98,7 +99,7 @@ public class mainApp {
                     }
                     else{
                         System.out.println("Incorrect Username/Password! Try again!");
-                        System.out.println("Create a new account by going into Guest Menu?");
+                        System.out.println("Create a new Customer Account by going into Customer Guest Menu?");
                         continue;
                     }
             case 2:
