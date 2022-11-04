@@ -12,6 +12,7 @@ import java.util.List;
 import entities.Showtime;
 import entities.TicketPrice;
 import entities.Ticket;
+import entities.Holidays;
 import entities.TicketType;
 
 public class TicketManager {
@@ -24,7 +25,6 @@ public class TicketManager {
     private TicketPrice tp = new TicketPrice();
     private ArrayList<LocalDate> hlList;
     private List<Holidays> holiDates;
-	
 	public static TicketManager newTM()
 	{
 	    if (tm == null) {
