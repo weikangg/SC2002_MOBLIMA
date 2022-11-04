@@ -7,7 +7,8 @@ public enum TicketType {
 		FRIAS(3),
 		WEEKEND(4),
 		SENIORWD(5),
-		STUDENTWD(6);
+		STUDENTWD(6),
+		HOLIDAY(7);
 		
 		private static final int size;
 		private int type;
