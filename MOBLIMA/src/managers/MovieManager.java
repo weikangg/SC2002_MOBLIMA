@@ -49,6 +49,7 @@ public class MovieManager {
             sc.nextLine();
             staffMenu(0);
         }
+        sc.nextLine();
         List<Movie>movieList = MovieListManager.getInstance().getMovieList();
         List<Review>reviewList = ReviewListManager.getInstance().getReviewList();
         switch (option) {
@@ -119,7 +120,6 @@ public class MovieManager {
             
             case 8:
                 System.out.println("Back to StaffApp......");
-                sc.nextLine();
                 adminApp a = adminApp.getInstance();
                 try{
                     Method m = adminApp.class.getDeclaredMethod("displayLoggedInMenu");

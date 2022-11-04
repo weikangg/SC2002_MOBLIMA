@@ -39,15 +39,16 @@ public class MovieListManager {
 			while((line = br.readLine()) !=null ) {
 				String[] moviecsv = line.split(separator);
 				if(!moviecsv[0].equals("MOVIE_ID")) {
-					String str = moviecsv[11];
-					LocalDate date = LocalDate.parse(str,DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+					String releaseDate = moviecsv[11];
+					String endOfShowingDate = moviecsv[12];
+					LocalDate ReleaseDate = LocalDate.parse(releaseDate,DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+					LocalDate EndOfShowingDate = LocalDate.parse(endOfShowingDate,DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 					movietmp = new Movie(Integer.parseInt(moviecsv[0]) ,moviecsv[1],ShowingStatus.valueOf(moviecsv[2]),moviecsv[3],moviecsv[4],moviecsv[5],moviecsv[6], MovieRating.valueOf(moviecsv[7]),
-							Integer.parseInt(moviecsv[8]),Double.parseDouble(moviecsv[9]),Double.parseDouble(moviecsv[10]), date,MovieType.valueOf(moviecsv[12]));
+							Integer.parseInt(moviecsv[8]),Double.parseDouble(moviecsv[9]),Double.parseDouble(moviecsv[10]), ReleaseDate,EndOfShowingDate,MovieType.valueOf(moviecsv[13]));
 					movieList.add(movietmp);		
 				}
 			}
 			updateMovieRatingScores(movieList, ReviewListManager.getInstance().getReviewList());
-			updateMovieSales(movieList);
 			updateEndOfShowing(movieList);
 			br.close();
 		}
@@ -75,8 +76,8 @@ public class MovieListManager {
 	}
 
     public static boolean addMovieList(List<Movie> movieList, int movieID,String movieTitle, String synopsis,String movieDirector, String cast, String genres, int movieDuration, 
-									   ShowingStatus showingStatus, double profitEarned, MovieRating movieRating, double overallRatingScore, LocalDate releaseDateTime, MovieType movieType) {
-        Movie newMovie = new Movie(movieID, movieTitle,showingStatus,synopsis,movieDirector,cast, genres,movieRating,movieDuration,profitEarned,overallRatingScore,releaseDateTime, movieType);
+									   ShowingStatus showingStatus, double profitEarned, MovieRating movieRating, double overallRatingScore, LocalDate releaseDateTime, LocalDate endOfShowingDate, MovieType movieType) {
+        Movie newMovie = new Movie(movieID, movieTitle,showingStatus,synopsis,movieDirector,cast, genres,movieRating,movieDuration,profitEarned,overallRatingScore,releaseDateTime, endOfShowingDate,movieType);
         movieList.add(newMovie);
         return updateMovieListCSV(movieList);
     }
@@ -108,9 +109,16 @@ public class MovieListManager {
 	public static boolean updateMovieSales(List<Movie>movieList){
 		return true;
 	}
-	// TO DO
+
+
+	// If Current date is after the end of showing date, we will update it to end of showing immediately.
 	public static boolean updateEndOfShowing(List<Movie>movieList){
-		return true;
+		for(Movie m : movieList){
+			if(LocalDate.now().isAfter(m.getEndOfShowingDate())){
+				m.setShowingStatus(ShowingStatus.FINISHED_SHOWING);
+			}
+		}
+		return updateMovieListCSV(movieList);
 	}
 
     public static boolean updateMovieListCSV(List<Movie> movieList) {
@@ -141,6 +149,8 @@ public class MovieListManager {
             csvWriter.append(separator);
 			csvWriter.append("RELEASE_DATE");
 			csvWriter.append(separator);
+			csvWriter.append("END_OF_SHOWING_DATE");
+			csvWriter.append(separator);
 			csvWriter.append("MOVIE_TYPE");
 			csvWriter.append("\n");
 
@@ -169,6 +179,8 @@ public class MovieListManager {
 				sb.append(movie.getOverallRatingScore());
                 sb.append(separator);
 				sb.append(movie.getReleaseDate());
+				sb.append(separator);
+				sb.append(movie.getEndOfShowingDate());
 				sb.append(separator);
 				sb.append(movie.getMovieType());
 				sb.append('\n');

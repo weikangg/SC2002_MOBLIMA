@@ -49,11 +49,10 @@ public class StaffRemoveMovieManager {
 
         String title;
         List<Movie>newList = new ArrayList<Movie>();
-        System.out.println("Enter Movie Title ");
+        System.out.println("Enter Movie Title: ");
         title = sc.next();
         
         // Search if movie exists first
-
         Movie temp = null;
         for(Movie m: mList){
             if(m.getMovieTitle().equalsIgnoreCase(title)){
@@ -65,7 +64,7 @@ public class StaffRemoveMovieManager {
             return 0;
         }
 
-        if(confirm("Confirm Remove Title ")){
+        if(confirm("Confirm Remove Title")){
             for(Movie m : mList){
                 if(!m.getMovieTitle().equals(title)){
                     int movieID = m.getMovieID();
@@ -80,12 +79,13 @@ public class StaffRemoveMovieManager {
                     double profitEarned =  m.getProfitEarned();
                     double overallRatingScore =  m.getOverallRatingScore();
                     LocalDate releaseDate =  m.getReleaseDate();
+                    LocalDate endOfShowingDate =  m.getEndOfShowingDate();
                     MovieType movieType = m.getMovieType();
-                    Movie newMovie = new Movie(movieID,movieTitle,showingStatus, synopsis, movieDirector, casts, genres, movieRating, movieDuration, profitEarned,  overallRatingScore, releaseDate, movieType);
+                    Movie newMovie = new Movie(movieID,movieTitle,showingStatus, synopsis, movieDirector, casts, genres, movieRating, movieDuration, profitEarned,  overallRatingScore, releaseDate,endOfShowingDate, movieType);
                     newList.add(newMovie);
                 }
             }
-            if(updateMovieListCSV(mList)){
+            if(updateMovieListCSV(newList)){
                 return 1;
             }
             else{

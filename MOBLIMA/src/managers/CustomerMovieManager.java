@@ -18,7 +18,7 @@ public class CustomerMovieManager {
 	static String SplitByColon = ":";
 
 	// Displays all info about movie + limited 3 reviews on each movie. If 0 reviews, prints a placeholder message
-
+	// Only shows info of movies which are preview or coming soon
 	public static void printMovieList(List<Movie>mList, List<Review>rList) {
 		int movieCount = 1;
 		System.out.println("#########################################################");
@@ -31,6 +31,7 @@ public class CustomerMovieManager {
 		}
 
 		for(Movie m : mList) {
+			if(m.getShowingStatus().equals(ShowingStatus.PREVIEW) || m.getShowingStatus().equals(ShowingStatus.NOW_SHOWING)){
 				String cast, genre;
 				String casttmp = m.getCast();
 				String genretmp = m.getGenres();
@@ -71,6 +72,7 @@ public class CustomerMovieManager {
 				System.out.println("");
 				movieCount++;
 			}
+		}
 	}
 
 	public static int searchMovie(List<Movie>mList, List<Review> rList, String name, boolean print){

@@ -21,7 +21,7 @@ public class StaffAddMovieToList {
         MovieRating movieRating = null;
 		int sale = 0;
 		MovieType movieType = null;
-		LocalDate releaseDate = null;
+		LocalDate releaseDate = null, endofShowingDate = null;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("#########################################################");
 		System.out.println("#################### ADDING MOVIES ######################");
@@ -165,6 +165,18 @@ public class StaffAddMovieToList {
 			}
 		}
 
+		while (true){
+			try{
+				System.out.println("Enter End Of Showing Date (DD/MM/YYYY)");
+				str = sc.nextLine();
+				endofShowingDate = LocalDate.parse(str,DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+				break;
+			}catch(DateTimeParseException e){
+				System.out.println("Wrong format, enter again!");
+				continue;
+			}
+		}
+
 		while(true){
 			System.out.println("Choose Movie Type");
 			System.out.println("1: TWOD");
@@ -202,7 +214,7 @@ public class StaffAddMovieToList {
 			break;
 		}
         sc.nextLine();
-		if (MovieListManager.addMovieList(mList,movieID, movieTitle, synopsis, movieDirector, cast, genres, movieDuration, status, sale, movieRating,rating, releaseDate ,movieType))
+		if (MovieListManager.addMovieList(mList,movieID, movieTitle, synopsis, movieDirector, cast, genres, movieDuration, status, sale, movieRating,rating, releaseDate , endofShowingDate, movieType))
 			return true;
 		 return false;
     }

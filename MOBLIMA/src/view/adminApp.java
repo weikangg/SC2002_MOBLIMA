@@ -1,18 +1,11 @@
 package view;
 import java.util.Scanner;
-import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
 import managers.StaffLogin;
 import managers.SystemSettingsManager;
 import managers.MovieManager;
 import managers.ShowtimeManager;
 
-
-import entities.*;
-import managers.*;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 
 

@@ -17,13 +17,14 @@ public class Movie {
     private double profitEarned;
     private double overallRatingScore;
     private LocalDate releaseDate;
+    private LocalDate endOfShowingDate;
     private MovieType movieType;
 
 
     // Constructor
 
     public Movie(int movieID,String movieTitle,ShowingStatus showingStatus, String synopsis,String movieDirector, String cast, String genres, 
-                MovieRating movieRating,int movieDuration,  double profitEarned, double overallRatingScore, LocalDate releaseDate,MovieType movieType){
+                MovieRating movieRating,int movieDuration,  double profitEarned, double overallRatingScore, LocalDate releaseDate,LocalDate endOfShowingDate,MovieType movieType){
         this.movieID = movieID;
         this.movieTitle = movieTitle;
         this.showingStatus = showingStatus;
@@ -36,6 +37,7 @@ public class Movie {
         this.profitEarned = profitEarned;
         this.overallRatingScore = overallRatingScore;
         this.releaseDate = releaseDate; // gets current time.
+        this.endOfShowingDate = endOfShowingDate;
         this.movieType = movieType;
     }
 
@@ -75,7 +77,9 @@ public class Movie {
     public LocalDate getReleaseDate() {
         return this.releaseDate;
     }
-
+    public LocalDate getEndOfShowingDate(){
+        return this.endOfShowingDate;
+    }
     public double getProfitEarned() {
         return this.profitEarned;
     }
@@ -120,6 +124,10 @@ public class Movie {
     public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
     }
+    public void setEndOfShowingDate(LocalDate endOfShowingDate){
+        this.endOfShowingDate = endOfShowingDate;
+    }
+
     public void setProfitEarned(double profitEarned) {
         this.profitEarned = profitEarned;
     }

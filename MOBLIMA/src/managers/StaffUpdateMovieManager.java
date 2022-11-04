@@ -50,8 +50,9 @@ public class StaffUpdateMovieManager {
             System.out.println("9. Update Profit Earned");
             System.out.println("10. Update Overall Rating Score");
             System.out.println("11. Update Release Date");
-            System.out.println("12. Update Movie Type");
-            System.out.println("13. Exit");
+            System.out.println("12. Update End Of Showing Date");
+            System.out.println("13. Update Movie Type");
+            System.out.println("14. Exit");
             int option;
             try{
                 option = sc.nextInt();
@@ -322,7 +323,6 @@ public class StaffUpdateMovieManager {
                                         m.setReleaseDate(releaseDate);
                                     }
                                 }
-                                sc.nextLine();
                             }catch(DateTimeParseException e){
                                 System.out.println("Wrong format, enter again!");
                                 continue;
@@ -334,6 +334,26 @@ public class StaffUpdateMovieManager {
                     }
                     break;
                 case 12:
+                    if(confirm("Confirm Update End Of Showing Date")){
+                        String endShowingStr = read("New Overall End Of Showing Date (YYYY-MM-DD): ");
+                            try{
+                                LocalDate endOfShowingDate = LocalDate.parse(endShowingStr);
+                                for(Movie m:movieList){
+                                    if(m.getMovieTitle().equalsIgnoreCase(newTitle)){
+                                        m.setEndOfShowingDate(endOfShowingDate);
+                                    }
+                                }
+                            }catch(DateTimeParseException e){
+                                System.out.println("Wrong format, enter again!");
+                                continue;
+                            }
+                    }
+                    else{
+                        sc.nextLine();
+                        return 2;
+                    }
+                    break;
+                case 13:
                     MovieType movieType = null;
                     if(confirm("Confirm Update Movie Type")){
                         System.out.println("Choose Movie Type");
@@ -375,12 +395,12 @@ public class StaffUpdateMovieManager {
                         return 2;
                     }
                     break;
-                case 13:
+                case 14:
                     print("Returning to Movie Menu....");
                     sc.nextLine();
                     return 2;
                 default:
-                    print("Please enter a number from 1-13 only.");
+                    print("Please enter a number from 1-14 only.");
                     continue;
             }
             break;

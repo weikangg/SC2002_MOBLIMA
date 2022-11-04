@@ -145,7 +145,7 @@ public class ReviewManager {
             return false;
         }
 
-        // If the movie exists
+        // If the movie exists, add review
         else{
             movieTitle = movieTitleTmp.replaceAll(csvSplitBy, SplitBy);
             reviewer = username;
