@@ -2,6 +2,7 @@ package managers;
 import java.util.*;
 import entities.Transaction;
 import entities.Ticket;
+import entities.Movie;
 import entities.Showtime;
 
 import java.time.LocalDate;
@@ -173,5 +174,22 @@ public class TransactionManager
         totalPrice = 0;
         isPromo = false;
     }
+
+
+    public void updateTotalSales()
+    {
+        for(Movie m : MovieListManager.getInstance().getMovieList())
+        {
+            if(m.getMovieTitle().equals(getShowtime().getMovieTitle()) == true)
+            {
+                double total = m.getProfitEarned() + getTotalPrice();
+                m.setProfitEarned(total);
+                break;
+            }
+        }
+        MovieListManager.updateMovieListCSV(MovieListManager.getInstance().getMovieList());
+
+    }
+
 
 }
