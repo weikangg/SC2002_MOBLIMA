@@ -1,6 +1,6 @@
 package entities;
-import java.io.Serializable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Transaction implements Serializable{
@@ -8,13 +8,15 @@ public class Transaction implements Serializable{
     private String movieName;
     private String tranDateTime;
     private ArrayList<Ticket> tix;
+    private double totalPrice;
 
-    public Transaction(String id, String movname, String tranDateTime, ArrayList<Ticket> tix)
+    public Transaction(String id, String movname, String tranDateTime, ArrayList<Ticket> tix, double totalPrice)
     {
         this.id = id;
         this.movieName = movname;
         this.tranDateTime = tranDateTime;
         this.tix = tix;
+        this.totalPrice = totalPrice;
     }
 
     public String getID(){
@@ -34,12 +36,18 @@ public class Transaction implements Serializable{
     public Ticket getTicket(int index){
     	return this.tix.get(index);
     }
+
+    public double getTotalPrice()
+    {
+        return this.totalPrice;
+    }
     
     public void setID(String id) {this.id = id;}
     public void setMovieName(String movname) {this.movieName= movname;}
     public void setTranDateTime(String tdt) {this.tranDateTime=tdt;}
     public void setTicketList(ArrayList<Ticket> tix) {this.tix = tix;}
     public void setTicket(int index, Ticket ticket) {this.tix.set(index, ticket);}
+    public void setTotalPrice(double price){this.totalPrice = price;}
     
     public void printTransaction() {
     	System.out.println("ID: " +this.getID());
