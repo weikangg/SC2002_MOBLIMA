@@ -9,7 +9,6 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
-import entities.Holidays;
 import entities.Showtime;
 import entities.TicketPrice;
 import entities.Ticket;
@@ -38,6 +37,8 @@ public class TicketManager {
 	public void ticketMenu(Showtime showtime, ArrayList<String> confirmedSeats, int[][] plan)
 	{
         setH(HolidayListManager.getInstance().getHolidayList());
+        ArrayList<Ticket> ticketArray = new ArrayList<>();
+        setTicketArray(ticketArray);
         ArrayList<LocalDate> holidayLD = new ArrayList<LocalDate>();
         setHList(holidayLD);
         setHolidayDates();
@@ -65,7 +66,7 @@ public class TicketManager {
                 "Options [1,2,3]\n" +
                 "1. Confirm \n" +
                 "2. Remove ticket \n" +
-                "3. Back"
+                "3. Back\n"
             );
             int option = sc.nextInt();
             while(option < 0 || option > 3)
@@ -79,16 +80,19 @@ public class TicketManager {
                     //Confirm tickets -> Calculate tickets based on ticket type -> calculate total price of tickets -> call transactionMgr
                     confirmTicket();
                     TransactionManager.getInstance().transactionMenu(getShowtime(), getTicketArray());
+                    noQuit = false;
                     break;
                 case 2:
                     //Choose ticket to remove -> update arraylist -> check if empty
                     System.out.println("Enter ticket number to remove: ");
                     int ticketNo = sc.nextInt();
+                    ticketNo--;
+                    sc.nextLine();
                     if(ticketNo>getCSArray().size())
                     {
                         System.out.println("Enter a valid ticket number");
                         ticketNo = sc.nextInt();
-    
+                        sc.nextLine();
                     }
                     deleteTicket(ticketNo, plan);
                     break;
@@ -308,3 +312,4 @@ public class TicketManager {
         return false;
     }
 }
+
