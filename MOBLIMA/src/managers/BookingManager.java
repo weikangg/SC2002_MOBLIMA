@@ -21,6 +21,7 @@ public class BookingManager implements Serializable{
     private ArrayList<Ticket> bookedTickets;
     private Booking booking;
     private Showtime showtime;
+    
 	
 	private static BookingManager bm = null;
 	
@@ -35,11 +36,12 @@ public class BookingManager implements Serializable{
 	
 	public void bookingMenu(Showtime showtime)
 	{
+        
 
 		//display seats at show time
 		//get user input to choose seats
 		setSeats(showtime.getSeats());
-        showtime.showSeats();
+        getShowtime().showSeats();
         Boolean notQuit = true;
         while(notQuit)
         {
@@ -90,8 +92,8 @@ public class BookingManager implements Serializable{
 
     public Boolean isSeatEmpty(int row, int col) //Check for showtime seats
     {
-        //0 = unavailable, 1 = available, 2 = booked, 3 = added
-        if(getSeats()[row][col] == 1)
+        //0 = available, 1 = unavailable, 2 = booked, 3 = added
+        if(getSeats()[row][col] == 0)
         {
             return true;
         }
@@ -279,8 +281,10 @@ public class BookingManager implements Serializable{
 
     public void createBooking()
     {
+        ArrayList<Booking> userBookings = new ArrayList<Booking>();
         updateShowtimeCSV();
-        String location = "MOBLIMA/src/data/bookings/booking";
+        String username = "user1";
+        String location = "MOBLIMA/data/bookings/" + username +"/";
         String filename = ".txt";
         int i = 1;
         String finalFile = location +i+ filename;
@@ -290,7 +294,7 @@ public class BookingManager implements Serializable{
         getBooking().setCinemaID(getShowtime().getCinemaID());
         getBooking().setCineplexID(getShowtime().getCineplexID());
         getBooking().setMovie(getShowtime().getMovieTitle());
-        getBooking().setShowTime(getShowtime().getDateTimeLDT());
+        getBooking().setShowTime(getShowtime().getDateTime());
         getBooking().setTotalPrice(TransactionManager.getInstance().getTotalPrice());
         getBooking().setTransaction(TransactionManager.getInstance().getTransaction());
         updateShowtimeCSV();
@@ -306,7 +310,8 @@ public class BookingManager implements Serializable{
             FileOutputStream file = new FileOutputStream(check);
             ObjectOutputStream out = new ObjectOutputStream(file);
             //System.out.println(file.getAbsolutePath());
-            out.writeObject(booking);
+            userBookings.add(getBooking());
+            out.writeObject(userBookings);
             out.close();
             file.close();
 
@@ -326,6 +331,7 @@ public class BookingManager implements Serializable{
             //}catch(IOException ex){System.out.println("Super ded");}
 
     }
+    
 
     public void deleteBM()
     {
@@ -338,6 +344,39 @@ public class BookingManager implements Serializable{
         TicketManager.newTM().deleteTicketM();
         TransactionManager.getInstance().deleteTransactionM();
     }
+
+
+    /*public ArrayList<Booking> getUserBookings()
+    {
+        ArrayList<Booking> getUB = new ArrayList<>();
+        String username = "user1";
+        String location = "MOBLIMA/data/bookings/" + username +".csv";
+        try
+        {   
+            // Reading the object from a file
+            FileInputStream file = new FileInputStream(location);
+            ObjectInputStream in = new ObjectInputStream(file);
+              
+            // Method for deserialization of object
+            getUB = (ArrayList)in.readObject();
+              
+            in.close();
+            file.close();
+              
+            System.out.println("Object has been deserialized ");
+        }
+          
+        catch(IOException ex)
+        {
+            System.out.println("IOException is caught");
+        }
+          
+        catch(ClassNotFoundException ex)
+        {
+            System.out.println("ClassNotFoundException is caught");
+        }
+        return getUB;
+    }*/
 
 
 }
