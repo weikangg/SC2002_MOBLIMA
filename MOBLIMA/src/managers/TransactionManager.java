@@ -19,7 +19,7 @@ public class TransactionManager
     private Showtime showtime;
     private double totalPrice;
     private Boolean isPromo = false;
-	
+	Boolean notQuit = true;
 	private Scanner sc = new Scanner(System.in);
 
     private static TransactionManager single_instance = null;
@@ -51,10 +51,10 @@ public class TransactionManager
     {
         setTList(tickets);
         setShowtime(showtime);
-    	Boolean notQuit = true;
     	//printTransaction(index);
     	
     	int option = 0;
+        notQuit = true;
         while(notQuit)
         {
                 System.out.println( "===================  TRANSACTION MENU  =================\n" +
@@ -79,14 +79,16 @@ public class TransactionManager
                         setTotalPrice();
                         System.out.println("Total payment will be $" + getTotalPrice());
                         BookingManager.newBM().createBooking();
-                        return;
+                        notQuit = false;
+                        break;
                     case 2: //Apply vouchers
                         usePromo();
                         break;
                     case 3:
                         System.out.println("Back to Ticketing Page......");
-                        deleteTransactionM();
-                        return;
+                        notQuit=false;
+                        //deleteTransactionM();
+                        break;
                     default:
                         System.out.println("Invalid choice. Please enter a number between 1-3.");
                         break;
