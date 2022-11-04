@@ -187,6 +187,7 @@ public class customerApp {
                 //ask user for cineplex
                 System.out.println("Please choose a Cineplex:");
                 cineplex = scan.nextInt();
+                scan.nextLine();
                 
                 //ask user for movie
                 CustomerMovieManager.printMovieList(movieList, reviewList);
