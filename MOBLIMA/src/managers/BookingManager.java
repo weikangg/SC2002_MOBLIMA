@@ -17,11 +17,13 @@ public class BookingManager implements Serializable{
 	//allow user to select multiple seats, allow user to delete selected seats.
 	
 	private Scanner sc = new Scanner(System.in);
+    private Boolean done = false;
     private int[][] seats;
 	private ArrayList<String> bookedSeats;
     private ArrayList<Ticket> bookedTickets;
     private Booking booking;
     private Showtime showtime;
+    Boolean notQuit = true;
     
 	
 	private static BookingManager bm = null;
@@ -33,6 +35,7 @@ public class BookingManager implements Serializable{
 	    }	        
 	    return bm;
 	}
+
 	
 	
 	public void bookingMenu(Showtime showtime)
@@ -45,7 +48,7 @@ public class BookingManager implements Serializable{
         setShowTime(showtime);
 		setSeats(showtime.getSeats());
         //getShowtime().showSeats();
-        Boolean notQuit = true;
+        notQuit = true;
         while(notQuit)
         {
             showSeat();
@@ -69,8 +72,8 @@ public class BookingManager implements Serializable{
             switch(choice)
             {
                 case 0:
-                    deleteBM();
                     notQuit = false;
+                    deleteBM();
                     break;
                 case 1: //Add seats to cart
                     addSeat();
@@ -81,9 +84,15 @@ public class BookingManager implements Serializable{
                 case 3://check at least 1 seat selected
                     if(confirmSelection(showtime))
                     {
+                        System.out.println("Going to Ticket Menu");
                         TicketManager.newTM().ticketMenu(showtime, getBookedSeats(), getSeats());
                         //Call ticket manager
-                        notQuit = false;
+                        //notQuit = false;
+                        if(getDone())
+                        {
+                            deleteBM();
+                            return;
+                        }
                     }
                     break;
                 default:
@@ -218,7 +227,7 @@ public class BookingManager implements Serializable{
                     String[] tokens = rowcol.split("/");
                     int row = Integer.parseInt(tokens[0]);
                     int col = Integer.parseInt(tokens[1]);        
-                    updateSeats(row, col, 2);
+                    updateSeats(row, col, 1);
                     return true;
                 }
             }
@@ -310,6 +319,7 @@ public class BookingManager implements Serializable{
 
 
 
+
     public void createBooking()
     {
         ArrayList<Booking> userBookings = new ArrayList<Booking>();
@@ -351,7 +361,11 @@ public class BookingManager implements Serializable{
             System.out.println("IOException is caught");
         }
         TransactionManager.getInstance().updateTotalSales();
-        deleteBM();
+        setDone();
+        TransactionManager.getInstance().deleteTransactionM();
+        TicketManager.newTM().deleteTicketM();
+        //deleteBM();
+        
 
         //try{
              // Will create parent directories if not exists
@@ -366,6 +380,16 @@ public class BookingManager implements Serializable{
     }
     
 
+
+    public void setDone()
+    {
+        this.done = true;
+    }
+    public boolean getDone()
+    {
+        return this.done;
+    }
+
     public void deleteBM()
     {
         //private Scanner sc = new Scanner(System.in);
@@ -374,8 +398,9 @@ public class BookingManager implements Serializable{
         bookedTickets = null;
         booking = null;
         showtime = null;
-        TicketManager.newTM().deleteTicketM();
-        TransactionManager.getInstance().deleteTransactionM();
+        done = false;
+        //TicketManager.newTM().deleteTicketM();
+        //TransactionManager.getInstance().deleteTransactionM();
     }
 
 
