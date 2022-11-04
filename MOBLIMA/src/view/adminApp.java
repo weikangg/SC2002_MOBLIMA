@@ -209,14 +209,16 @@ public class adminApp {
                         else{
                             System.out.println("No access!");
                         }
-                        break;
+                        continue;
                     case 6:
                         if(account.getAccessLevel().equals("SA")){
                             List<Account>accountList = AccountManager.getInstance().getAccountList();
-                            if(StaffAccManager.getInstance().removeStaffAccount(accountList) == 1){
+                            int result = StaffAccManager.getInstance().removeStaffAccount(accountList);
+                            System.out.println("Result: " + result);                
+                            if(result == 1){
                                 System.out.println("Account removed!");
                             }
-                            else if(StaffAccManager.getInstance().removeStaffAccount(accountList) == 2){
+                            else if(result == 2){
                                 ;
                             }
                             else{
@@ -226,7 +228,7 @@ public class adminApp {
                         else{
                             System.out.println("No access!");
                         }
-                        break;
+                        continue;
                     case 7: 
                         System.out.println("Logging out from StaffApp, have a nice day!");
                         mainApp.main(null);

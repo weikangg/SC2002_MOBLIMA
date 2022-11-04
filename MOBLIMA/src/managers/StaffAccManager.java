@@ -41,9 +41,14 @@ public class StaffAccManager {
         int age;
 		String password="";
         String pwStrength="";
+        scan.nextLine();
         while(true){
             System.out.println("Enter username: ");
             name = scan.nextLine();
+            if(name.equals("")){
+                System.out.println("Username cannot be empty!");
+                continue;
+            }
             if(accountManager.checkAccountExists(accountList, name)){
                 System.out.println("Account already exists! Try another username!");
                 continue;
@@ -182,6 +187,7 @@ public class StaffAccManager {
             }
         }
         else{
+            System.out.println("Account not removed!");
             return 2;
         }
     }
