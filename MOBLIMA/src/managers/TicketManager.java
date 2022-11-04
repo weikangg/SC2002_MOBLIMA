@@ -13,6 +13,7 @@ import entities.Holidays;
 import entities.Showtime;
 import entities.TicketPrice;
 import entities.Ticket;
+import entities.Holidays;
 import entities.TicketType;
 
 public class TicketManager {
@@ -25,7 +26,6 @@ public class TicketManager {
     private TicketPrice tp = new TicketPrice();
     private ArrayList<LocalDate> hlList;
     private List<Holidays> holiDates;
-	
 	public static TicketManager newTM()
 	{
 	    if (tm == null) {
@@ -156,7 +156,7 @@ public class TicketManager {
             int row = Integer.parseInt(tokens[0]);
             int col = Integer.parseInt(tokens[1]);
             TicketType newTT = getTicketType();
-            Ticket newTicket = new Ticket(getShowtime().getDateTime(), getShowtime().getMovieType(),newTT,row,col,calcTicketPrice(newTT));
+            Ticket newTicket = new Ticket(getShowtime().getDateTimeLDT(), getShowtime().getMovieType(),newTT,row,col,calcTicketPrice(newTT));
             addToTicketArray(newTicket);
         }
 
@@ -216,7 +216,7 @@ public class TicketManager {
             System.out.println("Enter valid option");
             tt = sc.nextInt();
         }
-        LocalDateTime time = getShowtime().getDateTime();
+        LocalDateTime time = getShowtime().getDateTimeLDT();
         DayOfWeek day = DayOfWeek.of(time.get(ChronoField.DAY_OF_WEEK));
         if(day == DayOfWeek.SUNDAY || day==DayOfWeek.SATURDAY)
         {
@@ -299,7 +299,7 @@ public class TicketManager {
 
     public Boolean isHoliday()
     {
-        LocalDate lDate = getShowtime().getDateTime().toLocalDate();
+        LocalDate lDate = getShowtime().getDateTimeLDT().toLocalDate();
         for(LocalDate ld : getHList())
         {
             if(lDate.isEqual(ld))
