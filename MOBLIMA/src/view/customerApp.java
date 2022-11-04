@@ -156,7 +156,7 @@ public class customerApp {
         do{
             //main menu
             System.out.print("================= MOBLIMA CUSTOMER INTERFACE =================\n"+
-                                "1. Make Bookings and Give Reviews\n"+
+                                "1. Make Bookings and Give Review\n"+
                                 "2. Create account\n"+
                                 "3. Show all movies\n"+
                                 "4. Search Movie by Name\n"+
