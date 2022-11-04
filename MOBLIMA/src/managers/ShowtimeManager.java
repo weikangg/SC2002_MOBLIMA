@@ -7,6 +7,7 @@ import entities.Cineplex;
 import entities.MovieType;
 import entities.Cinema;
 import entities.Showtime;
+import managers.MovieListManager;
 
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
@@ -285,7 +286,12 @@ public class ShowtimeManager {
             movieID = sc.nextInt();
             System.out.println("");
 
-            //check if movie id exists in movie datbase
+            //check if movie id exists in movie database
+            if(MovieListManager.getMovie(movieID) == null){
+                System.out.println("No such Movie");
+                return -1;
+            }
+
             
         } catch (Exception e) {
             // TODO: handle exception
