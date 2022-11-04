@@ -168,24 +168,18 @@ public class Showtime extends Cinema{
     /**
      * Printer method for showtime seats
      */
-    public void showSeats(){
-
+    public void showSeats()
+    {
         System.out.println("      Screen");
-
         for (int i = 0; i < 5; i++){
-
             System.out.print((char)(i+65)+"  ");
-
             for(int j = 0; j < 10; j++){
-
                 if(j == 5) System.out.print("  ");
-
-                System.out.print(seats[i][j]);
-
+                if(seats[i][j] == 0) System.out.print("\u001B[32m" + "O" + "\u001B[0m");
+                else if(seats[i][j] == 1) System.out.print("\u001B[31m" + "X" + "\u001B[0m");
             }
             System.out.println("  "+(char)(i+65));
         }
-
     }
 
     public void update(){

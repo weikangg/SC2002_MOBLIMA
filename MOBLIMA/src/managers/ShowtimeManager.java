@@ -25,6 +25,7 @@ public class ShowtimeManager {
     private ShowtimeManager() {}
 
     public void staffMenu(int choice){
+        
         int option = 0;
         try{
             if(choice == 0){
@@ -37,6 +38,7 @@ public class ShowtimeManager {
                                 "==============================================================");
                 System.out.print("Enter choice: ");
                 option = sc.nextInt();
+
                 if(!(option >= 1 && option <=5)){
                     System.out.println("Please only enter a number from 1-5.");
                     staffMenu(0);
@@ -54,6 +56,7 @@ public class ShowtimeManager {
         int movieID;
         LocalDateTime dateTime;
         MovieType movieType;
+        sc.nextLine();
 
         switch (option) {
             case 1:
@@ -186,7 +189,7 @@ public class ShowtimeManager {
             inputs[1] = cinemaID;
 
             
-        } catch (Exception e) {
+        } catch (InputMismatchException e) {
             // TODO: handle exception
             System.out.println("Input invalid");
             return null;
@@ -241,6 +244,12 @@ public class ShowtimeManager {
 
             //Prompt Showtimes
             Showtime[] showtimes = cinemas[cinemaID].getShowtimes();
+
+            if (showtimes.length == 0){
+                System.out.println("No showtimes in cinema");
+                return null;
+            }
+
             for(int i = 0; i < showtimes.length; i++){
                 System.out.println(i + ": " + showtimes[i].getMovieTitle()
                                     + ", " + showtimes[i].getDateTime() + ", " + showtimes[i].getMovieType());
@@ -257,7 +266,7 @@ public class ShowtimeManager {
 
             inputs[2] = showtimeID;
             
-        } catch (Exception e) {
+        } catch (InputMismatchException e) {
             // TODO: handle exception
             System.out.println("Input invalid");
             return null;
@@ -275,6 +284,8 @@ public class ShowtimeManager {
             System.out.print("Enter Movie ID: ");
             movieID = sc.nextInt();
             System.out.println("");
+
+            //check if movie id exists in movie datbase
             
         } catch (Exception e) {
             // TODO: handle exception
