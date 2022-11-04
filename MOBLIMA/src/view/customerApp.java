@@ -182,6 +182,7 @@ public class customerApp {
                 String name;
                 List<Movie> movieList = MovieListManager.getInstance().getMovieList();
                 List<Review> reviewList = ReviewListManager.getInstance().getReviewList();
+                List<Showtime> showtime;
 
                 //ask user for cineplex
                 System.out.println("Please choose a Cineplex:");
