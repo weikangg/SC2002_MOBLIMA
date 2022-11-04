@@ -16,7 +16,7 @@ public class mainApp {
         directory = new File("MOBLIMA").getAbsoluteFile();
         if (directory.exists()) System.setProperty("user.dir", directory.getAbsolutePath());
         
-        System.out.println(System.getProperty("user.dir"));
+        // System.out.println(System.getProperty("user.dir"));
         
         Scanner scan = new Scanner(System.in); //Scanner Object Instantiation
         int input = -1; //User Input
