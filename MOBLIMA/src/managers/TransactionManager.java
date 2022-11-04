@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 
 public class TransactionManager
 {
-	private Transaction trans = null;
+	private Transaction trans;
 	private String creditCardInfo;
     private ArrayList<Ticket> tList;
     private int numberOfTickets;
@@ -49,6 +49,7 @@ public class TransactionManager
 
     public void transactionMenu(Showtime showtime, ArrayList<Ticket> tickets)
     {
+        setTList(tickets);
         setShowtime(showtime);
     	Boolean notQuit = true;
     	//printTransaction(index);
@@ -78,7 +79,7 @@ public class TransactionManager
                         setTotalPrice();
                         System.out.println("Total payment will be $" + getTotalPrice());
                         BookingManager.newBM().createBooking();
-                        break;
+                        return;
                     case 2: //Apply vouchers
                         usePromo();
                         break;
@@ -102,11 +103,13 @@ public class TransactionManager
         String cinemaId = String.format("%04d",cID);
         String moviename = getShowtime().getMovieTitle();
         //MovieType mt = getShowtime().getMovieFormat();
-        getTransaction().setID(cinemaId);
+        Transaction transaction = new Transaction(cinemaId, moviename, dateportion, getTList());
+        setTransaction(transaction);
+        /*getTransaction().setID(cinemaId);
         getTransaction().setMovieName(moviename);
         getTransaction().setTranDateTime(dateportion);
         getTransaction().setTicketList(getTList());
-        getTransaction().setTotalPrice(getTotalPrice());
+        getTransaction().setTotalPrice(getTotalPrice());*/
     }
 
 
