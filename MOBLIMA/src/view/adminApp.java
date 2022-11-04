@@ -1,13 +1,16 @@
 package view;
 import java.util.Scanner;
+
+import entities.Account;
+
 import java.util.InputMismatchException;
-import managers.StaffLogin;
+import java.util.List;
+
 import managers.SystemSettingsManager;
+import managers.AccountManager;
 import managers.MovieManager;
 import managers.ShowtimeManager;
-
-
-
+import managers.StaffAccManager;
 
 public class adminApp {
 
@@ -32,65 +35,65 @@ public class adminApp {
  *****************************************
  */
 
-    public void displayLoginMenu(){
-        int choice;
-        boolean adminLoggedIn = false;
-        boolean toQuit = false;
+    // public void displayLoginMenu(){
+    //     int choice;
+    //     boolean adminLoggedIn = false;
+    //     boolean toQuit = false;
 
-        do{
-            System.out.println(	"================= MOBLIMA STAFF INTERFACE =================\n"+
-                                " 1. Staff Login                                            \n"+
-                                " 0. Back to Main Menu                                      \n"+
-                                "===========================================================");
-            System.out.println("Enter option: ");
+    //     do{
+    //         System.out.println(	"================= MOBLIMA STAFF INTERFACE =================\n"+
+    //                             " 1. Staff Login                                            \n"+
+    //                             " 0. Back to Main Menu                                      \n"+
+    //                             "===========================================================");
+    //         System.out.println("Enter option: ");
 
-            // If invalid input
-            while(!sc.hasNextInt()){
-                System.out.println("Please enter numbers only!");
-                sc.next(); // Flush input
-            }
+    //         // If invalid input
+    //         while(!sc.hasNextInt()){
+    //             System.out.println("Please enter numbers only!");
+    //             sc.next(); // Flush input
+    //         }
             
-            choice = sc.nextInt();
-            sc.nextLine();
+    //         choice = sc.nextInt();
+    //         sc.nextLine();
 
-            switch(choice){
-                case 1:
-                    System.out.println("Enter Username: ");
-                    while(!sc.hasNext()){
-                        System.out.println("Error, please try again!");
-                        sc.next();
-                    }
+    //         switch(choice){
+    //             case 1:
+    //                 System.out.println("Enter Username: ");
+    //                 while(!sc.hasNext()){
+    //                     System.out.println("Error, please try again!");
+    //                     sc.next();
+    //                 }
 
-                    String userName = sc.nextLine();
-                    System.out.println("Enter password: ");
-                    while(!sc.hasNext()){
-                        System.out.println("Error, please try again!");
-                        sc.next();
-                    }
+    //                 String userName = sc.nextLine();
+    //                 System.out.println("Enter password: ");
+    //                 while(!sc.hasNext()){
+    //                     System.out.println("Error, please try again!");
+    //                     sc.next();
+    //                 }
 
-                    String passWord = sc.nextLine();
+    //                 String passWord = sc.nextLine();
+    //                 boolean approved = StaffLogin.getInstance().checkStaffLogin(userName,passWord);
 
-                    System.out.println("Username is " + userName + " and password is " + passWord );
-                    boolean approved = StaffLogin.getInstance().checkLogin(userName,passWord);
-
-                    if(approved){
-                        toQuit = true;
-                        adminLoggedIn = true;
-                        this.displayLoggedInMenu();
-                    }
-                    else{
-                        System.out.print("Wrong Username/Password.");
-                        System.out.println(" Try again!");
-                    }
-                    break;
-                case 0:
-                    System.out.println("Heading back to Main Menu....");
-                    mainApp.main(null);
-                    break;
-            }
+    //                 if(approved){
+    //                     toQuit = true;
+    //                     adminLoggedIn = true;
+    //                     this.displayLoggedInMenu();
+    //                 }
+    //                 else{
+    //                     System.out.print("Wrong Username/Password.");
+    //                     System.out.println(" Try again!");
+    //                 }
+    //                 break;
+    //             case 2:
+    //                 break;
+    //             case 0:
+    //                 System.out.println("Heading back to Main Menu....");
+    //                 mainApp2.main(null);
+    //                 break;
+    //         }
             
-        } while(toQuit == false && adminLoggedIn == false);
-    }
+    //     } while(toQuit == false && adminLoggedIn == false);
+    // }
 
 // PRIVATE METHODS
 
@@ -99,7 +102,7 @@ public class adminApp {
  * DISPLAY MENU FOR STAFF TO EDIT AND DO STUFF *
  ***********************************************
  */
-    private void displayLoggedInMenu(){
+    public void displayLoggedInMenu(Account account){
 
         // System.out.println("");
 
@@ -159,17 +162,20 @@ public class adminApp {
                                     " 2. Manage Movie Reviews                                   \n" +
                                     " 3. Manage Cinema Showtimes                                \n" +
                                     " 4. Configure System Settings                              \n" +
-                                    " 5. Logout from StaffApp                                  \n"+
+                                    " 5. Create New Staff Account                               \n" +
+                                    " 6. Delete Staff Account                                   \n" +
+                                    " 7. Logout from StaffApp                                   \n" +
                                     "===========================================================");
                 System.out.println("Enter choice: ");
     
                 while (!sc.hasNextInt()) {
-                    System.out.println("Error Input. Enter 1-5 only!!");
+                    System.out.println("Error Input. Enter 1-7 only!!");
                     sc.next(); // Remove newline character
                 }
                 while(true){
                     try{
                         choice = sc.nextInt();
+                        sc.nextLine();
                         break;
                     }catch(InputMismatchException e){
                         System.out.println("Enter numbers only!");
@@ -190,18 +196,33 @@ public class adminApp {
                     case 4:
                         SystemSettingsManager.getInstance().staffMenu(0);
                         break;
-                    case 5: 
+                    case 5:
+                        if(account.getAccessLevel().equals("SA")){
+                            List<Account>accountList = AccountManager.getInstance().getAccountList();
+                            if(StaffAccManager.getInstance().createStaffAccount(accountList)){
+                                System.out.println("Account created!");
+                            }
+                            else{
+                                System.out.println("Failed to create account!");
+                            }
+                        }
+                        else{
+                            System.out.println("No access!");
+                        }
+                        break;
+                    case 7: 
                         System.out.println("Logging out from StaffApp, have a nice day!");
-                        sc.nextLine();
-                        displayLoginMenu();
+                        mainApp2.main(null);
                         break;
                     
                     default:
-                        System.out.println("Error input, please only choose 1-5.");
+                        System.out.println("Error input, please only choose 1-7.");
                         break;
                 }
-            }while(choice != 5);
+            }while(choice != 7);
     }
 
-    
+    public void createAccount(){
+
+    }
 }

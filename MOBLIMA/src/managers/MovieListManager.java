@@ -49,6 +49,7 @@ public class MovieListManager {
 				}
 			}
 			updateMovieRatingScores(movieList, ReviewListManager.getInstance().getReviewList());
+			// updateMovieSales(movieList);
 			updateEndOfShowing(movieList);
 			br.close();
 		}
@@ -106,9 +107,9 @@ public class MovieListManager {
 	}
 
 	// TO DO
-	public static boolean updateMovieSales(List<Movie>movieList){
-		return true;
-	}
+	// public static boolean updateMovieSales(List<Movie>movieList){
+	// 	return TransactionManager.getInstance().updateTotalSales();
+	// }
 
 
 	// If Current date is after the end of showing date, we will update it to end of showing immediately.

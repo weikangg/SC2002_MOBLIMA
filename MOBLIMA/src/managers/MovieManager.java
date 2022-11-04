@@ -61,9 +61,11 @@ public class MovieManager {
                     System.out.println("Failed to create movie!");
                 }
                 break;
+            // Staff can view full list of movies without restriction
             case 2:
                 StaffPrintMovieManager.printMovieList(movieList, reviewList);
                 break;
+            // Staff can search the movie info by movieID
             case 3:
                 System.out.println("Enter MovieID: ");
                 int movieID;

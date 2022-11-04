@@ -7,17 +7,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class StaffLogin {
-    public static StaffLogin object = null;
+    public static StaffLogin single_instance = null;
 
     public static StaffLogin getInstance(){
-        if (object == null){
-            object = new StaffLogin();
+        if (single_instance == null){
+            single_instance = new StaffLogin();
         }
-        return object;
+        return single_instance;
     }
     private StaffLogin(){}
 
-    public boolean checkLogin(String username , String password){
+    public boolean checkStaffLogin(String username , String password){
         try{
             String line = "";
 
@@ -27,20 +27,11 @@ public class StaffLogin {
             BufferedReader br = new BufferedReader(new FileReader(path.toAbsolutePath().toString()));
             while((line = br.readLine()) != null){
                 String[] values = line.split(",");
-                // System.out.println("IN DATABASE..");
-                // System.out.println("Username: " + values[0].substring(1,values[0].length()) 
-                //                     + "\nPassword: " + values[1].substring(0, values[1].length()-1));
-
-                // IF USERNAME AND PASSWORD MATCH, here I take the substring of what's read in from
-                // THE CSV BECAUSE FOR SOME REASON WHEN IT READS IN THE LINE FROM THE CSV, IT HAS AN INVERTED COMMA AT THE START
-                // FOR THE USERNAME AND CLOSING COMMAS FOR THE PASSWORD.
-                if(values[0].substring(1,values[0].length()).equals(username) 
-                && values[1].substring(0, values[1].length()-1).equals(password)){
+                if(values[0].equals(username) && values[1].equals(password)){
                     br.close();
                     return true;
                 }
             }
-
             // IF NO MATCH
             br.close();
             return false;

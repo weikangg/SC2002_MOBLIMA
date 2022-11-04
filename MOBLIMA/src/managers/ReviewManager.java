@@ -32,7 +32,7 @@ public class ReviewManager {
     private ReviewManager(){
     }
 
-    public void reviewMenu(int choice, User user){
+    public void reviewMenu(int choice, Account user){
         int option = 0;
         try{
             if(choice == 0){
@@ -96,7 +96,7 @@ public class ReviewManager {
                 break;
             case 5:
                 System.out.println("Returning to Customer Menu...");
-                customerApp.getInstance().logInMenu(user);
+                customerApp.getInstance().bookingAndReviewMenu(user);
             default:
                 System.out.println("Invalid choice. Please enter a number between 1-5.");
                 break;

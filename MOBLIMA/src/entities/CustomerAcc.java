@@ -1,26 +1,23 @@
-package managers;
+package entities;
 
 import java.util.LinkedList;
 import java.util.ArrayList;
 import entities.*;
 
-public class CustomerAcc {
-    private String name;
-    private String email;
-    private String mobile;
-    private String age;
-    private String password;
+public class CustomerAcc extends Account {
+
     //create transaction history using linked list
     private LinkedList<Transaction> bookingHistory = new LinkedList<Transaction>();
 
     //constructor
-    public CustomerAcc(String name, String email, String mobile, String age, String password)
+    public CustomerAcc(String name, String email, int mobile, int age, String password, String accessLevel)
     {
-        this.name = name;
+        this.username = name;
         this.email = email;
         this.mobile = mobile;
         this.age = age;
         this.password = password;
+        this.accessLevel = accessLevel;
     }
 
 /*    public ArrayList<CustomerAcc> readCustomerFile(){
@@ -77,40 +74,4 @@ public class CustomerAcc {
         return;
     }
 
-    public void setName(String n){
-        this.name = n;
-        return;
-    }
-    public void setEmail(String e){
-        this.email = e;
-        return;
-    }
-    public void setMobile(String m){
-        this.mobile = m;
-        return;
-    }
-    public void setAge(String a){
-        this.age = a;
-        return;
-    }
-    public void setPassword(String p){
-        this.password = p;
-        return;
-    }
-
-    public String getName(){
-        return this.name;
-    }
-    public String getEmail(){
-        return this.email;
-    }
-    public String getMobile(){
-        return this.mobile;
-    }
-    public String getAge(){
-        return this.age;
-    }
-    public String getPassword(){
-        return this.password;
-    }
 }

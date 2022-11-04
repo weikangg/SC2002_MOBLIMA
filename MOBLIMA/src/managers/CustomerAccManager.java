@@ -1,8 +1,12 @@
 package managers;
 
 import java.util.Scanner;
+
+import entities.CustomerAcc;
+
 import java.util.List;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,10 +15,8 @@ import java.io.FileNotFoundException;
 
 public class CustomerAccManager {
     
-    static String path = System.getProperty("user.dir") +"\\data\\customer\\account.csv";
+    static String path = System.getProperty("user.dir") +"\\data\\accounts\\accounts.csv";
     static String item_Separator = ",";	
-	static String row_Separator =";";
-	static String first_Item =" ;";
 
     Scanner scan = new Scanner(System.in);
 
@@ -32,13 +34,18 @@ public class CustomerAccManager {
 			br = new BufferedReader(new FileReader(path));
 			while((line = br.readLine()) !=null ) {
 				String[] custcsv = line.split(item_Separator);
-				if(!custcsv[0].equals("MOVIE_TITLE")) {
-					custemp = new CustomerAcc(custcsv[0],custcsv[1],custcsv[2],custcsv[3],custcsv[4]);
+				if(!custcsv[0].equals("USERNAME")) {
+                    int customerMobile = Integer.parseInt(custcsv[2]);
+                    int customerAge = Integer.parseInt(custcsv[3]);
+					custemp = new CustomerAcc(custcsv[0],custcsv[1],customerMobile,customerAge,custcsv[4],custcsv[5]);
 					customers.add(custemp);
 				}
 			}
 			br.close();
 		}
+        catch(NumberFormatException e){
+            System.out.println("Check age and mobile are numbers in database!");
+        }
 		catch(ArrayIndexOutOfBoundsException e){
 			return customers;
 		}
@@ -51,8 +58,8 @@ public class CustomerAccManager {
     public static CustomerAcc createAcc(){
         String name;
         String email;
-        String mobile;
-        String age;
+        int mobile;
+        int age;
 		String password;
         Scanner scan = new Scanner(System.in);
         List<CustomerAcc> customers = CustomerAccManager.getCustomerList();
@@ -65,25 +72,56 @@ public class CustomerAccManager {
         System.out.println("Enter your email:");
         email = scan.nextLine();
 
-        System.out.println("Enter mobile:");
-        mobile = scan.nextLine();
-
-        System.out.println("Enter age:");
-        age = scan.nextLine();
+        while(true){
+            try{
+                System.out.println("Enter mobile:");
+                mobile = scan.nextInt();
+                scan.nextLine();
+                break;
+            }catch(InputMismatchException e){
+                System.out.println("Please enter a valid mobile number!");
+                scan.nextLine();
+                continue;
+            }
+        }
+        while(true){
+            try{
+                System.out.println("Enter age:");
+                age = scan.nextInt();
+                scan.nextLine();
+                break;
+            }catch(InputMismatchException e){
+                System.out.println("Please enter a valid age!");
+                scan.nextLine();
+                continue;
+            }
+        }
 
 		System.out.println("Enter password:");
 		password = scan.nextLine();
-
-        CustomerAcc acc = new CustomerAcc(name, email, mobile, age, password);
-	customers.add(acc);
+        String accessLevel = "C";
+        CustomerAcc acc = new CustomerAcc(name, email, mobile, age, password,accessLevel);
+	    customers.add(acc);
 	    
 
 		String separator = ",";
 		try {
-            FileWriter csvWriter = new FileWriter(path);
+            FileWriter csvWriter = new FileWriter(path, false);
+            csvWriter.append("USERNAME");
+			csvWriter.append(separator);
+			csvWriter.append("EMAIL");
+			csvWriter.append(separator);
+			csvWriter.append("MOBILE");
+			csvWriter.append(separator);
+			csvWriter.append("AGE");
+			csvWriter.append(separator);
+			csvWriter.append("PASSWORD");
+            csvWriter.append(separator);
+			csvWriter.append("ACCESS_LEVEL");
+			csvWriter.append("\n");
             for (CustomerAcc cust : customers){
                 StringBuilder sb = new StringBuilder();
-			    sb.append(cust.getName());
+			    sb.append(cust.getUsername());
 			    sb.append(separator);
 			    sb.append(cust.getEmail());
 			    sb.append(separator);
@@ -92,6 +130,8 @@ public class CustomerAccManager {
 			    sb.append(cust.getAge());
 			    sb.append(separator);
 				sb.append(cust.getPassword());
+                sb.append(separator);
+				sb.append(cust.getAccessLevel());
 			    sb.append('\n');
 			    csvWriter.append(sb.toString());
             }
@@ -115,19 +155,20 @@ public class CustomerAccManager {
         try{
             String line = "";
 
-            String path = System.getProperty("user.dir") +"\\data\\customer\\account.csv";
+            String path = System.getProperty("user.dir") +"\\data\\accounts\\account.csv";
 
             BufferedReader br = new BufferedReader(new FileReader(path));
             while((line = br.readLine()) != null){
                 String[] values = line.split(",");
 
-                if(values[0].equals(username) && values[4].equals(password)){
+                if(values[0].equals(username) && values[4].equals(password) && values[5].equals("C")){
                     br.close();
                     return true;
                 }
             }
 
             // IF NO MATCH
+            System.out.println("User Account not found!");
             br.close();
             return false;
         }catch(FileNotFoundException e){
