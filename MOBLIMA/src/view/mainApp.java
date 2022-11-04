@@ -1,6 +1,7 @@
 package view;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.io.File;
 
 /* 
  * Main app to run to choose either Customer or Staff App
@@ -9,6 +10,13 @@ import java.util.Scanner;
 public class mainApp {
 
     public static void main(String[] args){
+
+        File directory = new File("SC2002_OOP\\MOBLIMA").getAbsoluteFile();
+        if (directory.exists()) System.setProperty("user.dir", directory.getAbsolutePath());
+        directory = new File("MOBLIMA").getAbsoluteFile();
+        if (directory.exists()) System.setProperty("user.dir", directory.getAbsolutePath());
+        
+        System.out.println(System.getProperty("user.dir"));
         
         Scanner scan = new Scanner(System.in); //Scanner Object Instantiation
         int input = -1; //User Input

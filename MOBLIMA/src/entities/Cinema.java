@@ -64,8 +64,9 @@ public class Cinema extends Cineplex{
 
         try {
             //Create File
-            Path path = Paths.get("data\\cineplexes\\"+super.getName()+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+numShowtimes+".csv");
+            Path path = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes\\"+super.getName()+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+numShowtimes+".csv");
             File file = new File(path.toAbsolutePath().toString());
+            
 
             String[] str = dateTime.toString().split("T",2);
             String strDateTime = str[0]+" "+str[1];
@@ -96,7 +97,7 @@ public class Cinema extends Cineplex{
             
             //Write to cineplexes.csv
 
-            path = Paths.get("data\\cineplexes.csv");
+            path = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes.csv");
             FileReader filereader = new FileReader(path.toAbsolutePath().toString()); //CSVReader Instantiation
             CSVReader csvReader = new CSVReader(filereader); 
             List<String[]> r = csvReader.readAll(); //Read File
@@ -140,7 +141,7 @@ public class Cinema extends Cineplex{
         }
 
         //Delete showtime csv file
-        Path path = Paths.get("data\\cineplexes\\"+super.getName()+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+showtimeID+".csv");
+        Path path = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes\\"+super.getName()+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+showtimeID+".csv");
         File file = new File(path.toAbsolutePath().toString());
 
         if (file.delete()) { 
@@ -154,7 +155,7 @@ public class Cinema extends Cineplex{
 
         try {
 
-            path = Paths.get("data\\cineplexes.csv");
+            path = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes.csv");
             FileReader filereader = new FileReader(path.toAbsolutePath().toString()); //CSVReader Instantiation
             CSVReader csvReader = new CSVReader(filereader); 
             List<String[]> r = csvReader.readAll(); //Read File
@@ -183,10 +184,10 @@ public class Cinema extends Cineplex{
 
         //Update filename of showtimes after and update numShowtimes
         for(int i = showtimeID + 1; i < numShowtimes; i++){
-            Path pathTwo = Paths.get("data\\cineplexes\\"+super.getName()+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+i+".csv");
+            Path pathTwo = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes\\"+super.getName()+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+i+".csv");
             File fileTwo = new File(pathTwo.toAbsolutePath().toString());
 
-            Path newPath = Paths.get("data\\cineplexes\\"+super.getName()+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+(i-1)+".csv");
+            Path newPath = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes\\"+super.getName()+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+(i-1)+".csv");
             File newFile = new File(newPath.toAbsolutePath().toString());
 
             fileTwo.renameTo(newFile);
