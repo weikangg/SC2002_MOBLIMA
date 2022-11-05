@@ -213,8 +213,9 @@ public class SystemSettingsManager {
             System.out.println("Please choose an option:");
             System.out.println("1. List Holidays");
             System.out.println("2. Add a Holiday");
-            System.out.println("3. Remove a Holiday");
-            System.out.println("4. Back to SystemSettingsManager");
+            System.out.println("3. Update a Holiday");
+            System.out.println("4. Remove a Holiday");
+            System.out.println("5. Back to SystemSettingsManager");
             int option; 
             try{
                 option = sc.nextInt();
@@ -240,6 +241,18 @@ public class SystemSettingsManager {
                     }
                     break;
                 case 3:
+                    int result = StaffHolidayCRUDManager.getInstance().staffUpdateHoliday(holidayList);
+                    if(result == 1){
+                        System.out.println("Holiday Updated!");
+                    }
+                    else if(result == 2){
+                        System.out.println("No updates made.");
+                    }
+                    else{
+                        System.out.println("Failed to update holiday!");
+                    }
+                    break;
+                case 4:
                     if(StaffHolidayCRUDManager.getInstance().removeHolidayFromDatabase(holidayList)){
                         System.out.println("Holiday successfully removed!");
                     }
@@ -247,7 +260,7 @@ public class SystemSettingsManager {
                         System.out.println("Failed to remove holiday!");
                     }
                     break;
-                case 4:
+                case 5:
                     System.out.println("Back to Systems Settings......");
                     this.staffMenu(0,account);
                     break;
