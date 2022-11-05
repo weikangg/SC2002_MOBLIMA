@@ -28,40 +28,40 @@ public class TicketPrice implements Serializable{
 		String path2 = System.getProperty("user.dir") +"\\data\\movietypeprice.csv";
 		BufferedReader bufReader;
 		BufferedReader bufReaderTwo;
-        ArrayList<Double> price = new ArrayList<>();
-        ArrayList<Double> mtPrice = new ArrayList<>();
-        try {
-            bufReader = new BufferedReader(new FileReader(path));
-            
-            //listOfLines.add(0.2);
-            String line = bufReader.readLine();
-            while (line != null) 
-            {
+        	ArrayList<Double> price = new ArrayList<>();
+        	ArrayList<Double> mtPrice = new ArrayList<>();
+		try {
+		    bufReader = new BufferedReader(new FileReader(path));
 
-                price.add(Double.valueOf(line));
-				//System.out.println(line);
-                line = bufReader.readLine();
-            }
-            bufReader.close();
-        }
-        catch (FileNotFoundException e){}
-        catch (IOException e){}
-        try {
-            bufReaderTwo = new BufferedReader(new FileReader(path2));
-            
-            //listOfLines.add(0.2);
-            String line = bufReaderTwo.readLine();
-            while (line != null) 
-            {
+		    //listOfLines.add(0.2);
+		    String line = bufReader.readLine();
+		    while (line != null) 
+		    {
 
-                mtPrice.add(Double.valueOf(line));
-				//System.out.println(line);
-                line = bufReaderTwo.readLine();
-            }
-            bufReaderTwo.close();
-        }
-        catch (FileNotFoundException e){System.out.println("TicketPrice error");}
-        catch (IOException e){System.out.println("TicketPrice error");}
+			price.add(Double.valueOf(line));
+					//System.out.println(line);
+			line = bufReader.readLine();
+		    }
+		    bufReader.close();
+		}
+		catch (FileNotFoundException e){}
+		catch (IOException e){}
+		try {
+		    bufReaderTwo = new BufferedReader(new FileReader(path2));
+
+		    //listOfLines.add(0.2);
+		    String line = bufReaderTwo.readLine();
+		    while (line != null) 
+		    {
+
+			mtPrice.add(Double.valueOf(line));
+					//System.out.println(line);
+			line = bufReaderTwo.readLine();
+		    }
+		    bufReaderTwo.close();
+		}
+		catch (FileNotFoundException e){System.out.println("TicketPrice error");}
+		catch (IOException e){System.out.println("TicketPrice error");}
 		//this.price = new Double[]{8.50,9.50,9.50,11.0,11.0,4.0,7.0,12.0};
 		//this.mtPrice = new Double[]{1.00,1.29,1.45,1.50};
 		int x = 0;
