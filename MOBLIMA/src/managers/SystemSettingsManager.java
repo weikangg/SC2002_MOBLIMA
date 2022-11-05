@@ -5,7 +5,6 @@ import java.util.*;
 
 import entities.*;
 import view.adminApp;
-
 import static utils.IOUtils.*;
 
 public class SystemSettingsManager {
@@ -226,13 +225,14 @@ public class SystemSettingsManager {
                 sc.nextLine();
                 continue;
             }
+            List<Holidays>holidayList = HolidayListManager.getInstance().getHolidayList();
             switch (option) {
                 case 1:
                     System.out.println("Current Holidays: ");
-                    Holidays.listHolidays();
+                    StaffHolidayCRUDManager.getInstance().listHolidays();
                     break;
                 case 2:
-                    if (StaffAddHolidayToList.staffAddHoliday(HolidayListManager.getInstance().getHolidayList())) {
+                    if (StaffHolidayCRUDManager.getInstance().staffAddHoliday(holidayList)) {
                         System.out.println("Holiday Added!");
                     } 
                     else {
@@ -240,7 +240,7 @@ public class SystemSettingsManager {
                     }
                     break;
                 case 3:
-                    if(StaffRemoveHolidayManager.removeHolidayFromDatabase(HolidayListManager.getInstance().getHolidayList())){
+                    if(StaffHolidayCRUDManager.getInstance().removeHolidayFromDatabase(holidayList)){
                         System.out.println("Holiday successfully removed!");
                     }
                     else{
