@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import com.opencsv.*;
 import com.opencsv.exceptions.CsvException;
@@ -46,7 +47,12 @@ public class CineplexManager {
             //Config Cinemas in all Cineplexes
 
             for(int i = 0; i < cineplexes.length; i++){
-                cineplexes[i].configCinema();                
+                ArrayList<String> str = new ArrayList<String>();
+                for(int j = 3+Integer.valueOf(r.get(i+1)[2]); j < 3+2*Integer.valueOf(r.get(i+1)[2]); j++){
+                    str.add(r.get(i+1)[j]);
+                }
+
+                cineplexes[i].configCinema(str);                
             }
 
             //Config Movies in Cinemas in Cineplexes

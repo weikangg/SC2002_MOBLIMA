@@ -1,6 +1,9 @@
 package managers;
 
 import java.util.*;
+
+import javax.sound.sampled.SourceDataLine;
+
 import entities.*;
 import view.adminApp;
 
@@ -47,6 +50,7 @@ public class ShowtimeManager {
         }
 
         Cinema cinema;
+        Cineplex cineplex;
         Showtime showtime;
         int[] inputs;
         int movieID;
@@ -60,9 +64,9 @@ public class ShowtimeManager {
                 inputs = promptShowtimeSelection();
 
                 if(inputs==null) break;
-                
+
                 showtime = CineplexManager.configCineplexes()[inputs[0]].getCinemas()[inputs[1]].getShowtimes()[inputs[2]];
-                
+
                 showtime.showInfo();
                 showtime.showSeats();
 
@@ -169,7 +173,7 @@ public class ShowtimeManager {
             //Prompt Cinemas
             Cinema[] cinemas = cineplexes[cineplexID].getCinemas();
             for(int i = 0; i < cinemas.length; i++){
-                System.out.println((i+1) + ": Hall " + (cinemas[i].getCinemaID()+1));
+                System.out.println((i+1) + ": Hall " + (cinemas[i].getCinemaID()+1)+", Class: "+cinemas[i].getCinemaClass());
             }
 
             System.out.println("");
@@ -224,7 +228,7 @@ public class ShowtimeManager {
             Cinema[] cinemas = cineplexes[cineplexID].getCinemas();
 
             for(int i = 0; i < cinemas.length; i++){
-                System.out.println((i+1) + ": Hall " + (cinemas[i].getCinemaID()+1));
+                System.out.println((i+1) + ": Hall " + (cinemas[i].getCinemaID()+1)+", Class: "+cinemas[i].getCinemaClass());
             }
 
             System.out.println("");

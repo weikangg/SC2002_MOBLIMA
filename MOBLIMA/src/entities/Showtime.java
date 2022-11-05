@@ -35,8 +35,8 @@ public class Showtime extends Cinema{
     private int[][] seats;
     private Movie movie;
 
-    public Showtime(String name, String location, int numCinemas, int cineplexID, int cinemaID, int showtimeID){
-        super(name, location, numCinemas, cineplexID, cinemaID);
+    public Showtime(String name, String location, int numCinemas, int cineplexID, int cinemaID, CinemaClass cinemaClass, int showtimeID){
+        super(name, location, numCinemas, cineplexID, cinemaID, cinemaClass);
         this.showtimeID = showtimeID;
         
         try {
@@ -55,7 +55,7 @@ public class Showtime extends Cinema{
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
             this.dateTime = dateTime;
-
+            
             if(r.get(1)[2].equals("TWOD")){
                 this.movieType = MovieType.TWOD;
             }else if(r.get(1)[2].equals("THREED")){
@@ -126,35 +126,10 @@ public class Showtime extends Cinema{
     }
 
     /**
-     * Printer method for showtime information and seats
-     */
-    public void show(){ 
-        System.out.println(super.getName()+", Hall "+(super.getCinemaID()+1));
-
-        System.out.println("Showtime ID: " + getShowtimeID());
-        System.out.println("Movie ID: " + getMovieID());
-        System.out.println("Movie Title: " + getMovieTitle());
-        System.out.println("Date and Time: " + getDateTime().toString());
-        System.out.println("Type: " + getMovieType().toString());
-        System.out.println("Cinema Status: " + getCinemaStatus());
-        System.out.println("");
-        
-        for (int i = 0; i < 5; i++){
-            for(int j = 0; j < 10; j++){
-
-                System.out.print(seats[i][j]);
-
-            }
-            System.out.println("");
-        }
-
-    }
-
-    /**
      * Printer method for showtime information
      */
     public void showInfo(){ 
-        System.out.println(super.getName()+", hall "+(super.getCinemaID()+1)+", movie " + getShowtimeID());
+        System.out.println(super.getName()+", Hall "+(super.getCinemaID()+1)+", Class: " +super.getCinemaClass());
 
         System.out.println("Showtime ID: " + getShowtimeID());
         System.out.println("Movie ID: " + getMovieID());
