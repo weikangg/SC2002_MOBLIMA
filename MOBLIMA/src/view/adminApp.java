@@ -184,7 +184,7 @@ public class adminApp {
                         MovieManager.getInstance().staffMenu(0,account);
                         break;
                     case 2:
-                        // Hide from viewer?
+                        // Delete reviews of user?
                         break;
                     case 3:
                         ShowtimeManager.getInstance().staffMenu(0,account);
