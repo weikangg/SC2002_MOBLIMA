@@ -78,14 +78,15 @@ public class customerApp {
                     CustomerAccManager.createAcc(accountManager.getAccountList());
                     break;
                 case 3:
-                    char cineplex;
-                    int cineplexID;
                     int idx = 1;
                     Showtime movst;
-                    String name;
                     List<Showtime> showtime;
 
                     //ask user for cineplex
+                    /*
+                    String name;
+                    char cineplex;
+                    int cineplexID;
                     System.out.println("Please choose a Cineplex(A,B,C):");
                     cineplex = scan.next().charAt(0);
                     scan.nextLine();
@@ -124,7 +125,27 @@ public class customerApp {
                     movst = showtime.get(input - 1);
     
                     //call bookingmenu in booking manager
+                    movst.showSeats();*/
+                    showtime = CustomerShowtime.searchMovieShowtime(movieList, reviewList);
+                    if(showtime.isEmpty())
+                    {
+                        break;
+                    }
+                
+                    //show user movie timing
+                    for(Showtime st: showtime)
+                    {
+                        System.out.println(idx + ". " + st.getDateTime());
+                        idx++;
+                    }
+                    //ask user to choose a movie timing
+                    System.out.println("Please choose a timing:");
+                    input = scan.nextInt();
+                    movst = showtime.get(input - 1);
+    
+                    //call bookingmenu in booking manager
                     movst.showSeats();
+
                     break;
                 case 4:
                     CustomerMovieManager.printMovieList(movieList,reviewList);
@@ -304,6 +325,8 @@ public class customerApp {
     public void bookingAndReviewMenu(Account user){
         int input = 5;
         boolean exit = false;
+        List<Movie> movieList = MovieListManager.getInstance().getMovieList();
+        List<Review> reviewList = ReviewListManager.getInstance().getReviewList();
        
         do{
             //menu
@@ -327,14 +350,14 @@ public class customerApp {
             switch(input){
                 case 1:
                 //book ticket
-                char cineplex;
-                int cineplexID;
                 int idx = 1;
                 Showtime movst;
-                String name;
-                List<Movie> movieList = MovieListManager.getInstance().getMovieList();
-                List<Review> reviewList = ReviewListManager.getInstance().getReviewList();
                 List<Showtime> showtime;
+
+                /*char cineplex;
+                int cineplexID;
+                String name;
+                
 
                 //ask user for cineplex
                 System.out.println("Please choose a Cineplex(A,B,C):");
@@ -353,11 +376,11 @@ public class customerApp {
                 //ask user for movie
                 CustomerMovieManager.printMovieList(movieList, reviewList);
                 System.out.println("Please choose a movie:");
-                name = scan.nextLine();
+                name = scan.nextLine();*/
                 
 
                 //link the movie to showtime
-                showtime = CustomerShowtime.searchMovieID(name, cineplexID);
+                showtime = CustomerShowtime.searchMovieShowtime(movieList, reviewList);
                 if(showtime.isEmpty())
                 {
                     break;

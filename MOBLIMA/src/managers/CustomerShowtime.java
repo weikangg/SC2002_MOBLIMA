@@ -8,6 +8,7 @@ import entities.Showtime;
 import entities.Cinema;
 import entities.Cineplex;
 import entities.Movie;
+import entities.Review;
 
 public class CustomerShowtime {
     String movieName;
@@ -61,6 +62,64 @@ public class CustomerShowtime {
         return list;
     }
 
+    public static ArrayList<Showtime> searchMovieShowtime(List<Movie> movieList, List<Review> reviewList)
+    {
+        String name;
+        char cineplex;
+        int cineplexID;
+
+        Scanner scan = new Scanner(System.in);
+
+        //ask user for cineplex
+        System.out.println("Please choose a Cineplex(A,B,C):");
+        cineplex = scan.next().charAt(0);
+        scan.nextLine();
+        cineplexID = (int)cineplex;
+        if(cineplexID > 90)
+        {
+            cineplexID -= (int)'a';
+        }
+        else
+        {
+            cineplexID -= (int)'A';
+        }
+        
+        //ask user for movie
+        CustomerMovieManager.printMovieList(movieList, reviewList);
+        System.out.println("Please choose a movie:");
+        name = scan.nextLine();
+        
+
+        //link the movie to showtime
+        ArrayList<Showtime> list = new ArrayList<Showtime>();
+        int id = -1;
+        for(Movie mov : movieList)
+        {
+            if(name.equals(mov.getMovieTitle()))
+            {
+                id = mov.getMovieID();
+            }
+        }
+        if(id == -1)
+        {
+            System.out.println("Movie not found");
+            return list;
+        }
+
+        Cineplex[] cineplexes = CineplexManager.configCineplexes(); 
+        Cinema[] cinemas = cineplexes[cineplexID].getCinemas();
+
+        for(int i = 0; i < cinemas.length; i++)
+        {
+            Showtime[] showtimes = cinemas[i].getShowtimes();
+            for(int j = 0; j < showtimes.length; j++)
+            {
+                if(showtimes[j].getMovieID() == id)list.add(showtimes[j]);
+            }
+        }
+        return list;
+        
+    }
 
 
     // ArrayList<Showtime> list = cineplexes[0].searchMovie(5); (search for movie)
