@@ -37,6 +37,7 @@ public class TicketManager {
 	
 	public void ticketMenu(Showtime showtime, ArrayList<String> confirmedSeats, int[][] plan)
 	{
+        //System.out.println("Inside Ticket Menu");
         setH(HolidayListManager.getInstance().getHolidayList());
         ArrayList<Ticket> ticketArray = new ArrayList<>();
         setTicketArray(ticketArray);
