@@ -1,6 +1,10 @@
 package managers;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import entities.Transaction;
+import view.customerApp;
 import entities.Ticket;
 import entities.Movie;
 import entities.Showtime;
@@ -21,6 +25,7 @@ public class TransactionManager
     private Boolean isPromo = false;
 	Boolean notQuit = true;
 	private Scanner sc = new Scanner(System.in);
+    String userInfo;
 
     private static TransactionManager single_instance = null;
     public static TransactionManager getInstance()
@@ -78,6 +83,7 @@ public class TransactionManager
                     case 1: //Make payment
                         setTotalPrice();
                         System.out.println("Total payment will be $" + getTotalPrice());
+                        enterUserInfo();
                         BookingManager.newBM().createBooking();
                         notQuit = false;
                         break;
@@ -95,6 +101,73 @@ public class TransactionManager
                 }
         }
     }
+
+    public void enterUserInfo()
+    {
+        boolean checks = true;
+        System.out.println("Hello Customer " + BookingManager.newBM().getUser().getUsername());
+        System.out.println(
+            "===================  Enter Information  =================\n" +
+            "Name (NRIC): "
+            );
+        String name = sc.nextLine();
+        while(checks)
+        {
+            for (int i = 0; i < name.length(); ++i)
+            {
+                char ch = name.charAt(i);
+                if (Character.isDigit(ch)) {
+                    checks = true;
+                    System.out.println("Name (NRIC): ");
+                    name = sc.nextLine();
+                    break;
+                }
+            }checks = false;
+        }
+        checks = true;
+        System.out.println("Mobile Number: +65");
+        String mobileNo = "+65 " + sc.nextLine();
+        //sc.nextLine();
+        while(checks)
+        {
+            Pattern singaporeRegex = Pattern.compile("^(\\+\\d{2}( )?)?\\d{4}[- .]?\\d{4}$");
+            Matcher m = singaporeRegex.matcher(mobileNo);
+            if(m.matches())
+            {
+                checks = false;
+            }
+            else
+            {
+                System.out.println("Mobile Number: +65");
+                mobileNo = "+65 " + sc.nextLine();
+            }
+        }
+        System.out.println("Email: ");
+        String email = sc.nextLine();
+        checks = true;
+        while(checks)
+        {
+            Pattern regex = Pattern.compile("^(.+)@(.+)$");
+            Matcher mTwo = regex.matcher(email);
+            if(mTwo.matches())
+            {
+                checks = false;
+            }
+            else
+            {
+                System.out.println("Email: ");
+                email = sc.nextLine();
+            }
+        }
+        this.userInfo = "Name: " + name + "Mobile Number: " + mobileNo + "Email: " + email + "\n"; 
+        
+    }
+    public String getUserInfo()
+    {
+        return this.userInfo;
+    }
+
+
 
     public void makeTransaction()
     {
@@ -183,17 +256,21 @@ public class TransactionManager
 
     public void updateTotalSales()
     {
+        List<Movie> newML = new ArrayList<>();
         for(Movie m : MovieListManager.getInstance().getMovieList())
         {
-            if(m.getMovieTitle().equals(getShowtime().getMovieTitle()) == true)
+            //System.out.println("Movie Title = " + m.getMovieTitle());
+            if(m.getMovieTitle().equals(getShowtime().getMovieTitle()))
             {
-                double total = m.getProfitEarned() + getTotalPrice();
-                m.setProfitEarned(total);
-                break;
+                //System.out.println("Movie Title is the same = " + m.getMovieID());
+                m.setProfitEarned(m.getProfitEarned() + getTotalPrice());
+                //MovieListManager.getInstance().updateMoveListPrice(m.getMovieID(), 10.5);
+                //MovieListManager.updateMovieListCSV(MovieListManager.getInstance().getMovieList());
             }
+            newML.add(m);
         }
-        MovieListManager.updateMovieListCSV(MovieListManager.getInstance().getMovieList());
-
+        MovieListManager.updateMovieListCSV(newML);
+        //System.out.println("Price updated");
     }
 
 
