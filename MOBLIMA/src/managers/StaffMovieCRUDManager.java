@@ -28,7 +28,7 @@ public class StaffMovieCRUDManager {
     }
 
     //Staff create movie
-    public static boolean staffAddMovie(List<Movie> mList) {
+    public boolean staffAddMovie(List<Movie> mList) {
 		ShowingStatus status = null;
 		String movieTitle, synopsis, movieDirector, cast, genres, synopsisTmp, movieDirectorTmp, castTmp, genreTmp, movieTitleTmp, str;
 		int choice;
@@ -245,7 +245,7 @@ public class StaffMovieCRUDManager {
     }
 
     //Staff Update Movie
-    public static int updateMovie(List<Movie> movieList){
+    public int updateMovie(List<Movie> movieList){
         System.out.println("#########################################################");
         System.out.println("#################### UPDATING MOVIES ####################");
         System.out.println("#########################################################");
@@ -732,7 +732,7 @@ public class StaffMovieCRUDManager {
     }
 
     // Remove Movie by setting status to "End of showing" as per request of question
-    public static int setToEndShowing(List<Movie>mList){
+    public int setToEndShowing(List<Movie>mList){
         System.out.println("#########################################################");
 		System.out.println("#################### REMOVING MOVIES ####################");
 		System.out.println("#########################################################");
@@ -761,7 +761,7 @@ public class StaffMovieCRUDManager {
     }
 
     // Remove movie from database entirely, if a movie is removed from the database, all reviews regarding it are deleted as well.
-    public static int removeMovieFromDatabase(List<Movie> mList, List<Review> rList){
+    public int removeMovieFromDatabase(List<Movie> mList, List<Review> rList){
         System.out.println("#########################################################");
 		System.out.println("#################### REMOVING MOVIES ####################");
 		System.out.println("#########################################################");
@@ -831,7 +831,7 @@ public class StaffMovieCRUDManager {
 
     // STAFF CAN PRINT EVERYTHING & SEE ALL MOVIES REGARDLESS OF MOVIE STATUS 
 	// STAFF CAN ALSO VIEW ALL REVIEWS
-	public static void printMovieList(List<Movie>mList, List<Review>rList) {
+	public void printMovieList(List<Movie>mList, List<Review>rList) {
 		
 		int movieCount = 1;
 		// ReviewListManager file = new ReviewListManager();
@@ -900,7 +900,7 @@ public class StaffMovieCRUDManager {
 			}
 	}
 
-	public static int printMovieByID(List<Movie>mList, List<Review>rList, int movieID) {
+	public int printMovieByID(List<Movie>mList, List<Review>rList, int movieID) {
 		int found = 0;
 		System.out.println("#########################################################");
 		System.out.println("################## DISPLAYING MOVIES ####################");

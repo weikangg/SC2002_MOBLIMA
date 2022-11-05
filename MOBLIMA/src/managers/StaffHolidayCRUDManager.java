@@ -28,7 +28,7 @@ public class StaffHolidayCRUDManager {
         return single_instance;
     }
 
-    public static boolean staffAddHoliday(List<Holidays> hList) {
+    public boolean staffAddHoliday(List<Holidays> hList) {
 		String holName,holNametmp,dateStr;
         LocalDate holDate=null;
 		System.out.println("#########################################################");
@@ -63,7 +63,7 @@ public class StaffHolidayCRUDManager {
     }
 
      // Remove holiday from database entirely
-     public static boolean removeHolidayFromDatabase(List<Holidays> hList){
+     public boolean removeHolidayFromDatabase(List<Holidays> hList){
         System.out.println("#########################################################");
 		System.out.println("#################### REMOVING HOLIDAYS ##################");
 		System.out.println("#########################################################");
@@ -105,7 +105,7 @@ public class StaffHolidayCRUDManager {
     }
 
     //Print out list of holidays
-    public static void listHolidays(){
+    public void listHolidays(){
         BufferedReader br = null;
         String line = "";
 		try {

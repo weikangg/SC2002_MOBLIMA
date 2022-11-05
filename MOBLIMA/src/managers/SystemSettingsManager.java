@@ -229,10 +229,10 @@ public class SystemSettingsManager {
             switch (option) {
                 case 1:
                     System.out.println("Current Holidays: ");
-                    StaffHolidayCRUDManager.listHolidays();
+                    StaffHolidayCRUDManager.getInstance().listHolidays();
                     break;
                 case 2:
-                    if (StaffHolidayCRUDManager.staffAddHoliday(holidayList)) {
+                    if (StaffHolidayCRUDManager.getInstance().staffAddHoliday(holidayList)) {
                         System.out.println("Holiday Added!");
                     } 
                     else {
@@ -240,7 +240,7 @@ public class SystemSettingsManager {
                     }
                     break;
                 case 3:
-                    if(StaffHolidayCRUDManager.removeHolidayFromDatabase(holidayList)){
+                    if(StaffHolidayCRUDManager.getInstance().removeHolidayFromDatabase(holidayList)){
                         System.out.println("Holiday successfully removed!");
                     }
                     else{
