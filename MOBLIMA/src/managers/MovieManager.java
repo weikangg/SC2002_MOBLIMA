@@ -53,7 +53,7 @@ public class MovieManager {
         int result;
         switch (option) {
             case 1:
-                if (StaffMovieCRUDManager.getInstance().staffAddMovie(movieList)) {
+                if (StaffAddMovieToList.staffAddMovie(movieList)) {
                     System.out.println("Movie created!");
                 } 
                 else {
@@ -62,7 +62,7 @@ public class MovieManager {
                 break;
             // Staff can view full list of movies without restriction
             case 2:
-                StaffMovieCRUDManager.getInstance().printMovieList(movieList, reviewList);
+                StaffPrintMovieManager.printMovieList(movieList, reviewList);
                 break;
             // Staff can search the movie info by movieID
             case 3:
@@ -78,13 +78,13 @@ public class MovieManager {
                         continue;
                     }
                 }
-                result = StaffMovieCRUDManager.getInstance().printMovieByID(movieList,reviewList, movieID);
+                result = StaffPrintMovieManager.printMovieByID(movieList,reviewList, movieID);
                 if(result == 0){
                     System.out.println("Movie not found!");
                 }
                 break;
             case 4:
-                result = StaffMovieCRUDManager.getInstance().updateMovie(movieList);
+                result = StaffUpdateMovieManager.updateMovie(movieList);
                 if(result == 1){
                     System.out.println("Movie Updated!");
                 }
@@ -96,7 +96,7 @@ public class MovieManager {
                 }
                 break;
             case 5:
-                result = StaffMovieCRUDManager.getInstance().setToEndShowing(movieList);
+                result = StaffRemoveMovieManager.setToEndShowing(movieList);
                 if(result == 1){
                     System.out.println("Movie successfully set to end showing!");
                 }
@@ -111,7 +111,7 @@ public class MovieManager {
                 SystemSettings.getInstance().top5Movies(movieList);
                 break;
             case 7:
-                result = StaffMovieCRUDManager.getInstance().removeMovieFromDatabase(movieList,reviewList);
+                result = StaffRemoveMovieManager.removeMovieFromDatabase(movieList,reviewList);
                 if(result == 1){
                     System.out.println("Movie successfully removed!");
                 }
