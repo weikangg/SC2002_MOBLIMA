@@ -23,6 +23,7 @@ public class BookingManager implements Serializable{
     private ArrayList<Ticket> bookedTickets;
     private Booking booking;
     private Showtime showtime;
+    private User user;
     Boolean notQuit = true;
     
 	
@@ -37,11 +38,14 @@ public class BookingManager implements Serializable{
 	}
 
 	
+
+
 	
-	public void bookingMenu(Showtime showtime)
+	public void bookingMenu(Showtime showtime, User user)
 	{
         ArrayList<String> bookedSeats = new ArrayList<>();
         setBookedSeats(bookedSeats);
+        setUser(user);
 
 		//display seats at show time
 		//get user input to choose seats
@@ -84,7 +88,9 @@ public class BookingManager implements Serializable{
                 case 3://check at least 1 seat selected
                     if(confirmSelection(showtime))
                     {
-                        System.out.println("Going to Ticket Menu");
+                        //System.out.println("Going to Ticket Menu");
+                        //System.out.println("Booked Seat: " + getBookedSeats().get(0));
+                        //System.out.println("Seats = " + getSeats()[1][5]);
                         TicketManager.newTM().ticketMenu(showtime, getBookedSeats(), getSeats());
                         //Call ticket manager
                         //notQuit = false;
@@ -214,7 +220,7 @@ public class BookingManager implements Serializable{
         System.out.println(answer);
         while(true)
         {
-            System.out.println(answer);
+            //System.out.println(answer);
             if(answer.equals("No"))
             {
                 return false;
@@ -280,6 +286,10 @@ public class BookingManager implements Serializable{
     {
         return this.showtime;
     }
+    public User getUser()
+    {
+        return this.user;
+    }
 
 
 
@@ -304,6 +314,10 @@ public class BookingManager implements Serializable{
     {
         this.showtime = showtime;
     }
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
 
     public void updateShowtimeCSV()
     {
@@ -322,9 +336,10 @@ public class BookingManager implements Serializable{
 
     public void createBooking()
     {
+        String path = System.getProperty("user.dir") +"\\data\\bookings\\";
         ArrayList<Booking> userBookings = new ArrayList<Booking>();
-        String username = "user1";
-        String location = "MOBLIMA/data/bookings/" + username +"/";
+        String username = getUser().getUsername();
+        String location = path + username +"/";
         String filename = ".txt";
         int i = 1;
         String finalFile = location +i+ filename;
