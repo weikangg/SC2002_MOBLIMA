@@ -28,7 +28,7 @@ public class StaffHolidayCRUDManager {
         return single_instance;
     }
 
-    public boolean staffAddHoliday(List<Holidays> hList) {
+    public boolean staffAddHoliday(List<Holidays> holidayList) {
 		String holName,holNametmp,dateStr;
         LocalDate holDate=null;
 		System.out.println("#########################################################");
@@ -38,7 +38,7 @@ public class StaffHolidayCRUDManager {
 
 		System.out.print("Enter Holiday Name: ");
 		holNametmp = sc.nextLine();
-		if (hList.stream().filter(o -> o.getHolidayName().equalsIgnoreCase(holNametmp)).findFirst().isPresent()) {
+		if (holidayList.stream().filter(o -> o.getHolidayName().equalsIgnoreCase(holNametmp)).findFirst().isPresent()) {
 			System.out.println("Holiday Already Exists!");
 			return false;
 		}
@@ -55,7 +55,7 @@ public class StaffHolidayCRUDManager {
 			}
         }
         if(confirm("Confirm Add Holiday: ")){
-            if (HolidayListManager.addHolidayList(hList,holName,holDate))
+            if (HolidayListManager.addHolidayList(holidayList,holName,holDate))
                 return true;
             return false;
         }
