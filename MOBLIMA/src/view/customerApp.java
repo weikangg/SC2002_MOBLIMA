@@ -33,10 +33,11 @@ public class customerApp {
             System.out.print("================= MOBLIMA CUSTOMER INTERFACE =================\n"+
                                 "1. Log In\n"+
                                 "2. Create account\n"+
-                                "3. Show all movies\n"+
-                                "4. Search Movie by Name\n"+
-                                "5. Top 5 Movies\n"+
-                                "6. Back to main menu\n"+
+                                "3. Seat availability\n"+
+                                "4. Show all movies\n"+
+                                "5. Search Movie by Name\n"+
+                                "6. Top 5 Movies\n"+
+                                "7. Back to main menu\n"+
                             "==============================================================\n");
             //scanner
             while(true){
@@ -76,12 +77,60 @@ public class customerApp {
                     //ask user for information to create account
                     CustomerAccManager.createAcc(accountManager.getAccountList());
                     break;
-
                 case 3:
+                    char cineplex;
+                    int cineplexID;
+                    int idx = 1;
+                    Showtime movst;
+                    String name;
+                    List<Showtime> showtime;
+
+                    //ask user for cineplex
+                    System.out.println("Please choose a Cineplex(A,B,C):");
+                    cineplex = scan.next().charAt(0);
+                    scan.nextLine();
+                    cineplexID = (int)cineplex;
+                    if(cineplexID > 90)
+                    {
+                        cineplexID -= (int)'a';
+                    }
+                    else
+                    {
+                        cineplexID -= (int)'A';
+                    }
+                
+                    //ask user for movie
+                    CustomerMovieManager.printMovieList(movieList, reviewList);
+                    System.out.println("Please choose a movie:");
+                    name = scan.nextLine();
+                
+
+                    //link the movie to showtime
+                    showtime = CustomerShowtime.searchMovieID(name, cineplexID);
+                    if(showtime.isEmpty())
+                    {
+                        break;
+                    }
+                
+                    //show user movie timing
+                    for(Showtime st: showtime)
+                    {
+                        System.out.println(idx + ". " + st.getDateTime());
+                        idx++;
+                    }
+                    //ask user to choose a movie timing
+                    System.out.println("Please choose a timing:");
+                    input = scan.nextInt();
+                    movst = showtime.get(input - 1);
+    
+                    //call bookingmenu in booking manager
+                    movst.showSeats();
+                    break;
+                case 4:
                     CustomerMovieManager.printMovieList(movieList,reviewList);
                     break;
 
-                case 4:
+                case 5:
                 //search
                     System.out.println("Please enter the movie name:");
                     strinput = scan.nextLine();
@@ -90,7 +139,7 @@ public class customerApp {
                     }
                     break;
 
-                case 5:
+                case 6:
                     int displaySetting;
                     SystemSettings top5Movies = SystemSettings.getInstance();
                     
@@ -133,7 +182,7 @@ public class customerApp {
                     }
                     
                     break;
-                case 6:
+                case 7:
                     System.out.println("Exiting customer interface...");
                     mainApp.main(null);
                     break;
@@ -160,7 +209,7 @@ public class customerApp {
                                 "2. Show all movies\n"+
                                 "3. Search Movie by Name\n"+
                                 "4. Top 5 Movies\n"+
-                                "5. Back to main menu\n"+
+                                "5. Log out\n"+
                             "==============================================================\n");
             //scanner
             while(true){
@@ -239,13 +288,13 @@ public class customerApp {
                     
                     break;
                 case 5:
-                    System.out.println("Exiting customer interface...");
+                    System.out.println("Logging out...");
                     mainApp.main(null);
                     break;
                 
                 default:
                     System.out.println("Please enter a valid option from 1-5 only!");
-                    customerGuestMenu();
+                    customerLoggedInMenu(account);
             }
 
 
@@ -261,9 +310,8 @@ public class customerApp {
             System.out.print("================= MOBLIMA CUSTOMER APP =================\n"+
                             "1. Book and Purchase Ticket\n"+
                             "2. Booking History\n"+
-                            "3. Seat Availability\n"+
-                            "4. Review Movie\n"+
-                            "5. Exit\n"+
+                            "3. Review Movie\n"+
+                            "4. Exit\n"+
                             "========================================================\n");
             System.out.println("Please Enter Your Choice:\n");
 
@@ -279,7 +327,8 @@ public class customerApp {
             switch(input){
                 case 1:
                 //book ticket
-                int cineplex;
+                char cineplex;
+                int cineplexID;
                 int idx = 1;
                 Showtime movst;
                 String name;
@@ -288,9 +337,18 @@ public class customerApp {
                 List<Showtime> showtime;
 
                 //ask user for cineplex
-                System.out.println("Please choose a Cineplex:");
-                cineplex = scan.nextInt();
+                System.out.println("Please choose a Cineplex(A,B,C):");
+                cineplex = scan.next().charAt(0);
                 scan.nextLine();
+                cineplexID = (int)cineplex;
+                if(cineplexID > 90)
+                {
+                    cineplexID -= (int)'a';
+                }
+                else
+                {
+                    cineplexID -= (int)'A';
+                }
                 
                 //ask user for movie
                 CustomerMovieManager.printMovieList(movieList, reviewList);
@@ -299,7 +357,7 @@ public class customerApp {
                 
 
                 //link the movie to showtime
-                showtime = CustomerShowtime.searchMovieID(name);
+                showtime = CustomerShowtime.searchMovieID(name, cineplexID);
                 if(showtime.isEmpty())
                 {
                     break;
@@ -327,15 +385,13 @@ public class customerApp {
                 case 2:
                 //show booking history
                     break;
+                    
                 case 3:
-                //show seat availability
-                    break;
-                case 4:
                 //review movie
                     ReviewManager.getInstance().reviewMenu(0, user);
                     break;
 
-                case 5:
+                case 4:
                     System.out.println("Exiting Customer App...");
                     customerApp.getInstance().customerGuestMenu();
                     break;

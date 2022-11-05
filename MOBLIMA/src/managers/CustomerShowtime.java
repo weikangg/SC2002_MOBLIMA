@@ -29,7 +29,7 @@ public class CustomerShowtime {
         return list;
     }
 
-    public static ArrayList<Showtime> searchMovieID(String name)
+    public static ArrayList<Showtime> searchMovieID(String name, int cineplexID)
     {
         List<Movie> movieList = MovieListManager.getInstance().getMovieList();
         ArrayList<Showtime> list = new ArrayList<Showtime>();
@@ -48,14 +48,14 @@ public class CustomerShowtime {
         }
 
         Cineplex[] cineplexes = CineplexManager.configCineplexes(); 
-        Cinema[] cinemas = cineplexes[0].getCinemas();
+        Cinema[] cinemas = cineplexes[cineplexID].getCinemas();
 
         for(int i = 0; i < cinemas.length; i++)
         {
             Showtime[] showtimes = cinemas[i].getShowtimes();
             for(int j = 0; j < showtimes.length; j++)
             {
-                if(showtimes[i].getMovieID() == id)list.add(showtimes[i]);
+                if(showtimes[j].getMovieID() == id)list.add(showtimes[j]);
             }
         }
         return list;
