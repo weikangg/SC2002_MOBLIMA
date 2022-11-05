@@ -9,6 +9,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import entities.*;
 
 public class AccountManager {
@@ -106,5 +109,33 @@ public class AccountManager {
             }
         }
         return false;
+    }
+    // The following restrictions are imposed in the email address' local part by using this regex:
+        // It allows numeric values from 0 to 9.
+        // Both uppercase and lowercase letters from a to z are allowed.
+        // Allowed are underscore “_”, hyphen “-“, and dot “.”
+        // Dot isn't allowed at the start and end of the local part.
+        // Consecutive dots aren't allowed.
+        // For the local part, a maximum of 64 characters are allowed.
+    
+    // Restrictions for the domain part in this regular expression include:
+        // It allows numeric values from 0 to 9.
+        // We allow both uppercase and lowercase letters from a to z.
+        // Hyphen “-” and dot “.” aren't allowed at the start and end of the domain part.
+        // No consecutive dots.
+    public boolean checkValidEmail(String emailAddress){
+        String regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" 
+        + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+        return Pattern.compile(regexPattern)
+        .matcher(emailAddress)
+        .matches();
+    }
+
+    // 1) Begins with 8 or 9
+    // 2) Then contains 7 digits
+    public boolean checkValidPhoneNumber(String mobile){
+        Pattern p = Pattern.compile("(8|9)?[0-9]{7}");
+        Matcher m = p.matcher(mobile);
+        return (m.find() && m.group().equals(mobile));
     }
 }

@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.*;
 
 import entities.*;
@@ -58,6 +59,9 @@ public class SystemSettings {
     }
 
     // Methods
+    
+    // Read in and update the current permissions of system settings. To be called before further
+    // updating the system settings for admin purposes.
     public void updatePermissions(){
         BufferedReader br = null;
 		String line = "";
@@ -124,13 +128,18 @@ public class SystemSettings {
                 // then we get the keyset and just print each of them.
 
                 // Rank by Value first, if tie, prints the first one in the map.
+                // Excludes movies that have are not showing currently / have 0 overall rating score/ 0 profit earned
                 case 1:
                     int i = 1;
+                    DecimalFormat df = new DecimalFormat("0.00");
+                    String result;
                     Map<String, Double> movieList = new HashMap<String, Double>();
 
                     for (Movie movieObj : mList) {
                         if (!(movieObj.getShowingStatus().equals(ShowingStatus.FINISHED_SHOWING)
-                                || movieObj.getShowingStatus().equals(ShowingStatus.COMING_SOON))) {
+                                || movieObj.getShowingStatus().equals(ShowingStatus.COMING_SOON) 
+                                || movieObj.getOverallRatingScore() == 0
+                                || movieObj.getProfitEarned() == 0 )) {
                             movieList.put(movieObj.getMovieTitle(), movieObj.getProfitEarned());
                         }
                     }
@@ -147,14 +156,16 @@ public class SystemSettings {
                                 break;
                             }
                             double value = sortedList.get(key);
-                            BigDecimal bd = new BigDecimal(value);
+                            result = df.format(value);
+                            BigDecimal bd = new BigDecimal(result);
                             print(i + ". " + key + " [Ticket Sales: " + bd.toPlainString() + "]");
                             i++;
                         }
                     } else {
                         for(String key:keys){
                             double value = sortedList.get(key);
-                            BigDecimal bd = new BigDecimal(value);
+                            result = df.format(value);
+                            BigDecimal bd = new BigDecimal(result);
                             print(i + ". " + key + " [Ticket Sales: " + bd.toPlainString() + "]");
                             i++;
                         }
@@ -163,10 +174,13 @@ public class SystemSettings {
                 case 2:
                     int j = 1;
                     Map<String, Double> movList = new HashMap<String, Double>();
-
+                    DecimalFormat df2 = new DecimalFormat("0.0");
+                    String roundedRatingScore;
                     for (Movie movieObj : mList) {
                         if (!(movieObj.getShowingStatus().equals(ShowingStatus.FINISHED_SHOWING)
-                                || movieObj.getShowingStatus().equals(ShowingStatus.COMING_SOON))) {
+                                || movieObj.getShowingStatus().equals(ShowingStatus.COMING_SOON)
+                                || movieObj.getOverallRatingScore() == 0
+                                || movieObj.getProfitEarned() == 0 )) {
                                     movList.put(movieObj.getMovieTitle(), movieObj.getOverallRatingScore());
                         }
                     }
@@ -182,12 +196,14 @@ public class SystemSettings {
                             if(j > 5){
                                 break;
                             }
-                            print(j + ". " + key + " [Overall Rating Score: " + reverseSortedList.get(key) + "]");
+                            roundedRatingScore = df2.format(reverseSortedList.get(key));
+                            print(j + ". " + key + " [Overall Rating Score: " + roundedRatingScore + "]");
                             j++;
                         }
                     } else {
                         for(String key:Keys){
-                            print(j + ". " + key + " [Overall Rating Score: " + reverseSortedList.get(key) + "]");
+                            roundedRatingScore = df2.format(reverseSortedList.get(key));
+                            print(j + ". " + key + " [Overall Rating Score: " + roundedRatingScore + "]");
                             j++;
                         }
                     }
@@ -205,6 +221,7 @@ public class SystemSettings {
 
     public void top5SalesOnly(List<Movie>mList){
         int choice = 0;
+        DecimalFormat df = new DecimalFormat("0.00");
         while(true){
             System.out.println("================== SHOW TOP 5 MOVIES ====================\n" +
                                " 1. Top 5 Movies By Sales 						         \n" +
@@ -232,13 +249,16 @@ public class SystemSettings {
                 // then we get the keyset and just print each of them.
 
                 // Rank by Value first, if tie, prints the first one in the map.
+                // Excludes movies that have are not showing currently / have 0 overall rating score/ 0 profit earned
                 case 1:
                     int i = 1;
                     Map<String, Double> movieList = new HashMap<String, Double>();
 
                     for (Movie movieObj : mList) {
                         if (!(movieObj.getShowingStatus().equals(ShowingStatus.FINISHED_SHOWING)
-                                || movieObj.getShowingStatus().equals(ShowingStatus.COMING_SOON))) {
+                                || movieObj.getShowingStatus().equals(ShowingStatus.COMING_SOON)
+                                || movieObj.getOverallRatingScore() == 0
+                                || movieObj.getProfitEarned() == 0)) {
                             movieList.put(movieObj.getMovieTitle(), movieObj.getProfitEarned());
                         }
                     }
@@ -255,14 +275,16 @@ public class SystemSettings {
                                 break;
                             }
                             double value = sortedList.get(key);
-                            BigDecimal bd = new BigDecimal(value);
+                            String result = df.format(value);
+                            BigDecimal bd = new BigDecimal(result);
                             print(i + ". " + key + " [Ticket Sales: " + bd.toPlainString() + "]");
                             i++;
                         }
                     } else {
                         for(String key:keys){
                             double value = sortedList.get(key);
-                            BigDecimal bd = new BigDecimal(value);
+                            String result = df.format(value);
+                            BigDecimal bd = new BigDecimal(result);
                             print(i + ". " + key + " [Ticket Sales: " + bd.toPlainString() + "]");
                             i++;
                         }
@@ -284,6 +306,7 @@ public class SystemSettings {
     // View top 5 ratings only
     public void top5RatingsOnly(List<Movie>mList){
         int choice = 0;
+        DecimalFormat df = new DecimalFormat("0.0");
         while(true){
             System.out.println("================== SHOW TOP 5 MOVIES ====================\n" +
                                " 1. Top 5 Movies By Sales 						         \n" +
@@ -321,7 +344,9 @@ public class SystemSettings {
 
                     for (Movie movieObj : mList) {
                         if (!(movieObj.getShowingStatus().equals(ShowingStatus.FINISHED_SHOWING)
-                                || movieObj.getShowingStatus().equals(ShowingStatus.COMING_SOON))) {
+                                || movieObj.getShowingStatus().equals(ShowingStatus.COMING_SOON)
+                                || movieObj.getOverallRatingScore() == 0
+                                || movieObj.getProfitEarned() == 0)) {
                                     movList.put(movieObj.getMovieTitle(), movieObj.getOverallRatingScore());
                         }
                     }
@@ -337,12 +362,14 @@ public class SystemSettings {
                             if(j > 5){
                                 break;
                             }
-                            print(j + ". " + key + " [Overall Rating Score: " + reverseSortedList.get(key) + "]");
+                            String roundedRatingScore = df.format(reverseSortedList.get(key));
+                            print(j + ". " + key + " [Overall Rating Score: " + roundedRatingScore + "]");
                             j++;
                         }
                     } else {
                         for(String key:Keys){
-                            print(j + ". " + key + " [Overall Rating Score: " + reverseSortedList.get(key) + "]");
+                            String roundedRatingScore = df.format(reverseSortedList.get(key));
+                            print(j + ". " + key + " [Overall Rating Score: " + roundedRatingScore + "]");
                             j++;
                         }
                     }
@@ -380,13 +407,6 @@ public class SystemSettings {
                 continue;
             }
             switch(choice){
-
-                // Creates a Hashmap by reverse order, puts those movies which are showing now or previewing only
-                // Then, because a hashmap only can have unique keys, this means the movieTitle must be the key, and the
-                // sales is the key. Thus, since we have to sort by the sales, we put them in a new linked hash map after sorting.
-                // then we get the keyset and just print each of them.
-
-                // Rank by Value first, if tie, prints the first one in the map.
                 case 1:
                     System.out.println("Sorry! We are currently not able to show you the Top 5 Movies by Sales!");
                     System.out.println("Try again at a later date!");

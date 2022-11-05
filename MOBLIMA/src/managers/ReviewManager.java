@@ -61,7 +61,7 @@ public class ReviewManager {
         
         List<Movie>movieList = MovieListManager.getInstance().getMovieList();
         List<Review>reviewList = ReviewListManager.getInstance().getReviewList();
-        
+        int result;
         switch (option) {
             case 1:
                 if(addReview(reviewList, movieList,user.getUsername())){
@@ -71,9 +71,10 @@ public class ReviewManager {
                 }
                 break;
             case 2:
-                if(updateReview(reviewList,user.getUsername()) == 1){
+                result = updateReview(reviewList,user.getUsername());
+                if(result == 1){
                     System.out.println("Review successfully updated!");
-                }else if(updateReview(reviewList,user.getUsername()) == 2){
+                }else if(result == 2){
                     ;
                 }
                 else{
@@ -81,10 +82,11 @@ public class ReviewManager {
                 }
                 break;
             case 3:
-                if(removeReview(reviewList,user.getUsername()) == 1){
+                result = removeReview(reviewList,user.getUsername());
+                if( result== 1){
                     System.out.println("Review successfully removed!");
                 }
-                else if(removeReview(reviewList,user.getUsername()) == 2){
+                else if(result == 2){
                     ;
                 }
                 else{
@@ -92,6 +94,7 @@ public class ReviewManager {
                 }
                 break;
             case 4:
+            // show past reviews of the user.
                 showAllPastReviews(ReviewListManager.getInstance().getReviewList(), user.getUsername());
                 break;
             case 5:

@@ -52,19 +52,34 @@ public class StaffAccManager {
                 System.out.println("Account already exists! Try another username!");
                 continue;
             }
-            else{
-                break;
-            }
+            break;
         }
          
-        System.out.println("Enter your email:");
-        email = scan.nextLine();
+        while(true){
+            System.out.println("Enter your email:");
+            email = scan.nextLine();
+            if(email.length() == 0){
+                System.out.println("Email cannot be empty!");
+                continue;
+            }
+            if(!accountManager.checkValidEmail(email)){
+                System.out.println("Invalid Email! Email addresses can only be like username@domain.com.");
+                continue;
+            }
+            break;
+        }
+
 
         while(true){
             try{
                 System.out.println("Enter mobile:");
                 mobile = scan.nextInt();
                 scan.nextLine();
+                String mobileStr = Integer.toString(mobile);
+                if(!accountManager.checkValidPhoneNumber(mobileStr)){
+                    System.out.println("Invalid Phone Number! Phone numbers can only be 8 digits, starting with 8 or 9.");
+                    continue;
+                }
                 break;
             }catch(InputMismatchException e){
                 System.out.println("Please enter a valid mobile number!");
@@ -77,6 +92,10 @@ public class StaffAccManager {
                 System.out.println("Enter age:");
                 age = scan.nextInt();
                 scan.nextLine();
+                if(age < 0 || age > 150){
+                    System.out.println("Invalid Age!");
+                    continue;
+                }
                 break;
             }catch(InputMismatchException e){
                 System.out.println("Please enter a valid age!");

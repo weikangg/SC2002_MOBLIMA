@@ -65,7 +65,7 @@ public class customerApp {
                     if(accountManager.checkLogin(accountManager.getAccountList(),username, password))
                     {
                         Account user = accountManager.getAccount(accountManager.getAccountList(), username, password);
-                        this.bookingAndReviewMenu(user);
+                        this.customerLoggedInMenu(user);
                     }
                     else{
                         System.out.println("Wrong username/password");
@@ -157,11 +157,10 @@ public class customerApp {
             //main menu
             System.out.print("================= MOBLIMA CUSTOMER INTERFACE =================\n"+
                                 "1. Make Bookings and Give Review\n"+
-                                "2. Create account\n"+
-                                "3. Show all movies\n"+
-                                "4. Search Movie by Name\n"+
-                                "5. Top 5 Movies\n"+
-                                "6. Back to main menu\n"+
+                                "2. Show all movies\n"+
+                                "3. Search Movie by Name\n"+
+                                "4. Top 5 Movies\n"+
+                                "5. Back to main menu\n"+
                             "==============================================================\n");
             //scanner
             while(true){
@@ -172,7 +171,7 @@ public class customerApp {
                     break;
                 }catch(InputMismatchException e){
                     scan.nextLine();
-                    System.out.println("Please enter numbers only!");
+                    System.out.println("Please enter a valid option from 1-5 only!");
                     continue;
                 }
             }
@@ -184,15 +183,10 @@ public class customerApp {
                     break;
 
                 case 2:
-                    //ask user for information to create account
-                    CustomerAccManager.createAcc(accountManager.getAccountList());
-                    break;
-
-                case 3:
                     CustomerMovieManager.printMovieList(movieList,reviewList);
                     break;
 
-                case 4:
+                case 3:
                 //search
                     System.out.println("Please enter the movie name:");
                     strinput = scan.nextLine();
@@ -201,7 +195,7 @@ public class customerApp {
                     }
                     break;
 
-                case 5:
+                case 4:
                     int displaySetting;
                     SystemSettings top5Movies = SystemSettings.getInstance();
                     
@@ -244,13 +238,13 @@ public class customerApp {
                     }
                     
                     break;
-                case 6:
+                case 5:
                     System.out.println("Exiting customer interface...");
                     mainApp.main(null);
                     break;
                 
                 default:
-                    System.out.println("Please enter a valid option");
+                    System.out.println("Please enter a valid option from 1-5 only!");
                     customerGuestMenu();
             }
 
