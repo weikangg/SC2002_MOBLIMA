@@ -1,20 +1,242 @@
 package managers;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Scanner;
-import static utils.IOUtils.*;
-import static managers.MovieListManager.*;
 import entities.*;
+import static managers.MovieListManager.*;
+import static managers.ReviewListManager.*;
+import static utils.IOUtils.*;
+import java.util.Scanner;
 
-public class StaffUpdateMovieManager {
-    private static Scanner sc = new Scanner(System.in);
+public class StaffMovieCRUDManager {
     static String csv_Separator = ",";
 	static String splitter = ";";
-	static String converter = ":";
 
+    static Scanner sc = new Scanner(System.in);
+
+    //Staff create movie
+    public static boolean staffAddMovie(List<Movie> mList) {
+		ShowingStatus status = null;
+		String movieTitle, synopsis, movieDirector, cast, genres, synopsisTmp, movieDirectorTmp, castTmp, genreTmp, movieTitleTmp, str;
+		int choice;
+		int movieDuration = 0,movieID;
+		double rating = 0.0;
+        MovieRating movieRating = null;
+		int sale = 0;
+		MovieType movieType = null;
+		LocalDate releaseDate = null, endofShowingDate = null;
+		System.out.println("#########################################################");
+		System.out.println("#################### ADDING MOVIES ######################");
+		System.out.println("#########################################################");
+		System.out.println("");
+		// If movie List is empty, we assign it an ID of 1.
+		if(mList.size() == 0){
+			movieID = 1;
+		}
+		// Else if it's not empty, we find the last ID in the list and add 1.
+		else{ 
+			movieID = mList.get((mList.size()-1)).getMovieID() + 1;
+		}
+
+		System.out.print("Enter Movie Title: ");
+		movieTitleTmp = sc.nextLine();
+		if (mList.stream().filter(o -> o.getMovieTitle().equalsIgnoreCase(movieTitleTmp)).findFirst().isPresent()) {
+			System.out.println("Movie Already Exists!");
+			return false;
+		}
+		movieTitle = movieTitleTmp.replaceAll(csv_Separator, splitter);
+		while(true){
+			System.out.println("Choose Movie Status");
+			System.out.println("1: COMING_SOON");
+			System.out.println("2: PREVIEW");
+			System.out.println("3: NOW_SHOWING");
+			System.out.println("4: FINISHED_SHOWING");
+			try{
+				choice = sc.nextInt();
+			}
+			catch(InputMismatchException e){
+				System.out.println("Enter numbers only!");
+				sc.nextLine();
+				continue;
+			}
+			switch (choice) {
+			case 1: {
+				status = ShowingStatus.COMING_SOON;
+				break;
+			}
+			case 2: {
+				status = ShowingStatus.PREVIEW;
+				break;
+			}
+			case 3: {
+				status = ShowingStatus.NOW_SHOWING;
+				break;
+			}
+			case 4: {
+				status = ShowingStatus.FINISHED_SHOWING;
+				break;
+			}
+			default:
+				System.out.println("Error Input! Please only input values from 1-4.\n");
+				continue;
+			}
+			break;
+		}
+        sc.nextLine();
+		System.out.print("Enter Movie Synopsis: ");
+		synopsisTmp = sc.nextLine();
+		synopsis = synopsisTmp.replaceAll(csv_Separator, splitter);
+		System.out.print("Enter Director Name: ");
+		movieDirectorTmp = sc.nextLine();
+		movieDirector = movieDirectorTmp.replaceAll(csv_Separator, splitter);
+		System.out.print("Enter Cast Name: ");
+		castTmp = sc.nextLine();
+		cast = castTmp.replaceAll(csv_Separator, splitter);
+		System.out.print("Enter Movie Genres: ");
+		genreTmp = sc.nextLine();
+		genres = genreTmp.replaceAll(csv_Separator, splitter);
+		while(true){
+			System.out.println("Choose Movie Rating");
+			System.out.println("1: G");
+			System.out.println("2: PG");
+			System.out.println("3: PG-13");
+			System.out.println("4: NC-16");
+			System.out.println("5: M-18");
+			System.out.println("6: R-21");
+			try{
+				choice = sc.nextInt();
+			}catch(InputMismatchException e){
+				System.out.println("Please input numbers only!");
+				sc.nextLine();
+				continue;
+			}
+			switch (choice) {
+			case 1: {
+				movieRating = MovieRating.G;
+				break;
+			}
+			case 2: {
+				movieRating = MovieRating.PG;
+				break;
+			}
+			case 3: {
+				movieRating = MovieRating.PG13;
+				break;
+			}
+			case 4: {
+				movieRating = MovieRating.NC16;
+				break;
+			}
+			case 5: {
+				movieRating = MovieRating.M18;
+				break;
+			}
+			case 6: {
+				movieRating = MovieRating.R21;
+				break;
+			}
+			default:
+				System.out.println("Error Input! Please only input values from 1-6.\n");
+				continue;
+			}
+			break;
+		}
+        sc.nextLine();
+		//  Checks movie duration
+		while (true){
+			System.out.println("Enter Movie Duration (minutes):");
+			try{
+				movieDuration = sc.nextInt();
+				if(movieDuration < 0 || movieDuration > 1440){
+					System.out.println("Movie Duration invalid! Re-enter correct movie Duration!");
+					continue;
+				}
+				break;
+			}
+			catch(InputMismatchException e){
+				System.out.println("Invalid input! Enter numbers only!");
+				sc.nextLine();
+				continue;
+			}
+		}
+		sc.nextLine();
+		
+		while (true){
+			try{
+				System.out.println("Enter Release Date (DD/MM/YYYY)");
+				str = sc.nextLine();
+				releaseDate = LocalDate.parse(str,DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+				break;
+			}catch(DateTimeParseException e){
+				System.out.println("Wrong format, enter again!");
+				continue;
+			}
+		}
+
+		while (true){
+			try{
+				System.out.println("Enter End Of Showing Date (DD/MM/YYYY)");
+				str = sc.nextLine();
+				endofShowingDate = LocalDate.parse(str,DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+				if(endofShowingDate.isBefore(releaseDate) || endofShowingDate.isEqual(releaseDate)){
+					System.out.println("Invalid End of showing date! End of showing date should be after Release Date!");
+					continue;
+				}
+				break;
+			}catch(DateTimeParseException e){
+				System.out.println("Wrong format, enter again!");
+				continue;
+			}
+		}
+
+		while(true){
+			System.out.println("Choose Movie Type");
+			System.out.println("1: TWOD");
+			System.out.println("2: THREED");
+			System.out.println("3: IMAX");
+			System.out.println("4: BLOCKBUSTER");
+			try{
+				choice = sc.nextInt();
+			}catch(InputMismatchException e){
+				System.out.println("Please input numbers only!");
+				sc.nextLine();
+				continue;
+			}
+			switch (choice) {
+				case 1: {
+					movieType = MovieType.TWOD;
+					break;
+				}
+				case 2: {
+					movieType = MovieType.THREED;
+					break;
+				}
+				case 3: {
+					movieType = MovieType.IMAX;
+					break;
+				}
+				case 4: {
+					movieType = MovieType.BLOCKBUSTER;
+					break;
+				}
+				default:
+					System.out.println("Error Input! Please only input values from 1-4.\n");
+					continue;
+				}
+			break;
+		}
+        sc.nextLine();
+		if (MovieListManager.addMovieList(mList,movieID, movieTitle, synopsis, movieDirector, cast, genres, movieDuration, status, sale, movieRating,rating, releaseDate , endofShowingDate, movieType))
+			return true;
+		 return false;
+    }
+
+    //Staff Update Movie
     public static int updateMovie(List<Movie> movieList){
         System.out.println("#########################################################");
         System.out.println("#################### UPDATING MOVIES ####################");
@@ -500,4 +722,244 @@ public class StaffUpdateMovieManager {
         }
         return 0;
     }
+
+    // Remove Movie by setting status to "End of showing" as per request of question
+    public static int setToEndShowing(List<Movie>mList){
+        System.out.println("#########################################################");
+		System.out.println("#################### REMOVING MOVIES ####################");
+		System.out.println("#########################################################");
+		System.out.println("");
+
+        
+        String title; 
+        System.out.println("Enter Movie Title: ");
+        title = sc.nextLine();
+    
+        for(Movie m: mList){
+            if(m.getMovieTitle().equalsIgnoreCase(title)){
+                if(confirm("Confirm Remove Title ")){
+                    m.setShowingStatus(ShowingStatus.FINISHED_SHOWING);
+                    updateMovieListCSV(mList);
+                    return 1;
+                }
+                else{
+                    return 2;
+                }
+            }
+        }
+        
+        System.out.println("Movie not found!");
+        return 0;
+    }
+
+    // Remove movie from database entirely, if a movie is removed from the database, all reviews regarding it are deleted as well.
+    public static int removeMovieFromDatabase(List<Movie> mList, List<Review> rList){
+        System.out.println("#########################################################");
+		System.out.println("#################### REMOVING MOVIES ####################");
+		System.out.println("#########################################################");
+		System.out.println("");
+
+        String title;
+        List<Movie>newList = new ArrayList<Movie>();
+        List<Review>newList2 = new ArrayList<Review>();
+        System.out.println("Enter Movie Title: ");
+        title = sc.next();
+        
+        // Search if movie exists first
+        Movie temp = null;
+        for(Movie m: mList){
+            if(m.getMovieTitle().equalsIgnoreCase(title)){
+                 temp = m;
+            }
+        }
+        if(!mList.contains(temp)){
+            System.out.println("Movie does not exist!");
+            return 0;
+        }
+
+        if(confirm("Confirm Remove Title")){
+            for(Movie m : mList){
+                if(!m.getMovieTitle().equals(title)){
+                    int movieID = m.getMovieID();
+                    String movieTitle = m.getMovieTitle();
+                    ShowingStatus showingStatus =  m.getShowingStatus();
+                    String synopsis = m.getSynopsis();
+                    String movieDirector =  m.getMovieDirector();
+                    String casts = m.getCast();
+                    String genres = m.getGenres();
+                    MovieRating movieRating = m.getMovieRating();
+                    int movieDuration =  m.getMovieDuration();
+                    double profitEarned =  m.getProfitEarned();
+                    double overallRatingScore =  m.getOverallRatingScore();
+                    LocalDate releaseDate =  m.getReleaseDate();
+                    LocalDate endOfShowingDate =  m.getEndOfShowingDate();
+                    MovieType movieType = m.getMovieType();
+                    Movie newMovie = new Movie(movieID,movieTitle,showingStatus, synopsis, movieDirector, casts, genres, movieRating, movieDuration, profitEarned,  overallRatingScore, releaseDate,endOfShowingDate, movieType);
+                    newList.add(newMovie);
+                }
+            }
+            for(Review r: rList){
+                if(!r.getMovieTitle().equals(title)){
+                    int reviewID = r.getReviewID();
+                    String movieTitle = r.getMovieTitle();
+                    String reviewer = r.getReviewer();
+                    String reviewDescription = r.getDescription();
+                    double ratingScore = r.getRatingScore();
+                    Review newReview = new Review(reviewID,movieTitle,reviewer,reviewDescription,ratingScore);
+                    newList2.add(newReview);
+                }
+            }
+            if(updateMovieListCSV(newList) && updateReviewInCSV(newList2)){
+                return 1;
+            }
+            else{
+                return 0;
+            }
+        }
+        else{
+            return 2;
+        }
+    }
+
+    // STAFF CAN PRINT EVERYTHING & SEE ALL MOVIES REGARDLESS OF MOVIE STATUS 
+	// STAFF CAN ALSO VIEW ALL REVIEWS
+	public static void printMovieList(List<Movie>mList, List<Review>rList) {
+		
+		int movieCount = 1;
+		// ReviewListManager file = new ReviewListManager();
+		// List<Review> rlist = file.getReviewList();
+		System.out.println("#########################################################");
+		System.out.println("################## DISPLAYING MOVIES ####################");
+		System.out.println("#########################################################");
+		System.out.println("");
+
+		if (mList.size() == 0){
+			System.out.println("No Movies to display.");
+			return;
+		}
+
+		for(Movie m : mList) {
+				String cast, genre;
+				String casttmp = m.getCast();
+				String genretmp = m.getGenres();
+				int reviewCount = 0, hasReviews = 0, printOverallRating = 0;
+				System.out.printf("----------------- MOVIE %d -----------------\n", movieCount);
+				System.out.println("Movie Title: "+ m.getMovieTitle());
+				System.out.println("Showing Status: "+ m.getShowingStatus());
+				System.out.println("Synopsis: " + m.getSynopsis());
+				System.out.println("Movie Director: "+ m.getMovieDirector());
+				cast = casttmp.replaceAll(splitter, csv_Separator);
+				System.out.println("Casts: "+ cast);
+				cast = casttmp.replaceAll(splitter, csv_Separator);
+				genre = genretmp.replaceAll(splitter, csv_Separator);
+				System.out.println("Genres: "+ genre);
+				System.out.println("Movie Rating: " + m.getMovieRating());
+				System.out.println("Movie Duration: " + m.getMovieDuration() + " minutes");
+				double profitEarned = m.getProfitEarned();
+				BigDecimal bd = new BigDecimal(profitEarned);
+				System.out.println("Profit Earned: " + bd.toPlainString());
+				for(Review r: rList){
+					if(reviewCount > 1 ){
+						printOverallRating = 1;
+						break;
+					}
+					if(r.getMovieTitle().equalsIgnoreCase(m.getMovieTitle())){
+						reviewCount++;
+					}
+				}
+				if(printOverallRating == 1){
+					System.out.printf("Overall Rating Score: %.1f/5\n" , m.getOverallRatingScore() );
+				}else{
+					System.out.println("Overall Rating Score: NA");
+				}
+				reviewCount = 0;
+				System.out.println("Release Date: " + m.getReleaseDate().toString());
+				System.out.println("Movie Type: " + m.getMovieType());
+				movieCount++;
+				System.out.println("");
+				System.out.println("Some Review Information of " + m.getMovieTitle() + ":");
+				for(Review r: rList){
+					if(r.getMovieTitle().equalsIgnoreCase(m.getMovieTitle())){
+						System.out.println(Integer.toString(reviewCount+1)+". " + r.getDescription() + " [" + r.getRatingScore() + "/5.0]" + " - " + r.getReviewer());
+						hasReviews = 1;
+						reviewCount++;
+					}
+				}
+				if(hasReviews == 0){
+					System.out.println("No reviews available for this movie right now!");
+				}
+				System.out.println("");
+			}
+	}
+
+	public static int printMovieByID(List<Movie>mList, List<Review>rList, int movieID) {
+		int found = 0;
+		System.out.println("#########################################################");
+		System.out.println("################## DISPLAYING MOVIES ####################");
+		System.out.println("#########################################################");
+		System.out.println("");
+
+		if (mList.size() == 0){
+			System.out.println("Error! No Movies to display.");
+		}
+
+		for(Movie m : mList) {
+			if(m.getMovieID() == movieID){
+				found = 1;
+				String cast, genre;
+				String casttmp = m.getCast();
+				String genretmp = m.getGenres();
+				int reviewCount = 0, hasReviews = 0, printOverallRating = 0;
+				System.out.printf("----------------- MOVIE %d -----------------\n", movieID);
+				System.out.println("Movie Title: "+ m.getMovieTitle());
+				System.out.println("Showing Status: "+ m.getShowingStatus());
+				System.out.println("Synopsis: " + m.getSynopsis());
+				System.out.println("Movie Director: "+ m.getMovieDirector());
+				cast = casttmp.replaceAll(splitter, csv_Separator);
+				System.out.println("Casts: "+ cast);
+				cast = casttmp.replaceAll(splitter, csv_Separator);
+				genre = genretmp.replaceAll(splitter, csv_Separator);
+				System.out.println("Genres: "+ genre);
+				System.out.println("Movie Rating: " + m.getMovieRating());
+				System.out.println("Movie Duration: " + m.getMovieDuration() + " minutes");
+				double profitEarned = m.getProfitEarned();
+				BigDecimal bd = new BigDecimal(profitEarned);
+				System.out.println("Profit Earned: " + bd.toPlainString());
+				for(Review r: rList){
+					if(reviewCount > 1 ){
+						printOverallRating = 1;
+						break;
+					}
+					if(r.getMovieTitle().equalsIgnoreCase(m.getMovieTitle())){
+						reviewCount++;
+					}
+				}
+				if(printOverallRating == 1){
+					System.out.printf("Overall Rating Score: %.1f/5\n" , m.getOverallRatingScore() );
+				}else{
+					System.out.println("Overall Rating Score: NA");
+				}
+				reviewCount = 0;
+				System.out.println("Release Date: " + m.getReleaseDate().toString());
+				System.out.println("Movie Type: " + m.getMovieType());
+				System.out.println("");
+				System.out.println("Some Review Information of " + m.getMovieTitle() + ":");
+				for(Review r: rList){
+					if(r.getMovieTitle().equalsIgnoreCase(m.getMovieTitle())){
+						System.out.println(Integer.toString(reviewCount+1)+". " + r.getDescription() + " [" + r.getRatingScore() + "/5.0]" + " - " + r.getReviewer());
+						hasReviews = 1;
+						reviewCount++;
+					}
+				}
+				if(hasReviews == 0){
+					System.out.println("No reviews available for this movie right now!");
+				}
+				System.out.println("");
+			}
+		}
+		if(found == 1){
+			return 1;
+		}
+		return 0;
+	}
 }
