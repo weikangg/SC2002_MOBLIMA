@@ -19,12 +19,26 @@ public class Cineplex {
     /**
      * Function to configure the list of cinemas
      */
-    public void configCinema(){ 
+    public void configCinema(ArrayList<String> str){ 
 
         Cinema[] cinemas = new Cinema[numCinemas]; //Creating object array for Cinema objects
 
         for (int i = 0; i < numCinemas; i++){
-            cinemas[i] = new Cinema(this.name, this.location, this.numCinemas, this.cineplexID,i);
+
+            CinemaClass cinemaClass;
+            
+            if(str.get(i).equals("SILVER")){
+                cinemaClass = CinemaClass.SILVER;
+            } else if(str.get(i).equals("GOLD")){
+                cinemaClass = CinemaClass.GOLD;
+            } else if(str.get(i).equals("PLATINUM")){
+                cinemaClass= CinemaClass.PLATINUM;
+            } else{
+                cinemaClass = CinemaClass.DIAMOND;
+            }
+
+
+            cinemas[i] = new Cinema(this.name, this.location, this.numCinemas, this.cineplexID,i, cinemaClass);
         }
 
         this.cinemas = cinemas;
