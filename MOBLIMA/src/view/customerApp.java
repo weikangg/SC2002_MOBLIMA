@@ -279,7 +279,8 @@ public class customerApp {
             switch(input){
                 case 1:
                 //book ticket
-                int cineplex;
+                char cineplex;
+                int cineplexID;
                 int idx = 1;
                 Showtime movst;
                 String name;
@@ -288,9 +289,18 @@ public class customerApp {
                 List<Showtime> showtime;
 
                 //ask user for cineplex
-                System.out.println("Please choose a Cineplex:");
-                cineplex = scan.nextInt();
+                System.out.println("Please choose a Cineplex(A,B,C):");
+                cineplex = scan.next().charAt(0);
                 scan.nextLine();
+                cineplexID = (int)cineplex;
+                if(cineplexID > 90)
+                {
+                    cineplexID -= (int)'a';
+                }
+                else
+                {
+                    cineplexID -= (int)'A';
+                }
                 
                 //ask user for movie
                 CustomerMovieManager.printMovieList(movieList, reviewList);
@@ -299,7 +309,7 @@ public class customerApp {
                 
 
                 //link the movie to showtime
-                showtime = CustomerShowtime.searchMovieID(name);
+                showtime = CustomerShowtime.searchMovieID(name, cineplexID);
                 if(showtime.isEmpty())
                 {
                     break;
