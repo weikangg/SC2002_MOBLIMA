@@ -7,7 +7,7 @@ public enum MovieRating {
     NC16("NC16"),
     M18("M18"),
     R21("R21");
-
+    
     private final String movieRating;
 
     private MovieRating(){

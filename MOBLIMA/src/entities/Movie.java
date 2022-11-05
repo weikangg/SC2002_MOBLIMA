@@ -20,7 +20,6 @@ public class Movie {
     private LocalDate endOfShowingDate;
     private MovieType movieType;
 
-
     // Constructor
 
     public Movie(int movieID,String movieTitle,ShowingStatus showingStatus, String synopsis,String movieDirector, String cast, String genres, 

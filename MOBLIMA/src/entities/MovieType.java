@@ -13,8 +13,7 @@ public enum MovieType {
      */
     private MovieType(String s) {
         name = s;
-    }
-
+    } 
     /**
      * For string comparison.
      * @param otherName String to be compared to.

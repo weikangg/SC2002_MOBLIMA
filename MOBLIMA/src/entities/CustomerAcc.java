@@ -2,8 +2,6 @@ package entities;
 
 import java.util.LinkedList;
 import java.util.ArrayList;
-import entities.*;
-
 public class CustomerAcc extends Account {
 
     //create transaction history using linked list

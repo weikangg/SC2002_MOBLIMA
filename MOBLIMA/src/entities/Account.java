@@ -1,5 +1,6 @@
 package entities;
 
+
 public abstract class Account {
     public String username;
     public String email;
