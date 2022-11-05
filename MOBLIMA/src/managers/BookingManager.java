@@ -23,7 +23,7 @@ public class BookingManager implements Serializable{
     private ArrayList<Ticket> bookedTickets;
     private Booking booking;
     private Showtime showtime;
-    private User user;
+    private Account user;
     Boolean notQuit = true;
     
 	
@@ -41,7 +41,7 @@ public class BookingManager implements Serializable{
 
 
 	
-	public void bookingMenu(Showtime showtime, User user)
+	public void bookingMenu(Showtime showtime, Account user)
 	{
         ArrayList<String> bookedSeats = new ArrayList<>();
         setBookedSeats(bookedSeats);
@@ -72,6 +72,7 @@ public class BookingManager implements Serializable{
             {
                 System.out.println("Invalid input type. Please enter an integer value.");
                 choice = sc.nextInt();
+                sc.nextLine();
             }   
             switch(choice)
             {
@@ -156,6 +157,7 @@ public class BookingManager implements Serializable{
 			System.out.println("Invalid input! Please enter a valid seat ID.");
         }
         row = sc.nextInt();
+        sc.nextLine();
 
         System.out.println("Please enter column number:");
 		while (!sc.hasNextInt()) { // Not a string
@@ -163,6 +165,7 @@ public class BookingManager implements Serializable{
 			System.out.println("Invalid input! Please enter a valid seat ID.");
 		}
         col = sc.nextInt();
+        sc.nextLine();
 
         if (isSeatEmpty(row, col)) {						
 			System.out.println("Seat " + (char)(row+65)+ col + " added to cart");
@@ -191,11 +194,13 @@ public class BookingManager implements Serializable{
         int size = getBookedSeats().size();
         System.out.println("Please choose seat to delete");
         int seat = sc.nextInt();
+        sc.nextLine();
 
         while(seat > size || seat < 1)
         {
             System.out.println("Please enter valid number");
             seat = sc.nextInt();
+            sc.nextLine();
         }
         String rowcol = getBookedSeats().get(seat-1);
 
@@ -286,7 +291,7 @@ public class BookingManager implements Serializable{
     {
         return this.showtime;
     }
-    public User getUser()
+    public Account getUser()
     {
         return this.user;
     }
@@ -314,7 +319,7 @@ public class BookingManager implements Serializable{
     {
         this.showtime = showtime;
     }
-    public void setUser(User user)
+    public void setUser(Account user)
     {
         this.user = user;
     }
@@ -339,7 +344,7 @@ public class BookingManager implements Serializable{
         String path = System.getProperty("user.dir") +"\\data\\bookings\\";
         ArrayList<Booking> userBookings = new ArrayList<Booking>();
         String username = getUser().getUsername();
-        String location = path + username +"/";
+        String location = path + username +"/Booking";
         String filename = ".txt";
         int i = 1;
         String finalFile = location +i+ filename;
@@ -379,6 +384,7 @@ public class BookingManager implements Serializable{
         setDone();
         TransactionManager.getInstance().deleteTransactionM();
         TicketManager.newTM().deleteTicketM();
+        System.out.println("Booking and payment success!\n Please view under booking history");
         //deleteBM();
         
 
