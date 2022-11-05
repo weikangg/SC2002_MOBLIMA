@@ -55,7 +55,7 @@ public class CustomerShowtime {
             Showtime[] showtimes = cinemas[i].getShowtimes();
             for(int j = 0; j < showtimes.length; j++)
             {
-                if(showtimes[i].getMovieID() == id)list.add(showtimes[i]);
+                if(showtimes[j].getMovieID() == id)list.add(showtimes[j]);
             }
         }
         return list;
