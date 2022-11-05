@@ -160,7 +160,7 @@ public class customerApp {
                                 "2. Show all movies\n"+
                                 "3. Search Movie by Name\n"+
                                 "4. Top 5 Movies\n"+
-                                "5. Back to main menu\n"+
+                                "5. Log out\n"+
                             "==============================================================\n");
             //scanner
             while(true){
@@ -239,13 +239,13 @@ public class customerApp {
                     
                     break;
                 case 5:
-                    System.out.println("Exiting customer interface...");
+                    System.out.println("Logging out...");
                     mainApp.main(null);
                     break;
                 
                 default:
                     System.out.println("Please enter a valid option from 1-5 only!");
-                    customerGuestMenu();
+                    customerLoggedInMenu();
             }
 
 
