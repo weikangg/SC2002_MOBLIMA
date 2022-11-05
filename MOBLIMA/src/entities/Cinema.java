@@ -220,5 +220,9 @@ public class Cinema extends Cineplex{
         return cinemaClass.toString();
     }
     
+    public CinemaClass getCinemaClassCC(){
+        return this.cinemaClass;
+    }
+    
     
 }
