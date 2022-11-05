@@ -73,10 +73,12 @@ public class TicketManager {
                 "3. Back\n"
             );
             int option = sc.nextInt();
+            sc.nextLine();
             while(option < 0 || option > 3)
             {
                 System.out.println("Enter a valid input from 1-3");
                 option = sc.nextInt();
+                sc.nextLine();
             }
             switch(option)
             {
@@ -136,9 +138,9 @@ public class TicketManager {
             price = HOLIDAY PRICE;
         }
         */
-
+        double cc = tp.getMappedCinemaClassPrice().get(getShowtime().getCinemaClassCC());
         double modifier = tp.getMappedMovieTypePrice().get(getShowtime().getMovieType());
-        price = price * modifier;
+        price = price * modifier * cc;
         return price;
     }
 
@@ -217,16 +219,18 @@ public class TicketManager {
             return TicketType.HOLIDAY;
         }
         System.out.println(
-            "Choose Ticket Type:" +
-            "1. Normal" +
-            "2. Student" +
+            "Choose Ticket Type:\n" +
+            "1. Normal\n" +
+            "2. Student\n" +
             "3. Senior"
             );
         int tt = sc.nextInt();
+        sc.nextLine();
         while(tt<0 || tt>3)
         {
             System.out.println("Enter valid option");
             tt = sc.nextInt();
+            sc.nextLine();
         }
         LocalDateTime time = getShowtime().getDateTimeLDT();
         DayOfWeek day = DayOfWeek.of(time.get(ChronoField.DAY_OF_WEEK));
