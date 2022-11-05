@@ -69,10 +69,12 @@ public class TransactionManager
                                     "========================================================");
                 System.out.println("Enter choice: ");
                 option = sc.nextInt();
+                sc.nextLine();
                 while(!(option >= 1 && option <=3))
                 {
                     System.out.println("Please only enter a number from 1-3.");
                     option = sc.nextInt();
+                    sc.nextLine();
                 }
         
         /*Need to add ticket*/
@@ -104,11 +106,18 @@ public class TransactionManager
 
     public void enterUserInfo()
     {
+        
+
+
+        
         boolean checks = true;
         System.out.println("Hello Customer " + BookingManager.newBM().getUser().getUsername());
         System.out.println(
-            "===================  Enter Information  =================\n" +
-            "Name (NRIC): "
+            "===================  Information  =================\n" +
+            "Username: " + BookingManager.newBM().getUser().getUsername() + "\n" +
+            "Email: " + BookingManager.newBM().getUser().getEmail() + "\n" +
+            "Mobile Number: (+65) " +  BookingManager.newBM().getUser().getMobile() + "\n" +
+            "Please enter your name to confirm booking: "
             );
         String name = sc.nextLine();
         while(checks)
@@ -118,14 +127,25 @@ public class TransactionManager
                 char ch = name.charAt(i);
                 if (Character.isDigit(ch)) {
                     checks = true;
-                    System.out.println("Name (NRIC): ");
+                    System.out.println("Name: ");
                     name = sc.nextLine();
                     break;
                 }
             }checks = false;
         }
         checks = true;
-        System.out.println("Mobile Number: +65");
+        System.out.println("Paying...");
+        String userInfo = "Email: " + BookingManager.newBM().getUser().getEmail() +
+        "Mobile Number: (+65) " +  BookingManager.newBM().getUser().getMobile() + "Name: " +
+        name;
+        this.userInfo=userInfo;
+
+
+
+
+
+
+        /*System.out.println("Mobile Number: +65");
         String mobileNo = "+65 " + sc.nextLine();
         //sc.nextLine();
         while(checks)
@@ -160,7 +180,7 @@ public class TransactionManager
             }
         }
         this.userInfo = "Name: " + name + "Mobile Number: " + mobileNo + "Email: " + email + "\n"; 
-        
+        */
     }
     public String getUserInfo()
     {
@@ -175,10 +195,11 @@ public class TransactionManager
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
         String dateportion = now.format(format);
         int cID = getShowtime().getCinemaID();
-        String cinemaId = String.format("%04d",cID);
+        String cinemaId = String.format("%03d",cID) + dateportion;
         String moviename = getShowtime().getMovieTitle();
         //MovieType mt = getShowtime().getMovieFormat();
         Transaction transaction = new Transaction(cinemaId, moviename, dateportion, getTList());
+        System.out.println("Transaction ID: " + cinemaId);
         setTransaction(transaction);
         /*getTransaction().setID(cinemaId);
         getTransaction().setMovieName(moviename);
