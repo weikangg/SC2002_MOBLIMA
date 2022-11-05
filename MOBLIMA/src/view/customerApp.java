@@ -402,7 +402,7 @@ public class customerApp {
                 System.out.println(movst.getMovieTitle());
     
                 //call bookingmenu in booking manager
-                BookingManager.newBM().bookingMenu(movst);
+                BookingManager.newBM().bookingMenu(movst, user);
                 break;
 
                 case 2:

@@ -71,7 +71,22 @@ public class CustomerShowtime {
         Scanner scan = new Scanner(System.in);
 
         //ask user for cineplex
-        System.out.println("Please choose a Cineplex(A,B,C):");
+
+        while(true){
+            System.out.println("Please choose a Cineplex(A,B,C):");
+            cineplex = scan.next().charAt(0);
+            scan.nextLine();
+            cineplexID = (int)cineplex;
+            if(cineplexID < 41 || (cineplexID > 90 && cineplexID < 97) || cineplexID > 122){
+                System.out.println("Please key in an alphabet");
+                continue;
+            }
+            else{
+                break;
+            }
+        }
+
+        
         cineplex = scan.next().charAt(0);
         scan.nextLine();
         cineplexID = (int)cineplex;
