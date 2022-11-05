@@ -20,6 +20,14 @@ public class StaffHolidayCRUDManager {
 	static String splitter = ";";
 	static String converter = ":";
 
+    private static StaffHolidayCRUDManager single_instance = null;
+    public static StaffHolidayCRUDManager getInstance()
+    {
+        if (single_instance == null)
+            single_instance = new StaffHolidayCRUDManager();
+        return single_instance;
+    }
+
     public static boolean staffAddHoliday(List<Holidays> hList) {
 		String holName,holNametmp,dateStr;
         LocalDate holDate=null;

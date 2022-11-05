@@ -19,6 +19,14 @@ public class StaffMovieCRUDManager {
 
     static Scanner sc = new Scanner(System.in);
 
+    private static StaffMovieCRUDManager single_instance = null;
+    public static StaffMovieCRUDManager getInstance()
+    {
+        if (single_instance == null)
+            single_instance = new StaffMovieCRUDManager();
+        return single_instance;
+    }
+
     //Staff create movie
     public static boolean staffAddMovie(List<Movie> mList) {
 		ShowingStatus status = null;
