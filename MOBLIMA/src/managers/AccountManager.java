@@ -8,10 +8,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import entities.*;
+import java.util.concurrent.ThreadLocalRandom;
+
+
 
 public class AccountManager {
     static String path = System.getProperty("user.dir") +"\\data\\accounts\\accounts.csv";
@@ -103,12 +107,22 @@ public class AccountManager {
 
     public boolean checkAccountExists(List<Account>accountList, String username){
         for(Account a: accountList){
-            if(a.getUsername().equalsIgnoreCase(username)){
+            if(a.getUsername().equals(username)){
                 return true;
             }
         }
         return false;
     }
+
+    public boolean checkAccountExistsAndCustomer(List<Account>accountList, String username){
+        for(Account a:accountList){
+            if(a.getUsername().equals(username) && a.getAccessLevel().equals("C")){
+                return true;
+            }
+        }
+        return false;
+    }
+
     // The following restrictions are imposed in the email address' local part by using this regex:
         // It allows numeric values from 0 to 9.
         // Both uppercase and lowercase letters from a to z are allowed.
@@ -136,5 +150,23 @@ public class AccountManager {
         Pattern p = Pattern.compile("(8|9)?[0-9]{7}");
         Matcher m = p.matcher(mobile);
         return (m.find() && m.group().equals(mobile));
+    }
+
+    // Generates random alphanumeric name of length 7 and appends it to "Guest" to signify that it is a guest name
+    public String randomNameGenerator() {
+        // nextInt is normally exclusive of the top value,
+        // so add 1 to make it inclusive
+        int leftLimit = 48; // numeral '0'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 7;
+        Random random = new Random();
+    
+        String generatedString = random.ints(leftLimit, rightLimit + 1)
+          .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+          .limit(targetStringLength)
+          .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+          .toString();
+    
+        return "Guest" + generatedString;
     }
 }

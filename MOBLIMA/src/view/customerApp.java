@@ -37,7 +37,8 @@ public class customerApp {
                                 "4. Show all movies\n"+
                                 "5. Search Movie by Name\n"+
                                 "6. Top 5 Movies\n"+
-                                "7. Back to main menu\n"+
+                                "7. Review Movie\n" +
+                                "8. Exit\n"+
                             "==============================================================\n");
             //scanner
             while(true){
@@ -204,6 +205,13 @@ public class customerApp {
                     
                     break;
                 case 7:
+                    // Generate random username and temporary account for guest to review movie
+                    // Temporary Account will not be saved within database.
+                    String userName = AccountManager.getInstance().randomNameGenerator();
+                    Account guestAccount = new CustomerAcc(userName,"Guest Account", 0, 0, "Guest", "G");
+                    ReviewManager.getInstance().reviewMenuCustomer(0, guestAccount);
+                    break;
+                case 8:
                     System.out.println("Exiting customer interface...");
                     mainApp.main(null);
                     break;
@@ -226,11 +234,12 @@ public class customerApp {
         do{
             //main menu
             System.out.print("================= MOBLIMA CUSTOMER INTERFACE =================\n"+
-                                "1. Make Bookings and Give Review\n"+
+                                "1. Make Bookings for movies\n"+
                                 "2. Show all movies\n"+
                                 "3. Search Movie by Name\n"+
                                 "4. Top 5 Movies\n"+
-                                "5. Log out\n"+
+                                "5. Give Review\n" + 
+                                "6. Log out\n"+
                             "==============================================================\n");
             //scanner
             while(true){
@@ -241,7 +250,7 @@ public class customerApp {
                     break;
                 }catch(InputMismatchException e){
                     scan.nextLine();
-                    System.out.println("Please enter a valid option from 1-5 only!");
+                    System.out.println("Please enter a valid option from 1-6 only!");
                     continue;
                 }
             }
@@ -309,12 +318,16 @@ public class customerApp {
                     
                     break;
                 case 5:
+                    //review movie
+                    ReviewManager.getInstance().reviewMenuCustomer(0, account);
+                    break;
+                case 6:
                     System.out.println("Logging out...");
                     mainApp.main(null);
                     break;
                 
                 default:
-                    System.out.println("Please enter a valid option from 1-5 only!");
+                    System.out.println("Please enter a valid option from 1-6 only!");
                     customerLoggedInMenu(account);
             }
 
@@ -333,8 +346,7 @@ public class customerApp {
             System.out.print("================= MOBLIMA CUSTOMER APP =================\n"+
                             "1. Book and Purchase Ticket\n"+
                             "2. Booking History\n"+
-                            "3. Review Movie\n"+
-                            "4. Exit\n"+
+                            "3. Exit\n"+
                             "========================================================\n");
             System.out.println("Please Enter Your Choice:\n");
 
@@ -342,7 +354,7 @@ public class customerApp {
                 input = scan.nextInt();
                 scan.nextLine();
             }catch(InputMismatchException e){
-                System.out.println("Please enter numbers only!");
+                System.out.println("Please enter a valid option from 1-3 only!");
                 scan.nextLine();
                 bookingAndReviewMenu(user);
             }
@@ -409,18 +421,15 @@ public class customerApp {
                 //show booking history
                     break;
                     
-                case 3:
-                //review movie
-                    ReviewManager.getInstance().reviewMenu(0, user);
-                    break;
 
-                case 4:
+
+                case 3:
                     System.out.println("Exiting Customer App...");
                     customerApp.getInstance().customerGuestMenu();
                     break;
 
                 default:
-                System.out.println("Please enter a valid option (1-5) only.");
+                System.out.println("Please enter a valid option (1-3) only.");
             }
         }while(exit == false);
     }

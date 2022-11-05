@@ -9,6 +9,7 @@ import java.util.List;
 import managers.SystemSettingsManager;
 import managers.AccountManager;
 import managers.MovieManager;
+import managers.ReviewManager;
 import managers.ShowtimeManager;
 import managers.StaffAccManager;
 
@@ -184,7 +185,7 @@ public class adminApp {
                         MovieManager.getInstance().staffMenu(0,account);
                         break;
                     case 2:
-                        // Delete reviews of user?
+                        ReviewManager.getInstance().reviewMenuStaff(0,account);
                         break;
                     case 3:
                         ShowtimeManager.getInstance().staffMenu(0,account);
