@@ -8,7 +8,8 @@ import managers.AccountManager;
 import java.io.File;
 
 /* 
- * Main app to run to choose either Customer or Staff App
+ * Main app to run to choose either Customer or Staff App 
+ * Allows user to either run as Guest or Login to make bookings
  */
 
 public class mainApp {
