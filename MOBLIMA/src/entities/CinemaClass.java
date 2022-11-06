@@ -1,5 +1,11 @@
 package entities;
 
+/**
+ * Represents different classes of Cinemas
+ * @author Andrew Leung
+ * @version 1.0
+ * @since 2022-11-06
+ */
 public enum CinemaClass {
     SILVER ("SILVER"),
     GOLD ("GOLD"),
