@@ -7,21 +7,39 @@ import managers.AccountManager;
 
 import java.io.File;
 
-/* 
- * Main app to run to choose either Customer or Staff App 
+/**
+ * The class for our Main app to run 
  * Allows user to either run as Guest or Login to make bookings
+ * @author Wei Kang
+ * @version 2.5
+ * @since 01-11-2022
  */
 
 public class mainApp {
 
+	/**
+	 * For singleton pattern adherence. This mainApp instance persists throughout runtime.
+	 */
     private static mainApp newInstance = null;
+	/**
+	 * The scanner for reading input of user
+	 */
     private static Scanner sc = new Scanner(System.in); //Scanner Object Instantiation
+    /**
+	 * For singleton pattern adherence. 
+	 * @return instance The static instance that persists throughout runtime.
+	 */
     public static mainApp getInstance(){
         if (newInstance == null){
             newInstance = new mainApp();
         }
         return newInstance;
     }
+    /**
+     * Main function to display main menu
+     * Login to go to either Staff or Customer Menu based on account's access level
+     * Or simply continue as Guest
+	 */
     public static void main(String[] args){
 
         File directory = new File("SC2002_OOP\\MOBLIMA").getAbsoluteFile();

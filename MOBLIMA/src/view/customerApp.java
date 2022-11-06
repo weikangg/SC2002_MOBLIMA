@@ -3,9 +3,6 @@ package view;
 import java.util.Scanner;
 
 import entities.*;
-import managers.CustomerMovieManager;
-import managers.MovieListManager;
-import managers.SystemSettings;
 import managers.*;
 import java.util.InputMismatchException;
 import java.util.List;

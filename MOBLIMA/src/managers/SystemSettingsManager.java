@@ -2,26 +2,52 @@ package managers;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
-
 import entities.*;
 import view.adminApp;
 import static utils.IOUtils.*;
-
+/**
+ * A manager class for all actions related to the staff to configure the system settings
+ * @author Wei Kang
+ * @version 2.5
+ * @since 01-11-2022
+ */
 public class SystemSettingsManager {
+	/**
+	 * The scanner for reading input of user
+	 */
     private Scanner sc = new Scanner(System.in);
-
+	/**
+	 * For singleton pattern adherence. This SystemSettingsManager instance persists throughout runtime.
+	 */
     private static SystemSettingsManager single_instance = null;
+	/**
+	 * For singleton pattern adherence. 
+	 * @return instance The static instance that persists throughout runtime.
+	 */
     public static SystemSettingsManager getInstance()
     {
         if (single_instance == null)
             single_instance = new SystemSettingsManager();
         return single_instance;
     }
-
+	/**
+	 * The default constructor for the SystemSettingsManager class
+	 */
     private SystemSettingsManager(){}
-    static String path = System.getProperty("user.dir") +"\\data\\staffs\\staffsSettings.csv";
-    static String separator = ",";
-
+    /**
+	 * The path to the CSV file that stores all the staff system settings
+	 */
+    private static String path = System.getProperty("user.dir") +"\\data\\staffs\\staffsSettings.csv";
+	/**
+	 * The separator for the columns in the csv file
+	 */
+    private static String separator = ",";
+	/**
+	 * Staff's Menu to manage system settings
+     * Choose options to configure ticket prices, customer's access to view top 5 movies, holidays, rating score limit for movies
+     * @param choice User's option
+     * @param account User's account
+	 */
     public void staffMenu(int choice,Account account){
         int option = 0;
         
@@ -29,7 +55,7 @@ public class SystemSettingsManager {
             if(choice == 0){
                 System.out.println("==================== SYSTEM SETTINGS STAFF APP ====================\n" +
             					" 1. Configure Ticket Prices                                           \n" +
-                                " 2. Configure Top 5 Rankings                                          \n" + 
+                                " 2. Configure Top 5 Movies Permissions                                \n" + 
 			            		" 3. Configure Holidays                                                \n" +
                                 " 4. Configure Rating Score Limit for Movies                           \n" +
 			                    " 5. Back to Staff App                                                 \n" +
@@ -69,7 +95,11 @@ public class SystemSettingsManager {
                 staffMenu(0,account);
         }
     }
-
+    /**
+	 * Function to configure rating score limit
+     * Any movie that has a overall rating score below the rating score limit will not be displayed to the customer.
+     * @param account  staff account
+	 */
     public void configureRatingScoreLimit(Account account){
         System.out.println("###########################################################");
 		System.out.println("############## CONFIGURING DISPLAY OF RATINGS #############");
@@ -128,7 +158,12 @@ public class SystemSettingsManager {
             break;
         }
     }
-
+    /**
+	 * Function to configure top 5 movies settings
+     * Staff can choose to hide the top 5 movies by sales rankings from the customer
+     * Staff can choose to hide the top 5 movies by overall ratings from the customer
+     * @param account  staff account
+	 */
     public void configureTop5(Account account){
         System.out.println("###########################################################");
 		System.out.println("#################### CONFIGURING TOP 5 ####################");
@@ -201,7 +236,11 @@ public class SystemSettingsManager {
 
     }
 
-
+    /**
+	 * Function to configure holidays
+     * Staff can view all current holidays, add, update and remove holidays
+     * @param account  staff account
+	 */
     public void configureHolidays(Account account){
         
         System.out.println("###########################################################");
@@ -272,7 +311,11 @@ public class SystemSettingsManager {
         }
         staffMenu(0,account);
     }
-
+	/**
+	 * Writes the existing system settings to the systemsettings.csv file for storage
+	 * @param systemSettings System settings object
+	 * @return true if update was successful, false if update was unsuccessful
+	 */
     public static boolean updateSystemSettingsCSV(SystemSettings systemSettings){
         FileWriter csvWriter;
         try {

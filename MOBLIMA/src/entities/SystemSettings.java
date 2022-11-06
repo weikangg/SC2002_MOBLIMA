@@ -1,4 +1,4 @@
-package managers;
+package entities;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -7,17 +7,38 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.*;
-import entities.*;
 import static utils.IOUtils.*;
-
+/**
+ * A class defining a System Settings object.
+ * @author Wei Kang
+ * @version 2.5
+ * @since 01-11-2022
+ */
 public class SystemSettings {
-    
+    /**
+	* This string is used to store the permission for customer to view the top 5 movies by sales.
+	*/
     private String customerViewTop5Sales;
+    /**
+	* This string is used to store the permission for customer to view the top 5 movies by overall rating score.
+	*/
     private String customerViewTop5OverallRating;
+    /**
+	* This double is used to store the rating score limit.
+	*/
     private double ratingScoreLimit;
+	/**
+	 * The scanner for reading input of user
+	 */
     private static Scanner sc = new Scanner(System.in);
-    // Ensure single instance
+	/**
+	 * For singleton pattern adherence. This SystemSettings instance persists throughout runtime.
+	 */
     private static SystemSettings single_instance = null;
+	/**
+	 * For singleton pattern adherence. 
+	 * @return instance The static instance that persists throughout runtime.
+	 */
 	public static SystemSettings getInstance()
     {
         if (single_instance == null)
@@ -25,42 +46,71 @@ public class SystemSettings {
         return single_instance;
     }
 
-    // Constructor
-    public SystemSettings(){
-        // this.customerViewTop5Sales = "Y";
-        // this.customerViewTop5OverallRating = "Y";
-        // this.ratingScoreLimit = 1;
-    }
-
-    static String path = System.getProperty("user.dir") +"\\data\\staffs\\staffsSettings.csv";
-    static String separator = ",";
+	/**
+	 * The default constructor for the SystemSettings class
+	 */
+    public SystemSettings(){}
+    /**
+	 * The path to the CSV file that stores all the staff system settings
+	 */
+    private static String path = System.getProperty("user.dir") +"\\data\\staffs\\staffsSettings.csv";
+	/**
+	 * The separator for the columns in the csv file
+	 */
+    private static String separator = ",";
 
     // Gettors
+
+    /**
+	 * Get Permission for Customers to view Top 5 movies by Sales (String). Public method.
+	 * @return Customer's permission to view top 5 movies by sales
+	 */
     public String getTop5SalesPermission(){
         return this.customerViewTop5Sales;
     }
+    /**
+	 * Get Permission for Customers to view Top 5 movies by Overall Rating Score (String). Public method.
+	 * @return Customer's permission to view top 5 movies by Overall Rating Score
+	 */
     public String getTop5OverallRatingPermission(){
         return this.customerViewTop5OverallRating;
     }
-
+    /**
+	 * Get Rating Score Limit. Public method.
+	 * @return ratingScoreLimit
+	 */
     public double getRatingScoreLimit(){
         return this.ratingScoreLimit;
     }
     // Settors
+
+	/**
+	 * Set Permission for Customers to view Top 5 movies by Sales. Public method.
+	 * @param permission String containing permission.
+	 */
     public void setTop5SalesPermission(String permission){
         this.customerViewTop5Sales = permission;
     }
+	/**
+	 * Set Permission for Customers to view Top 5 movies by overall Rating Score . Public method.
+	 * @param permission String containing permission.
+	 */
     public void setTop5OverallRatingPermission(String permission){
         this.customerViewTop5OverallRating = permission;
     }
+	/**
+	 * Set Permission for Customers to view Top 5 movies by Sales . Public method.
+	 * @param ratingScoreLimit double containing ratingScoreLimit.
+	 */
     public void setRatingScoreLimit(double ratingScoreLimit){
         this.ratingScoreLimit = ratingScoreLimit;
     }
 
     // Methods
-    
-    // Read in and update the current permissions of system settings. To be called before further
-    // updating the system settings for admin purposes.
+
+    /**
+	 * Read in and update the current permissions of system settings. To be called before further updating the system settings.
+	 */
     public void updatePermissions(){
         BufferedReader br = null;
 		String line = "";
@@ -96,8 +146,12 @@ public class SystemSettings {
         }
     }
 
-    // View Top 5 Menu Normally
-
+    /**
+	 * Function to display the menu where the customer can view the top 5 movies normally
+     * Customer able to view both top 5 movies by sales and ratings
+     * Excludes movies that have are not showing currently or in preview / have 0 overall rating score/ 0 profit earned.
+     * @param mList  Existing List of movies
+	 */
     public void top5Movies(List<Movie>mList){
         int choice = 0;
         while(true){
@@ -115,7 +169,7 @@ public class SystemSettings {
                 }
                 sc.nextLine();
             }catch(InputMismatchException e){
-                print("Please enter numbers only!");
+                print("Please enter a valid option from 1-3 only!");
                 sc.nextLine();
                 continue;
             }
@@ -216,8 +270,11 @@ public class SystemSettings {
         }
     }
 
-    // View top 5 Sales only 
-
+    /**
+	 * Function to display the menu where the customer can only view top 5 movies by sales
+     * Excludes movies that have are not showing currently or in preview / have 0 overall rating score/ 0 profit earned.
+     * @param mList  Existing List of movies
+	 */
     public void top5SalesOnly(List<Movie>mList){
         int choice = 0;
         DecimalFormat df = new DecimalFormat("0.00");
@@ -236,7 +293,7 @@ public class SystemSettings {
                 }
                 sc.nextLine();
             }catch(InputMismatchException e){
-                print("Please enter numbers only!");
+                print("Please enter a valid option from 1-3 only!");
                 sc.nextLine();
                 continue;
             }
@@ -302,7 +359,11 @@ public class SystemSettings {
         }
     }
     
-    // View top 5 ratings only
+    /**
+	 * Function to display the menu where the customer can only view top 5 movies by ratings
+     * Excludes movies that have are not showing currently or in preview / have 0 overall rating score/ 0 profit earned.
+     * @param mList  Existing List of movies
+	 */
     public void top5RatingsOnly(List<Movie>mList){
         int choice = 0;
         DecimalFormat df = new DecimalFormat("0.0");
@@ -321,7 +382,7 @@ public class SystemSettings {
                 }
                 sc.nextLine();
             }catch(InputMismatchException e){
-                print("Please enter numbers only!");
+                print("Please enter a valid option from 1-3 only!");
                 sc.nextLine();
                 continue;
             }
@@ -383,7 +444,10 @@ public class SystemSettings {
 
     }
 
-    // View None
+    /**
+	 * Function to display the menu where customer cannot view both top 5 movies by sales and ratings.
+     * A placeholder message will be displayed instead.
+	 */
     public void viewNone(){
         int choice = 0;
         while(true){
@@ -401,7 +465,7 @@ public class SystemSettings {
                 }
                 sc.nextLine();
             }catch(InputMismatchException e){
-                print("Please enter numbers only!");
+                print("Please enter a valid option from 1-3 only!");
                 sc.nextLine();
                 continue;
             }

@@ -13,148 +13,43 @@ import managers.ReviewManager;
 import managers.ShowtimeManager;
 import managers.StaffAccManager;
 
+/**
+ * The class for our adminApp 
+ * @author Wei Kang
+ * @version 2.5
+ * @since 01-11-2022
+ */
+
 public class adminApp {
-
+	/**
+	 * For singleton pattern adherence. This MovieListManager instance persists throughout runtime.
+	 */
     private static adminApp newInstance = null;
+	/**
+	 * The scanner for reading input of user
+	 */
     private static Scanner sc = new Scanner(System.in);
-
+	/**
+	 * The default constructor for the adminApp class
+	 */
     private adminApp(){}
 
-// PUBLIC METHODS
-
-    // If no previous instance of Admin has been created, we create one. Else use the previously
-    // created one. Returns an instance of StaffApp.
+    /**
+	 * For singleton pattern adherence. 
+	 * @return instance The static instance that persists throughout runtime.
+	 */
     public static adminApp getInstance(){
         if (newInstance == null){
             newInstance = new adminApp();
         }
         return newInstance;
     }
-/*
- *****************************************
- * DISPLAY LOGIN MENU FOR STAFF TO LOGIN *
- *****************************************
- */
 
-    // public void displayLoginMenu(){
-    //     int choice;
-    //     boolean adminLoggedIn = false;
-    //     boolean toQuit = false;
-
-    //     do{
-    //         System.out.println(	"================= MOBLIMA STAFF INTERFACE =================\n"+
-    //                             " 1. Staff Login                                            \n"+
-    //                             " 0. Back to Main Menu                                      \n"+
-    //                             "===========================================================");
-    //         System.out.println("Enter option: ");
-
-    //         // If invalid input
-    //         while(!sc.hasNextInt()){
-    //             System.out.println("Please enter numbers only!");
-    //             sc.next(); // Flush input
-    //         }
-            
-    //         choice = sc.nextInt();
-    //         sc.nextLine();
-
-    //         switch(choice){
-    //             case 1:
-    //                 System.out.println("Enter Username: ");
-    //                 while(!sc.hasNext()){
-    //                     System.out.println("Error, please try again!");
-    //                     sc.next();
-    //                 }
-
-    //                 String userName = sc.nextLine();
-    //                 System.out.println("Enter password: ");
-    //                 while(!sc.hasNext()){
-    //                     System.out.println("Error, please try again!");
-    //                     sc.next();
-    //                 }
-
-    //                 String passWord = sc.nextLine();
-    //                 boolean approved = StaffLogin.getInstance().checkStaffLogin(userName,passWord);
-
-    //                 if(approved){
-    //                     toQuit = true;
-    //                     adminLoggedIn = true;
-    //                     this.displayLoggedInMenu();
-    //                 }
-    //                 else{
-    //                     System.out.print("Wrong Username/Password.");
-    //                     System.out.println(" Try again!");
-    //                 }
-    //                 break;
-    //             case 2:
-    //                 break;
-    //             case 0:
-    //                 System.out.println("Heading back to Main Menu....");
-    //                 mainApp2.main(null);
-    //                 break;
-    //         }
-            
-    //     } while(toQuit == false && adminLoggedIn == false);
-    // }
-
-// PRIVATE METHODS
-
-/*
- ***********************************************
- * DISPLAY MENU FOR STAFF TO EDIT AND DO STUFF *
- ***********************************************
- */
+    /**
+     * Function to display logged in menu after staff logs in
+     * @param account Staff account
+	 */
     public void displayLoggedInMenu(Account account){
-
-        // System.out.println("");
-
-        // Cineplex[] cineplexes = CineplexManager.configCineplexes(); //Function to get cineplexes object
-
-        // // ArrayList<Showtime> list = cineplexes[0].searchMovie(5);
-
-        // // for(int i = 0; i < list.size(); i++){
-        // //     list.get(i).showInfo();
-        // //     System.out.println("");
-        // // }
-
-        // Cinema[] cinemas = cineplexes[0].getCinemas(); //Function to get cinemas object of cineplexes[0]
-
-        // // Showtime[] showtimes = cinemas[0].getShowtimes(); //Function to get movies object of cinema[0]
-
-
-        // String str = "2023-01-23 20:00";
-        // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        // LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
-        // MovieType movieType = MovieType.THREED;
-
-        // cinemas[2].addShowtime(4, dateTime, movieType);
-
-        // cinemas[1].showShowtimes();
-        
-        // cinemas[1].deleteShowtime(2);
-
-        // cinemas[1].showShowtimes();
-
-        // cinemas[1].showShowtimes();
-        
-        // showtimes[0].reserveSeat(0, 0);
-
-        // showtimes[1].setMovieID(5);
-        // cinemas[0].showShowtimes(); //Show Showtimes in cinemas[0] of cineplexes[0]
-
-        // System.out.println("Information about showtimes[0]");
-        // // showtimes[1].showInfo(); //Show info of showtimes[0] in cinemas[0] of cineplexes[0]
-        // System.out.println("");
-
-        // System.out.println("Seats available in showtimes[0]");
-        // showtimes[2].showSeats(); //Show seats of showtimes[0] in cinemas[0] of cineplexes[0]
-        // System.out.println("");
-
-        // List<Movie> movies = MovieListManager.getMovieList();
-        // for(int i = 0; i < movies.size(); i++){
-            
-        //     System.out.println(": "+movies.get(i).getMovieTitle());
-        // }
-
 
         int choice;
             do {
@@ -238,7 +133,4 @@ public class adminApp {
             }while(choice != 7);
     }
 
-    public void createAccount(){
-
-    }
 }
