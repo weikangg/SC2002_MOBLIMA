@@ -98,6 +98,12 @@ public class SystemSettingsManager {
                 staffMenu(0,account);
         }
     }
+
+	/**
+	 * Staff's Menu to manage configure ticket prices
+     * Choose options to configure ticket prices for different ticket types and multiplier rates for different movie types, seat types & cinema classes
+     * @param account User's account
+	 */
     public void configureTicketPriceMenu(Account account){
         System.out.println("###########################################################");
 		System.out.println("################# CONFIGURING TICKET PRICE ################");
@@ -143,7 +149,10 @@ public class SystemSettingsManager {
         }
         this.staffMenu(0, account);
     }
-
+    /**
+	 * Function to configure cinema class multipler
+     * @param account  staff account
+	 */
     public void configureCinemaClassMultiplier(Account account){
         int count = 1;
         TicketPrice tpObj = new TicketPrice();
@@ -264,7 +273,10 @@ public class SystemSettingsManager {
         }
         System.out.println("Multiplier successfully updated!");
     }
-
+    /**
+	 * Function to configure seat type multipler
+     * @param account  staff account
+	 */
     public void configureSeatTypeMultiplier(Account account){
         int count = 1;
         TicketPrice tpObj = new TicketPrice();
@@ -385,7 +397,10 @@ public class SystemSettingsManager {
         }
         System.out.println("Multiplier successfully updated!");
     }
-
+    /**
+	 * Function to configure movie type multipler
+     * @param account  staff account
+	 */
     public void configureMovieTypeMultiplier(Account account){
         int count = 1;
         TicketPrice tpObj = new TicketPrice();
@@ -510,7 +525,10 @@ public class SystemSettingsManager {
         }
         System.out.println("Multiplier successfully updated!");
     }
-
+    /**
+	 * Function to configure ticket type multipler
+     * @param account  staff account
+	 */
     public void configureTicketTypePrice(Account account){
         int count = 1;
         TicketPrice tpObj = new TicketPrice();
