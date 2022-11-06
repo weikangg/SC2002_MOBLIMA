@@ -105,8 +105,7 @@ public class adminApp {
                     case 6:
                         if(account.getAccessLevel().equals("SA")){
                             List<Account>accountList = AccountManager.getInstance().getAccountList();
-                            int result = StaffAccManager.getInstance().removeStaffAccount(accountList);
-                            System.out.println("Result: " + result);                
+                            int result = StaffAccManager.getInstance().removeStaffAccount(accountList);              
                             if(result == 1){
                                 System.out.println("Account removed!");
                             }
