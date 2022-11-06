@@ -9,7 +9,7 @@ public class StaffAcc extends Account {
     //constructor
 
     /**
-	 * This constructoris used to create a new Staff Account object
+	 * This constructor is used to create a new Staff Account object
 	 * @param username	  This is the staff's username
 	 * @param email		  This is the staff's email
 	 * @param mobile	  This is the staff's mobile
