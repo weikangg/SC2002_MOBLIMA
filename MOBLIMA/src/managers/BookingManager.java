@@ -1,14 +1,17 @@
 package managers;
 
 import java.util.Scanner;
-import java.io.Console;
+//import java.io.Console;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import entities.*;
+import utils.IOUtils;
 
 public class BookingManager implements Serializable{
 	
@@ -29,7 +32,11 @@ public class BookingManager implements Serializable{
 	
 	private static BookingManager bm = null;
 	
-	public static BookingManager newBM()
+	
+    /** 
+     * @return BookingManager
+     */
+    public static BookingManager newBM()
 	{
 	    if (bm == null) {
 	    	 bm = new BookingManager();
@@ -41,7 +48,12 @@ public class BookingManager implements Serializable{
 
 
 	
-	public void bookingMenu(Showtime showtime, Account user)
+	
+    /** 
+     * @param showtime
+     * @param user
+     */
+    public void bookingMenu(Showtime showtime, Account user)
 	{
         ArrayList<String> bookedSeats = new ArrayList<>();
         setBookedSeats(bookedSeats);
@@ -111,6 +123,12 @@ public class BookingManager implements Serializable{
 		
 	}
 
+    
+    /** 
+     * @param row
+     * @param col
+     * @return Boolean
+     */
     public Boolean isSeatEmpty(int row, int col) //Check for showtime seats
     {
         //0 = available, 1 = unavailable, 2 = booked
@@ -212,6 +230,11 @@ public class BookingManager implements Serializable{
         System.out.println("Seat removed...");
     }
 
+    
+    /** 
+     * @param showtime
+     * @return Boolean
+     */
     public Boolean confirmSelection(Showtime showtime)
     {
         if(this.bookedSeats.size()==0)
@@ -220,9 +243,24 @@ public class BookingManager implements Serializable{
             System.out.println("Please choose another option");
             return false;   
         }
-        System.out.println("Confirm booking? (Yes/No)");
-        String answer = sc.nextLine();
+        if(IOUtils.confirm("Confirm booking?"))
+        {
+            for(int i = 0; i<getBookedSeats().size(); i++)
+            {
+                String rowcol = getBookedSeats().get(i);
+                String[] tokens = rowcol.split("/");
+                int row = Integer.parseInt(tokens[0]);
+                int col = Integer.parseInt(tokens[1]);        
+                updateSeats(row, col, 1);
+            }
+            return true;
+        }
+        else
+            return false;
+
+        /*String answer = sc.nextLine();
         System.out.println(answer);
+
         while(true)
         {
             //System.out.println(answer);
@@ -248,11 +286,17 @@ public class BookingManager implements Serializable{
                 answer = sc.nextLine();
             }
 
-        }
+        }*/
 
     }       //getShowtime().setSeats(getSeats());
 
 
+    
+    /** 
+     * @param row
+     * @param col
+     * @param choice
+     */
     public void updateSeats(int row, int col, int choice)
     {
         switch(choice)
@@ -271,26 +315,50 @@ public class BookingManager implements Serializable{
         }
     }
 
+    
+    /** 
+     * @return int[][]
+     */
     public int[][] getSeats()
     {
         return this.seats;
     }
+    
+    /** 
+     * @return ArrayList<String>
+     */
     public ArrayList<String> getBookedSeats()
     {
         return this.bookedSeats;
     }
+    
+    /** 
+     * @return ArrayList<Ticket>
+     */
     public ArrayList<Ticket> getBookedTickets()
     {
         return this.bookedTickets;
     }
+    
+    /** 
+     * @return Booking
+     */
     public Booking getBooking()
     {
         return this.booking;
     }
+    
+    /** 
+     * @return Showtime
+     */
     public Showtime getShowtime()
     {
         return this.showtime;
     }
+    
+    /** 
+     * @return Account
+     */
     public Account getUser()
     {
         return this.user;
@@ -299,26 +367,50 @@ public class BookingManager implements Serializable{
 
 
 
+    
+    /** 
+     * @param seats
+     */
     public void setSeats(int[][] seats)
     {
         this.seats = seats;
     }
+    
+    /** 
+     * @param bookedSeats
+     */
     public void setBookedSeats(ArrayList<String> bookedSeats)
     {
         this.bookedSeats = bookedSeats;
     }
+    
+    /** 
+     * @param bookedTickets
+     */
     public void setBookedTickets(ArrayList<Ticket> bookedTickets)
     {
         this.bookedTickets=bookedTickets;
     }
+    
+    /** 
+     * @param booking
+     */
     public void setBooking(Booking booking)
     {
         this.booking = booking;
     }
+    
+    /** 
+     * @param showtime
+     */
     public void setShowTime(Showtime showtime)
     {
         this.showtime = showtime;
     }
+    
+    /** 
+     * @param user
+     */
     public void setUser(Account user)
     {
         this.user = user;
@@ -341,6 +433,60 @@ public class BookingManager implements Serializable{
 
     public void createBooking()
     {
+        ArrayList<Booking> userBookings = new ArrayList<Booking>();
+        String path = System.getProperty("user.dir") +"\\data\\bookings\\";
+        String username = getUser().getUsername();
+        String filename = path + username + "/bookings.csv";
+        TransactionManager.getInstance().makeTransaction();
+        File check = new File(filename);
+        FileInputStream fis = null;
+		ObjectInputStream in = null;
+        if(check.exists())
+        {
+            try
+            {
+                fis = new FileInputStream(filename);
+                in = new ObjectInputStream(fis);
+                userBookings = (ArrayList<Booking>) in.readObject();
+                in.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                System.out.println("IOException is caught");
+            } catch (ClassNotFoundException ex) {
+                ex.printStackTrace();
+                System.out.println("IOException is caught");
+            }
+            System.out.println("Total Price of first booking is: " + userBookings.get(0).getTotalPrice());
+        }
+        String userBooks = "B" + userBookings.size();
+        Booking newB = new Booking(userBooks,TransactionManager.getInstance().getTotalPrice(),getShowtime().getMovieTitle(),
+        getShowtime().getCinemaID(),getShowtime().getCineplexID(),TransactionManager.getInstance().getTList(),
+        getShowtime().getDateTimeLDT(),TransactionManager.getInstance().getTransaction());
+        userBookings.add(newB);
+        updateShowtimeCSV();
+        //check = new File(filename);
+        try{
+            check.getParentFile().mkdirs();
+            FileOutputStream file = new FileOutputStream(check);
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            //System.out.println(file.getAbsolutePath());
+            userBookings.add(getBooking());
+            out.writeObject(userBookings);
+            out.close();
+            file.close();
+
+        }catch(IOException ex){
+            System.out.println("IOException is caught");
+        }
+        TransactionManager.getInstance().updateTotalSales();
+        setDone();
+        TransactionManager.getInstance().deleteTransactionM();
+        TicketManager.newTM().deleteTicketM();
+        System.out.println("Booking and payment success!\n Please view under booking history");
+
+
+
+        /*
         String path = System.getProperty("user.dir") +"\\data\\bookings\\";
         ArrayList<Booking> userBookings = new ArrayList<Booking>();
         String username = getUser().getUsername();
@@ -350,16 +496,16 @@ public class BookingManager implements Serializable{
         String finalFile = location +i+ filename;
         File check = new File(finalFile);
         TransactionManager.getInstance().makeTransaction();
-        Booking newB = new Booking(null,0,null,0,0,null,null,null);
-        setBooking(newB);
-        getBooking().setTicketList(TransactionManager.getInstance().getTList());
+        Booking newB = new Booking("",TransactionManager.getInstance().getTotalPrice(),getShowtime().getMovieTitle(),getShowtime().getCinemaID(),getShowtime().getCineplexID(),TransactionManager.getInstance().getTList(),getShowtime().getDateTimeLDT(),TransactionManager.getInstance().getTransaction());
+        setBooking(newB);*/
+        /*getBooking().setTicketList(TransactionManager.getInstance().getTList());
         getBooking().setCinemaID(getShowtime().getCinemaID());
         getBooking().setCineplexID(getShowtime().getCineplexID());
         getBooking().setMovie(getShowtime().getMovieTitle());
         getBooking().setShowTime(getShowtime().getDateTimeLDT());
         getBooking().setTotalPrice(TransactionManager.getInstance().getTotalPrice());
-        getBooking().setTransaction(TransactionManager.getInstance().getTransaction());
-        updateShowtimeCSV();
+        getBooking().setTransaction(TransactionManager.getInstance().getTransaction());*/
+        /*updateShowtimeCSV();
         while(check.exists())
         {
             i++;
@@ -380,11 +526,26 @@ public class BookingManager implements Serializable{
         }catch(IOException ex){
             System.out.println("IOException is caught");
         }
-        TransactionManager.getInstance().updateTotalSales();
-        setDone();
-        TransactionManager.getInstance().deleteTransactionM();
-        TicketManager.newTM().deleteTicketM();
-        System.out.println("Booking and payment success!\n Please view under booking history");
+
+
+        ArrayList<Booking> pDetails = new ArrayList<>();
+		FileInputStream fis = null;
+		ObjectInputStream in = null;
+		try {
+			fis = new FileInputStream(filename);
+			in = new ObjectInputStream(fis);
+			pDetails = (ArrayList) in.readObject();
+			in.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} catch (ClassNotFoundException ex) {
+			ex.printStackTrace();
+		}
+		// print out the size
+		//System.out.println(" Details Size: " + pDetails.size());
+		//System.out.println();
+		return pDetails;*/
+
         //deleteBM();
         
 
@@ -406,6 +567,10 @@ public class BookingManager implements Serializable{
     {
         this.done = true;
     }
+    
+    /** 
+     * @return boolean
+     */
     public boolean getDone()
     {
         return this.done;
