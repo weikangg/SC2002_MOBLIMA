@@ -228,6 +228,10 @@ public class Showtime extends Cinema{
 
     }
 
+    public SeatType getSeatType(int i, int j){
+        return seats[i][j].getSeatType();
+    }
+
 
     //Getters
 
@@ -254,6 +258,7 @@ public class Showtime extends Cinema{
 
         return ret;
     }
+
     //Setters
 
     
