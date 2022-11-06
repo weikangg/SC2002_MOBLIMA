@@ -268,7 +268,7 @@ public class StaffMovieCRUDManager {
     }
 
     /**
-	 * Function for staff to update a movie from the list of movies and database regardless of movie status based on the movie title.
+	 * Function for staff to update a movie from the list of movies based on the movie title.
      * @param movieList   Existing List of movies
      * @return true if updating of movie was successful, false if unsuccessful
 	 */
