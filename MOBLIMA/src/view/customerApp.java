@@ -339,16 +339,14 @@ public class customerApp {
                 input = scan.nextInt();
                 movst = showtime.get(input - 1);
 
-                //debug
-                System.out.println(movst.getMovieID());
-                System.out.println(movst.getMovieTitle());
-    
                 //call bookingmenu in booking manager
                 BookingManager.newBM().bookingMenu(movst, user);
                 break;
 
                 case 2:
                 //show booking history
+                System.out.println("=========================HISTORY=========================\n");
+                CustomerAccManager.checkHistory(user);
                     break;
                     
                 case 3:
