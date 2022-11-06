@@ -2,8 +2,6 @@ package managers;
 
 import java.util.*;
 
-import javax.sound.sampled.SourceDataLine;
-
 import entities.*;
 import view.adminApp;
 
@@ -50,7 +48,7 @@ public class ShowtimeManager {
         }
 
         Cinema cinema;
-        Cineplex cineplex;
+
         Showtime showtime;
         int[] inputs;
         int movieID;

@@ -1,17 +1,14 @@
 package entities;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ArrayList;
 import java.io.File;
-import java.time.format.DateTimeFormatter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.FileReader;
 import java.io.FileWriter;
 import com.opencsv.*;
-import com.opencsv.exceptions.CsvException;
 
 public class Cinema extends Cineplex{
 
@@ -67,9 +64,7 @@ public class Cinema extends Cineplex{
         try {
             //Create File
             Path path = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes\\"+super.getName()+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+numShowtimes+".csv");
-            File file = new File(path.toAbsolutePath().toString());
             
-
             String[] str = dateTime.toString().split("T",2);
             String strDateTime = str[0]+" "+str[1];
 
@@ -127,7 +122,7 @@ public class Cinema extends Cineplex{
             configShowtimes(numShowtimes);
             
             System.out.println("Showtime added");
-            
+            csvReader.close();
         } catch (Exception e) {
             // TODO: handle exception
         }
@@ -179,7 +174,7 @@ public class Cinema extends Cineplex{
 
             csvwriterTwo.writeAll(cineplexesFile);
             csvwriterTwo.close();
-            
+            csvReader.close();
         } catch (Exception e) {
             // TODO: handle exception
         }

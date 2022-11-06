@@ -8,7 +8,6 @@ import entities.Booking;
 import utils.PasswordStrengthChecker;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.io.File;
 import java.io.FileReader;
