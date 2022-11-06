@@ -14,21 +14,23 @@ import com.opencsv.exceptions.CsvException;
 import entities.Cineplex;
 import entities.Cinema;
 
+/**
+ * Function Class that configures and returns the array of Cineplex objects
+ * @author Andrew Leung
+ * @version 3.0
+ * @since 2022-11-06
+ */
 public class CineplexManager {
     
     /**
-     * Function to configure the cineplexes
+     * Function to configure and returna the array of Cineplex objects
+     * @return cineplexes[] A list of Cineplex objects
      */
     public static Cineplex[] configCineplexes(){ 
 
         try {
-
-            
-            
-
             Path path = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes.csv");
             // System.out.println(path.toAbsolutePath().toString());
-
             
             FileReader filereader = new FileReader(path.toAbsolutePath().toString()); //CSVReader Instantiation
             CSVReader csvReader = new CSVReader(filereader); 
@@ -53,6 +55,7 @@ public class CineplexManager {
 
                 cineplexes[i].configCinema(str);                
             }
+            
 
             //Config Movies in Cinemas in Cineplexes
             for(int i = 0; i < cineplexes.length; i++){

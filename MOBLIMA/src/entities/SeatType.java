@@ -1,27 +1,20 @@
 package entities;
 
-/**
- * Represents different classes of Cinemas
- * @author Andrew Leung
- * @version 1.0
- * @since 2022-11-06
- */
-public enum CinemaClass {
-    SILVER ("SILVER"),
-    GOLD ("GOLD"),
-    PLATINUM ("PLATINUM"),
-    DIAMOND ("DIAMOND");
+public enum SeatType {
+    REGULAR ("R"),
+    ELITE ("E"),
+    COUPLE ("C"),
+    ULTIMATE ("U");
 
     private final String name;
 
     /**
-     * Constructor for the CinemaClass enum, taking in the string value of the enum and setting it as an attribute.
+     * Constructor for the SeatType enum, taking in the string value of the enum and setting it as an attribute.
      * @param s of the enum.
      */
-    private CinemaClass(String s) {
+    private SeatType(String s) {
         name = s;
-    }
-
+    } 
     /**
      * For string comparison.
      * @param otherName String to be compared to.
@@ -37,8 +30,7 @@ public enum CinemaClass {
      * @return String value of MovieFormat for string comparison purposes.
      */
     public String toString() {
-        return this.name;
-     }
-
-
+       return this.name;
+    }
+    
 }
