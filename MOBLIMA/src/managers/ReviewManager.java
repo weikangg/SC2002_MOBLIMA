@@ -511,6 +511,10 @@ public class ReviewManager {
                 System.out.println("");
             }
         }
+        if(count ==1){
+            System.out.println("You have not made any reviews before!");
+            return;
+        }
     }
     public void showAllReviews(List<Review> reviewList){
         int count = 1;

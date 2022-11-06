@@ -11,7 +11,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import managers.MovieListManager;
-import entities.MovieType;
 
 import com.opencsv.*;
 import com.opencsv.exceptions.CsvException;

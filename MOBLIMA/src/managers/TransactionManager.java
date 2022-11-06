@@ -1,15 +1,11 @@
 package managers;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import entities.Transaction;
-import view.customerApp;
 import entities.Ticket;
 import entities.Movie;
 import entities.Showtime;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;  
 import java.time.format.DateTimeFormatter;
 

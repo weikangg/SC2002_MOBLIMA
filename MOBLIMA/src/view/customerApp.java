@@ -49,7 +49,7 @@ public class customerApp {
                     break;
                 }catch(InputMismatchException e){
                     scan.nextLine();
-                    System.out.println("Please enter numbers only!");
+                    System.out.println("Please enter a valid option from 1-8 only!");
                     continue;
                 }
             }

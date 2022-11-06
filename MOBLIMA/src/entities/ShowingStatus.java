@@ -1,26 +1,27 @@
 package entities;
 
+/**
+ * An enum class defining Movie Showing Status.
+ * @author Wei Kang
+ * @version 2.5
+ * @since 01-11-2022
+ */
+
 public enum ShowingStatus {
-    COMING_SOON("COMING_SOON"),
-    PREVIEW("PREVIEW"),
-    NOW_SHOWING("NOW_SHOWING"),
-    FINISHED_SHOWING("FINISHED_SHOWING");
-
-    private final String showingStatus;
-
-    private ShowingStatus(){
-        this.showingStatus = "";
-    }
-
-    private ShowingStatus(String showingStatus){
-        this.showingStatus = showingStatus;
-    }
-
-    public String toString(){
-        return this.showingStatus;
-    }
-
-    public boolean equalsTo(String showingStatus){
-        return this.showingStatus.equals(showingStatus);
-    }
+    /**
+	 * Showing Status (COMING SOON)
+	 */
+    COMING_SOON,
+    /**
+	 * Showing Status (PREVIEW)
+	 */
+    PREVIEW,
+    /**
+	 * Showing Status (NOW SHOWING)
+	 */
+    NOW_SHOWING,
+    /**
+	 * Showing Status (FINISHED SHOWING)
+	 */
+    FINISHED_SHOWING;
 }

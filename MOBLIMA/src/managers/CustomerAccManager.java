@@ -7,7 +7,6 @@ import entities.CustomerAcc;
 import utils.PasswordStrengthChecker;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.io.FileReader;
 import java.io.FileWriter;

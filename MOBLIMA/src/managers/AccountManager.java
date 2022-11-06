@@ -13,7 +13,6 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import entities.*;
-import java.util.concurrent.ThreadLocalRandom;
 
 
 
@@ -107,7 +106,7 @@ public class AccountManager {
 
     public boolean checkAccountExists(List<Account>accountList, String username){
         for(Account a: accountList){
-            if(a.getUsername().equals(username)){
+            if(a.getUsername().equalsIgnoreCase(username)){
                 return true;
             }
         }
