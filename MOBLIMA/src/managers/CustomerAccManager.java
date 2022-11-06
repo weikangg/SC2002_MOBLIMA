@@ -4,14 +4,20 @@ import java.util.Scanner;
 
 import entities.Account;
 import entities.CustomerAcc;
+import entities.Booking;
 import utils.PasswordStrengthChecker;
 
 import java.util.List;
 import java.util.InputMismatchException;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInput;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.io.FileNotFoundException;
 
 public class CustomerAccManager {
@@ -20,41 +26,6 @@ public class CustomerAccManager {
     static String item_Separator = ",";	
     static AccountManager accountManager = AccountManager.getInstance();
     Scanner scan = new Scanner(System.in);
-
-    /*public ArrayList<CustomerAcc> readCustomerFile(){
-        //read in account.csv file, then put the names, email, mobile and age into constructor and create an array of customer information
-
-    }*/
-
-    // public static List<CustomerAcc> getCustomerList(){
-    //     List<CustomerAcc>customers = new ArrayList<>();
-    // 	BufferedReader br = null;
-	// 	String line = "";
-	// 	CustomerAcc custemp;
-	// 	try {
-	// 		br = new BufferedReader(new FileReader(path));
-	// 		while((line = br.readLine()) !=null ) {
-	// 			String[] custcsv = line.split(item_Separator);
-	// 			if(!custcsv[0].equals("USERNAME")) {
-    //                 int customerMobile = Integer.parseInt(custcsv[2]);
-    //                 int customerAge = Integer.parseInt(custcsv[3]);
-	// 				custemp = new CustomerAcc(custcsv[0],custcsv[1],customerMobile,customerAge,custcsv[4],custcsv[5]);
-	// 				customers.add(custemp);
-	// 			}
-	// 		}
-	// 		br.close();
-	// 	}
-    //     catch(NumberFormatException e){
-    //         System.out.println("Check age and mobile are numbers in database!");
-    //     }
-	// 	catch(ArrayIndexOutOfBoundsException e){
-	// 		return customers;
-	// 	}
-	// 	catch (IOException e) {
-	// 		e.printStackTrace();
-	// 	}
-	// 	return customers;
-    // }
 
     public static CustomerAcc createAcc(List<Account>accountList){
         String name;
@@ -234,5 +205,56 @@ public class CustomerAccManager {
 
     public boolean userLogOut(){
         return false;
+    }
+
+    public static void checkHistory(Account user){
+        String name = user.getUsername();
+        String path = System.getProperty("user.dir") +"\\data\\bookings\\";
+        String location = path + name +"/Booking";
+        String filename = ".txt";
+        String trans;
+        int fileCount;
+        ArrayList<Booking> book;
+
+        File directory = new File(path + name);
+        fileCount = directory.list().length;
+        //debug
+        System.out.println(fileCount);
+
+        for(int i = 1; i <= fileCount; i++)//go through all the files in customer and print out the transaction information
+        {
+            
+            trans = location + i + filename;
+            System.out.println(trans);
+            System.out.println("========================================================");
+            
+            
+            try{
+                FileInputStream file = new FileInputStream(trans);
+                ObjectInputStream in = new ObjectInputStream(file);
+                book = (ArrayList<Booking>) in.readObject();
+
+                System.out.println(book);
+
+                for(Booking b : book)
+                {
+                    System.out.println("Booking ID: " + b.getbookingID());
+                    System.out.println("Movie Title: " + b.getMovie());
+                    System.out.println("Cineplex: " + b.getCineplexID());
+                    System.out.println("Cinema: " + b.getCinemaID());
+                    //System.out.println("")
+
+                }
+                
+                in.close();
+                file.close();
+    
+            }catch(IOException ex){
+                System.out.println("IOException is caught");
+            } catch (ClassNotFoundException exp) {
+                System.out.println("Class not found");
+            }
+            System.out.println("========================================================");    
+        }
     }
 }
