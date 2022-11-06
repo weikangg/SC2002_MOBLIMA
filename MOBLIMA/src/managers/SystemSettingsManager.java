@@ -2,6 +2,8 @@ package managers;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+import java.util.Map.Entry;
+
 import entities.*;
 import view.adminApp;
 import static utils.IOUtils.*;
@@ -74,7 +76,8 @@ public class SystemSettingsManager {
             staffMenu(0, account);
         }
         switch (option) {
-            case 1:
+            case 1: 
+                configureTicketPriceMenu(account);
                 break;
             case 2:
                 configureTop5(account);
@@ -95,6 +98,624 @@ public class SystemSettingsManager {
                 staffMenu(0,account);
         }
     }
+    public void configureTicketPriceMenu(Account account){
+        System.out.println("###########################################################");
+		System.out.println("################# CONFIGURING TICKET PRICE ################");
+		System.out.println("###########################################################");
+		System.out.println("");
+        while (true){
+            System.out.println("Please choose an option:");
+            System.out.println("1. Configure Ticket Price for Different Ticket Types");
+            System.out.println("2. Configure Multiplier Rates for Different Movie Types");
+            System.out.println("3. Configure Multiplier Rates for Different Seat Types");
+            System.out.println("4. Configure Multiplier Rates for Different Cinema Classes");
+            System.out.println("5. Back to SystemSettingsManager");
+            int option;
+            try{
+                option = sc.nextInt();
+                sc.nextLine();
+            }catch(InputMismatchException e){
+                System.out.println("Enter a number from 1-5 only!");
+                sc.nextLine();
+                continue;
+            }
+            switch (option) {
+                case 1:
+                    configureTicketTypePrice(account);
+                    break;
+                case 2:
+                    configureMovieTypeMultiplier(account);
+                    break;
+                case 3:
+                    configureSeatTypeMultiplier(account);
+                    break;
+                case 4:
+                    configureCinemaClassMultiplier(account);
+                    break;
+                case 5:
+                    System.out.println("Back to System Settings......");
+                    this.staffMenu(0, account);
+                default:
+                    System.out.println("Invalid choice. Please choose between 1-5 only.");
+                    continue;
+            }
+            break;
+        }
+        this.staffMenu(0, account);
+    }
+
+    public void configureCinemaClassMultiplier(Account account){
+        int count = 1;
+        TicketPrice tpObj = new TicketPrice();
+        Map<CinemaClass, Double> cinemaClassPriceList = new EnumMap<>(CinemaClass.class);
+        cinemaClassPriceList = tpObj.getMappedCinemaClassPrice();
+        while(true){
+            System.out.println("Please choose a cinema class to change multiplier:");
+            System.out.println("Current Rates: ");
+            for (Entry<CinemaClass, Double> entry : cinemaClassPriceList.entrySet()) {
+                System.out.println(Integer.toString(count) + ". " + entry.getKey() + ": \t[" + entry.getValue() + "]");     
+                count++;
+            }
+            System.out.println(Integer.toString(count) + ". Exit");
+            count = 1;
+            int option;
+            try{
+                option = sc.nextInt();
+                sc.nextLine();
+            }catch(InputMismatchException e){
+                System.out.println("Please choose an option from 1-5 only!");
+                sc.nextLine();
+                continue;
+            }
+            double multiplier;
+            switch (option) {
+                case 1:
+                    if(confirm("Confirm Update Multiplier for Silver Class")){
+                        try{
+                            System.out.println("Please enter the new multiplier rate: ");
+                            multiplier =  sc.nextDouble();
+                            sc.nextLine();
+                        }catch(InputMismatchException e){
+                            System.out.println("Please enter a valid multiplier rate!");
+                            sc.nextLine();
+                            continue;
+                        }
+                        if(multiplier < 0 ){
+                            System.out.println("Please enter a valid multiplier rate!");
+                            continue;
+                        }
+                        tpObj.setCCPrice(0,multiplier);
+                    }
+                    else{
+                        continue;
+                    }
+                    break;
+                case 2:
+                    if(confirm("Confirm Update Multiplier for Gold Class")){
+                        try{
+                            System.out.println("Please enter the new multiplier rate: ");
+                            multiplier =  sc.nextDouble();
+                            sc.nextLine();
+                        }catch(InputMismatchException e){
+                            System.out.println("Please enter a valid multiplier rate!");
+                            sc.nextLine();
+                            continue;
+                        }
+                        if(multiplier < 0 ){
+                            System.out.println("Please enter a valid multiplier rate!");
+                            continue;
+                        }
+                        tpObj.setCCPrice(1,multiplier);
+                    }
+                    else{
+                        continue;
+                    }
+                    break;
+                case 3:
+                    if(confirm("Confirm Update Multiplier for Platinum Class")){
+                        try{
+                            System.out.println("Please enter the new multiplier rate: ");
+                            multiplier =  sc.nextDouble();
+                            sc.nextLine();
+                        }catch(InputMismatchException e){
+                            System.out.println("Please enter a valid multiplier rate!");
+                            sc.nextLine();
+                            continue;
+                        }
+                        if(multiplier < 0 ){
+                            System.out.println("Please enter a valid multiplier rate!");
+                            continue;
+                        }
+                        tpObj.setCCPrice(2,multiplier);
+                    }
+                    else{
+                        continue;
+                    }
+                    break;
+                case 4:
+                    if(confirm("Confirm Update Multiplier for Diamond Class")){
+                        try{
+                            System.out.println("Please enter the new multiplier rate: ");
+                            multiplier =  sc.nextDouble();
+                            sc.nextLine();
+                        }catch(InputMismatchException e){
+                            System.out.println("Please enter a valid multiplier rate!");
+                            sc.nextLine();
+                            continue;
+                        }
+                        if(multiplier < 0 ){
+                            System.out.println("Please enter a valid multiplier rate!");
+                            continue;
+                        }
+                        tpObj.setCCPrice(3,multiplier);
+                    }
+                    else{
+                        continue;
+                    }
+                    break;
+                case 5:
+                    System.out.println("Back to System Settings......");
+                    this.configureTicketPriceMenu(account);
+                default:
+                    System.out.println("Invalid choice. Please choose between 1-5 only.");
+                    continue;
+            }
+            break;
+        }
+        System.out.println("Multiplier successfully updated!");
+    }
+
+    public void configureSeatTypeMultiplier(Account account){
+        int count = 1;
+        TicketPrice tpObj = new TicketPrice();
+        Map<SeatType, Double> seatTypePriceList = new EnumMap<>(SeatType.class);
+        seatTypePriceList = tpObj.getMappedSeatTypePrice();
+        while(true){
+            System.out.println("Please choose a seat type to change multiplier:");
+            System.out.println("Current Rates: ");
+            for (Entry<SeatType, Double> entry : seatTypePriceList.entrySet()) {
+                System.out.println(Integer.toString(count) + ". " + entry.getKey() + ": \t[" + entry.getValue() + "]");     
+                count++;
+            }
+            System.out.println(Integer.toString(count) + ". Exit");
+            count = 1;
+            int option;
+            try{
+                option = sc.nextInt();
+                sc.nextLine();
+            }catch(InputMismatchException e){
+                System.out.println("Please choose an option from 1-5 only!");
+                sc.nextLine();
+                continue;
+            }
+            double multiplier;
+            switch (option) {
+                case 1:
+                    if(confirm("Confirm Update Multiplier for Regular Seats")){
+                        try{
+                            System.out.println("Please enter the new multiplier rate: ");
+                            multiplier =  sc.nextDouble();
+                            sc.nextLine();
+                        }catch(InputMismatchException e){
+                            System.out.println("Please enter a valid multiplier rate!");
+                            sc.nextLine();
+                            continue;
+                        }
+                        if(multiplier < 0 ){
+                            System.out.println("Please enter a valid multiplier rate!");
+                            continue;
+                        }
+                        tpObj.setSTPrice(0,multiplier);
+                    }
+                    else{
+                        continue;
+                    }
+                    break;
+                case 2:
+                    if(confirm("Confirm Update Multiplier for Elite Seats")){
+                        try{
+                            System.out.println("Please enter the new multiplier rate: ");
+                            multiplier =  sc.nextDouble();
+                            sc.nextLine();
+                        }catch(InputMismatchException e){
+                            System.out.println("Please enter a valid multiplier rate!");
+                            sc.nextLine();
+                            continue;
+                        }
+                        if(multiplier < 0 ){
+                            System.out.println("Please enter a valid multiplier rate!");
+                            continue;
+                        }
+                        tpObj.setSTPrice(1,multiplier);
+                    }
+                    else{
+                        continue;
+                    }
+                    break;
+                case 3:
+                    if(confirm("Confirm Update Multiplier for Couple Seats")){
+                        try{
+                            System.out.println("Please enter the new multiplier rate: ");
+                            multiplier =  sc.nextDouble();
+                            sc.nextLine();
+                        }catch(InputMismatchException e){
+                            System.out.println("Please enter a valid multiplier rate!");
+                            sc.nextLine();
+                            continue;
+                        }
+                        if(multiplier < 0 ){
+                            System.out.println("Please enter a valid multiplier rate!");
+                            continue;
+                        }
+                        tpObj.setSTPrice(2,multiplier);
+                    }
+                    else{
+                        continue;
+                    }
+                    break;
+                case 4:
+                    if(confirm("Confirm Update Multiplier for Ultimate Seats")){
+                        try{
+                            System.out.println("Please enter the new multiplier rate: ");
+                            multiplier =  sc.nextDouble();
+                            sc.nextLine();
+                        }catch(InputMismatchException e){
+                            System.out.println("Please enter a valid multiplier rate!");
+                            sc.nextLine();
+                            continue;
+                        }
+                        if(multiplier < 0 ){
+                            System.out.println("Please enter a valid multiplier rate!");
+                            continue;
+                        }
+                        tpObj.setSTPrice(3,multiplier);
+                    }
+                    else{
+                        continue;
+                    }
+                    break;
+                case 5:
+                    System.out.println("Back to System Settings......");
+                    this.configureTicketPriceMenu(account);
+                default:
+                    System.out.println("Invalid choice. Please choose between 1-5 only.");
+                    continue;
+            }
+            break;
+        }
+        System.out.println("Multiplier successfully updated!");
+    }
+
+    public void configureMovieTypeMultiplier(Account account){
+        int count = 1;
+        TicketPrice tpObj = new TicketPrice();
+        Map<MovieType, Double> movieTypePriceList = new EnumMap<>(MovieType.class);
+        movieTypePriceList = tpObj.getMappedMovieTypePrice();
+        while(true){
+            System.out.println("Please choose a movie type to change multiplier:");
+            System.out.println("Current Rates: ");
+            for (Entry<MovieType, Double> entry : movieTypePriceList.entrySet()) {
+                if(count == 4){
+                    System.out.println(Integer.toString(count) + ". " + entry.getKey() + ": [" + entry.getValue() + "]"); 
+                }else{
+                    System.out.println(Integer.toString(count) + ". " + entry.getKey() + ": \t[" + entry.getValue() + "]"); 
+                }      
+                count++;
+            }
+            System.out.println(Integer.toString(count) + ". Exit");
+            count = 1;
+            int option;
+            try{
+                option = sc.nextInt();
+                sc.nextLine();
+            }catch(InputMismatchException e){
+                System.out.println("Please choose an option from 1-5 only!");
+                sc.nextLine();
+                continue;
+            }
+            double multiplier;
+            switch (option) {
+                case 1:
+                    if(confirm("Confirm Update Multiplier for TWOD")){
+                        try{
+                            System.out.println("Please enter the new multiplier rate: ");
+                            multiplier =  sc.nextDouble();
+                            sc.nextLine();
+                        }catch(InputMismatchException e){
+                            System.out.println("Please enter a valid multiplier rate!");
+                            sc.nextLine();
+                            continue;
+                        }
+                        if(multiplier < 0 ){
+                            System.out.println("Please enter a valid multiplier rate!");
+                            continue;
+                        }
+                        tpObj.setMtPrice(0,multiplier);
+                    }
+                    else{
+                        continue;
+                    }
+                    break;
+                case 2:
+                    if(confirm("Confirm Update Multiplier for THREED")){
+                        try{
+                            System.out.println("Please enter the new multiplier rate: ");
+                            multiplier =  sc.nextDouble();
+                            sc.nextLine();
+                        }catch(InputMismatchException e){
+                            System.out.println("Please enter a valid multiplier rate!");
+                            sc.nextLine();
+                            continue;
+                        }
+                        if(multiplier < 0 ){
+                            System.out.println("Please enter a valid multiplier rate!");
+                            continue;
+                        }
+                        tpObj.setMtPrice(1,multiplier);
+                    }
+                    else{
+                        continue;
+                    }
+                    break;
+                case 3:
+                    if(confirm("Confirm Update Multiplier for IMAX")){
+                        try{
+                            System.out.println("Please enter the new multiplier rate: ");
+                            multiplier =  sc.nextDouble();
+                            sc.nextLine();
+                        }catch(InputMismatchException e){
+                            System.out.println("Please enter a valid multiplier rate!");
+                            sc.nextLine();
+                            continue;
+                        }
+                        if(multiplier < 0 ){
+                            System.out.println("Please enter a valid multiplier rate!");
+                            continue;
+                        }
+                        tpObj.setMtPrice(2,multiplier);
+                    }
+                    else{
+                        continue;
+                    }
+                    break;
+                case 4:
+                    if(confirm("Confirm Update Multiplier for BLOCKBUSTER")){
+                        try{
+                            System.out.println("Please enter the new multiplier rate: ");
+                            multiplier =  sc.nextDouble();
+                            sc.nextLine();
+                        }catch(InputMismatchException e){
+                            System.out.println("Please enter a valid multiplier rate!");
+                            sc.nextLine();
+                            continue;
+                        }
+                        if(multiplier < 0 ){
+                            System.out.println("Please enter a valid multiplier rate!");
+                            continue;
+                        }
+                        tpObj.setMtPrice(3,multiplier);
+                    }
+                    else{
+                        continue;
+                    }
+                    break;
+                case 5:
+                    System.out.println("Back to System Settings......");
+                    this.configureTicketPriceMenu(account);
+                default:
+                    System.out.println("Invalid choice. Please choose between 1-5 only.");
+                    continue;
+            }
+            break;
+        }
+        System.out.println("Multiplier successfully updated!");
+    }
+
+    public void configureTicketTypePrice(Account account){
+        int count = 1;
+        TicketPrice tpObj = new TicketPrice();
+        Map<TicketType, Double> priceList = new EnumMap<>(TicketType.class);
+        priceList = tpObj.getMappedPrice();
+        while(true){
+            System.out.println("Please choose a ticket type to change price:");
+            System.out.println("Current Rates: ");
+            for (Entry<TicketType, Double> entry : priceList.entrySet()) {       
+                System.out.println(Integer.toString(count) + ". " + entry.getKey() + ": \t[" + entry.getValue() + "]"); 
+                count++;
+            }
+            System.out.println(Integer.toString(count) + ". Exit");
+            count = 1;
+            int option;
+            try{
+                option = sc.nextInt();
+                sc.nextLine();
+            }catch(InputMismatchException e){
+                System.out.println("Please choose an option from 1-9 only!");
+                sc.nextLine();
+                continue;
+            }
+            double price;
+            switch (option) {
+                case 1:
+                    if(confirm("Confirm Update Price for Monday To Wednesday")){
+                        try{
+                            System.out.println("Please enter the new price: ");
+                            price =  sc.nextDouble();
+                            sc.nextLine();
+                        }catch(InputMismatchException e){
+                            System.out.println("Please enter a valid price!");
+                            sc.nextLine();
+                            continue;
+                        }
+                        if(price < 0 ){
+                            System.out.println("Please enter a valid price!");
+                            continue;
+                        }
+                        tpObj.setPrice(0,price);
+                    }
+                    else{
+                        continue;
+                    }
+                    break;
+                case 2:
+                    if(confirm("Confirm Update Price for Thursday")){
+                        try{
+                            System.out.println("Please enter the new price: ");
+                            price =  sc.nextDouble();
+                            sc.nextLine();
+                        }catch(InputMismatchException e){
+                            System.out.println("Please enter a valid price!");
+                            sc.nextLine();
+                            continue;
+                        }
+                        if(price < 0 ){
+                            System.out.println("Please enter a valid price!");
+                            continue;
+                        }
+                        tpObj.setPrice(1,price);
+                    }
+                    else{
+                        continue;
+                    }
+                    break;
+                case 3:
+                    if(confirm("Confirm Update Price for Friday before 6pm")){
+                        try{
+                            System.out.println("Please enter the new price: ");
+                            price =  sc.nextDouble();
+                            sc.nextLine();
+                        }catch(InputMismatchException e){
+                            System.out.println("Please enter a valid price!");
+                            sc.nextLine();
+                            continue;
+                        }
+                        if(price < 0 ){
+                            System.out.println("Please enter a valid price!");
+                            continue;
+                        }
+                        tpObj.setPrice(2,price);
+                    }
+                    else{
+                        continue;
+                    }
+                    break;
+                case 4:
+                    if(confirm("Confirm Update Price for Friday after 6pm")){
+                        try{
+                            System.out.println("Please enter the new price: ");
+                            price =  sc.nextDouble();
+                            sc.nextLine();
+                        }catch(InputMismatchException e){
+                            System.out.println("Please enter a valid price!");
+                            sc.nextLine();
+                            continue;
+                        }
+                        if(price < 0 ){
+                            System.out.println("Please enter a valid price!");
+                            continue;
+                        }
+                        tpObj.setPrice(3,price);
+                    }
+                    else{
+                        continue;
+                    }
+                    break;
+                case 5:
+                    if(confirm("Confirm Update Price for Weekend")){
+                        try{
+                            System.out.println("Please enter the new price: ");
+                            price =  sc.nextDouble();
+                            sc.nextLine();
+                        }catch(InputMismatchException e){
+                            System.out.println("Please enter a valid price!");
+                            sc.nextLine();
+                            continue;
+                        }
+                        if(price < 0 ){
+                            System.out.println("Please enter a valid price!");
+                            continue;
+                        }
+                        tpObj.setPrice(4,price);
+                    }
+                    else{
+                        continue;
+                    }
+                    break;
+                case 6:
+                    if(confirm("Confirm Update Price for Senior Weekday")){
+                        try{
+                            System.out.println("Please enter the new price: ");
+                            price =  sc.nextDouble();
+                            sc.nextLine();
+                        }catch(InputMismatchException e){
+                            System.out.println("Please enter a valid price!");
+                            sc.nextLine();
+                            continue;
+                        }
+                        if(price < 0 ){
+                            System.out.println("Please enter a valid price!");
+                            continue;
+                        }
+                        tpObj.setPrice(5,price);
+                    }
+                    else{
+                        continue;
+                    }
+                    break;
+                case 7:
+                    if(confirm("Confirm Update Price for Student Weekday")){
+                        try{
+                            System.out.println("Please enter the new price: ");
+                            price =  sc.nextDouble();
+                            sc.nextLine();
+                        }catch(InputMismatchException e){
+                            System.out.println("Please enter a valid price!");
+                            sc.nextLine();
+                            continue;
+                        }
+                        if(price < 0 ){
+                            System.out.println("Please enter a valid price!");
+                            continue;
+                        }
+                        tpObj.setPrice(6,price);
+                    }
+                    else{
+                        continue;
+                    }
+                    break;
+                case 8:
+                    if(confirm("Confirm Update Price for Holiday")){
+                        try{
+                            System.out.println("Please enter the new price: ");
+                            price =  sc.nextDouble();
+                            sc.nextLine();
+                        }catch(InputMismatchException e){
+                            System.out.println("Please enter a valid price!");
+                            sc.nextLine();
+                            continue;
+                        }
+                        if(price < 0 ){
+                            System.out.println("Please enter a valid price!");
+                            continue;
+                        }
+                        tpObj.setPrice(7,price);
+                    }
+                    else{
+                        continue;
+                    }
+                    break;
+                case 9:
+                    System.out.println("Back to System Settings......");
+                    this.configureTicketPriceMenu(account);
+                default:
+                    System.out.println("Invalid choice. Please choose between 1-9 only.");
+                    continue;
+            }
+            break;
+        }
+        System.out.println("Price successfully updated!");
+    }
+
     /**
 	 * Function to configure rating score limit
      * Any movie that has a overall rating score below the rating score limit will not be displayed to the customer.
@@ -157,6 +778,7 @@ public class SystemSettingsManager {
             }
             break;
         }
+        this.staffMenu(0, account);
     }
     /**
 	 * Function to configure top 5 movies settings
@@ -233,7 +855,7 @@ public class SystemSettingsManager {
             }
             break;
         }
-
+        this.staffMenu(0, account);
     }
 
     /**
@@ -309,7 +931,7 @@ public class SystemSettingsManager {
             }
             break;
         }
-        staffMenu(0,account);
+        this.staffMenu(0, account);
     }
 	/**
 	 * Writes the existing system settings to the systemsettings.csv file for storage

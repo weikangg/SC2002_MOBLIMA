@@ -7,10 +7,10 @@ package entities;
  * @since 06-11-2022
  */
 public enum SeatType {
-    REGULAR ("R"),
-    ELITE ("E"),
-    COUPLE ("C"),
-    ULTIMATE ("U");
+    REGULAR ("REGULAR"),
+    ELITE ("ELITE"),
+    COUPLE ("COUPLE"),
+    ULTIMATE ("ULTIMATE");
 
     private final String name;
 

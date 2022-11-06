@@ -301,7 +301,6 @@ public class TicketPrice implements Serializable{
 	public void updatePrice()
 	{
 		String path = System.getProperty("user.dir") +"\\data\\ticketprice.csv";
-		//String path2 = System.getProperty("user.dir") +"\\data\\movietypeprice.csv";
 		ArrayList<String> arrList = new ArrayList<String>();
 		for(int i = 0; i<getPrices().size();i++)
 		{
@@ -311,7 +310,6 @@ public class TicketPrice implements Serializable{
         Path output = Paths.get(path);
         try {
             Files.write(output, arrList);
-            System.out.println(output.toFile().getAbsolutePath());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -344,7 +342,6 @@ public class TicketPrice implements Serializable{
         Path output = Paths.get(path2);
         try {
             Files.write(output, arrList);
-            System.out.println(output.toFile().getAbsolutePath());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -379,7 +376,6 @@ public class TicketPrice implements Serializable{
         Path output = Paths.get(path3);
         try {
             Files.write(output, arrList);
-            System.out.println(output.toFile().getAbsolutePath());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -414,7 +410,6 @@ public class TicketPrice implements Serializable{
         Path output = Paths.get(path4);
         try {
             Files.write(output, arrList);
-            System.out.println(output.toFile().getAbsolutePath());
         } catch (Exception e) {
             e.printStackTrace();
         }
