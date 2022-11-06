@@ -227,7 +227,7 @@ public class CustomerAccManager {
             ObjectInputStream in = new ObjectInputStream(file);
             book = (ArrayList<Booking>) in.readObject();
 
-            System.out.println(book);
+            //System.out.println(book);
 
             for(Booking b : book)
             {
@@ -242,10 +242,10 @@ public class CustomerAccManager {
                     tix = b.getTicketList();
                     for(int i = 0; i < tix.size(); i++)
                     {
-                        System.out.println("    Ticket " + (i+1) + " : " + " Row " + tix.get(i).getRow() + " Column " + tix.get(i).getCol() + " $" + tix.get(i).getTicketPrice());
+                        System.out.println("    Ticket " + (i+1) + " : " + " Row " + tix.get(i).getRow() + " Column " + tix.get(i).getCol() + " $" + String.format("%.2f", tix.get(i).getTicketPrice()));
                     }
                     System.out.println("Transaction Time:" + b.getTransaction().getTranDateTime());
-                    System.out.println("Total Price: $" + b.getTotalPrice());
+                    System.out.println("Total Price: $" + String.format("%.2f", b.getTotalPrice()) );
                     System.out.println("========================================================");
                 }
             }
@@ -261,7 +261,11 @@ public class CustomerAccManager {
         while(input != 0)
         {
             System.out.println("Enter 0 to exit.");
-            input = scan.nextInt();
+            try{
+                input = scan.nextInt();
+            }catch(InputMismatchException e){
+                scan.nextLine();
+            }
         }
         
         
