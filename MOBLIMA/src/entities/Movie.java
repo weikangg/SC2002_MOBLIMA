@@ -78,6 +78,7 @@ public class Movie {
 	 * @param movieDirector	     This is the movie's director(s)
 	 * @param cast			     This is the movie's casts
 	 * @param genres		     This is the movie's genres
+     * @param movieRating        This is the movie's rating
 	 * @param movieDuration	     This is the movie's duration
 	 * @param profitEarned	     This is the movie's total profit earned
 	 * @param overallRatingScore This is the movie's overall rating score

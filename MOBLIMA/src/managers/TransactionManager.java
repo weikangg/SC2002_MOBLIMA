@@ -286,7 +286,7 @@ public class TransactionManager
             }
             newML.add(m);
         }
-        MovieListManager.updateMovieListCSV(newML);
+        MovieListManager.getInstance().updateMovieListCSV(newML);
         //System.out.println("Price updated");
     }
 

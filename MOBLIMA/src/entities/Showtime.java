@@ -77,7 +77,7 @@ public class Showtime extends Cinema{
 
             this.seats = seats;
 
-            Movie movie = MovieListManager.getMovie(movieID);
+            Movie movie = MovieListManager.getInstance().getMovie(movieID);
             this.movie = movie;
 
             this.updateCinemaStatus();

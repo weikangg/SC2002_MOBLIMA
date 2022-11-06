@@ -4,32 +4,58 @@ import java.io.IOException;
 import java.util.*;
 import entities.*;
 import utils.PasswordStrengthChecker;
-
 import static utils.IOUtils.*;
-
+/**
+ * A manager class for all actions related to Staff Accounts
+ * @author Wei Kang
+ * @version 2.5
+ * @since 01-11-2022
+ */
 public class StaffAccManager {
+    /**
+	 * The path to the CSV file that stores all the accounts
+	 */
+    private static String path = System.getProperty("user.dir") +"\\data\\accounts\\accounts.csv";
+    /**
+	 * An instance of account manager to get the list of accounts
+	 */
     AccountManager accountManager = AccountManager.getInstance();
+    /**
+	 * The list of accounts
+	 */
     List<Account>accountList = accountManager.getAccountList();
+	/**
+	 * The scanner for reading input of user
+	 */
     private static Scanner scan = new Scanner(System.in);
+    /**
+	 * For singleton pattern adherence. This StaffAccManager instance persists throughout runtime.
+	 */
     private static StaffAccManager single_instance = null;
-    static String path = System.getProperty("user.dir") +"\\data\\accounts\\accounts.csv";
+	/**
+	 * For singleton pattern adherence. 
+	 * @return instance The static instance that persists throughout runtime.
+	 */
     public static StaffAccManager getInstance()
     {
         if (single_instance == null)
             single_instance = new StaffAccManager();
         return single_instance;
     }
+	/**
+	 * The default constructor for the StaffAccManager class
+	 */
     private StaffAccManager(){}
-
-    // public boolean checkSuperAdmin(List<Account>accountList, String username){
-    //     for(Account a: accountList){
-    //         if(a.getUsername().equals(username) && a.getAccessLevel().equals("SA")){
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
-
+    /**
+	 * Function to create new staff account
+     * Checks for empty username input and whether the username already exists
+     * Checks if the email is valid according to pre-defined regex function in AccountManager class
+     * Checks if the mobile number is valid according to pre-defined regex function in AccountManager class
+     * Checks if the age is valid. Ages below 0 and above 150 are not allowed.
+     * Checks if the password is strong according to pre-defined function in utils/PasswordStrengthChecker class
+     * @param accountList Existing List of accounts
+     * @return true if creation of staff account was successful, false if unsuccessful
+	 */
     public boolean createStaffAccount(List<Account>accountList){
         System.out.println("#########################################################");
 		System.out.println("################### CREATING ACCOUNT ####################");
@@ -160,7 +186,13 @@ public class StaffAccManager {
 			return false;
 		}
     }
-
+    /**
+	 * Function to remove staff account
+     * Checks whether the username exists
+     * Removal of staff account only allowed for super admin
+     * @param accountList Existing List of accounts
+     * @return true if deletion of staff account was successful, false if unsuccessful
+	 */
     public int removeStaffAccount(List<Account> accountList){
         System.out.println("#########################################################");
 		System.out.println("#################### REMOVING ACCOUNT ###################");
@@ -209,6 +241,11 @@ public class StaffAccManager {
             return 2;
         }
     }
+    /**
+	 * Writes the list of accounts to the accounts.csv file for storage
+	 * @param reviewList Existing list of accounts
+	 * @return true if update was successful, false if update was unsuccessful
+	 */
     public boolean updateAccountListCSV(List<Account>accountList){
         String separator = ",";
         try {

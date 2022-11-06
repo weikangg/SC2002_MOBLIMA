@@ -285,7 +285,7 @@ public class ShowtimeManager {
             System.out.println("");
 
             //check if movie id exists in movie database
-            if(MovieListManager.getMovie(movieID) == null){
+            if(MovieListManager.getInstance().getMovie(movieID) == null){
                 System.out.println("No such Movie");
                 return -1;
             }

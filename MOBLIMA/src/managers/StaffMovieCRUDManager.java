@@ -8,18 +8,36 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import entities.*;
-import static managers.MovieListManager.*;
 import static managers.ReviewListManager.*;
 import static utils.IOUtils.*;
 import java.util.Scanner;
-
+/**
+ * A manager class for all actions related to the staff to create, read, update and delete movies
+ * @author Wei Kang
+ * @version 2.5
+ * @since 01-11-2022
+ */
 public class StaffMovieCRUDManager {
-    static String csv_Separator = ",";
-	static String splitter = ";";
-
-    static Scanner sc = new Scanner(System.in);
-
+	/**
+	 * The separator for the columns in the csv file
+	 */
+    private static String csv_Separator = ",";
+    /**
+	 * The separator used for array of string in the csv file such as if the movie has more than 1 cast
+	 */
+	private static String splitter = ";";
+	/**
+	 * The scanner for reading input of user
+	 */
+    private static Scanner sc = new Scanner(System.in);
+	/**
+	 * For singleton pattern adherence. This StaffMovieCRUDManager instance persists throughout runtime.
+	 */
     private static StaffMovieCRUDManager single_instance = null;
+	/**
+	 * For singleton pattern adherence. 
+	 * @return instance The static instance that persists throughout runtime.
+	 */
     public static StaffMovieCRUDManager getInstance()
     {
         if (single_instance == null)
@@ -27,7 +45,12 @@ public class StaffMovieCRUDManager {
         return single_instance;
     }
 
-    //Staff create movie
+    /**
+	 * Function to add new movie for the staffs.
+     * Checks if the movie that he wants to review already exists. 
+     * @param mList  Existing List of movies
+     * @return true if addition of movie was successful, false if unsuccessful
+	 */
     public boolean staffAddMovie(List<Movie> mList) {
 		ShowingStatus status = null;
 		String movieTitle, synopsis, movieDirector, cast, genres, synopsisTmp, movieDirectorTmp, castTmp, genreTmp, movieTitleTmp, str;
@@ -239,7 +262,7 @@ public class StaffMovieCRUDManager {
 			break;
 		}
         sc.nextLine();
-		if (MovieListManager.addMovieList(mList,movieID, movieTitle, synopsis, movieDirector, cast, genres, movieDuration, status, sale, movieRating,rating, releaseDate , endofShowingDate, movieType))
+		if (MovieListManager.getInstance().addMovieList(mList,movieID, movieTitle, synopsis, movieDirector, cast, genres, movieDuration, status, sale, movieRating,rating, releaseDate , endofShowingDate, movieType))
 			return true;
 		 return false;
     }
@@ -725,13 +748,17 @@ public class StaffMovieCRUDManager {
             break;
         }
         
-        if(updateMovieListCSV(movieList)){
+        if(MovieListManager.getInstance().updateMovieListCSV(movieList)){
             return 1;
         }
         return 0;
     }
-
-    // Remove Movie by setting status to "End of showing" as per request of question
+    /**
+	 * Function to psuedo-delete a movie from the list of movies by setting the showing status to end of showing based on the movie  title.
+     * Checks if the movie to be deleted exists
+     * @param mList Existing List of movies
+     * @return true if pseudo-deletion of movie was successful, false if unsuccessful
+	 */
     public int setToEndShowing(List<Movie>mList){
         System.out.println("#########################################################");
 		System.out.println("#################### REMOVING MOVIES ####################");
@@ -747,7 +774,7 @@ public class StaffMovieCRUDManager {
             if(m.getMovieTitle().equalsIgnoreCase(title)){
                 if(confirm("Confirm Remove Title ")){
                     m.setShowingStatus(ShowingStatus.FINISHED_SHOWING);
-                    updateMovieListCSV(mList);
+                    MovieListManager.getInstance().updateMovieListCSV(mList);
                     return 1;
                 }
                 else{
@@ -759,8 +786,14 @@ public class StaffMovieCRUDManager {
         System.out.println("Movie not found!");
         return 0;
     }
-
-    // Remove movie from database entirely, if a movie is removed from the database, all reviews regarding it are deleted as well.
+   /**
+	 * Function to delete a movie from the list of movies and database entirely based on the movie  title.
+     * Checks if the movie to be deleted exists
+     * Deletes all reviews related to the movie as well
+     * @param mList Existing List of movies
+     * @param rList Existing list of reviews
+     * @return true if deletion of movie was successful, false if unsuccessful
+	 */
     public int removeMovieFromDatabase(List<Movie> mList, List<Review> rList){
         System.out.println("#########################################################");
 		System.out.println("#################### REMOVING MOVIES ####################");
@@ -817,7 +850,7 @@ public class StaffMovieCRUDManager {
                     newList2.add(newReview);
                 }
             }
-            if(updateMovieListCSV(newList) && updateReviewInCSV(newList2)){
+            if(MovieListManager.getInstance().updateMovieListCSV(newList) && updateReviewInCSV(newList2)){
                 return 1;
             }
             else{
@@ -828,14 +861,15 @@ public class StaffMovieCRUDManager {
             return 2;
         }
     }
-
-    // STAFF CAN PRINT EVERYTHING & SEE ALL MOVIES REGARDLESS OF MOVIE STATUS 
-	// STAFF CAN ALSO VIEW ALL REVIEWS
+   /**
+	 * Function for staff to view all movie from the list of movies and database regardless of movie status.
+     * Staff can view all reviews for each movie
+     * @param mList Existing List of movies
+     * @param rList Existing list of reviews
+	 */
 	public void printMovieList(List<Movie>mList, List<Review>rList) {
 		
 		int movieCount = 1;
-		// ReviewListManager file = new ReviewListManager();
-		// List<Review> rlist = file.getReviewList();
 		System.out.println("#########################################################");
 		System.out.println("################## DISPLAYING MOVIES ####################");
 		System.out.println("#########################################################");
@@ -899,7 +933,13 @@ public class StaffMovieCRUDManager {
 				System.out.println("");
 			}
 	}
-
+   /**
+	 * Function for staff to view a movie from the list of movies and database regardless of movie status based on the movieID.
+     * Staff can view all reviews for the movie
+     * @param mList   Existing List of movies
+     * @param rList   Existing list of reviews
+     * @param movieID ID of movie
+	 */
 	public int printMovieByID(List<Movie>mList, List<Review>rList, int movieID) {
 		int found = 0;
 		System.out.println("#########################################################");

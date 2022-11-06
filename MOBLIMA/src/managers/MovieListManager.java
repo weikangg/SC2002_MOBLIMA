@@ -10,24 +10,46 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import entities.*;
+/**
+ * A manager class for all actions related to the list of movies in our data base 
+ * @author Wei Kang
+ * @version 2.5
+ * @since 01-11-2022
+ */
 
 public class MovieListManager {
-	
+	/**
+	 * For singleton pattern adherence. This MovieListManager instance persists throughout runtime.
+	 */
     private static MovieListManager single_instance = null;
+	/**
+	 * For singleton pattern adherence. 
+	 * @return instance The static instance that persists throughout runtime.
+	 */
 	public static MovieListManager getInstance()
     {
         if (single_instance == null)
             single_instance = new MovieListManager();
         return single_instance;
     }
-	
-    // Constructor
+	/**
+	 * The default constructor for the MovieListManager class
+	 */
     public MovieListManager(){}
-
-    static String path = System.getProperty("user.dir") +"\\data\\movies\\movies.csv";
-    // static String path = "src/data/movies/movies.csv";
-    static String separator = ",";
-
+    /**
+	 * The path to the CSV file that stores all the movies
+	 */
+    private static String path = System.getProperty("user.dir") +"\\data\\movies\\movies.csv";
+	/**
+	 * The separator for the columns in the csv file
+	 */
+    private static String separator = ",";
+    /**
+	 * Fetch all the movies inside the movies.csv file and compile them into a list 
+	 * Updates the rating scores based on latest reviews when fetching the movies
+	 * Updates the showing status of the movie automatically if the current time is after the end of showing date
+	 * @return movieList
+	 */
     public List<Movie>getMovieList(){
     	List<Movie>movieList = new ArrayList<>();
     	BufferedReader br = null;
@@ -48,7 +70,6 @@ public class MovieListManager {
 				}
 			}
 			updateMovieRatingScores(movieList, ReviewListManager.getInstance().getReviewList());
-			// updateMovieSales(movieList);
 			updateEndOfShowing(movieList);
 			br.close();
 		}
@@ -63,8 +84,12 @@ public class MovieListManager {
 		}
 		return movieList;
     }
-
-	public static Movie getMovie(int id){
+    /**
+	 * Fetch the movie inside the movies.csv file based on it's ID
+	 * @param id ID of movie to be fetched
+	 * @return movie if exists, null if it does not exist
+	 */
+	public Movie getMovie(int id){
 		List<Movie> movies = getInstance().getMovieList();
 
 		for(int i = 0; i < movies.size(); i++){
@@ -74,17 +99,40 @@ public class MovieListManager {
         }
 		return null;
 	}
-
-    public static boolean addMovieList(List<Movie> movieList, int movieID,String movieTitle, String synopsis,String movieDirector, String cast, String genres, int movieDuration, 
+    /**
+	 * Appends the new movie to the existing list of movies and updates the list of movies in the database
+	 * @param movieList 		 Existing list of movies
+	 * @param movieID            This is the movie's ID
+	 * @param movieTitle	     This is the movie's name
+	 * @param synopsis		     This is the movie's synopsis
+	 * @param movieDirector	     This is the movie's director(s)
+	 * @param cast			     This is the movie's casts
+	 * @param genres		     This is the movie's genres
+	 * @param movieDuration	     This is the movie's duration
+	 * @param showingStatus	     This is the movie's showingStatus
+	 * @param profitEarned	     This is the movie's total profit earned
+	 * @param movieRating        This is the movie's rating
+	 * @param overallRatingScore This is the movie's overall rating score
+	 * @param releaseDate	     This is the movie's release date
+	 * @param endOfShowingDate	 This is the movie's end of showing date
+	 * @param movieType	         This is the movie's movie type
+	 * @return true if update was successful, false if update was unsuccessful
+	 */
+    public boolean addMovieList(List<Movie> movieList, int movieID,String movieTitle, String synopsis,String movieDirector, String cast, String genres, int movieDuration, 
 									   ShowingStatus showingStatus, double profitEarned, MovieRating movieRating, double overallRatingScore, LocalDate releaseDateTime, LocalDate endOfShowingDate, MovieType movieType) {
         Movie newMovie = new Movie(movieID, movieTitle,showingStatus,synopsis,movieDirector,cast, genres,movieRating,movieDuration,profitEarned,overallRatingScore,releaseDateTime, endOfShowingDate,movieType);
         movieList.add(newMovie);
         return updateMovieListCSV(movieList);
     }
 
-	// Gets all the rating scores from complete review list, calculate the average rating score & sets it as the overall rating score for the movie.
-
-	public static boolean updateMovieRatingScores(List<Movie>movieList, List<Review>reviewList){
+    /**
+	 * Fetches all the rating scores from complete list of reviews, calculate the average rating score & sets it as the overall rating score for the movie.
+	 * If the movie has no rating, a default value of 0 is set for the overall Rating Score
+	 * @param movieList Existing list of movies
+	 * @param reviewList Existing list of reviews
+	 * @return true if update was successful, false if update was unsuccessful
+	 */
+	public boolean updateMovieRatingScores(List<Movie>movieList, List<Review>reviewList){
 		for (Movie m: movieList){
 			int movieExists = 0;
 			double totalMovies = 0, TotalRating = 0;
@@ -105,14 +153,13 @@ public class MovieListManager {
 		return updateMovieListCSV(movieList);
 	}
 
-	// TO DO
-	// public static boolean updateMovieSales(List<Movie>movieList){
-	// 	return TransactionManager.getInstance().updateTotalSales();
-	// }
-
-
-	// If Current date is after the end of showing date, we will update it to end of showing immediately.
-	public static boolean updateEndOfShowing(List<Movie>movieList){
+	/**
+	 * Fetches all the movies from complete list of movies, checks if the current date is after the end of showing date for each movie.
+	 * If it is, the showing status of the movie will be updated to end of showing immediately.
+	 * @param movieList Existing list of movies
+	 * @return true if update was successful, false if update was unsuccessful
+	 */
+	public boolean updateEndOfShowing(List<Movie>movieList){
 		for(Movie m : movieList){
 			if(LocalDate.now().isAfter(m.getEndOfShowingDate())){
 				m.setShowingStatus(ShowingStatus.FINISHED_SHOWING);
@@ -120,8 +167,12 @@ public class MovieListManager {
 		}
 		return updateMovieListCSV(movieList);
 	}
-
-    public static boolean updateMovieListCSV(List<Movie> movieList) {
+	/**
+	 * Writes the list of movies to the movies.csv file for storage
+	 * @param movieList Existing list of movies
+	 * @return true if update was successful, false if update was unsuccessful
+	 */
+    public boolean updateMovieListCSV(List<Movie> movieList) {
 		FileWriter csvWriter;
 		try {
 			csvWriter = new FileWriter(path,false);

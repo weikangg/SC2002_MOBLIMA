@@ -8,31 +8,50 @@ import entities.*;
 import view.adminApp;
 import view.customerApp;
 import static utils.IOUtils.*;
-
+/**
+ * A manager class for all actions related to the staff to manage reviews
+ * @author Wei Kang
+ * @version 2.5
+ * @since 01-11-2022
+ */
 public class ReviewManager {
-    private Scanner sc = new Scanner(System.in);
-    static String path = System.getProperty("user.dir") +"\\data\\reviews\\reviews.csv";
-    
-    /**
-	 * The separator for array of string in csv
-	 */
-	static String SplitBy = ";";
 	/**
-	 * The csv seperator
+	 * The scanner for reading input of user
 	 */
-	static String csvSplitBy = ",";
+    private Scanner sc = new Scanner(System.in);    
+    /**
+	 * The separator used for array of string in the csv file such as if the review description is more than one sentence
+	 */
+	private static String SplitBy = ";";
+	/**
+	 * The separator for the columns in the csv file
+	 */
+	private static String csvSplitBy = ",";
+	/**
+	 * For singleton pattern adherence. This MovieManager instance persists throughout runtime.
+	 */
     private static ReviewManager single_instance = null;
+	/**
+	 * For singleton pattern adherence. 
+	 * @return instance The static instance that persists throughout runtime.
+	 */
     public static ReviewManager getInstance()
     {
         if (single_instance == null)
             single_instance = new ReviewManager();
         return single_instance;
     }
-
-
+	/**
+	 * The default constructor for the ReviewListManager class
+	 */
     private ReviewManager(){
     }
-
+	/**
+	 * Customer's Menu to manage reviews
+     * Choose options to create, read, update, delete reviews
+     * @param choice User's option
+     * @param account User's account
+	 */
     public void reviewMenuCustomer(int choice, Account user){
         int option = 0;
         try{
@@ -114,7 +133,12 @@ public class ReviewManager {
 
         reviewMenuCustomer(0,user);
     }
-
+	/**
+	 * Staff's Menu to manage reviews
+     * Choose options to create, read, update, delete reviews of customers, delete own reviews, show all reviews, search for all reviews for a movie
+     * @param choice User's option
+     * @param account User's account
+	 */
     public void reviewMenuStaff(int choice, Account user){
         int option = 0;
         try{
@@ -218,9 +242,17 @@ public class ReviewManager {
         reviewMenuStaff(0,user);
     }
     
-    // adding reviews for the user. checks if he has previously inputted a review for that movie.
-    // checks if the movie that he wants to review exists?
     // TO DO: CHECK AND PRINT THE MOVIES THAT HE HAS PREVIOUSLY WATCHED BEFORE.
+
+    /**
+	 * Function to add reviews for the user.
+     * Checks if he has previously inputted a review for that movie. Only 1 review per movie is allowed.
+     * Checks if the movie that he wants to review exists. User can only input review for existing movie
+     * @param reviewList Existing List of reviews
+     * @param movieList  Existing List of movies
+     * @param username   User's username
+     * @return true if addition of review was successful, false if unsuccessful
+	 */
     public boolean addReview(List<Review> reviewList, List<Movie> movieList, String username){
         System.out.println("#########################################################");
 		System.out.println("#################### ADDING REVIEWS #####################");
@@ -289,14 +321,22 @@ public class ReviewManager {
 
     }   
 
-    // Update Reviews for the user
-
-    // Checks if user has given a review for the movie before.
+    /**
+	 * Function to update previous reviews for the user.
+     * Checks if he has previously inputted a review for that movie. Only 1 review per movie is allowed.
+     * Checks if the movie that he wants to review exists. User can only input review for existing movie
+     * @param reviewList Existing List of reviews
+     * @param movieList  Existing List of movies
+     * @param username   User's username
+     * @return true if updating of review was successful, false if unsuccessful
+	 */
     public int updateReview(List<Review> reviewList, String username){
         System.out.println("#########################################################");
 		System.out.println("#################### EDITING REVIEWS ####################");
 		System.out.println("#########################################################");
         System.out.println("");
+
+        showAllPastReviews(reviewList, username);
 
         System.out.println("Please enter Movie Title to update:");
         String movieTitle = sc.nextLine();
@@ -386,8 +426,13 @@ public class ReviewManager {
             return 0;
         }
     }
-
-     // Remove Customer Review based on movie title
+    /**
+	 * Function to remove previous reviews for the staff to remove customer's review based on the movie  title.
+     * Checks if the customer has previously inputted a review for that movie.
+     * @param reviewList Existing List of reviews
+     * @param username   Customer's username
+     * @return true if deletion of review was successful, false if unsuccessful
+	 */
      public int removeCustomerReview(List<Review> reviewList, String username){
         System.out.println("#########################################################");
 		System.out.println("#################### REMOVING REVIEW ####################");
@@ -395,6 +440,7 @@ public class ReviewManager {
 		System.out.println("");
 
         showAllPastReviews(reviewList, username);
+        
         String title; 
         System.out.println("Enter Movie Title: ");
         title = sc.next();
@@ -437,9 +483,13 @@ public class ReviewManager {
          }
 
     }
-
-
-    // Remove Review based on movie title
+    /**
+	 * Function to remove previous reviews for the user based on the movie title.
+     * Checks if he has previously inputted a review for that movie.
+     * @param reviewList Existing List of reviews
+     * @param username   User's username
+     * @return true if deletion of review was successful, false if unsuccessful
+	 */
     public int removeReview(List<Review> reviewList, String username){
         System.out.println("#########################################################");
 		System.out.println("#################### REMOVING REVIEW ####################");
@@ -489,8 +539,11 @@ public class ReviewManager {
          }
 
     }
-
-    // Show movie title, review description, and overall rating score based on user who logged in
+    /**
+	 * Function to show all past reviews made by the user who is logged in
+     * @param reviewList Existing List of reviews
+     * @param username   User's username
+	 */
     public void showAllPastReviews(List<Review> reviewList, String username){
         int count = 1;
         if (reviewList.size() == 0){
@@ -516,6 +569,10 @@ public class ReviewManager {
             return;
         }
     }
+    /**
+	 * Function to show all reviews made by every user
+     * @param reviewList Existing List of reviews
+	 */
     public void showAllReviews(List<Review> reviewList){
         int count = 1;
         if (reviewList.size() == 0){
@@ -536,7 +593,11 @@ public class ReviewManager {
             System.out.println("");
         }
     }
-
+    /**
+	 * Function to show all reviews made by every user for each movie
+     * @param reviewList Existing List of reviews
+     * @param movieTitle movieTitle name to be searched
+	 */
     public void showAllReviewsForMovie(List<Review> reviewList, String movieTitle){
         int count = 1, found = 0;
         if (reviewList.size() == 0){
@@ -562,8 +623,5 @@ public class ReviewManager {
         if (found == 0){
             System.out.println("Movie not found!");
         }
-    }
-    public boolean hideReviews(){
-        return true;
     }
 }

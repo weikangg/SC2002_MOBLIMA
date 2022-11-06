@@ -3,22 +3,42 @@ package managers;
 import java.util.*;
 import view.adminApp;
 import entities.*;
-
+/**
+ * A manager class for all actions related to the staff to manage movies
+ * @author Wei Kang
+ * @version 2.5
+ * @since 01-11-2022
+ */
 public class MovieManager {    
+	/**
+	 * The scanner for reading input of user
+	 */
     private Scanner sc = new Scanner(System.in);
-
+	/**
+	 * For singleton pattern adherence. This MovieManager instance persists throughout runtime.
+	 */
     private static MovieManager single_instance = null;
+	/**
+	 * For singleton pattern adherence. 
+	 * @return instance The static instance that persists throughout runtime.
+	 */
     public static MovieManager getInstance()
     {
         if (single_instance == null)
             single_instance = new MovieManager();
         return single_instance;
     }
-
-
+	/**
+	 * The default constructor for the MovieManager class
+	 */
     private MovieManager(){
     }
-
+	/**
+	 * Staff's Menu to manage movies
+     * Choose options to create, read, update, pseudo-delete movies, show top 5 movies, remove movies from database
+     * @param choice User's option
+     * @param account User's account
+	 */
     public void staffMenu(int choice,Account account){
         int option = 0;
         try{
