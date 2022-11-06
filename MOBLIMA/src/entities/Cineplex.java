@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * Represents a Cineplex managed by the vendor
  * Has multiple Cinemas
  * @author Andrew Leung
- * @version 1.0
+ * @version 3.0
  * @since 2022-11-06
  */
 public class Cineplex {
@@ -71,8 +71,8 @@ public class Cineplex {
                 cinemaClass = CinemaClass.DIAMOND;
             }
 
-
             cinemas[i] = new Cinema(this.name, this.location, this.numCinemas, this.cineplexID,i, cinemaClass);
+        
         }
 
         this.cinemas = cinemas;
@@ -132,7 +132,7 @@ public class Cineplex {
 
     /**
      * Function to return the array of Cinema objects cinemas[]
-     * @return cinemas A list of Cinema objects
+     * @return A list of Cinema objects
      */
     public Cinema[] getCinemas() {
         return cinemas;

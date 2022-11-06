@@ -10,13 +10,40 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import com.opencsv.*;
 
+/**
+ * Represents a Cinema, inside a Cineplex
+ * Has multiple Showtimes
+ * @author Andrew Leung
+ * @version 3.0
+ * @since 2022-11-06
+ */
 public class Cinema extends Cineplex{
 
+    /**
+     * ID of Cinema
+     */
     private int cinemaID;
-    private int numShowtimes;
-    private Showtime[] showtimes;
+
+    /**
+     * Class of Cinema
+     */
     private CinemaClass cinemaClass;
 
+    /**
+     * Number of Showtimes in Cinema
+     */
+    private int numShowtimes;
+
+    /**
+     * Object array of Showtime objects
+     */
+    private Showtime[] showtimes;
+
+    /**
+     * Creates a new Cinema with inheritance, and also the Cinema's ID and Class
+     * @param cinemaID Name of Cineplex
+     * @param cinemaClass Location of Cineplex
+     */
     public Cinema(String name, String location, int numCinemas, int cineplexID, int cinemaID, CinemaClass cinemaClass){
         super(name, location, numCinemas, cineplexID);
 
@@ -26,7 +53,8 @@ public class Cinema extends Cineplex{
     }
     
     /**
-     * Function to configure the list of showtimes
+     * Function to configure the array of Showtime objects showtimes[]
+     * @param numShowtimes an integer storing the number of Showtimes this cinema has
      */
     public void configShowtimes(int numShowtimes){ 
 
@@ -43,7 +71,7 @@ public class Cinema extends Cineplex{
     }
 
     /**
-     * Function to show details of all showtimes
+     * Function to show details of all Showtimes
      */
     public void showShowtimes(){ 
         
@@ -57,9 +85,12 @@ public class Cinema extends Cineplex{
     }
 
     /**
-     * Function to add showtime
+     * Function to add a new Showtime
+     * @param movieID ID of movie to be referenced in Movie List
+     * @param dateTime Date and Time of Showtime
+     * @param movieType Type of Movie being showed
      */
-    public void addShowtime(int MovieID, LocalDateTime dateTime, MovieType movieType){
+    public void addShowtime(int movieID, LocalDateTime dateTime, MovieType movieType){
 
         try {
             //Create File
@@ -77,7 +108,7 @@ public class Cinema extends Cineplex{
 
             ArrayList<String[]> data = new ArrayList<String[]>();
             data.add(new String[] { "MovieID", "DateTime" , "MovieType" });
-            data.add(new String[] { Integer.toString(MovieID), strDateTime, movieType.toString() });
+            data.add(new String[] { Integer.toString(movieID), strDateTime, movieType.toString() });
             
             for (int i = 0; i < 5; i++){
                 String[] s = new String[10];
@@ -128,7 +159,11 @@ public class Cinema extends Cineplex{
         }
 
     }
-
+    
+    /**
+     * Function to delete a Showtime using it's ID
+     * @param showtimeID ID of Showtime
+     */
     public void deleteShowtime(int showtimeID){
 
         //check if showtime exists
@@ -199,24 +234,44 @@ public class Cinema extends Cineplex{
 
     }
 
+    /**
+     * Function to return the ID of the Cinema
+     * @return ID of Cinema
+     */
     public int getCinemaID(){
         return cinemaID;
     }
-    
-    public Showtime[] getShowtimes(){
-        return showtimes;
+
+    /**
+     * Function to return the Class of the Cinema
+     * @return Class of Cinema as String
+     */
+    public String getCinemaClass(){
+        return cinemaClass.toString();
     }
 
+    /**
+     * Function to return the Class of the Cinema
+     * @return Class of Cinema of CinemaClass type 
+     */
+    public CinemaClass getCinemaClassCC(){
+        return this.cinemaClass;
+    }
+
+    /**
+     * Function to return the number of Showtimes in the Cinema
+     * @return Number of Showtimes in Cinema
+     */
     public int getNumShowtimes(){
         return numShowtimes;
     }
 
-    public String getCinemaClass(){
-        return cinemaClass.toString();
-    }
-    
-    public CinemaClass getCinemaClassCC(){
-        return this.cinemaClass;
+    /**
+     * Function to return the array of Showtime objects showtimes[]
+     * @return A list of Showtime objects
+     */
+    public Showtime[] getShowtimes(){
+        return showtimes;
     }
     
     

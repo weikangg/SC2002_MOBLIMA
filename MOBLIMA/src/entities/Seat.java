@@ -22,4 +22,4 @@ public class Seat {
         this.state = state;
     }
 
-}
+} 
