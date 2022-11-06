@@ -83,50 +83,6 @@ public class customerApp {
                     Showtime movst;
                     List<Showtime> showtime;
 
-                    //ask user for cineplex
-                    /*
-                    String name;
-                    char cineplex;
-                    int cineplexID;
-                    System.out.println("Please choose a Cineplex(A,B,C):");
-                    cineplex = scan.next().charAt(0);
-                    scan.nextLine();
-                    cineplexID = (int)cineplex;
-                    if(cineplexID > 90)
-                    {
-                        cineplexID -= (int)'a';
-                    }
-                    else
-                    {
-                        cineplexID -= (int)'A';
-                    }
-                
-                    //ask user for movie
-                    CustomerMovieManager.printMovieList(movieList, reviewList);
-                    System.out.println("Please choose a movie:");
-                    name = scan.nextLine();
-                
-
-                    //link the movie to showtime
-                    showtime = CustomerShowtime.searchMovieID(name, cineplexID);
-                    if(showtime.isEmpty())
-                    {
-                        break;
-                    }
-                
-                    //show user movie timing
-                    for(Showtime st: showtime)
-                    {
-                        System.out.println(idx + ". " + st.getDateTime());
-                        idx++;
-                    }
-                    //ask user to choose a movie timing
-                    System.out.println("Please choose a timing:");
-                    input = scan.nextInt();
-                    movst = showtime.get(input - 1);
-    
-                    //call bookingmenu in booking manager
-                    movst.showSeats();*/
                     showtime = CustomerShowtime.searchMovieShowtime(movieList, reviewList);
                     if(showtime.isEmpty())
                     {
@@ -220,7 +176,6 @@ public class customerApp {
                     System.out.println("Please enter a valid option");
                     customerGuestMenu();
             }
-
 
         }while(exit == false);
     }
@@ -348,7 +303,7 @@ public class customerApp {
                             "2. Booking History\n"+
                             "3. Exit\n"+
                             "========================================================\n");
-            System.out.println("Please Enter Your Choice:\n");
+            System.out.println("Please Enter Your Choice:");
 
             try{
                 input = scan.nextInt();
@@ -365,31 +320,6 @@ public class customerApp {
                 int idx = 1;
                 Showtime movst;
                 List<Showtime> showtime;
-
-                /*char cineplex;
-                int cineplexID;
-                String name;
-                
-
-                //ask user for cineplex
-                System.out.println("Please choose a Cineplex(A,B,C):");
-                cineplex = scan.next().charAt(0);
-                scan.nextLine();
-                cineplexID = (int)cineplex;
-                if(cineplexID > 90)
-                {
-                    cineplexID -= (int)'a';
-                }
-                else
-                {
-                    cineplexID -= (int)'A';
-                }
-                
-                //ask user for movie
-                CustomerMovieManager.printMovieList(movieList, reviewList);
-                System.out.println("Please choose a movie:");
-                name = scan.nextLine();*/
-                
 
                 //link the movie to showtime
                 showtime = CustomerShowtime.searchMovieShowtime(movieList, reviewList);
@@ -421,8 +351,6 @@ public class customerApp {
                 //show booking history
                     break;
                     
-
-
                 case 3:
                     System.out.println("Exiting Customer App...");
                     customerApp.getInstance().customerGuestMenu();
