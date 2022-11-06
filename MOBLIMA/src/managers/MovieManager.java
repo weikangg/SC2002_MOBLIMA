@@ -3,6 +3,7 @@ package managers;
 import java.util.*;
 import view.adminApp;
 import entities.*;
+
 /**
  * A manager class for all actions related to the staff to manage movies
  * @author Wei Kang

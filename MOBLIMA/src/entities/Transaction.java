@@ -16,7 +16,6 @@ public class Transaction implements Serializable{
         this.movieName = movname;
         this.tranDateTime = tranDateTime;
         this.tix = tix;
-        //this.totalPrice = totalPrice;
     }
 
     public String getID(){
@@ -48,7 +47,7 @@ public class Transaction implements Serializable{
     public void setTicketList(ArrayList<Ticket> tix) {this.tix = tix;}
     public void setTicket(int index, Ticket ticket) {this.tix.set(index, ticket);}
     public void setTotalPrice(double price){this.totalPrice = price;}
-    
+
     public void printTransaction() {
     	System.out.println("ID: " +this.getID());
 		System.out.println("Movie Title: " +this.getMovieName());

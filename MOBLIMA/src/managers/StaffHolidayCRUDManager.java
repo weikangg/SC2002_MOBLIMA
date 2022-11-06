@@ -14,6 +14,7 @@ import java.util.Scanner;
 import static utils.IOUtils.*;
 import entities.Holidays;
 import static managers.HolidayListManager.*;
+
 /**
  * A manager class for all actions related to the staff to create, read, update and delete holidays
  * @author Aloysius

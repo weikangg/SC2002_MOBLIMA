@@ -1,6 +1,7 @@
 package utils;
 
 import java.util.Scanner;
+
 /**
  * A utility class allowing easy access to functions which are repeatedly used
  * @author Wei Kang

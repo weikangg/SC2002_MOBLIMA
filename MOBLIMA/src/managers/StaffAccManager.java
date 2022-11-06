@@ -5,13 +5,15 @@ import java.util.*;
 import entities.*;
 import utils.PasswordStrengthChecker;
 import static utils.IOUtils.*;
+
 /**
  * A manager class for all actions related to Staff Accounts
  * @author Wei Kang
  * @version 2.5
  * @since 01-11-2022
  */
-public class StaffAccManager {
+
+ public class StaffAccManager {
     /**
 	 * The path to the CSV file that stores all the accounts
 	 */

@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.*;
 import static utils.IOUtils.*;
+
 /**
  * A class defining a System Settings object.
  * @author Wei Kang

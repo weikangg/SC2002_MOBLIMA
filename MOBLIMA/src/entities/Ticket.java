@@ -2,7 +2,6 @@ package entities;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-
 public class Ticket implements Serializable{
 	private LocalDateTime date;
 	//private Boolean promotion;

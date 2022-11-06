@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Scanner;
 import entities.*;
 import managers.AccountManager;
-
 import java.io.File;
 
 /**
@@ -14,7 +13,7 @@ import java.io.File;
  * @version 2.5
  * @since 01-11-2022
  */
-
+ 
 public class mainApp {
 
 	/**

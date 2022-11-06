@@ -3,7 +3,6 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-
 public class Booking implements Serializable{
 	private String bookingID;
 	private double totalPrice;

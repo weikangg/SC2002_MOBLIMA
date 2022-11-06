@@ -86,6 +86,7 @@ public class AccountManager {
 		}
 		return accounts;
     }
+    
     /**
 	 * Checks login details by checking whether the username and password exists in the database, accounts.csv
      * @param accountList List of existing accounts

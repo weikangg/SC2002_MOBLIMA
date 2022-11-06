@@ -1,6 +1,7 @@
 package entities;
 
 import java.time.LocalDate;
+
 /**
  * A class defining a Movie Object.
  * @author Wei Kang

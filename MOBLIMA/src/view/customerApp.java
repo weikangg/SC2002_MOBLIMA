@@ -1,7 +1,6 @@
 package view;
 
 import java.util.Scanner;
-
 import entities.*;
 import managers.*;
 import java.util.InputMismatchException;

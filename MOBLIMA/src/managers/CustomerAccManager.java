@@ -1,26 +1,20 @@
 package managers;
 
 import java.util.Scanner;
-
 import entities.Account;
 import entities.CustomerAcc;
 import entities.Ticket;
 import entities.Booking;
 import utils.PasswordStrengthChecker;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInput;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
-import java.io.Serializable;
 import java.io.FileNotFoundException;
 
 public class CustomerAccManager {
@@ -28,7 +22,7 @@ public class CustomerAccManager {
     static String path = System.getProperty("user.dir") +"\\data\\accounts\\accounts.csv";
     static String item_Separator = ",";	
     static AccountManager accountManager = AccountManager.getInstance();
-    Scanner scan = new Scanner(System.in);
+    private static Scanner scan = new Scanner(System.in);
 
     public static CustomerAcc createAcc(List<Account>accountList){
         String name;
@@ -37,7 +31,6 @@ public class CustomerAccManager {
         int age;
 		String password="";
         String pwStrength="Weak";
-        Scanner scan = new Scanner(System.in);
 
 
         //ask for user information and use try to check if name or email or mobile exists
@@ -218,14 +211,16 @@ public class CustomerAccManager {
         //String filename = ".csv";
         //String trans;
         //int fileCount;
-        ArrayList<Booking> book;
+        ArrayList<Booking> book = new ArrayList<Booking>();
         ArrayList<Ticket> tix;
-        Scanner scan = new Scanner(System.in);
 
         try{
             FileInputStream file = new FileInputStream(location);
             ObjectInputStream in = new ObjectInputStream(file);
-            book = (ArrayList<Booking>) in.readObject();
+            if(book instanceof Object){
+                book = (ArrayList<Booking>) in.readObject();
+            }
+
 
             System.out.println(book);
 

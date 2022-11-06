@@ -5,6 +5,7 @@ package entities;
  * @version 2.5
  * @since 01-11-2022
  */
+
 public abstract class Account {
 	/**
 	* This string is used to store the Account's username.

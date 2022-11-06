@@ -11,6 +11,7 @@ import entities.*;
 import static managers.ReviewListManager.*;
 import static utils.IOUtils.*;
 import java.util.Scanner;
+
 /**
  * A manager class for all actions related to the staff to create, read, update and delete movies
  * @author Wei Kang
@@ -865,6 +866,28 @@ public class StaffMovieCRUDManager {
             return 2;
         }
     }
+    
+    /**
+	 * Function for staff to view all movie titles from the list of movies based on showing status
+     * This function is for users to see the list of existing movies that they can make reviews for
+     * @param mList Existing List of movies
+	 */
+    public void printMovieTitles(List<Movie>mList){
+        int count = 1;
+        if (mList.size() == 0){
+			System.out.println("No Movies to display currently.");
+			return;
+		}
+        for(Movie m : mList) {
+            if(m.getShowingStatus().equals(ShowingStatus.NOW_SHOWING) ||
+               m.getShowingStatus().equals(ShowingStatus.PREVIEW)){
+                System.out.println(Integer.toString(count) + ". " + m.getMovieTitle());
+                count++;
+            }
+        }
+    }
+
+
    /**
 	 * Function for staff to view all movie from the list of movies and database regardless of movie status.
      * Staff can view all reviews for each movie

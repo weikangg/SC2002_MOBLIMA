@@ -1,4 +1,5 @@
 package entities;
+
 /**
  * A class defining a Review Object.
  * @author Wei Kang

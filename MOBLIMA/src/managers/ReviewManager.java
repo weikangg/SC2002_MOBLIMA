@@ -8,6 +8,7 @@ import entities.*;
 import view.adminApp;
 import view.customerApp;
 import static utils.IOUtils.*;
+
 /**
  * A manager class for all actions related to the staff to manage reviews
  * @author Wei Kang
@@ -259,6 +260,8 @@ public class ReviewManager {
 		System.out.println("#########################################################");
         System.out.println("");
 
+        System.out.println("List of available movies you can make reviews for: ");
+        StaffMovieCRUDManager.getInstance().printMovieTitles(movieList);
         int  reviewID, found = 0;
         double ratingScore;
         String movieTitleTmp, movieTitle,reviewer, descriptionTmp,description;

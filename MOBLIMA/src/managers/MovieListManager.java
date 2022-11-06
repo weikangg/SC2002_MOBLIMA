@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import entities.*;
+
 /**
  * A manager class for all actions related to the list of movies in our data base 
  * @author Wei Kang

@@ -1,5 +1,4 @@
 package entities;
-
 /**
  * An enum class defining Movie Type.
  * @author Wei Kang

@@ -164,8 +164,6 @@ public class TicketPrice implements Serializable{
 	}
 
 
-	
-
 	/**
 	 * getters
 	 */

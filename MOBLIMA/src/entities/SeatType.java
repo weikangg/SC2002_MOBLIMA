@@ -1,5 +1,4 @@
 package entities;
-
 /**
  * An enum class defining Seat Type
  * @author Andrew Leung
