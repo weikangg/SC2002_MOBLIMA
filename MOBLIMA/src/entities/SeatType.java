@@ -1,5 +1,11 @@
 package entities;
 
+/**
+ * An enum class defining Seat Type
+ * @author Andrew Leung
+ * @version 1.0
+ * @since 06-11-2022
+ */
 public enum SeatType {
     REGULAR ("R"),
     ELITE ("E"),
@@ -18,7 +24,7 @@ public enum SeatType {
     /**
      * For string comparison.
      * @param otherName String to be compared to.
-     * @return boolean on whether the String value of MovieFormat is equals to otherName.
+     * @return boolean on whether the String value of SeatType is equals to otherName.
      */
     public boolean equalsString(String otherName) {
         // (otherName == null) check is not needed because name.equals(null) returns false 
@@ -27,7 +33,7 @@ public enum SeatType {
 
     /**
      *
-     * @return String value of MovieFormat for string comparison purposes.
+     * @return String value of SeatType for string comparison purposes.
      */
     public String toString() {
        return this.name;

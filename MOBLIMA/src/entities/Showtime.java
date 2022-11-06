@@ -15,25 +15,53 @@ import managers.MovieListManager;
 import com.opencsv.*;
 import com.opencsv.exceptions.CsvException;
 
+/**
+ * Represents one Showtime in the Cinema
+ * @author Andrew Leung
+ * @version 3.0
+ * @since 06-11-2022
+ */
 public class Showtime extends Cinema{
 
+    /**
+     * ID of Shotwime
+     */
     private int showtimeID;
+
+    /**
+     * Unique movieID to specify the movie being shown for that showtime
+     */
     private int movieID;
+
+    /**
+     * Date and Time of Showtime
+     */
     private LocalDateTime dateTime;
 
-    //Unique movieID to specify the movie being shown for that showtime.
     /**
      * Movie Format of the specific showtime.
      */
     private MovieType movieType;
-    /**
-     * Cinema object with access to a seating plan. Cinema held is the cinema at which the movie is showing.
-     */
 
+    /**
+     * Status of how many seats are left of the specific showtime
+     */
     private CinemaStatus cinemaStatus;
+
+    /**
+     * 2D array of Seat objects, stores the satus and type of Seat
+     */
     private Seat[][] seats;
+
+    /**
+     * Movie object
+     */
     private Movie movie;
 
+    /**
+     * Creates a new Showtime by inheriting from Cinema, and also showtimeID
+     * @param showtimeID ID of Shotwime
+     */
     public Showtime(String name, String location, int numCinemas, int cineplexID, int cinemaID, CinemaClass cinemaClass, int showtimeID){
         super(name, location, numCinemas, cineplexID, cinemaID, cinemaClass);
         this.showtimeID = showtimeID;
@@ -146,7 +174,7 @@ public class Showtime extends Cinema{
     }
 
     /**
-     * Printer method for showtime information
+     * Printer method for Showtime information
      */
     public void showInfo(){ 
         System.out.println(super.getName()+", Hall "+(super.getCinemaID()+1)+", Class: " +super.getCinemaClass());
@@ -161,7 +189,7 @@ public class Showtime extends Cinema{
     }
 
     /**
-     * Printer method for showtime seats
+     * Printer method for Showtime seats
      */
     public void showSeats(){
         System.out.println("      Screen");
@@ -176,6 +204,9 @@ public class Showtime extends Cinema{
         }
     }
 
+    /**
+     * Printer method for Showtime seats with types
+     */
     public void showSeatsType(){
         System.out.println("      Screen");
         for (int i = 0; i < 5; i++){
@@ -189,6 +220,9 @@ public class Showtime extends Cinema{
         }
     }
 
+    /**
+     * Function for writing into Showtime CSV files
+     */
     public void update(){
 
         try {
@@ -228,6 +262,11 @@ public class Showtime extends Cinema{
 
     }
 
+    /**
+     * Function that returns the type of the specified seat 
+     * @param i Row of the Seat
+     * @param j Column of the Seat
+     */
     public SeatType getSeatType(int i, int j){
         return seats[i][j].getSeatType();
     }
@@ -235,16 +274,55 @@ public class Showtime extends Cinema{
 
     //Getters
 
+    /**
+     * Function to return ID of Shotwime
+     * @return ID of Shotwime
+     */
     public int getShowtimeID() {return showtimeID;}
+    
+    /**
+     * Function to return Unique movieID
+     * @return Unique movieID to specify the movie being shown for that showtime
+     */
     public int getMovieID() {return movieID;}
+
+    /**
+     * Function to return Date and Time of Showtime
+     * @return Date and Time of Showtime
+     */
     public String getDateTime() {
         String[] str = dateTime.toString().split("T",2);
         return str[0]+" "+str[1];
     }
+
+    /**
+     * Function to return Date and Time of Showtime as a LocalDateTime object
+     * @return Date and Time of Showtime as a LocalDateTime object
+     */
     public LocalDateTime getDateTimeLDT(){return this.dateTime;}
+
+    /**
+     * Function to return Title of Movie
+     * @return Title of Movie
+     */
     public String getMovieTitle() {return movie.getMovieTitle();}
+
+    /**
+     * Function to return Movie Format of the specific showtime
+     * @return Movie Format of the specific showtime
+     */
     public MovieType getMovieType() {return movieType;}
+
+    /**
+     * Function to return status depending on proportion of seats filled
+     * @return Status depending on proportion of seats filled
+     */
     public String getCinemaStatus() {return cinemaStatus.toString();}
+
+    /**
+     * Function to return seat availiblilty as an integer array
+     * @return Seat availiblilty as an integer array
+     */
     public int[][] getSeats(){
         int[][] ret = new int [5][10];
         for (int i = 0; i < 5; i++){
@@ -261,11 +339,35 @@ public class Showtime extends Cinema{
 
     //Setters
 
-    
+    /**
+     * Function to set date and time of Showtime
+     * @param dateTime Date and Time of Showtime
+     */
     public void setDateTime(LocalDateTime dateTime) {this.dateTime = dateTime;update();}
+    
+    /**
+     * Function to set Movie ID of Showtime
+     * @param movieID Unique movieID to specify the movie being shown for that showtime
+     */
     public void setMovieID(Integer movieID) {this.movieID = movieID;update();}
+    
+    /**
+     * Function to set Movie Format of the specific showtime
+     * @param movieReso Movie Format of the specific showtime
+     */
     public void setMovieType(MovieType movieReso) {this.movieType = movieReso;update();}
+    
+    /**
+     * Function to set status of how many seats are left of the specific showtime
+     * @param cinemaStatus Status of how many seats are left of the specific showtime
+     */
     public void setCinemaStatus(CinemaStatus cinemaStatus) {this.cinemaStatus = cinemaStatus;}
+    
+    /**
+     * Function to set status seat to reserved
+     * @param i Row of Seat
+     * @param j Column of Seat
+     */
     public void reserveSeat(int i, int j){this.seats[i][j].setState(1);update();}
 
 

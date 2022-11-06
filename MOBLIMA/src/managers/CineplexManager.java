@@ -18,7 +18,7 @@ import entities.Cinema;
  * Function Class that configures and returns the array of Cineplex objects
  * @author Andrew Leung
  * @version 3.0
- * @since 2022-11-06
+ * @since 06-11-2022
  */
 public class CineplexManager {
     
@@ -55,7 +55,7 @@ public class CineplexManager {
 
                 cineplexes[i].configCinema(str);                
             }
-            
+
 
             //Config Movies in Cinemas in Cineplexes
             for(int i = 0; i < cineplexes.length; i++){

@@ -8,6 +8,12 @@ import view.adminApp;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
+/**
+ * Function Class that handles Showtime Management Options
+ * @author Andrew Leung
+ * @version 2.0
+ * @since 06-11-2022
+ */
 public class ShowtimeManager {
     private Scanner sc = new Scanner(System.in);
 
@@ -21,6 +27,12 @@ public class ShowtimeManager {
 
     private ShowtimeManager() {}
 
+
+    /**
+     * Function to select and choose Showtime Options
+     * @param choice input choice by user
+     * @param account Account of User, Staff or Customer
+     */
     public void staffMenu(int choice,Account account){
         
         int option = 0;
@@ -143,6 +155,10 @@ public class ShowtimeManager {
             // staffMenu(0);
     }
 
+    /**
+     * Function to prompt user for Selection of Cinema
+     * @return IDs of Cinema and Cineplex
+     */
     public static int[] promptCinemaSelection(){
         int[] inputs = new int[2];
 
@@ -198,6 +214,10 @@ public class ShowtimeManager {
         return inputs;
     }
     
+    /**
+     * Function to prompt user for Selection of Showtime
+     * @return IDs of Showtime, Cinema and Cineplex
+     */
     public static int[] promptShowtimeSelection(){
         int[] inputs = new int[3];
 
@@ -275,6 +295,10 @@ public class ShowtimeManager {
         return inputs;
     }
 
+    /**
+     * Function to prompt user for MovieID
+     * @return MovieID
+     */
     public static int promptMovieID(){
         int movieID = -1;
         Scanner sc = new Scanner(System.in);
@@ -301,6 +325,10 @@ public class ShowtimeManager {
         return movieID;
     }
 
+    /**
+     * Function to prompt user for Date and Time
+     * @return DateTime 
+     */
     public static LocalDateTime promptDateTime(){
         Scanner sc = new Scanner(System.in);
 
@@ -326,6 +354,10 @@ public class ShowtimeManager {
         
     }
 
+    /**
+     * Function to prompt user for Type of Movie
+     * @return MovieType
+     */
     public static MovieType promptMovieType(){
 
         Scanner sc = new Scanner(System.in);

@@ -15,7 +15,7 @@ import com.opencsv.*;
  * Has multiple Showtimes
  * @author Andrew Leung
  * @version 3.0
- * @since 2022-11-06
+ * @since 06-11-2022
  */
 public class Cinema extends Cineplex{
 
@@ -40,7 +40,7 @@ public class Cinema extends Cineplex{
     private Showtime[] showtimes;
 
     /**
-     * Creates a new Cinema with inheritance, and also the Cinema's ID and Class
+     * Creates a new Cinema by inheriting from Cineplex, and also the Cinema's ID and Class
      * @param cinemaID Name of Cineplex
      * @param cinemaClass Location of Cineplex
      */

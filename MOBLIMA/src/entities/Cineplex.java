@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Has multiple Cinemas
  * @author Andrew Leung
  * @version 3.0
- * @since 2022-11-06
+ * @since 06-11-2022
  */
 public class Cineplex {
 
