@@ -32,7 +32,7 @@ public class Showtime extends Cinema{
      */
 
     private CinemaStatus cinemaStatus;
-    private int[][] seats;
+    private Seat[][] seats;
     private Movie movie;
 
     public Showtime(String name, String location, int numCinemas, int cineplexID, int cinemaID, CinemaClass cinemaClass, int showtimeID){
@@ -66,12 +66,33 @@ public class Showtime extends Cinema{
                 this.movieType = MovieType.BLOCKBUSTER;
             }
 
-            int[][] seats = new int[5][10];
+            Seat[][] seats = new Seat[5][10];
+
+            Path pathTwo = Paths.get(System.getProperty("user.dir")+"\\data\\cinemaLayout.csv");
+            // System.out.println(pathTwo.toAbsolutePath().toString());
+
+            FileReader filereaderTwo = new FileReader(pathTwo.toAbsolutePath().toString()); //CSVReader Instantiation
+            CSVReader csvReaderTwo = new CSVReader(filereaderTwo); 
+            
+            List<String[]> s = csvReaderTwo.readAll(); //Read File
 
             for (int i = 0; i < 5; i++){
                 for(int j = 0; j < 10; j++){
 
-                    seats[i][j] = Integer.valueOf(r.get(i+2)[j]); //Copying individual lines into seats array
+                    String temp = s.get(i)[j];
+                    SeatType seatType;
+
+                    if(temp.equals("R")){
+                        seatType = SeatType.REGULAR;
+                    }else if(temp.equals("C")){
+                        seatType = SeatType.COUPLE;
+                    }else if(temp.equals("E")){
+                        seatType = SeatType.ELITE;
+                    }else{
+                        seatType = SeatType.ULTIMATE;
+                    }
+
+                    seats[i][j] = new Seat(Integer.valueOf(r.get(i+2)[j]), seatType); //Copying individual lines into seats array
 
                 }
             }
@@ -107,7 +128,7 @@ public class Showtime extends Cinema{
         for (int i = 0; i < 5; i++){
             for(int j = 0; j < 10; j++){
 
-                if (seats[i][j] == 1) seatsFilled++;
+                if (seats[i][j].getState() == 1) seatsFilled++;
 
             }
         }
@@ -143,15 +164,27 @@ public class Showtime extends Cinema{
     /**
      * Printer method for showtime seats
      */
-    public void showSeats()
-    {
+    public void showSeats(){
         System.out.println("      Screen");
         for (int i = 0; i < 5; i++){
             System.out.print((char)(i+65)+"  ");
             for(int j = 0; j < 10; j++){
                 if(j == 5) System.out.print("  ");
-                if(seats[i][j] == 0) System.out.print("\u001B[32m" + "O" + "\u001B[0m");
-                else if(seats[i][j] == 1) System.out.print("\u001B[31m" + "X" + "\u001B[0m");
+                if(seats[i][j].getState() == 0) System.out.print("\u001B[32m" + "O" + "\u001B[0m");
+                else if(seats[i][j].getState() == 1) System.out.print("\u001B[31m" + "X" + "\u001B[0m");
+            }
+            System.out.println("  "+(char)(i+65));
+        }
+    }
+
+    public void showSeatsType(){
+        System.out.println("      Screen");
+        for (int i = 0; i < 5; i++){
+            System.out.print((char)(i+65)+"  ");
+            for(int j = 0; j < 10; j++){
+                if(j == 5) System.out.print("  ");
+                if(seats[i][j].getState() == 0) System.out.print("\u001B[32m" + seats[i][j].getSeatType().toString() + "\u001B[0m");
+                else if(seats[i][j].getState() == 1) System.out.print("\u001B[31m" + "X" + "\u001B[0m");
             }
             System.out.println("  "+(char)(i+65));
         }
@@ -179,7 +212,7 @@ public class Showtime extends Cinema{
                 String[] s = new String[10];
                 for(int j = 0; j < 10; j++){
     
-                    s[j] = Integer.toString(seats[i][j]);
+                    s[j] = Integer.toString(seats[i][j].getState());
     
                 }
                 data.add(s);
@@ -209,7 +242,19 @@ public class Showtime extends Cinema{
     public String getMovieTitle() {return movie.getMovieTitle();}
     public MovieType getMovieType() {return movieType;}
     public String getCinemaStatus() {return cinemaStatus.toString();}
-    public int[][] getSeats(){return seats;}
+    public int[][] getSeats(){
+        int[][] ret = new int [5][10];
+        for (int i = 0; i < 5; i++){
+            for(int j = 0; j < 10; j++){
+
+                ret[i][j] = seats[i][j].getState();
+
+            }
+            
+        }
+
+        return ret;
+    }
     //Setters
 
     
@@ -217,7 +262,7 @@ public class Showtime extends Cinema{
     public void setMovieID(Integer movieID) {this.movieID = movieID;update();}
     public void setMovieType(MovieType movieReso) {this.movieType = movieReso;update();}
     public void setCinemaStatus(CinemaStatus cinemaStatus) {this.cinemaStatus = cinemaStatus;}
-    public void reserveSeat(int i, int j){this.seats[i][j] = 1;update();}
+    public void reserveSeat(int i, int j){this.seats[i][j].setState(1);update();}
 
 
 }

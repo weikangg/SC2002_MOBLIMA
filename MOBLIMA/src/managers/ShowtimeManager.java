@@ -69,6 +69,7 @@ public class ShowtimeManager {
 
                 showtime.showInfo();
                 showtime.showSeats();
+                // showtime.showSeatsType();
 
                 break;
 
