@@ -77,7 +77,6 @@ public class CustomerShowtime {
             cineplex = scan.next().charAt(0);
             scan.nextLine();
             cineplexID = (int)cineplex;
-            System.out.println(cineplexID);
             if((cineplexID < 65) || (cineplexID > 90 && cineplexID < 97) || (cineplexID > 122)){
                 System.out.println("Please key in an alphabet");
                 continue;
