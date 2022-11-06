@@ -7,6 +7,7 @@ import entities.CustomerAcc;
 import entities.Booking;
 import utils.PasswordStrengthChecker;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.InputMismatchException;
 import java.io.File;
