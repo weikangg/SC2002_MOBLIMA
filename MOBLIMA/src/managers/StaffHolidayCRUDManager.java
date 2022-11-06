@@ -14,21 +14,45 @@ import java.util.Scanner;
 import static utils.IOUtils.*;
 import entities.Holidays;
 import static managers.HolidayListManager.*;
-
+/**
+ * A manager class for all actions related to the staff to create, read, update and delete holidays
+ * @author Aloysius
+ * @version 2.5
+ * @since 06-11-2022
+ */
 public class StaffHolidayCRUDManager {
+    /**
+	 * The scanner for reading input of user
+	 */
     static Scanner sc = new Scanner(System.in);
+    /**
+	 * The separator for the columns in the csv file
+	 */
     static String csv_Separator = ",";
+    /**
+	 * The separator used for array of string in the csv file such as if the holiday has more than 1 name
+	 */
 	static String splitter = ";";
-	static String converter = ":";
-
+    /**
+	 * For singleton pattern adherence. This StaffHolidayCRUDManager instance persists throughout runtime.
+	 */
     private static StaffHolidayCRUDManager single_instance = null;
+    /**
+	 * For singleton pattern adherence. 
+	 * @return instance The static instance that persists throughout runtime.
+	 */
     public static StaffHolidayCRUDManager getInstance()
     {
         if (single_instance == null)
             single_instance = new StaffHolidayCRUDManager();
         return single_instance;
     }
-
+     /**
+	 * Function to add new holidays for the staffs.
+     * Checks if the holidays that he wants to add already exists. 
+     * @param holidayList  Existing List of holidays
+     * @return true if addition of holiday was successful, false if unsuccessful
+	 */
     public boolean staffAddHoliday(List<Holidays> holidayList) {
 		String holName,holNametmp,dateStr;
         LocalDate holDate=null;
@@ -43,7 +67,7 @@ public class StaffHolidayCRUDManager {
 			System.out.println("Holiday Already Exists!");
 			return false;
 		}
-		holName = holNametmp.replaceAll(csv_Separator, converter);
+		holName = holNametmp.replaceAll(csv_Separator, splitter);
 		while (true){
 			try{
 				System.out.println("Enter Holiday Date (YYYY-MM-DD)");
@@ -63,7 +87,13 @@ public class StaffHolidayCRUDManager {
         return false;
     }
 
-     // Remove holiday from database entirely
+     /**
+	 * Function to delete a holiday from the list of holidays and database entirely based on holiday name.
+     * Checks if the holiday to be deleted exists
+     * Deletes both holiday name and date
+     * @param hList Existing List of holidays
+     * @return true if deletion of holiday was successful, false if unsuccessful
+	 */
      public boolean removeHolidayFromDatabase(List<Holidays> hList){
         System.out.println("#########################################################");
 		System.out.println("#################### REMOVING HOLIDAYS ##################");
@@ -105,7 +135,11 @@ public class StaffHolidayCRUDManager {
         }
     }
 
-    //Staff Update Holiday
+    /**
+	 * Function for staff to update a holiday from the list of holidays and database based on the holiday name.
+     * @param holidayList   Existing List of holidays
+     * @return true if updating of holiday was successful, false if unsuccessful.
+	 */
     public int staffUpdateHoliday(List<Holidays> holidayList){
         System.out.println("#########################################################");
         System.out.println("#################### UPDATING HOLIDAYS ##################");
@@ -212,7 +246,9 @@ public class StaffHolidayCRUDManager {
         return 0;
     }
 
-    //Print out list of holidays
+    /**
+	 * Function for staff to view all holidays.
+	 */
     public void listHolidays(){
         BufferedReader br = null;
         String line = "";

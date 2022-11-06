@@ -267,7 +267,11 @@ public class StaffMovieCRUDManager {
 		 return false;
     }
 
-    //Staff Update Movie
+    /**
+	 * Function for staff to update a movie from the list of movies and database regardless of movie status based on the movie title.
+     * @param movieList   Existing List of movies
+     * @return true if updating of movie was successful, false if unsuccessful
+	 */
     public int updateMovie(List<Movie> movieList){
         System.out.println("#########################################################");
         System.out.println("#################### UPDATING MOVIES ####################");
