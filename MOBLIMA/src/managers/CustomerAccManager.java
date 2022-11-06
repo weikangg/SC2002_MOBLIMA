@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import entities.Account;
 import entities.CustomerAcc;
+import entities.Ticket;
 import entities.Booking;
 import utils.PasswordStrengthChecker;
 
@@ -212,18 +213,66 @@ public class CustomerAccManager {
     public static void checkHistory(Account user){
         String name = user.getUsername();
         String path = System.getProperty("user.dir") +"\\data\\bookings\\";
-        String location = path + name +"/Booking";
-        String filename = ".txt";
-        String trans;
-        int fileCount;
+        String location = path + name +"/bookings.csv";
+        int input = -1;
+        //String filename = ".csv";
+        //String trans;
+        //int fileCount;
         ArrayList<Booking> book;
+        ArrayList<Ticket> tix;
+        Scanner scan = new Scanner(System.in);
 
-        File directory = new File(path + name);
-        fileCount = directory.list().length;
+        try{
+            FileInputStream file = new FileInputStream(location);
+            ObjectInputStream in = new ObjectInputStream(file);
+            book = (ArrayList<Booking>) in.readObject();
+
+            System.out.println(book);
+
+            for(Booking b : book)
+            {
+                if(b != null)
+                {
+                    System.out.println("Booking ID: " + b.getbookingID());
+                    System.out.println("Movie Title: " + b.getMovie());
+                    System.out.println("Cineplex: " + b.getCineplexID());
+                    System.out.println("Cinema: " + b.getCinemaID());
+                    System.out.println("Movie Date & Time: " + b.getShowtime());
+                    System.out.println("Tickets:");
+                    tix = b.getTicketList();
+                    for(int i = 0; i < tix.size(); i++)
+                    {
+                        System.out.println("    Ticket " + (i+1) + " : " + " Row " + tix.get(i).getRow() + " Column " + tix.get(i).getCol() + " $" + tix.get(i).getTicketPrice());
+                    }
+                    System.out.println("Transaction Time:" + b.getTransaction().getTranDateTime());
+                    System.out.println("Total Price: $" + b.getTotalPrice());
+                    System.out.println("========================================================");
+                }
+            }
+            
+            in.close();
+            file.close();
+
+        }catch(IOException ex){
+            System.out.println("IOException is caught");
+        } catch (ClassNotFoundException exp) {
+            System.out.println("Class not found");
+        }
+        while(input != 0)
+        {
+            System.out.println("Enter 0 to exit.");
+            input = scan.nextInt();
+        }
+        
+        
+        
+
+        //File directory = new File(path + name);
+        //fileCount = directory.list().length;
         //debug
-        System.out.println(fileCount);
+        //System.out.println(fileCount);
 
-        for(int i = 1; i <= fileCount; i++)//go through all the files in customer and print out the transaction information
+        /*for(int i = 1; i <= fileCount; i++)//go through all the files in customer and print out the transaction information
         {
             
             trans = location + i + filename;
@@ -244,7 +293,7 @@ public class CustomerAccManager {
                     System.out.println("Movie Title: " + b.getMovie());
                     System.out.println("Cineplex: " + b.getCineplexID());
                     System.out.println("Cinema: " + b.getCinemaID());
-                    //System.out.println("")
+                    System.out.println("");
 
                 }
                 
@@ -257,6 +306,6 @@ public class CustomerAccManager {
                 System.out.println("Class not found");
             }
             System.out.println("========================================================");    
-        }
+        }*/
     }
 }

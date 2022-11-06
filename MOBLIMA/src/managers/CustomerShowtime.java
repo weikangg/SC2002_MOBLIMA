@@ -67,39 +67,67 @@ public class CustomerShowtime {
         String name;
         char cineplex;
         int cineplexID;
+        List<Movie> cineMovieList;
 
         Scanner scan = new Scanner(System.in);
 
         //ask user for cineplex
-
         while(true){
-            System.out.println("Please choose a Cineplex(A,B,C):");
-            cineplex = scan.next().charAt(0);
+            System.out.print("====================CHOOSE A CINEPLEX====================\n"+
+                                "1. Cineplex A\n"+
+                                "2. Cineplex B\n"+
+                                "3. Cineplex C\n");
+            System.out.println("Enter your choice:");
+            cineplexID = scan.nextInt();
             scan.nextLine();
-            cineplexID = (int)cineplex;
-            if((cineplexID < 65) || (cineplexID > 90 && cineplexID < 97) || (cineplexID > 122)){
-                System.out.println("Please key in an alphabet");
+            if(cineplexID > 3 || cineplexID < 1)
+            {
+                System.out.println("Please enter a valid option");
                 continue;
             }
-            else{
+            else
+            {
                 break;
             }
         }
+        
+        //find movies that are in the cineplex
+        cineplexID -= 1;
+        cineplex = (char)(cineplexID + 65);
+        Cineplex[] cineplexes = CineplexManager.configCineplexes(); 
+        Cinema[] cinemas = cineplexes[cineplexID].getCinemas();
+        /*for(Cinema c : cinemas)
+        {
+            Showtime [] st = c.getShowtimes();
+            for()
+        }*/
+        
+        //can get movie id from show time
 
-        if(cineplexID > 90)
+            //cineplex = scan.next().charAt(0);
+            //scan.nextLine();
+            //cineplexID = (int)cineplex;
+            //if((cineplexID < 65) || (cineplexID > 90 && cineplexID < 97) || (cineplexID > 122)){
+                //System.out.println("Please key in an alphabet");
+                //continue;
+            //}
+            //else{
+                //break;
+            //}
+
+        /*if(cineplexID > 90)
         {
             cineplexID -= (int)'a';
         }
         else
         {
             cineplexID -= (int)'A';
-        }
+        }*/
         
         //ask user for movie
         CustomerMovieManager.printMovieList(movieList, reviewList);
         System.out.println("Please choose a movie:");
         name = scan.nextLine();
-        
 
         //link the movie to showtime
         ArrayList<Showtime> list = new ArrayList<Showtime>();
@@ -117,8 +145,7 @@ public class CustomerShowtime {
             return list;
         }
 
-        Cineplex[] cineplexes = CineplexManager.configCineplexes(); 
-        Cinema[] cinemas = cineplexes[cineplexID].getCinemas();
+        
 
         for(int i = 0; i < cinemas.length; i++)
         {
