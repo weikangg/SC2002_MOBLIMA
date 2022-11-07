@@ -113,3 +113,18 @@ public class Transaction implements Serializable{
     public void setTotalPrice(double price){this.totalPrice = price;}
  
 }
+
+    public void printTransaction() {
+    	System.out.println("ID: " +this.getID());
+		System.out.println("Movie Title: " +this.getMovieName());
+		System.out.println("Date & Time: " + this.getTranDateTime());
+
+        //print out the information for each ticket
+        for(int i = 0; i < tix.size(); i++)
+        {
+            System.out.print("Ticket " + (i+1) + ":");
+            System.out.println("    " + this.getTicket(i).getDate());
+            System.out.println("    " + this.getTicket(i).getTicketPrice());
+        }
+
+    }
