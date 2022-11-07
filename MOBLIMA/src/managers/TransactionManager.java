@@ -1,11 +1,15 @@
 package managers;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import entities.Transaction;
+import view.customerApp;
 import entities.Ticket;
 import entities.Movie;
 import entities.Showtime;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;  
 import java.time.format.DateTimeFormatter;
 
@@ -21,9 +25,14 @@ public class TransactionManager
     private Boolean isPromo = false;
 	Boolean notQuit = true;
 	private Scanner sc = new Scanner(System.in);
-    String userInfo;
+    private String userInfo;
 
     private static TransactionManager single_instance = null;
+    
+    /** 
+     * Creates a new instance of transaction manager
+     * @return TransactionManager
+     */
     public static TransactionManager getInstance()
     {
         if (single_instance == null)
@@ -34,10 +43,18 @@ public class TransactionManager
     public Transaction getTransaction() {return this.trans;}
     public String getString() {return this.creditCardInfo;}
     
+    
+    /** 
+     * @param transaction
+     */
     public void setTransaction(Transaction transaction)
     {
     	this.trans = transaction;
     }
+    
+    /** 
+     * @param cci
+     */
     public void setCreditCardInfo(String cci)
     {
     	this.creditCardInfo = cci;
@@ -48,6 +65,15 @@ public class TransactionManager
     private TransactionManager(){
     }
 
+    
+    /** 
+     * Main function of transaction menu, displays the total price and asks the customer to either 
+     * make payment or apply voucher discount, once the customer chooses to make payment, it will call makeBooking()
+     * function to end all instances. The customers email and mobile phone number is captured, along with the customers real name
+     * which the system will ask for here
+     * @param showtime
+     * @param tickets
+     */
     public void transactionMenu(Showtime showtime, ArrayList<Ticket> tickets)
     {
         setTList(tickets);
@@ -100,12 +126,13 @@ public class TransactionManager
         }
     }
 
+
+    /**
+     * Asks the customer to input their name and displays their username, email and mobile phone number and saves this information
+     * as a string in the booking class
+     */
     public void enterUserInfo()
-    {
-        
-
-
-        
+    {        
         boolean checks = true;
         System.out.println("Hello Customer " + BookingManager.newBM().getUser().getUsername());
         System.out.println(
@@ -132,7 +159,7 @@ public class TransactionManager
         checks = true;
         System.out.println("Paying...");
         String userInfo = "Email: " + BookingManager.newBM().getUser().getEmail() +
-        "Mobile Number: (+65) " +  BookingManager.newBM().getUser().getMobile() + "Name: " +
+        "\nMobile Number: (+65)" +  BookingManager.newBM().getUser().getMobile() + "\nName: " +
         name;
         this.userInfo=userInfo;
 
@@ -178,13 +205,18 @@ public class TransactionManager
         this.userInfo = "Name: " + name + "Mobile Number: " + mobileNo + "Email: " + email + "\n"; 
         */
     }
+    
+    /** 
+     * @return String
+     */
     public String getUserInfo()
     {
         return this.userInfo;
     }
 
-
-
+    /**
+     * Creates the transaction class and adds all information into it
+     */
     public void makeTransaction()
     {
         LocalDateTime now = LocalDateTime.now();
@@ -192,9 +224,8 @@ public class TransactionManager
         String dateportion = now.format(format);
         int cID = getShowtime().getCinemaID();
         String cinemaId = String.format("%03d",cID) + dateportion;
-        String moviename = getShowtime().getMovieTitle();
         //MovieType mt = getShowtime().getMovieFormat();
-        Transaction transaction = new Transaction(cinemaId, moviename, dateportion, getTList());
+        Transaction transaction = new Transaction(cinemaId, dateportion, getTList());
         System.out.println("Transaction ID: " + cinemaId);
         setTransaction(transaction);
         /*getTransaction().setID(cinemaId);
@@ -205,36 +236,68 @@ public class TransactionManager
     }
 
 
+    
+    /** 
+     * @return ArrayList<Ticket>
+     */
     public ArrayList<Ticket> getTList()
     {
         return this.tList;
     }
+    
+    /** 
+     * @return Showtime
+     */
     public Showtime getShowtime()
     {
         return this.showtime;
     }   
+    
+    /** 
+     * @return double
+     */
     public double getTotalPrice()
     {
         return this.totalPrice;
     }
+    
+    /** 
+     * @return int
+     */
     public int getNumberOfTickets()
     {
         return this.numberOfTickets;
     }
+    
+    /** 
+     * @return Boolean
+     */
     public Boolean getPromo()
     {
         return this.isPromo;
     }
 
 
+    
+    /** 
+     * @param ArrayListtList
+     */
     public void setTList(ArrayList<Ticket>tList)
     {
         this.tList = tList;
     }
+    
+    /** 
+     * @param i
+     */
     public void setNumberOfTickets(int i)
     {
         this.numberOfTickets = i;
     }
+    
+    /** 
+     * @param showtime
+     */
     public void setShowtime(Showtime showtime)
     {
         this.showtime = showtime;
@@ -270,7 +333,9 @@ public class TransactionManager
         isPromo = false;
     }
 
-
+    /**
+     * updates the total sale for the selected movie and adds it to the movie csv
+     */
     public void updateTotalSales()
     {
         List<Movie> newML = new ArrayList<>();
@@ -286,7 +351,8 @@ public class TransactionManager
             }
             newML.add(m);
         }
-        MovieListManager.getInstance().updateMovieListCSV(newML);
+        MovieListManager.updateMovieListCSV(newML);
+        //System.out.println("Price updated");
     }
 
 
