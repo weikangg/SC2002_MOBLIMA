@@ -81,7 +81,7 @@ public class StaffHolidayCRUDManager {
 			}
         }
         if(confirm("Confirm Add Holiday: ")){
-            if (HolidayListManager.addHolidayList(holidayList,holName,holDate))
+            if (HolidayListManager.getInstance().addHolidayList(holidayList,holName,holDate))
                 return true;
             return false;
         }
@@ -128,7 +128,7 @@ public class StaffHolidayCRUDManager {
                     newList.add(newHoliday);
                 }
             }
-            return updateHolidayListCSV(newList);
+            return HolidayListManager.getInstance().updateHolidayListCSV(newList);
         }
         else{
             System.out.println("Removing Movie Cancelled, Returning to Original Menu...");
@@ -241,7 +241,7 @@ public class StaffHolidayCRUDManager {
             break;
         }
         
-        if(updateHolidayListCSV(holidayList)){
+        if(HolidayListManager.getInstance().updateHolidayListCSV(holidayList)){
             return 1;
         }
         return 0;

@@ -21,11 +21,7 @@ import static utils.IOUtils.*;
     /**
 	 * An instance of account manager to get the list of accounts
 	 */
-    AccountManager accountManager = AccountManager.getInstance();
-    /**
-	 * The list of accounts
-	 */
-    List<Account>accountList = accountManager.getAccountList();
+    private static AccountManager accountManager = AccountManager.getInstance();
 	/**
 	 * The scanner for reading input of user
 	 */

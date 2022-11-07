@@ -81,7 +81,7 @@ public class HolidayListManager {
 	 * @param holName            This is the name of the holiday
 	 * @param holDate            This is the date of the holiday
 	 */ 
-    public static boolean addHolidayList(List<Holidays> holidayList, String holName, LocalDate holDate) {
+    public boolean addHolidayList(List<Holidays> holidayList, String holName, LocalDate holDate) {
         Holidays newHol = new Holidays(holName, holDate);
         holidayList.add(newHol);
         return updateHolidayListCSV(holidayList);
@@ -91,7 +91,7 @@ public class HolidayListManager {
 	 * @param holidayList Existing list of holidays
 	 * @return true if update was successful, false if update was unsuccessful
 	 */
-    public static boolean updateHolidayListCSV(List<Holidays> holidayList) {
+    public boolean updateHolidayListCSV(List<Holidays> holidayList) {
 		FileWriter csvWriter;
 		try {
 			csvWriter = new FileWriter(path,false);
