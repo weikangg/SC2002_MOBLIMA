@@ -116,7 +116,7 @@ public class Transaction implements Serializable{
 
     public void printTransaction() {
     	System.out.println("ID: " +this.getID());
-		System.out.println("Movie Title: " +this.getMovieName());
+		//System.out.println("Movie Title: " +this.getMovieName());
 		System.out.println("Date & Time: " + this.getTranDateTime());
 
         //print out the information for each ticket
