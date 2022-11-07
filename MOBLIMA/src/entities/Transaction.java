@@ -111,8 +111,6 @@ public class Transaction implements Serializable{
      * @param price
      */
     public void setTotalPrice(double price){this.totalPrice = price;}
- 
-}
 
     public void printTransaction() {
     	System.out.println("ID: " +this.getID());
@@ -128,3 +126,4 @@ public class Transaction implements Serializable{
         }
 
     }
+}
