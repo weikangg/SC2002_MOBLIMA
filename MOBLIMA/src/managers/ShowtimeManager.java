@@ -159,7 +159,7 @@ public class ShowtimeManager {
      * Function to prompt user for Selection of Cinema
      * @return IDs of Cinema and Cineplex
      */
-    public static int[] promptCinemaSelection(){
+    public int[] promptCinemaSelection(){
         int[] inputs = new int[2];
 
         try {
@@ -218,7 +218,7 @@ public class ShowtimeManager {
      * Function to prompt user for Selection of Showtime
      * @return IDs of Showtime, Cinema and Cineplex
      */
-    public static int[] promptShowtimeSelection(){
+    public int[] promptShowtimeSelection(){
         int[] inputs = new int[3];
 
         try {
@@ -299,7 +299,7 @@ public class ShowtimeManager {
      * Function to prompt user for MovieID
      * @return MovieID
      */
-    public static int promptMovieID(){
+    public int promptMovieID(){
         int movieID = -1;
         Scanner sc = new Scanner(System.in);
 
@@ -329,7 +329,7 @@ public class ShowtimeManager {
      * Function to prompt user for Date and Time
      * @return DateTime 
      */
-    public static LocalDateTime promptDateTime(){
+    public LocalDateTime promptDateTime(){
         Scanner sc = new Scanner(System.in);
 
         LocalDateTime dateTime;
@@ -358,7 +358,7 @@ public class ShowtimeManager {
      * Function to prompt user for Type of Movie
      * @return MovieType
      */
-    public static MovieType promptMovieType(){
+    public MovieType promptMovieType(){
 
         Scanner sc = new Scanner(System.in);
 
