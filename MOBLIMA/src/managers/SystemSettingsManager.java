@@ -15,6 +15,10 @@ import static utils.IOUtils.*;
  * @since 01-11-2022
  */
 public class SystemSettingsManager {
+
+	/**
+	 * The separator for the columns in the csv file
+	 */
 	/**
 	 * The scanner for reading input of user
 	 */

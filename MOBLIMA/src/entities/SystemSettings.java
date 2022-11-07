@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.*;
 import static utils.IOUtils.*;
 
@@ -16,6 +17,18 @@ import static utils.IOUtils.*;
  * @since 01-11-2022
  */
 public class SystemSettings {
+    /**
+	 * Creating a new Locale
+	 */
+    private static Locale usa = new Locale("en", "US");
+	/**
+	 * Create a Currency instance for the Locale
+	 */
+    private static Currency dollars = Currency.getInstance(usa);
+	/**
+	 * Create a formatter given the Locale
+	 */
+    private static NumberFormat dollarFormat = NumberFormat.getCurrencyInstance(usa);
     /**
 	* This string is used to store the permission for customer to view the top 5 movies by sales.
 	*/
@@ -212,7 +225,7 @@ public class SystemSettings {
                             double value = sortedList.get(key);
                             result = df.format(value);
                             BigDecimal bd = new BigDecimal(result);
-                            print(i + ". " + key + " [Ticket Sales: " + bd.toPlainString() + "]");
+                            print(i + ". " + key + " [Ticket Sales: " + dollarFormat.format(bd) + "]");
                             i++;
                         }
                     } else {
@@ -220,7 +233,7 @@ public class SystemSettings {
                             double value = sortedList.get(key);
                             result = df.format(value);
                             BigDecimal bd = new BigDecimal(result);
-                            print(i + ". " + key + " [Ticket Sales: " + bd.toPlainString() + "]");
+                            print(i + ". " + key + " [Ticket Sales: " + dollarFormat.format(bd) + "]");
                             i++;
                         }
                     }
@@ -334,7 +347,7 @@ public class SystemSettings {
                             double value = sortedList.get(key);
                             String result = df.format(value);
                             BigDecimal bd = new BigDecimal(result);
-                            print(i + ". " + key + " [Ticket Sales: " + bd.toPlainString() + "]");
+                            print(i + ". " + key + " [Ticket Sales: " + dollarFormat.format(bd) + "]");
                             i++;
                         }
                     } else {
@@ -342,7 +355,7 @@ public class SystemSettings {
                             double value = sortedList.get(key);
                             String result = df.format(value);
                             BigDecimal bd = new BigDecimal(result);
-                            print(i + ". " + key + " [Ticket Sales: " + bd.toPlainString() + "]");
+                            print(i + ". " + key + " [Ticket Sales: " + dollarFormat.format(bd) + "]");
                             i++;
                         }
                     }
