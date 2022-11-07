@@ -10,27 +10,27 @@ public abstract class Account {
 	/**
 	* This string is used to store the Account's username.
 	*/
-    public String username;
+    private String username;
 	/**
 	* This string is used to store the Account's email.
 	*/
-    public String email;
+    private String email;
     /**
 	* This int is used to store the Account's mobile number.
 	*/
-    public int mobile;
+    private int mobile;
     /**
 	* This int is used to store the Account's age.
 	*/
-    public int age;
+    private int age;
     /**
 	* This string is used to store the Account's password.
 	*/
-    public String password;
+    private String password;
     /**
 	* This string is used to store the Account's access level.
 	*/
-    public String accessLevel;
+    private String accessLevel;
     
     // Gettors
 
