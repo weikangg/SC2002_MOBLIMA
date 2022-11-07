@@ -52,7 +52,7 @@ public class CustomerAcc extends Account {
         //for each account created, create a file inside tranaction
     }
 */
-    /*User's history will be update as the user uses the app. History will not be saved into csv file. If app shuts down, history will be gone*/
+    /*User's history will be update as the user uses the app. History will not be saved into csv file. If app shuts down, history will be gone
     public void updateHistory(ArrayList<Ticket> tix, String movieName, String tranDateTime, String cinID){
         //creates transaction id
         String id =  cinID + tranDateTime;
@@ -61,14 +61,14 @@ public class CustomerAcc extends Account {
         //add the new transaction to history
         bookingHistory.addFirst(x);
         System.out.println("Transaction Complete!");
-    }
+    }*/
 
-    public void showBookingHistory(){
+    /*public void showBookingHistory(){
         //prints out booking history
         for(int i = 0; i < bookingHistory.size(); i++)
         {
         	bookingHistory.get(i).printTransaction();
         }
         return;
-    }
+    }*/
 }

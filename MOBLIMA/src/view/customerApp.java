@@ -79,7 +79,7 @@ public class customerApp {
                     Showtime movst;
                     List<Showtime> showtime;
 
-                    showtime = CustomerShowtime.searchMovieShowtime(movieList, reviewList);
+                    showtime = CustomerMovieManager.searchMovieShowtime(movieList, reviewList);
                     if(showtime.isEmpty())
                     {
                         break;
@@ -318,7 +318,7 @@ public class customerApp {
                 List<Showtime> showtime;
 
                 //link the movie to showtime
-                showtime = CustomerShowtime.searchMovieShowtime(movieList, reviewList);
+                showtime = CustomerMovieManager.searchMovieShowtime(movieList, reviewList);
                 if(showtime.isEmpty())
                 {
                     break;
