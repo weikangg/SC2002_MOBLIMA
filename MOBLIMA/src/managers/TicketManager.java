@@ -15,6 +15,7 @@ import entities.Ticket;
 import entities.Holidays;
 import entities.Seat;
 import entities.TicketType;
+import utils.IOUtils;
 
 public class TicketManager {
 
@@ -77,7 +78,7 @@ public class TicketManager {
                 int row = Integer.parseInt(tokens[0]);
                 int col = Integer.parseInt(tokens[1]);        
                 System.out.println(
-                "Ticket [" + (i+1) + "]: Row- " + row + " Column- " + col + "."
+                "Ticket [" + (i+1) + "]: Seat " + (char)(row+65) + "" + col
                 );
             }
     
@@ -85,16 +86,9 @@ public class TicketManager {
                 "Options [1,2,3]\n" +
                 "1. Confirm \n" +
                 "2. Remove ticket \n" +
-                "3. Back\n"
+                "3. Back"
             );
-            int option = sc.nextInt();
-            sc.nextLine();
-            while(option < 0 || option > 3)
-            {
-                System.out.println("Enter a valid input from 1-3");
-                option = sc.nextInt();
-                sc.nextLine();
-            }
+            int option = IOUtils.check(1, 3, sc);
             switch(option)
             {
                 case 1:
@@ -108,16 +102,7 @@ public class TicketManager {
                     //Choose ticket to remove -> update arraylist -> check if empty
                     System.out.println("Enter ticket number to remove: ");
                     printTransaction();
-                    int ticketNo = sc.nextInt();
-                    //ticketNo--;
-                    sc.nextLine();
-                    if(ticketNo>getCSArray().size())
-                    {
-                        System.out.println("Enter a valid ticket number");
-                        ticketNo = sc.nextInt();
-                        sc.nextLine();
-                    }
-                    System.out.println("Checkpt1");
+                    int ticketNo = IOUtils.check(1, getCSArray().size(), sc);
                     deleteTicket(ticketNo, plan);
                     break;
                 case 3:
@@ -181,7 +166,9 @@ public class TicketManager {
             String[] tokens = rowcol.split("/");
             row = Integer.parseInt(tokens[0]);
             col = Integer.parseInt(tokens[1]);
-            System.out.println("Ticket ["+(i+1)+"]: Row-"+row+" Col-"+col);
+            System.out.println(
+                "Ticket [" + (i+1) + "]: Seat " + (char)(row+65) + "" + col
+                );
             
         }
     }
@@ -296,14 +283,7 @@ public class TicketManager {
             "2. Student\n" +
             "3. Senior"
             );
-        int tt = sc.nextInt();
-        sc.nextLine();
-        while(tt<0 || tt>3)
-        {
-            System.out.println("Enter valid option");
-            tt = sc.nextInt();
-            sc.nextLine();
-        }
+        int tt = IOUtils.check(1, 3, sc);
         LocalDateTime time = getShowtime().getDateTimeLDT();
         DayOfWeek day = DayOfWeek.of(time.get(ChronoField.DAY_OF_WEEK));
         if(day == DayOfWeek.SUNDAY || day==DayOfWeek.SATURDAY)

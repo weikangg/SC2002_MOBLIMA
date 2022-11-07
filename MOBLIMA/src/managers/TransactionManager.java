@@ -1,6 +1,7 @@
 package managers;
 import java.util.*;
 import entities.Transaction;
+import utils.IOUtils;
 import entities.Ticket;
 import entities.Movie;
 import entities.Showtime;
@@ -84,15 +85,7 @@ public class TransactionManager
                                     " 3. Back          	                                     \n" +
                                     "========================================================");
                 System.out.println("Enter choice: ");
-                option = sc.nextInt();
-                sc.nextLine();
-                while(!(option >= 1 && option <=3))
-                {
-                    System.out.println("Please only enter a number from 1-3.");
-                    option = sc.nextInt();
-                    sc.nextLine();
-                }
-        
+                option = IOUtils.check(1, 3, sc);       
         /*Need to add ticket*/
         
         
