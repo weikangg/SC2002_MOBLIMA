@@ -13,6 +13,7 @@ import entities.Showtime;
 import entities.TicketPrice;
 import entities.Ticket;
 import entities.Holidays;
+import entities.Seat;
 import entities.TicketType;
 
 public class TicketManager {
@@ -26,7 +27,12 @@ public class TicketManager {
     private ArrayList<LocalDate> hlList;
     private List<Holidays> holiDates;
     Boolean noQuit = true;
-	public static TicketManager newTM()
+	
+    /** 
+     * Creates a new TicketManager instance
+     * @return TicketManager
+     */
+    public static TicketManager newTM()
 	{
 	    if (tm == null) {
 	    	 tm = new TicketManager();
@@ -35,7 +41,16 @@ public class TicketManager {
 	}
 	
 	
-	public void ticketMenu(Showtime showtime, ArrayList<String> confirmedSeats, int[][] plan)
+	
+    /** 
+     * Main function in TicketManager, asks the customer to check if they have selected the right tickets and give the customer the
+     * ability to remove tickets if they do not want to purchase them. If the customer confirms the tickets, the calculate function
+     * will be called and the user will be brought to the transaction manager page.
+     * @param showtime
+     * @param confirmedSeats
+     * @param plan
+     */
+    public void ticketMenu(Showtime showtime, ArrayList<String> confirmedSeats, Seat[][] plan)
 	{
         //System.out.println("Inside Ticket Menu");
         setH(HolidayListManager.getInstance().getHolidayList());
@@ -116,34 +131,44 @@ public class TicketManager {
         }
     }
 
-    public void deleteTicket(int index, int[][] plan)
+    
+    /** 
+     * Deletes the ticket of the customers choice 
+     * @param index
+     * @param plan
+     */
+    public void deleteTicket(int index, Seat[][] plan)
     {
         String rowcol = getCS(index-1);
         String[] tokens = rowcol.split("/");
         int row = Integer.parseInt(tokens[0]);
         int col = Integer.parseInt(tokens[1]);
-        plan[row][col]=0;
+        plan[row][col].setState(0);
         getCSArray().remove(index-1);
     }
 
-    public double calcTicketPrice(TicketType tt)
+    
+    /** 
+     * Calculate the price of a ticket, using the formula of Ticket Type's Price * Cinema Class's Price * Movie Type's Price * Seat Type's Price
+     * @param tt
+     * @param row
+     * @param col
+     * @return double
+     */
+    public double calcTicketPrice(TicketType tt, int row, int col)
     {
         double price = tp.getMappedPrice().get(tt);
-        /*
-        //check for holiday (uncomment once holiday implemented)
-        LocalDateTime check = getShowtime().getDateTime();
-        for(holidays : holidays)
-        {
-            if check == holidays;
-            price = HOLIDAY PRICE;
-        }
-        */
         double cc = tp.getMappedCinemaClassPrice().get(getShowtime().getCinemaClassCC());
         double modifier = tp.getMappedMovieTypePrice().get(getShowtime().getMovieType());
-        price = price * modifier * cc;
+        double sc = tp.getMappedSeatTypePrice().get(getShowtime().getSeatS()[row][col].getSeatType());
+        price = price * modifier * cc * sc;
         return price;
     }
 
+
+    /**
+     * displays the tickets
+     */
     public void printTransaction()
     {
         int row, col;
@@ -161,6 +186,11 @@ public class TicketManager {
         }
     }
 
+
+    /**
+     * Creates the ticket class for each confirmed seat
+     */
+
     public void confirmTicket()
     {
         for(int i = 0; i<getCSArray().size(); i++)
@@ -170,48 +200,90 @@ public class TicketManager {
             int row = Integer.parseInt(tokens[0]);
             int col = Integer.parseInt(tokens[1]);
             TicketType newTT = getTicketType();
-            Ticket newTicket = new Ticket(getShowtime().getDateTimeLDT(), getShowtime().getMovieType(),newTT,row,col,calcTicketPrice(newTT));
+            Ticket newTicket = new Ticket(getShowtime().getDateTimeLDT(), getShowtime().getMovieType(),
+            newTT,getShowtime().getCinemaClassCC(),getShowtime().getSeatS()[row][col].getSeatType(),
+            row,col,calcTicketPrice(newTT, row, col));
             addToTicketArray(newTicket);
         }
 
     }
 
 
+    
+    /** 
+     * Add the created ticket to the ticket array
+     * @param ticket
+     */
     public void addToTicketArray(Ticket ticket)
     {
         getTicketArray().add(ticket);
     }
 
+    
+    /** 
+     * @param ticketList
+     */
     public void setTicketArray(ArrayList<Ticket> ticketList)
     {
         this.ticketList = ticketList;
     }
+    
+    /** 
+     * @param confirmedSeat
+     */
     public void setCS(ArrayList<String> confirmedSeat)
     {
         this.cS = confirmedSeat;
     }
+    
+    /** 
+     * @param showtime
+     */
     public void setShowtime(Showtime showtime)
     {
         this.showtime = showtime;
     }
 
 
+    
+    /** 
+     * @return ArrayList<Ticket>
+     */
     public ArrayList<Ticket> getTicketArray()
     {
         return this.ticketList;
     }
+    
+    /** 
+     * @return ArrayList<String>
+     */
     public ArrayList<String> getCSArray()
     {
         return this.cS;
     }
+    
+    /** 
+     * @param index
+     * @return String
+     */
     public String getCS(int index)
     {
         return this.cS.get(index);
     }
+    
+    /** 
+     * @return Showtime
+     */
     public Showtime getShowtime()
     {
         return this.showtime;
     }
+    
+    /** 
+     * Gets the type of ticket the customer would like to purchase for, returns Holiday if the 
+     * selected showtime is on a holiday
+     * @return TicketType
+     */
     public TicketType getTicketType()
     {
         if(isHoliday())
@@ -275,7 +347,9 @@ public class TicketManager {
         }
     }
 
-
+    /**
+     * Deletes the ticket manager instance
+     */
     public void deleteTicketM()
     {
         ticketList.clear();
@@ -283,22 +357,38 @@ public class TicketManager {
         showtime = null;
     }
 
+    
+    /** 
+     * @param ArrayListHList
+     */
     public void setHList(ArrayList<LocalDate>HList)
     {
         this.hlList = HList;
     }
 
+    
+    /** 
+     * @return ArrayList<LocalDate>
+     */
     public ArrayList<LocalDate> getHList()
     {
         return this.hlList;
     }
 
 
+    
+    /** 
+     * @param ListHList
+     */
     public void setH(List<Holidays>HList)
     {
         this.holiDates = HList;
     }
 
+    
+    /** 
+     * @return List<Holidays>
+     */
     public List<Holidays> getH()
     {
         return this.holiDates;
@@ -313,6 +403,11 @@ public class TicketManager {
         }
     }
 
+    
+    /** 
+     * Checks if showtime is a holiday
+     * @return Boolean
+     */
     public Boolean isHoliday()
     {
         LocalDate lDate = getShowtime().getDateTimeLDT().toLocalDate();
