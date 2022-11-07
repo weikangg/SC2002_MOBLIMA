@@ -10,26 +10,10 @@ public enum TicketType {
 		STUDENTWD(6),
 		HOLIDAY(7);
 		
-		private static final int size;
 		private int type;
-		
-		static
-		{
-			size = values().length;
-		}
-		
+
 		TicketType(int type)
 		{
 			this.type = type;
-		}
-		
-		public static int getSize()
-		{
-			return size;
-		}
-
-		public int getTT()
-		{
-			return this.type;
 		}
 }
