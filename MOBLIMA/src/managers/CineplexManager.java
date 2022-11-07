@@ -47,7 +47,7 @@ public class CineplexManager {
      * Function to configure and returna the array of Cineplex objects
      * @return cineplexes[] A list of Cineplex objects
      */
-    public static Cineplex[] configCineplexes(){ 
+    public Cineplex[] configCineplexes(){ 
 
         try {
             Path path = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes\\cineplexes.csv");

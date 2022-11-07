@@ -47,7 +47,7 @@ public class ShowtimeManager {
                                 "==============================================================");
                 System.out.print("Enter choice: ");
                 option = sc.nextInt();
-
+                sc.nextLine();
                 if(!(option >= 1 && option <=5)){
                     System.out.println("Please only enter a number from 1-5.");
                     staffMenu(0,account);
@@ -55,7 +55,8 @@ public class ShowtimeManager {
             }
         }
         catch(InputMismatchException e){
-            System.out.println("Invalid Input.");
+            System.out.println("Invalid Input. Please enter a valid option from 1-5 only!");
+            sc.nextLine();
             staffMenu(0,account);
         }
 
@@ -70,56 +71,34 @@ public class ShowtimeManager {
 
         switch (option) {
             case 1:
-
                 inputs = promptShowtimeSelection();
-
                 if(inputs==null) break;
-
                 showtime = CineplexManager.getInstance().configCineplexes()[inputs[0]].getCinemas()[inputs[1]].getShowtimes()[inputs[2]];
-
                 showtime.showInfo();
                 showtime.showSeats();
-                // showtime.showSeatsType();
-
                 break;
-
             case 2:
-                
                 inputs = promptCinemaSelection();
-
                 if(inputs==null) break;
-
                 cinema = CineplexManager.getInstance().configCineplexes()[inputs[0]].getCinemas()[inputs[1]];
-
                 movieID = promptMovieID();
                 if(movieID == -1) break;
-
                 dateTime = promptDateTime();
                 if(dateTime == null) break;
-                
                 movieType = promptMovieType();
                 if(movieType == null) break;
-
                 cinema.addShowtime(movieID, dateTime, movieType);
-                
                 break;
             case 3:
-
                 inputs = promptShowtimeSelection();
-
                 if(inputs==null) break;
-
                 showtime = CineplexManager.getInstance().configCineplexes()[inputs[0]].getCinemas()[inputs[1]].getShowtimes()[inputs[2]];
-
                 movieID = promptMovieID();
                 if(movieID == -1) break;
-
                 dateTime = promptDateTime();
                 if(dateTime == null) break;
-                
                 movieType = promptMovieType();
                 if(movieType == null) break;
-
                 showtime.setMovieID(movieID);
                 showtime.setDateTime(dateTime);
                 showtime.setMovieType(movieType);
@@ -146,13 +125,6 @@ public class ShowtimeManager {
                 System.out.println("Invalid choice. Please choose between 1-5.");
                 break;
             }
-            // MovieListManager movListManager = new MovieListManager();
-            // ReviewListManager reviewListManager = new ReviewListManager();
-
-            // clear garbage
-            // movListManager = null;
-            // reviewListManager = null;
-            // staffMenu(0);
     }
 
     /**

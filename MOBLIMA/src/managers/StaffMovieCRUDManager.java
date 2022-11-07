@@ -1,12 +1,16 @@
 package managers;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Locale;
+
 import entities.*;
 import static managers.ReviewListManager.*;
 import static utils.IOUtils.*;
@@ -19,6 +23,19 @@ import java.util.Scanner;
  * @since 01-11-2022
  */
 public class StaffMovieCRUDManager {
+
+	/**
+	 * Creating a new Locale
+	 */
+    Locale usa = new Locale("en", "US");
+	/**
+	 * Create a Currency instance for the Locale
+	 */
+    Currency dollars = Currency.getInstance(usa);
+	/**
+	 * Create a formatter given the Locale
+	 */
+    NumberFormat dollarFormat = NumberFormat.getCurrencyInstance(usa);
 	/**
 	 * The separator for the columns in the csv file
 	 */
@@ -888,6 +905,8 @@ public class StaffMovieCRUDManager {
     }
 
 
+
+
    /**
 	 * Function for staff to view all movie from the list of movies and database regardless of movie status.
      * Staff can view all reviews for each movie
@@ -926,7 +945,7 @@ public class StaffMovieCRUDManager {
 				System.out.println("Movie Duration: " + m.getMovieDuration() + " minutes");
 				double profitEarned = m.getProfitEarned();
 				BigDecimal bd = new BigDecimal(profitEarned);
-				System.out.println("Profit Earned: " + bd.toPlainString());
+				System.out.println("Profit Earned: " + dollarFormat.format(bd));
 				for(Review r: rList){
 					if(reviewCount > 1 ){
 						printOverallRating = 1;
@@ -999,7 +1018,7 @@ public class StaffMovieCRUDManager {
 				System.out.println("Movie Duration: " + m.getMovieDuration() + " minutes");
 				double profitEarned = m.getProfitEarned();
 				BigDecimal bd = new BigDecimal(profitEarned);
-				System.out.println("Profit Earned: " + bd.toPlainString());
+				System.out.println("Profit Earned: " + dollarFormat.format(bd));
 				for(Review r: rList){
 					if(reviewCount > 1 ){
 						printOverallRating = 1;
