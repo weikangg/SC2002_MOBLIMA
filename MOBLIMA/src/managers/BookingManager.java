@@ -31,7 +31,7 @@ public class BookingManager implements Serializable{
     
 	
 	private static BookingManager bm = null;
-
+	
 	
     /** 
      * Creates a BookingManager class if empty
@@ -80,15 +80,7 @@ public class BookingManager implements Serializable{
              "======================================================");
             displayAddedSeats();
             System.out.println("Please select a choice:");
-            int choice = 0;
-            choice = sc.nextInt();
-            sc.nextLine();
-            while(choice < 0 || choice >3)
-            {
-                System.out.println("Invalid input type. Please enter an integer value.");
-                choice = sc.nextInt();
-                sc.nextLine();
-            }   
+            int choice = IOUtils.check(0, 3, sc);
             switch(choice)
             {
                 case 0:
@@ -178,22 +170,28 @@ public class BookingManager implements Serializable{
     {
         int row,col;
         row = 0; col = 0;
-        System.out.println("Please enter row number:");
-		while (!sc.hasNextInt()) { // Not a string
-			sc.next(); // Remove newline character
-			System.out.println("Invalid input! Please enter a valid seat ID.");
+        System.out.println("Row (A-E):");
+        row = ((int)sc.next().charAt(0));
+        while(true)
+        {
+            if (row >= 65 && row <= 69)
+            {
+                row = row-65;
+                break;
+            }
+            else if(row >= 97 && row <= 101)
+            {
+                row = row-97;
+                break;
+            }
+            else
+            {
+                System.out.println("Invalid input! Row (A-E):");
+                row = ((int)sc.next().charAt(0));
+            }
         }
-        row = sc.nextInt();
-        sc.nextLine();
-
-        System.out.println("Please enter column number:");
-		while (!sc.hasNextInt()) { // Not a string
-			sc.next(); // Remove newline character
-			System.out.println("Invalid input! Please enter a valid seat ID.");
-		}
-        col = sc.nextInt();
-        sc.nextLine();
-
+        System.out.println("Column (0-9):");
+        col = IOUtils.check(0, 9, sc);
         if (isSeatEmpty(row, col)) {						
 			System.out.println("Seat " + (char)(row+65)+ col + " added to cart");
 	    	updateSeats(row,col,1);
@@ -223,15 +221,7 @@ public class BookingManager implements Serializable{
         displayAddedSeats();
         int size = getBookedSeats().size();
         System.out.println("Please choose seat to delete");
-        int seat = sc.nextInt();
-        sc.nextLine();
-
-        while(seat > size || seat < 1)
-        {
-            System.out.println("Please enter valid number");
-            seat = sc.nextInt();
-            sc.nextLine();
-        }
+        int seat = IOUtils.check(1, size, sc);
         String rowcol = getBookedSeats().get(seat-1);
 
         String[] tokens = rowcol.split("/");
@@ -472,17 +462,16 @@ public class BookingManager implements Serializable{
         {
             try
             {
-
                 fis = new FileInputStream(filename);
                 in = new ObjectInputStream(fis);
                 userBookings = (ArrayList<Booking>) in.readObject();
                 in.close();
             } catch (IOException ex) {
                 ex.printStackTrace();
-                System.out.println("IOException is caught");
+                System.out.println("IOException is caught 1");
             } catch (ClassNotFoundException ex) {
                 ex.printStackTrace();
-                System.out.println("IOException is caught");
+                System.out.println("IOException is caught 2");
             }
             //System.out.println("Total Price of first booking is: " + userBookings.get(0).getTotalPrice());
             //System.out.println("Transaction Number: " + userBookings.get(0).getTransaction().getID());
@@ -513,81 +502,6 @@ public class BookingManager implements Serializable{
         TransactionManager.getInstance().deleteTransactionM();
         TicketManager.newTM().deleteTicketM();
         System.out.println("Booking and payment success!\n Please view under booking history");
-
-
-
-        /*
-        String path = System.getProperty("user.dir") +"\\data\\bookings\\";
-        ArrayList<Booking> userBookings = new ArrayList<Booking>();
-        String username = getUser().getUsername();
-        String location = path + username +"/Booking";
-        String filename = ".txt";
-        int i = 1;
-        String finalFile = location +i+ filename;
-        File check = new File(finalFile);
-        TransactionManager.getInstance().makeTransaction();
-        Booking newB = new Booking("",TransactionManager.getInstance().getTotalPrice(),getShowtime().getMovieTitle(),getShowtime().getCinemaID(),getShowtime().getCineplexID(),TransactionManager.getInstance().getTList(),getShowtime().getDateTimeLDT(),TransactionManager.getInstance().getTransaction());
-        setBooking(newB);*/
-        /*getBooking().setTicketList(TransactionManager.getInstance().getTList());
-        getBooking().setCinemaID(getShowtime().getCinemaID());
-        getBooking().setCineplexID(getShowtime().getCineplexID());
-        getBooking().setMovie(getShowtime().getMovieTitle());
-        getBooking().setShowTime(getShowtime().getDateTimeLDT());
-        getBooking().setTotalPrice(TransactionManager.getInstance().getTotalPrice());
-        getBooking().setTransaction(TransactionManager.getInstance().getTransaction());*/
-        /*updateShowtimeCSV();
-        while(check.exists())
-        {
-            i++;
-            finalFile = location +i+ filename;
-            check = new File(finalFile);
-            getBooking().setbookingID("B" + i);
-        }
-        try{
-            check.getParentFile().mkdirs();
-            FileOutputStream file = new FileOutputStream(check);
-            ObjectOutputStream out = new ObjectOutputStream(file);
-            //System.out.println(file.getAbsolutePath());
-            userBookings.add(getBooking());
-            out.writeObject(userBookings);
-            out.close();
-            file.close();
-
-        }catch(IOException ex){
-            System.out.println("IOException is caught");
-        }
-
-
-        ArrayList<Booking> pDetails = new ArrayList<>();
-		FileInputStream fis = null;
-		ObjectInputStream in = null;
-		try {
-			fis = new FileInputStream(filename);
-			in = new ObjectInputStream(fis);
-			pDetails = (ArrayList) in.readObject();
-			in.close();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} catch (ClassNotFoundException ex) {
-			ex.printStackTrace();
-		}
-		// print out the size
-		//System.out.println(" Details Size: " + pDetails.size());
-		//System.out.println();
-		return pDetails;*/
-
-        //deleteBM();
-        
-
-        //try{
-             // Will create parent directories if not exists
-            //C:\Users\eisna\Desktop\SC2002_OOP-main\SC2002_OOP\MOBLIMA\src\managers
-            //MOBLIMA\src\managers\test.java
-            //System.out.println(file.getPath());    
-            //System.out.println(file.getCanonicalPath());
-            //if(file.createNewFile()){System.out.println("Yay");}else{System.out.println("Ded");}
-            //FileOutputStream s = new FileOutputStream(file,false);
-            //}catch(IOException ex){System.out.println("Super ded");}
 
     }
     
@@ -625,61 +539,6 @@ public class BookingManager implements Serializable{
         //TransactionManager.getInstance().deleteTransactionM();
     }
 
-
-    /*public ArrayList<Booking> getUserBookings()
-    {
-        ArrayList<Booking> getUB = new ArrayList<>();
-        String username = "user1";
-        String location = "MOBLIMA/data/bookings/" + username +".csv";
-        try
-        {   
-            // Reading the object from a file
-            FileInputStream file = new FileInputStream(location);
-            ObjectInputStream in = new ObjectInputStream(file);
-              
-            // Method for deserialization of object
-            getUB = (ArrayList)in.readObject();
-              
-            in.close();
-            file.close();
-              
-            System.out.println("Object has been deserialized ");
-        }
-          
-        catch(IOException ex)
-        {
-            System.out.println("IOException is caught");
-        }
-          
-        catch(ClassNotFoundException ex)
-        {
-            System.out.println("ClassNotFoundException is caught");
-        }
-        return getUB;
-    }*/
-
-
-    /*public void showSeat()
-    {
-
-        System.out.println("      Screen");
-
-        for (int i = 0; i < 5; i++){
-
-            System.out.print((char)(i+65)+"  ");
-
-            for(int j = 0; j < 10; j++){
-
-                if(j == 5) System.out.print("  ");
-
-                if(getSeats()[i][j] == 0) System.out.print("\u001B[32m" + "O" + "\u001B[0m");
-                else if(getSeats()[i][j] == 1) System.out.print("\u001B[31m" + "X" + "\u001B[0m");
-                else if(getSeats()[i][j] == 2) System.out.print("\u001B[34m" + "S" + "\u001B[0m");
-
-            }
-            System.out.println("  "+(char)(i+65));
-        }
-    }*/
     /**
      * displays the seats
      */
@@ -695,5 +554,8 @@ public class BookingManager implements Serializable{
             }
             System.out.println("  "+(char)(i+65));
         }
+        System.out.println("   01234  56789\n");
     }
+
+    
 }

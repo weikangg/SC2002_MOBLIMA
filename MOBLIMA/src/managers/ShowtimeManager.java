@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  * @since 06-11-2022
  */
 public class ShowtimeManager {
-    private Scanner sc = new Scanner(System.in);
+    private static Scanner sc = new Scanner(System.in);
 
     private static ShowtimeManager single_instance = null;
     public static ShowtimeManager getInstance()
@@ -136,8 +136,6 @@ public class ShowtimeManager {
 
         try {
 
-            Scanner sc = new Scanner(System.in);
-
             //Prompt Cineplexes
             Cineplex[] cineplexes = CineplexManager.getInstance().configCineplexes(); 
             for(int i = 0; i < cineplexes.length; i++){
@@ -194,9 +192,6 @@ public class ShowtimeManager {
         int[] inputs = new int[3];
 
         try {
-
-            Scanner sc = new Scanner(System.in);
-
             //Prompt Cineplexes
             Cineplex[] cineplexes = CineplexManager.getInstance().configCineplexes(); 
             for(int i = 0; i < cineplexes.length; i++){
@@ -274,8 +269,6 @@ public class ShowtimeManager {
      */
     public int promptMovieID(){
         int movieID = -1;
-        Scanner sc = new Scanner(System.in);
-
         try {
             System.out.print("Enter Movie ID: ");
             movieID = sc.nextInt();
@@ -302,8 +295,6 @@ public class ShowtimeManager {
      * @return DateTime 
      */
     public LocalDateTime promptDateTime(){
-        Scanner sc = new Scanner(System.in);
-
         LocalDateTime dateTime;
         
         try {
@@ -331,9 +322,6 @@ public class ShowtimeManager {
      * @return MovieType
      */
     public MovieType promptMovieType(){
-
-        Scanner sc = new Scanner(System.in);
-
         MovieType movieType; 
 
         System.out.print("Enter Movie Type (TWOD/THREED/IMAX/BLOCKBUSTER): ");

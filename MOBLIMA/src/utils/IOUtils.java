@@ -61,4 +61,27 @@ public class IOUtils {
         System.out.println(message);
     }
 
+    public static int check(int from, int to, Scanner sc)
+    {
+        int choice;
+        while (!sc.hasNextInt()) { // Not a string
+            sc.next(); // Remove newline character
+            System.out.println("Invalid input! Enter value ("+from+"-"+to+"):");
+        }
+        choice = sc.nextInt();
+        sc.nextLine();
+        while(choice < from || choice > to)
+        {
+            //sc.next(); // Remove newline character
+            System.out.println("Invalid input! Enter value ("+from+"-"+to+"):");
+            while (!sc.hasNextInt()) { // Not a string
+                sc.next(); // Remove newline character
+                System.out.println("Invalid input! Enter value ("+from+"-"+to+"):");
+            }
+            choice = sc.nextInt();
+            sc.nextLine();
+        }
+        return choice;
+    }
+
 }

@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -21,7 +22,7 @@ import com.opencsv.exceptions.CsvException;
  * @version 3.0
  * @since 06-11-2022
  */
-public class Showtime{
+public class Showtime implements Serializable{
 
     /**
      * Name of Cineplex
@@ -356,6 +357,10 @@ public class Showtime{
      */
     public String getCinemaClass(){
         return cinemaClass.toString();
+    }
+
+    public CinemaClass getCinemaClassCC(){
+        return cinemaClass;
     }
 
     /**

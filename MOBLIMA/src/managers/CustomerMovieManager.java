@@ -18,6 +18,7 @@ public class CustomerMovieManager {
 	 * The seperator that represent "," when stored in csv
 	 */
 	static String SplitByColon = ":";
+	private static Scanner scan = new Scanner(System.in);
 
 	// Displays all info about movie + limited 5 reviews on each movie. If <= 1  review with rating score higher than the limit, prints a placeholder message "na"
 	// Only shows info of movies which are preview or NOW SHOWING
@@ -164,8 +165,6 @@ public class CustomerMovieManager {
         char cineplex;
         int cineplexID;
         List<Movie> cineMovieList;
-
-        Scanner scan = new Scanner(System.in);
 
         //ask user for cineplex
         while(true){
