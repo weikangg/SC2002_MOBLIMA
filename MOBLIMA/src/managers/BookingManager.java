@@ -1,6 +1,7 @@
 package managers;
 
 import java.util.Scanner;
+//import java.io.Console;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -20,7 +21,7 @@ public class BookingManager implements Serializable{
 	
 	private Scanner sc = new Scanner(System.in);
     private Boolean done = false;
-    private int[][] seats;
+    private Seat[][] seats;
 	private ArrayList<String> bookedSeats;
     private ArrayList<Ticket> bookedTickets;
     private Booking booking;
@@ -33,6 +34,7 @@ public class BookingManager implements Serializable{
 	
 	
     /** 
+     * Creates a BookingManager class if empty
      * @return BookingManager
      */
     public static BookingManager newBM()
@@ -49,6 +51,8 @@ public class BookingManager implements Serializable{
 	
 	
     /** 
+     * main page for users to book their seats. Shows the available seats, and calls ticket manager once user confirms
+     * their seat selections
      * @param showtime
      * @param user
      */
@@ -61,7 +65,7 @@ public class BookingManager implements Serializable{
 		//display seats at show time
 		//get user input to choose seats
         setShowTime(showtime);
-		setSeats(showtime.getSeats());
+		setSeats(showtime.getSeatS());
         //getShowtime().showSeats();
         notQuit = true;
         while(notQuit)
@@ -124,6 +128,7 @@ public class BookingManager implements Serializable{
 
     
     /** 
+     * Checks if the seat is empty and available for selection
      * @param row
      * @param col
      * @return Boolean
@@ -131,7 +136,7 @@ public class BookingManager implements Serializable{
     public Boolean isSeatEmpty(int row, int col) //Check for showtime seats
     {
         //0 = available, 1 = unavailable, 2 = booked
-        if(getSeats()[row][col] == 0)
+        if(getSeats()[row][col].getState() == 0)
         {
             System.out.println("Its available");
             return true;
@@ -144,6 +149,9 @@ public class BookingManager implements Serializable{
 
     }
 
+    /**
+     * Displays the seats that the customer has chosen
+     */
     public void displayAddedSeats()
     {
         if(getBookedSeats().isEmpty())
@@ -163,8 +171,10 @@ public class BookingManager implements Serializable{
     }
 
 
-
-    public void addSeat() //Add seats into booking class attribute ArrayList tickets
+    /**
+     * Add seats into booking class attribute ArrayList tickets
+     */
+    public void addSeat()
     {
         int row,col;
         row = 0; col = 0;
@@ -192,13 +202,16 @@ public class BookingManager implements Serializable{
 		}
         else
         {
-            if(getSeats()[row][col]==1)
+            if(getSeats()[row][col].getState()==1)
             System.out.println("Seat " + (char)(row+65) + col + " unavailable.");
             else
             System.out.println("Seat " + (char)(row+65) + col + " already selected.");
         }
     }
 
+    /**
+     * Delete seats from customers current selection
+     */
     public void deleteSeat()
     {
         if(getBookedSeats().isEmpty())
@@ -231,6 +244,7 @@ public class BookingManager implements Serializable{
 
     
     /** 
+     * Confirms the customers selections
      * @param showtime
      * @return Boolean
      */
@@ -292,6 +306,7 @@ public class BookingManager implements Serializable{
 
     
     /** 
+     * Updates the state of the seats to allow showSeat function to display accurate information
      * @param row
      * @param col
      * @param choice
@@ -301,13 +316,13 @@ public class BookingManager implements Serializable{
         switch(choice)
         {
             case 1: //add seats
-                getSeats()[row][col]=2;
+                getSeats()[row][col].setState(2);
                 break;
             case 2: //confirmed seats
-                getSeats()[row][col]=1;
+                getSeats()[row][col].setState(1);
                 break;
             case 3: //remove seats
-                getSeats()[row][col]=0;
+                getSeats()[row][col].setState(0);
                 break;
             default:
                 break;
@@ -316,14 +331,16 @@ public class BookingManager implements Serializable{
 
     
     /** 
+     * Returns the seat array
      * @return int[][]
      */
-    public int[][] getSeats()
+    public Seat[][] getSeats()
     {
         return this.seats;
     }
     
     /** 
+     * return the list of booked seats
      * @return ArrayList<String>
      */
     public ArrayList<String> getBookedSeats()
@@ -332,6 +349,7 @@ public class BookingManager implements Serializable{
     }
     
     /** 
+     * gets the list of tickets
      * @return ArrayList<Ticket>
      */
     public ArrayList<Ticket> getBookedTickets()
@@ -340,6 +358,7 @@ public class BookingManager implements Serializable{
     }
     
     /** 
+     * gets the current booking
      * @return Booking
      */
     public Booking getBooking()
@@ -348,6 +367,7 @@ public class BookingManager implements Serializable{
     }
     
     /** 
+     * 
      * @return Showtime
      */
     public Showtime getShowtime()
@@ -370,7 +390,7 @@ public class BookingManager implements Serializable{
     /** 
      * @param seats
      */
-    public void setSeats(int[][] seats)
+    public void setSeats(Seat[][] seats)
     {
         this.seats = seats;
     }
@@ -415,6 +435,10 @@ public class BookingManager implements Serializable{
         this.user = user;
     }
 
+
+    /**
+     * pushes the updated seating plan to the csv files
+     */
     public void updateShowtimeCSV()
     {
         for(int i = 0; i<getBookedSeats().size();i++)
@@ -429,7 +453,11 @@ public class BookingManager implements Serializable{
 
 
 
-
+    /**
+     * Final function which creates the Booking and Transaction class and stores all the information into a csv file
+     * update all necessary csv files and finally stop all instances
+     * @exception IOException,ClassNotFoundException
+     */
     public void createBooking()
     {
         ArrayList<Booking> userBookings = new ArrayList<Booking>();
@@ -455,10 +483,12 @@ public class BookingManager implements Serializable{
                 ex.printStackTrace();
                 System.out.println("IOException is caught");
             }
-            System.out.println("Total Price of first booking is: " + userBookings.get(0).getTotalPrice());
+            //System.out.println("Total Price of first booking is: " + userBookings.get(0).getTotalPrice());
+            //System.out.println("Transaction Number: " + userBookings.get(0).getTransaction().getID());
+            System.out.println("User info: " + userBookings.get(0).getUserInfo());
         }
         String userBooks = "B" + userBookings.size();
-        Booking newB = new Booking(userBooks,TransactionManager.getInstance().getTotalPrice(),getShowtime().getMovieTitle(),
+        Booking newB = new Booking(userBooks,TransactionManager.getInstance().getUserInfo(),TransactionManager.getInstance().getTotalPrice(),getShowtime().getMovieTitle(),
         getShowtime().getCinemaID(),getShowtime().getCineplexID(),TransactionManager.getInstance().getTList(),
         getShowtime().getDateTimeLDT(),TransactionManager.getInstance().getTransaction());
         userBookings.add(newB);
@@ -561,13 +591,16 @@ public class BookingManager implements Serializable{
     }
     
 
-
+    /**
+     * set to true if booking was done
+     */
     public void setDone()
     {
         this.done = true;
     }
     
     /** 
+     * checks if booking was done
      * @return boolean
      */
     public boolean getDone()
@@ -575,6 +608,9 @@ public class BookingManager implements Serializable{
         return this.done;
     }
 
+    /**
+     * deletes the BookingManager instance
+     */
     public void deleteBM()
     {
         //private Scanner sc = new Scanner(System.in);
@@ -622,7 +658,7 @@ public class BookingManager implements Serializable{
     }*/
 
 
-    public void showSeat()
+    /*public void showSeat()
     {
 
         System.out.println("      Screen");
@@ -642,7 +678,21 @@ public class BookingManager implements Serializable{
             }
             System.out.println("  "+(char)(i+65));
         }
+    }*/
+    /**
+     * displays the seats
+     */
+    public void showSeat(){
+        System.out.println("      Screen");
+        for (int i = 0; i < 5; i++){
+            System.out.print((char)(i+65)+"  ");
+            for(int j = 0; j < 10; j++){
+                if(j == 5) System.out.print("  ");
+                if(getSeats()[i][j].getState() == 0) System.out.print("\u001B[32m" + "O" + "\u001B[0m");
+                else if(getSeats()[i][j].getState() == 1) System.out.print("\u001B[31m" + "X" + "\u001B[0m");
+                else System.out.print("\u001B[34m" + "S" + "\u001B[0m");
+            }
+            System.out.println("  "+(char)(i+65));
+        }
     }
-
-
 }
