@@ -1,9 +1,9 @@
 USERNAME,EMAIL,MOBILE,AGE,PASSWORD,ACCESS_LEVEL
 test,boblim@gmail.com,12345678,22,test,C
-Wei,wei1234@gmail.com,12345678,21,1234,A
-SuperAdmin,superAdmin1234@gmail.com,12345678,21,1234,SA
-Customer,customer@gmail.com,12312131,29,1234,C
-loy2,lo@jdjqow.com,1234,22,Wheregottime123!,C
-1,a,23,2,Aasdas@2323,A
 1,1@gmail.com,12345678,1,1,SA
-wei,as@123.com,86712345,22,rdr-@123Aas,C
+WeiKang,wei1234@gmail.com,87635263,21,Weikang@1234,A
+SuperAdmin,superAdmin1234@gmail.com,83444567,21,SuperAdmin@1234,SA
+Jovan,jovan123@gmail.com,22,81234567,Jovan@2345,A
+Aloysius,aloysius22@gmail.com,98374653,29,Aloysius@1234,A
+LingHin,linghin2000@gmail.com,87364756,25,LingHin@3458,A
+Andrew,andrew5000@hotmail.com,93476523,23,Andrew@1234,C

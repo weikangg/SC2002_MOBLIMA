@@ -1,16 +1,14 @@
 REVIEW_ID,MOVIE_TITLE,REVIEWER,REVIEW_DESCRIPTION,RATING_SCORE
-1,test1,test,very good,4.0
-2,Test2,test,It was a so-so movie,3.0
-3,test7,test1,Bad movie!,1.0
-4,Test2,test1,Good movie!,4.5
-5,Test3,test2,Fantastic Movie!,5.0
-6,Test3,test,Ok ,4.0
-7,test4,test,Very the good,4.0
-8,test1,Bot1,Very the good,4.3
-9,test1,Bot2,Very the good,4.5
-10,Test10,Bot2,Very the good,4.5
-11,thor,test,thor nice,4.5
-12,thor,AEloVaCD5R,asda,3.0
-13,Thor,1,hello thor,5.0
-14,Black Panther: wakanda forever,1,It was a good movie!,5.0
-15,Captain Marvel,1,Captain Marvel was amazing.,5.0
+1,Black Panther: wakanda forever,WeiKang,It was a good movie!,5.0
+2,Captain Marvel,WeiKang,Captain Marvel was amazing.,5.0
+3,Black Panther: Wakanda Forever,WeiKang,Action Packed and Funny at times!,4.8
+4,Harry Potter and the Philosopher's Stone,WeiKang,Everything I could have asked as a huge fan,4.9
+5,Titanic,Jovan,Much more than I expected,4.5
+6,Jurassic Park,Jovan,Solid popcorn entertainment,4.0
+7,Shrek,Aloysius,Great visuals and lots of humour!,4.7
+8,Captain Marvel,Aloysius,Captain Marvel was really cool!,5.0
+9,Star Wars,LingHin,When Summer blockbusters go really wrong...,2.0
+10,Captain Marvel,LingHin,How could the MCU mess this up?,1.0
+11,Black Panther: Wakanda Forever,LingHin,the best action movie in awhile!,5.0
+12,The Godfather,Andrew,Absolutely terrible movie.....,1.0
+13,Harry Potter and the Philosopher's Stone,Andrew,Exactly like the book; it's what i was looking for!,4.8
