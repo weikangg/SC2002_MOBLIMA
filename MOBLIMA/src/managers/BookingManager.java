@@ -31,7 +31,7 @@ public class BookingManager implements Serializable{
     
 	
 	private static BookingManager bm = null;
-	
+
 	
     /** 
      * Creates a BookingManager class if empty
@@ -472,6 +472,7 @@ public class BookingManager implements Serializable{
         {
             try
             {
+
                 fis = new FileInputStream(filename);
                 in = new ObjectInputStream(fis);
                 userBookings = (ArrayList<Booking>) in.readObject();

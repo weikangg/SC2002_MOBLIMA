@@ -16,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.io.FileNotFoundException;
+@SuppressWarnings("unchecked")
 
 public class CustomerAccManager {
     

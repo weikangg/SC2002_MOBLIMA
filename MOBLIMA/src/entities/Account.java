@@ -6,7 +6,7 @@ package entities;
  * @since 01-11-2022
  */
 
-public abstract class Account {
+public class Account {
 	/**
 	* This string is used to store the Account's username.
 	*/
@@ -32,6 +32,19 @@ public abstract class Account {
 	*/
     private String accessLevel;
     
+	/**
+	 * The default constructor for the Account class
+	 */
+	public Account(String name, String email, int mobile, int age, String password, String accessLevel)
+    {
+        this.username = name;
+        this.email = email;
+        this.mobile = mobile;
+        this.age = age;
+        this.password = password;
+        this.accessLevel = accessLevel;
+    }
+
     // Gettors
 
     /**

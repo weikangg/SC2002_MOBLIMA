@@ -11,8 +11,6 @@ import entities.Movie;
 import entities.Review;
 
 public class CustomerShowtime {
-    private String movieName;
-    private List<Movie> movieList = MovieListManager.getInstance().getMovieList();
 
     public ArrayList<Showtime> searchMovie(int movieID){
         ArrayList<Showtime> list = new ArrayList<Showtime>();

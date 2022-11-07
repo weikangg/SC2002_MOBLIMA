@@ -1,21 +1,11 @@
 package entities;
 
-import java.util.LinkedList;
-import java.util.ArrayList;
 public class CustomerAcc extends Account {
-
-    //create transaction history using linked list
-    private LinkedList<Transaction> bookingHistory = new LinkedList<Transaction>();
 
     //constructor
     public CustomerAcc(String name, String email, int mobile, int age, String password, String accessLevel)
     {
-        this.username = name;
-        this.email = email;
-        this.mobile = mobile;
-        this.age = age;
-        this.password = password;
-        this.accessLevel = accessLevel;
+        super(name,email,mobile,age,password,accessLevel);
     }
 
 /*    public ArrayList<CustomerAcc> readCustomerFile(){

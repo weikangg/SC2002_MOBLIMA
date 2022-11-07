@@ -159,6 +159,7 @@ public class CustomerMovieManager {
 
 	public static ArrayList<Showtime> searchMovieShowtime(List<Movie> movieList, List<Review> reviewList)
     {
+		
         String name;
         char cineplex;
         int cineplexID;

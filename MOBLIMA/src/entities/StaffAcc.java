@@ -19,12 +19,7 @@ public class StaffAcc extends Account {
 	 */
     public StaffAcc(String username, String email, int mobile, int age, String password, String accessLevel)
     {
-        this.username = username;
-        this.email = email;
-        this.mobile = mobile;
-        this.age = age;
-        this.password = password;
-        this.accessLevel = accessLevel;
+        super(username,email,mobile,age,password,accessLevel);
     }
 
 }

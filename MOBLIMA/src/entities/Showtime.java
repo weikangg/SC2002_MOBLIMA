@@ -131,6 +131,7 @@ public class Showtime extends Cinema{
 
             this.updateCinemaStatus();
             csvReader.close();
+            csvReaderTwo.close();
         } catch (FileNotFoundException e) {
             System.out.println("File not found!");
             System.out.println(e.getMessage());
@@ -319,22 +320,14 @@ public class Showtime extends Cinema{
      */
     public String getCinemaStatus() {return cinemaStatus.toString();}
 
+
     /**
-     * Function to return seat availiblilty as an integer array
-     * @return Seat availiblilty as an integer array
+     * Function to return seat availiblilty as a seats 2D array
+     * @return Seat availiblilty as a seats 2D array
      */
-    public int[][] getSeats(){
-        int[][] ret = new int [5][10];
-        for (int i = 0; i < 5; i++){
-            for(int j = 0; j < 10; j++){
-
-                ret[i][j] = seats[i][j].getState();
-
-            }
-            
-        }
-
-        return ret;
+    public Seat[][] getSeatS()
+    {
+        return this.seats;
     }
 
     //Setters

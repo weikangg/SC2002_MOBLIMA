@@ -9,7 +9,6 @@ public enum TicketType {
 		SENIORWD(5),
 		STUDENTWD(6),
 		HOLIDAY(7);
-		
 		private int type;
 
 		TicketType(int type)
