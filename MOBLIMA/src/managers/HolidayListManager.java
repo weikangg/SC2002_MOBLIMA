@@ -9,23 +9,43 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import entities.Holidays;
-
+/**
+ * A manager class for all actions related to the list of holidays in our data base 
+ * @author Aloysius
+ * @version 2.5
+ * @since 07-11-2022
+ */
 public class HolidayListManager {
-
+	/**
+	 * For singleton pattern adherence. This HolidayListManager instance persists throughout runtime.
+	 */
     private static HolidayListManager single_instance = null;
+	/**
+	 * For singleton pattern adherence. 
+	 * @return instance The static instance that persists throughout runtime.
+	 */
 	public static HolidayListManager getInstance()
     {
         if (single_instance == null)
             single_instance = new HolidayListManager();
         return single_instance;
     }
-	
-    // Constructor
+	/**
+	 * The default constructor for the HolidayListManager class
+	 */
     public HolidayListManager(){}
-    
+    /**
+	 * The path to the CSV file that stores all the holidays
+	 */
     static String path = System.getProperty("user.dir") +"\\data\\staffs\\holidaySettings.csv";
+	/**
+	 * The separator for the columns in the csv file
+	 */
     static String separator = ",";
-
+	/**
+	 * Fetch all the holidays inside the holidaySettings.csv file and compile them into a list 
+	 * @return holidayList
+	 */
     public List<Holidays>getHolidayList(){
         List<Holidays>holidayList = new ArrayList<>();
     	BufferedReader br = null;
@@ -55,12 +75,22 @@ public class HolidayListManager {
 		}
 		return holidayList;
     }
-
+	/**
+	 * Appends the new movie to the existing list of movies and updates the list of movies in the database
+	 * @param movieList 		 Existing list of movies
+	 * @param holName            This is the name of the holiday
+	 * @param holDate            This is the date of the holiday
+	 */ 
     public static boolean addHolidayList(List<Holidays> holidayList, String holName, LocalDate holDate) {
         Holidays newHol = new Holidays(holName, holDate);
         holidayList.add(newHol);
         return updateHolidayListCSV(holidayList);
     }
+	/**
+	 * Writes the list of holidays to the holidaySettings.csv file for storage
+	 * @param holidayList Existing list of holidays
+	 * @return true if update was successful, false if update was unsuccessful
+	 */
     public static boolean updateHolidayListCSV(List<Holidays> holidayList) {
 		FileWriter csvWriter;
 		try {
