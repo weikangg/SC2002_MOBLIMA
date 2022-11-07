@@ -21,7 +21,37 @@ import com.opencsv.exceptions.CsvException;
  * @version 3.0
  * @since 06-11-2022
  */
-public class Showtime extends Cinema{
+public class Showtime{
+
+    /**
+     * Name of Cineplex
+     */
+    private String name;
+
+    /**
+     * Location of Cineplex
+     */
+    private String location;
+
+     /**
+     * Number of Cinemas in Cineplex
+     */
+    private int numCinemas;
+
+    /**
+     * ID of Cineplex
+     */
+    private int cineplexID;
+
+    /**
+     * ID of Cinema
+     */
+    private int cinemaID;
+
+    /**
+     * Class of Cinema
+     */
+    private CinemaClass cinemaClass;
 
     /**
      * ID of Shotwime
@@ -63,7 +93,12 @@ public class Showtime extends Cinema{
      * @param showtimeID ID of Shotwime
      */
     public Showtime(String name, String location, int numCinemas, int cineplexID, int cinemaID, CinemaClass cinemaClass, int showtimeID){
-        super(name, location, numCinemas, cineplexID, cinemaID, cinemaClass);
+        
+        this.name = name;
+        this.location = location;
+        this.numCinemas = numCinemas;
+        this.cinemaID = cinemaID;
+        this.cinemaClass = cinemaClass;
         this.showtimeID = showtimeID;
         
         try {
@@ -178,7 +213,7 @@ public class Showtime extends Cinema{
      * Printer method for Showtime information
      */
     public void showInfo(){ 
-        System.out.println(super.getName()+", Hall "+(super.getCinemaID()+1)+", Class: " +super.getCinemaClass());
+        System.out.println(name+", Hall "+(cinemaID+1)+", Class: " +cinemaClass);
 
         System.out.println("Showtime ID: " + getShowtimeID());
         System.out.println("Movie ID: " + getMovieID());
@@ -228,7 +263,7 @@ public class Showtime extends Cinema{
 
         try {
 
-            Path path = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes\\"+getName()+ "\\hall"+Integer.toString(getCinemaID()+1)+ "\\"+getShowtimeID()+".csv");
+            Path path = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes\\"+name+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+showtimeID+".csv");
             // System.out.println(path.toAbsolutePath().toString());
 
             FileWriter filewriter = new FileWriter(path.toAbsolutePath().toString()); //CSVReader Instantiation
@@ -276,7 +311,55 @@ public class Showtime extends Cinema{
     //Getters
 
     /**
-     * Function to return ID of Shotwime
+     * Function to return the Name of the Cineplex Showtime is showing in
+     * @return Name of Cineplex Showtime is showing in
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Function to return the ID of the Cineplex Showtime is showing in
+     * @return ID of Cineplex Showtime is showing in
+     */
+    public int getCineplexID(){
+        return cineplexID;
+    }
+
+    /**
+     * Function to return the Location of the Cineplex Showtime is showing in
+     * @return Location of Cineplex Showtime is showing in
+     */
+    public String getLocation() {
+        return location;
+    }
+
+    /**
+     * Function to return the number of Cinemas in the Cineplex Showtime is showing in
+     * @return Number of Cinemas in Cineplex Showtime is showing in
+     */
+    public int getNumCinema() {
+        return numCinemas;
+    }
+
+       /**
+     * Function to return the ID of the Cinema Showtime is showing in
+     * @return ID of Cinema Showtime is showing in
+     */
+    public int getCinemaID(){
+        return cinemaID;
+    }
+
+    /**
+     * Function to return the Class of the Cinema Showtime is showing in
+     * @return Class of Cinema Showtime is showing in as String 
+     */
+    public String getCinemaClass(){
+        return cinemaClass.toString();
+    }
+
+    /**
+     * Function to return ID of Shotwime 
      * @return ID of Shotwime
      */
     public int getShowtimeID() {return showtimeID;}
