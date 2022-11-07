@@ -318,7 +318,15 @@ public class Showtime extends Cinema{
      * @return Status depending on proportion of seats filled
      */
     public String getCinemaStatus() {return cinemaStatus.toString();}
-
+    /**
+     *Function to return seat availbility as a Seat array
+     * @return Seat availability as a Seat array
+     */
+    public Seat[][] getSeatS()
+    {
+        return this.seats;
+    }
+    
     /**
      * Function to return seat availiblilty as an integer array
      * @return Seat availiblilty as an integer array
