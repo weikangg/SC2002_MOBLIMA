@@ -21,6 +21,27 @@ import entities.Cinema;
  * @since 06-11-2022
  */
 public class CineplexManager {
+
+    /**
+	 * For singleton pattern adherence. This CineplexManager instance persists throughout runtime.
+	 */
+    private static CineplexManager newInstance = null;
+
+    /**
+	 * The default constructor for the CineplexManager class
+	 */
+    private CineplexManager(){}
+
+    /**
+	 * For singleton pattern adherence. 
+	 * @return instance The static instance that persists throughout runtime.
+	 */
+    public static CineplexManager getInstance(){
+        if (newInstance == null){
+            newInstance = new CineplexManager();
+        }
+        return newInstance;
+    }
     
     /**
      * Function to configure and returna the array of Cineplex objects

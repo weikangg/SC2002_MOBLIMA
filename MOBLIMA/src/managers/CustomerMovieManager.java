@@ -190,7 +190,7 @@ public class CustomerMovieManager {
         //find movies that are in the cineplex
         cineplexID -= 1;
         cineplex = (char)(cineplexID + 65);
-        Cineplex[] cineplexes = CineplexManager.configCineplexes(); 
+        Cineplex[] cineplexes = CineplexManager.getInstance().configCineplexes(); 
         Cinema[] cinemas = cineplexes[cineplexID].getCinemas();
         /*for(Cinema c : cinemas)
         {

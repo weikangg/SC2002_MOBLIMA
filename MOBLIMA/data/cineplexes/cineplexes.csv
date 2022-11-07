@@ -1,4 +1,4 @@
 Name,Location,numCinemas,numShowtimes[],cinemaClass[]
 Cineplex_A,Location A,3,3,1,0,SILVER,GOLD,PLATINUM
-Cineplex_B,Location B,4,1,1,1,1,SILVER,GOLD,PLATINUM,DIAMOND
-Cineplex_C,Location C,2,1,1,SILVER,PLATINUM
+Cineplex_B,Location B,4,1,2,1,1,SILVER,GOLD,PLATINUM,DIAMOND
+Cineplex_C,Location C,2,2,1,SILVER,PLATINUM

@@ -75,7 +75,7 @@ public class ShowtimeManager {
 
                 if(inputs==null) break;
 
-                showtime = CineplexManager.configCineplexes()[inputs[0]].getCinemas()[inputs[1]].getShowtimes()[inputs[2]];
+                showtime = CineplexManager.getInstance().configCineplexes()[inputs[0]].getCinemas()[inputs[1]].getShowtimes()[inputs[2]];
 
                 showtime.showInfo();
                 showtime.showSeats();
@@ -89,7 +89,7 @@ public class ShowtimeManager {
 
                 if(inputs==null) break;
 
-                cinema = CineplexManager.configCineplexes()[inputs[0]].getCinemas()[inputs[1]];
+                cinema = CineplexManager.getInstance().configCineplexes()[inputs[0]].getCinemas()[inputs[1]];
 
                 movieID = promptMovieID();
                 if(movieID == -1) break;
@@ -109,7 +109,7 @@ public class ShowtimeManager {
 
                 if(inputs==null) break;
 
-                showtime = CineplexManager.configCineplexes()[inputs[0]].getCinemas()[inputs[1]].getShowtimes()[inputs[2]];
+                showtime = CineplexManager.getInstance().configCineplexes()[inputs[0]].getCinemas()[inputs[1]].getShowtimes()[inputs[2]];
 
                 movieID = promptMovieID();
                 if(movieID == -1) break;
@@ -133,7 +133,7 @@ public class ShowtimeManager {
 
                 if(inputs==null) break;
 
-                cinema = CineplexManager.configCineplexes()[inputs[0]].getCinemas()[inputs[1]];
+                cinema = CineplexManager.getInstance().configCineplexes()[inputs[0]].getCinemas()[inputs[1]];
 
                 cinema.deleteShowtime(inputs[2]);
 
@@ -167,7 +167,7 @@ public class ShowtimeManager {
             Scanner sc = new Scanner(System.in);
 
             //Prompt Cineplexes
-            Cineplex[] cineplexes = CineplexManager.configCineplexes(); 
+            Cineplex[] cineplexes = CineplexManager.getInstance().configCineplexes(); 
             for(int i = 0; i < cineplexes.length; i++){
                 System.out.println((i+1) + ": " + cineplexes[i].getName());
             }
@@ -178,7 +178,7 @@ public class ShowtimeManager {
             cineplexID--;
             System.out.println("");
 
-            if(cineplexID<0||cineplexID>cineplexes.length){
+            if(cineplexID<0||cineplexID>=cineplexes.length){
                 System.out.println("No such Cineplex");
                 return null;
             }
@@ -197,7 +197,7 @@ public class ShowtimeManager {
             cinemaID--;
             System.out.println("");
 
-            if(cinemaID<0||cinemaID>cinemas.length){
+            if(cinemaID<0||cinemaID>=cinemas.length){
                 System.out.println("No such Cinema");
                 return null;
             }
@@ -226,7 +226,7 @@ public class ShowtimeManager {
             Scanner sc = new Scanner(System.in);
 
             //Prompt Cineplexes
-            Cineplex[] cineplexes = CineplexManager.configCineplexes(); 
+            Cineplex[] cineplexes = CineplexManager.getInstance().configCineplexes(); 
             for(int i = 0; i < cineplexes.length; i++){
                 System.out.println((i+1) + ": " + cineplexes[i].getName());
             }
@@ -256,6 +256,7 @@ public class ShowtimeManager {
             cinemaID--;
 
             if(cinemaID<0||cinemaID>=cinemas.length){
+                
                 System.out.println("No such Cinema");
                 return null;
             }
@@ -304,7 +305,6 @@ public class ShowtimeManager {
         Scanner sc = new Scanner(System.in);
 
         try {
-            System.out.println("");
             System.out.print("Enter Movie ID: ");
             movieID = sc.nextInt();
             System.out.println("");
@@ -335,7 +335,6 @@ public class ShowtimeManager {
         LocalDateTime dateTime;
         
         try {
-            System.out.println("");
             System.out.print("Enter Date and Time (yyyy-MM-dd HH:mm): ");
             String str = sc.nextLine();
             System.out.println("");
@@ -345,6 +344,7 @@ public class ShowtimeManager {
             
         } catch (Exception e) {
             // TODO: handle exception
+            System.out.println("Date invalid");
             return null;
         }
         
@@ -364,7 +364,6 @@ public class ShowtimeManager {
 
         MovieType movieType; 
 
-        System.out.println("");
         System.out.print("Enter Movie Type (TWOD/THREED/IMAX/BLOCKBUSTER): ");
         String str = sc.nextLine();
         System.out.println("");
