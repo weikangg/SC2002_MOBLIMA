@@ -11,10 +11,10 @@ import entities.Movie;
 import entities.Review;
 
 public class CustomerShowtime {
-    String movieName;
-    List<Movie> movieList = MovieListManager.getInstance().getMovieList();
+    private String movieName;
+    private List<Movie> movieList = MovieListManager.getInstance().getMovieList();
 
-    public ArrayList<Showtime> searchMovie(int MovieID){
+    public ArrayList<Showtime> searchMovie(int movieID){
         ArrayList<Showtime> list = new ArrayList<Showtime>();
         Cineplex[] cineplexes = CineplexManager.configCineplexes(); 
         Cinema[] cinemas = cineplexes[0].getCinemas();
@@ -24,7 +24,7 @@ public class CustomerShowtime {
             Showtime[] showtimes = cinemas[i].getShowtimes();
             for(int j = 0; j < showtimes.length; j++)
             {
-                if(showtimes[i].getMovieID() == MovieID)list.add(showtimes[i]);
+                if(showtimes[i].getMovieID() == movieID)list.add(showtimes[i]);
             }
         }
         return list;
