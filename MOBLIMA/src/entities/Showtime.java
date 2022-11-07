@@ -95,7 +95,7 @@ public class Showtime extends Cinema{
 
             Seat[][] seats = new Seat[5][10];
 
-            Path pathTwo = Paths.get(System.getProperty("user.dir")+"\\data\\cinemaLayout.csv");
+            Path pathTwo = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes\\cinemaLayout.csv");
             // System.out.println(pathTwo.toAbsolutePath().toString());
 
             FileReader filereaderTwo = new FileReader(pathTwo.toAbsolutePath().toString()); //CSVReader Instantiation

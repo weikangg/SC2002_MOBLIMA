@@ -125,7 +125,7 @@ public class Cinema extends Cineplex{
             
             //Write to cineplexes.csv
 
-            path = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes.csv");
+            path = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes\\cineplexes.csv");
             FileReader filereader = new FileReader(path.toAbsolutePath().toString()); //CSVReader Instantiation
             CSVReader csvReader = new CSVReader(filereader); 
             List<String[]> r = csvReader.readAll(); //Read File
@@ -187,7 +187,7 @@ public class Cinema extends Cineplex{
 
         try {
 
-            path = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes.csv");
+            path = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes\\cineplexes.csv");
             FileReader filereader = new FileReader(path.toAbsolutePath().toString()); //CSVReader Instantiation
             CSVReader csvReader = new CSVReader(filereader); 
             List<String[]> r = csvReader.readAll(); //Read File

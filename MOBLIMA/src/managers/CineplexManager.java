@@ -29,7 +29,7 @@ public class CineplexManager {
     public static Cineplex[] configCineplexes(){ 
 
         try {
-            Path path = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes.csv");
+            Path path = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes\\cineplexes.csv");
             // System.out.println(path.toAbsolutePath().toString());
             
             FileReader filereader = new FileReader(path.toAbsolutePath().toString()); //CSVReader Instantiation
