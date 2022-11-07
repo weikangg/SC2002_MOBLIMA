@@ -1,4 +1,4 @@
-package managers;
+/*package managers;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -125,7 +125,7 @@ public class CustomerShowtime {
         }*/
         
         //ask user for movie
-        CustomerMovieManager.printMovieList(movieList, reviewList);
+        /*CustomerMovieManager.printMovieList(movieList, reviewList);
         System.out.println("Please choose a movie:");
         name = scan.nextLine();
 
@@ -157,7 +157,7 @@ public class CustomerShowtime {
         }
         return list;
         
-    }
+    }*/
 
 
     // ArrayList<Showtime> list = cineplexes[0].searchMovie(5); (search for movie)
@@ -166,4 +166,4 @@ public class CustomerShowtime {
     //     list.get(i).showInfo();
     //     System.out.println("");
     // }
-}
+
