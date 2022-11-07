@@ -47,7 +47,6 @@ public class ShowtimeManager {
                                 "==============================================================");
                 System.out.print("Enter choice: ");
                 option = sc.nextInt();
-                sc.nextLine();
                 if(!(option >= 1 && option <=5)){
                     System.out.println("Please only enter a number from 1-5.");
                     staffMenu(0,account);
@@ -299,7 +298,9 @@ public class ShowtimeManager {
         
         try {
             System.out.print("Enter Date and Time (yyyy-MM-dd HH:mm): ");
+            sc.nextLine();
             String str = sc.nextLine();
+
             System.out.println("");
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
