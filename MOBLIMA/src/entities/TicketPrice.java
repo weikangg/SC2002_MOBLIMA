@@ -53,10 +53,10 @@ public class TicketPrice implements Serializable{
 	 */
 	public TicketPrice()
 	{
-		String path = System.getProperty("user.dir") +"\\data\\ticketprice.csv";
-		String path2 = System.getProperty("user.dir") +"\\data\\movietypeprice.csv";
-		String path3 = System.getProperty("user.dir") +"\\data\\cinemaclassprice.csv";
-		String path4 = System.getProperty("user.dir") +"\\data\\seattypeprice.csv";
+		String path = System.getProperty("user.dir") +"\\data\\prices\\ticketprice.csv";
+		String path2 = System.getProperty("user.dir") +"\\data\\prices\\movietypeprice.csv";
+		String path3 = System.getProperty("user.dir") +"\\data\\prices\\cinemaclassprice.csv";
+		String path4 = System.getProperty("user.dir") +"\\data\\prices\\seattypeprice.csv";
 		BufferedReader bufReader;
 		BufferedReader bufReaderTwo;
 		BufferedReader bufReaderThree;
@@ -95,8 +95,8 @@ public class TicketPrice implements Serializable{
 		    }
 		    bufReaderTwo.close();
 		}
-		catch (FileNotFoundException e){System.out.println("TicketPrice error");}
-		catch (IOException e){System.out.println("TicketPrice error");}
+		catch (FileNotFoundException e){}
+		catch (IOException e){}
 		try {
 		    bufReaderThree = new BufferedReader(new FileReader(path3));
 
@@ -106,7 +106,6 @@ public class TicketPrice implements Serializable{
 		    {
 
 			ccPrice.add(Double.valueOf(line));
-					//System.out.println(line);
 			line = bufReaderThree.readLine();
 		    }
 		    bufReaderThree.close();
@@ -115,22 +114,17 @@ public class TicketPrice implements Serializable{
 		catch (IOException e){}
 		try {
 		    bufReaderFour = new BufferedReader(new FileReader(path4));
-
-		    //listOfLines.add(0.2);
 		    String line = bufReaderFour.readLine();
 		    while (line != null) 
 		    {
 
 			stPrice.add(Double.valueOf(line));
-					//System.out.println(line);
 			line = bufReaderFour.readLine();
 		    }
 		    bufReaderFour.close();
 		}
 		catch (FileNotFoundException e){}
 		catch (IOException e){}
-		//this.price = new Double[]{8.50,9.50,9.50,11.0,11.0,4.0,7.0,12.0};
-		//this.mtPrice = new Double[]{1.00,1.29,1.45,1.50};
 		int x = 0;
 		for(TicketType type: TicketType.values())
 		{
@@ -159,10 +153,10 @@ public class TicketPrice implements Serializable{
 		this.mtPrice = mtPrice;
 		this.ccPrice = ccPrice;
 		this.stPrice = stPrice; 
-		//System.out.println("Price 1:" + price.get(0));
-		//System.out.println("MTPrice 1:" + mtPrice.get(0));
 	}
 
+
+	
 
 	/**
 	 * getters
@@ -298,7 +292,7 @@ public class TicketPrice implements Serializable{
 	 */
 	public void updatePrice()
 	{
-		String path = System.getProperty("user.dir") +"\\data\\ticketprice.csv";
+		String path = System.getProperty("user.dir") +"\\data\\prices\\ticketprice.csv";
 		ArrayList<String> arrList = new ArrayList<String>();
 		for(int i = 0; i<getPrices().size();i++)
 		{
@@ -329,8 +323,7 @@ public class TicketPrice implements Serializable{
 	 */
 	public void updateMTPrice()
 	{
-		//String path = System.getProperty("user.dir") +"\\data\\ticketprice.csv";
-		String path2 = System.getProperty("user.dir") +"\\data\\movietypeprice.csv";
+		String path2 = System.getProperty("user.dir") +"\\data\\prices\\movietypeprice.csv";
 		ArrayList<String> arrList = new ArrayList<String>();
 		for(int i = 0; i<getMtPriceList().size();i++)
 		{
@@ -364,7 +357,7 @@ public class TicketPrice implements Serializable{
 	public void updateCCPrice()
 	{
 		//String path = System.getProperty("user.dir") +"\\data\\ticketprice.csv";
-		String path3 = System.getProperty("user.dir") +"\\data\\cinemaclassprice.csv";
+		String path3 = System.getProperty("user.dir") +"\\data\\prices\\cinemaclassprice.csv";
 		ArrayList<String> arrList = new ArrayList<String>();
 		for(int i = 0; i<getCCPriceList().size();i++)
 		{
@@ -398,7 +391,7 @@ public class TicketPrice implements Serializable{
 	public void updateSTPrice()
 	{
 		//String path = System.getProperty("user.dir") +"\\data\\ticketprice.csv";
-		String path4 = System.getProperty("user.dir") +"\\data\\seattypeprice.csv";
+		String path4 = System.getProperty("user.dir") +"\\data\\prices\\seattypeprice.csv";
 		ArrayList<String> arrList = new ArrayList<String>();
 		for(int i = 0; i<getSTPriceList().size();i++)
 		{
