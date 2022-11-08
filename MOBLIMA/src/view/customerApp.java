@@ -6,21 +6,43 @@ import managers.*;
 import java.util.InputMismatchException;
 import java.util.List;
 
+/**
+ * The class for our customerApp
+ * @author Ling Hin
+ * @version 2.5
+ * @since 8-11-2022
+ */
+
 public class customerApp {
+    /**
+	 * For singleton pattern adherence. This MovieListManager instance persists throughout runtime.
+	 */
     private static customerApp newInstance = null;
+    /**
+	 * For singleton pattern adherence. 
+	 * @return instance The static instance that persists throughout runtime.
+	 */
     public static customerApp getInstance(){
         if (newInstance == null){
             newInstance = new customerApp();
         }
         return newInstance;
     }
-    static AccountManager accountManager = AccountManager.getInstance();
+    //static AccountManager accountManager = AccountManager.getInstance();
+    /**
+	 * The scanner for reading input of user
+	 */
     Scanner scan = new Scanner(System.in);
 
+    /*
+     * Function to show guest menu to customer when they select to continue as guest
+     * Guest customer can assess the log in page, create account or view movie and cinema informations
+     */
     public void customerGuestMenu(){
 
         List<Movie> movieList = MovieListManager.getInstance().getMovieList();
         List<Review> reviewList = ReviewListManager.getInstance().getReviewList();
+        AccountManager accountManager = AccountManager.getInstance();
         boolean exit = false;
         String strinput;
         int input;
@@ -176,6 +198,11 @@ public class customerApp {
         }while(exit == false);
     }
 
+    /*
+     * Function to show logged in user menu
+     * Logged in users can make bookings, view movies, search movies, view top 5 and also give review
+     * There is also a log out selection which will bring user back to the mainapp menu
+     */
     public void customerLoggedInMenu(Account account){
         List<Movie> movieList = MovieListManager.getInstance().getMovieList();
         List<Review> reviewList = ReviewListManager.getInstance().getReviewList();
@@ -286,6 +313,11 @@ public class customerApp {
         }while(exit == false);
     }
 
+    /*
+     * Function shows logged in user the booking menu when they have selected the booking option
+     * User can choose to book and purchase tickets or look at their booking history
+     * Selecting exit will log user out and bring them to the guest main menu
+     */
     public void bookingAndReviewMenu(Account user){
         int input = 5;
         boolean exit = false;
