@@ -9,53 +9,68 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
+/**
+ * Function class that provides the transaction and confirmation features for customers
+ * @author Jovan Sie
+ * @version 3.0
+ * @since 06-11-2022
+ */
 public class TransactionManager
 {
+    /**
+     * stores the trans information
+     */
 	private Transaction trans;
-	private String creditCardInfo;
+    /**
+     * stores the ticket array from ticketmanager
+     */
     private ArrayList<Ticket> tList;
+    /**
+     * stores the number of tickets
+     */
     private int numberOfTickets;
+    /**
+     * stores the current showtime information
+     */
     private Showtime showtime;
+    /**
+     * total price of the tickets
+     */
     private double totalPrice;
+    /**
+     * checks if promo is applied
+     */
     private Boolean isPromo = false;
+    /**
+     * stop loop upon exit
+     */
 	Boolean notQuit = true;
+    /**
+     * Scanner
+     */
 	private Scanner sc = new Scanner(System.in);
+    /**
+     * stores the user info as a string
+     */
     private String userInfo;
 
+    /**
+	 * For singleton pattern adherence. This TicketManager instance persists throughout runtime.
+	 */
     private static TransactionManager single_instance = null;
     
-    /** 
-     * Creates a new instance of transaction manager
-     * @return TransactionManager
-     */
+    /**
+	 * For singleton pattern adherence. 
+	 * @return instance The static instance that persists throughout runtime.
+	 */
     public static TransactionManager getInstance()
     {
         if (single_instance == null)
             single_instance = new TransactionManager();
         return single_instance;
     }
-    
-    public Transaction getTransaction() {return this.trans;}
-    public String getString() {return this.creditCardInfo;}
-    
-    
-    /** 
-     * @param transaction
-     */
-    public void setTransaction(Transaction transaction)
-    {
-    	this.trans = transaction;
-    }
-    
-    /** 
-     * @param cci
-     */
-    public void setCreditCardInfo(String cci)
-    {
-    	this.creditCardInfo = cci;
-    }
-    
 
+    
     //constructor
     private TransactionManager(){
     }
@@ -149,56 +164,6 @@ public class TransactionManager
         "\nMobile Number: (+65)" +  BookingManager.newBM().getUser().getMobile() + "\nName: " +
         name;
         this.userInfo=userInfo;
-
-
-
-
-
-
-        /*System.out.println("Mobile Number: +65");
-        String mobileNo = "+65 " + sc.nextLine();
-        //sc.nextLine();
-        while(checks)
-        {
-            Pattern singaporeRegex = Pattern.compile("^(\\+\\d{2}( )?)?\\d{4}[- .]?\\d{4}$");
-            Matcher m = singaporeRegex.matcher(mobileNo);
-            if(m.matches())
-            {
-                checks = false;
-            }
-            else
-            {
-                System.out.println("Mobile Number: +65");
-                mobileNo = "+65 " + sc.nextLine();
-            }
-        }
-        System.out.println("Email: ");
-        String email = sc.nextLine();
-        checks = true;
-        while(checks)
-        {
-            Pattern regex = Pattern.compile("^(.+)@(.+)$");
-            Matcher mTwo = regex.matcher(email);
-            if(mTwo.matches())
-            {
-                checks = false;
-            }
-            else
-            {
-                System.out.println("Email: ");
-                email = sc.nextLine();
-            }
-        }
-        this.userInfo = "Name: " + name + "Mobile Number: " + mobileNo + "Email: " + email + "\n"; 
-        */
-    }
-    
-    /** 
-     * @return String
-     */
-    public String getUserInfo()
-    {
-        return this.userInfo;
     }
 
     /**
@@ -222,26 +187,33 @@ public class TransactionManager
         getTransaction().setTotalPrice(getTotalPrice());*/
     }
 
-
-    
     /** 
-     * @return ArrayList<Ticket>
+     * gets the user information
+     * @return current user information
+     */
+    public String getUserInfo()
+    {
+        return this.userInfo;
+    }
+    
+    /** gets the array list of tickets
+     * @return current ArrayList<Ticket>
      */
     public ArrayList<Ticket> getTList()
     {
         return this.tList;
     }
     
-    /** 
-     * @return Showtime
+    /** gets the showtime 
+     * @return the current Showtime
      */
     public Showtime getShowtime()
     {
         return this.showtime;
     }   
     
-    /** 
-     * @return double
+    /** gets the total price
+     * @return the total price in double
      */
     public double getTotalPrice()
     {
@@ -249,7 +221,8 @@ public class TransactionManager
     }
     
     /** 
-     * @return int
+     * gets the total number of tickets
+     * @return integer value of current total tickets
      */
     public int getNumberOfTickets()
     {
@@ -257,7 +230,8 @@ public class TransactionManager
     }
     
     /** 
-     * @return Boolean
+     * gets the isPromo value
+     * @return the current isPromo value
      */
     public Boolean getPromo()
     {
@@ -266,7 +240,7 @@ public class TransactionManager
 
 
     
-    /** 
+    /** sets the ticket array list with the ticketmanager's
      * @param ArrayListtList
      */
     public void setTList(ArrayList<Ticket>tList)
@@ -275,6 +249,7 @@ public class TransactionManager
     }
     
     /** 
+     * sets the total number of tickets
      * @param i
      */
     public void setNumberOfTickets(int i)
@@ -283,12 +258,16 @@ public class TransactionManager
     }
     
     /** 
+     * sets the current showtime
      * @param showtime
      */
     public void setShowtime(Showtime showtime)
     {
         this.showtime = showtime;
     }
+    /**
+     * calculates the total price by adding each ticket's price together. Currently isPromo instantly grants a 10% discount
+     */
     public void setTotalPrice()
     {
         double totalPrice = 0;
@@ -302,17 +281,21 @@ public class TransactionManager
             totalPrice = totalPrice * 0.90;
         }
         this.totalPrice = totalPrice;
-    } 
+    }
+    /*
+     * sets the isPromo to true;
+     */
     public void usePromo()
     {
         this.isPromo = true;
     }
 
-
+    /**
+     * clears up all information stored in TransactionManager
+     */
     public void deleteTransactionM()
     {
         trans = null;
-        creditCardInfo = null;
         tList.clear();
         numberOfTickets = 0;
         showtime = null;
@@ -340,6 +323,22 @@ public class TransactionManager
         }
         MovieListManager.getInstance().updateMovieListCSV(newML);
         //System.out.println("Price updated");
+    }
+
+    /**
+     * gets the transaction
+     * @return the current transaction
+     */
+    public Transaction getTransaction() {return this.trans;}
+    
+    
+    /** 
+     * sets the transaction
+     * @param transaction
+     */
+    public void setTransaction(Transaction transaction)
+    {
+    	this.trans = transaction;
     }
 
 
