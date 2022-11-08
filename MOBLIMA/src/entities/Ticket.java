@@ -2,7 +2,12 @@ package entities;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-
+/**
+ * Represents movie tickets 
+ * @author Jovan Sie
+ * @version 3.0
+ * @since 06-11-2022
+ */
 public class Ticket implements Serializable{
 	private LocalDateTime date;
 	//private Boolean promotion;
