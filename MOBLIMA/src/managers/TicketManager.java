@@ -17,22 +17,57 @@ import entities.Seat;
 import entities.TicketType;
 import utils.IOUtils;
 
+/**
+ * Function class that provides the ticketing and calculation features for customers
+ * @author Jovan Sie
+ * @version 3.0
+ * @since 06-11-2022
+ */
 public class TicketManager {
 
+    /**
+     * Scanner class
+     */
     private Scanner sc = new Scanner(System.in);
+    /**
+	 * For singleton pattern adherence. This TicketManager instance persists throughout runtime.
+	 */
     private static TicketManager tm = null;
+    /**
+     * Stores the list of tickets to be provided for transactionmanager and bookingmanager
+     */
     private ArrayList<Ticket> ticketList;
+    /**
+     * stores the booked seats as confirmed seats in string
+     */
     private ArrayList<String> cS;
+    /**
+     * stores the current showtime value
+     */
     private Showtime showtime;
+    /**
+     * initialises the ticket prices stored in csv files
+     */
     private TicketPrice tp = new TicketPrice();
+    /**
+     * stores the holiday list locally
+     */
     private ArrayList<LocalDate> hlList;
+    /**
+     * gets the list of holidays in csv
+     */
     private List<Holidays> holiDates;
+    /**
+     * for loop break upon exit
+     */
     Boolean noQuit = true;
 	
-    /** 
-     * Creates a new TicketManager instance
-     * @return TicketManager
-     */
+
+    	
+    /**
+	 * For singleton pattern adherence. 
+	 * @return instance The static instance that persists throughout runtime.
+	 */
     public static TicketManager newTM()
 	{
 	    if (tm == null) {
@@ -215,6 +250,7 @@ public class TicketManager {
 
     
     /** 
+     * sets the current ticket list
      * @param ticketList
      */
     public void setTicketArray(ArrayList<Ticket> ticketList)
@@ -223,6 +259,7 @@ public class TicketManager {
     }
     
     /** 
+     * sets the bookedseats from bookingmanager into confirmed seats
      * @param confirmedSeat
      */
     public void setCS(ArrayList<String> confirmedSeat)
@@ -231,6 +268,7 @@ public class TicketManager {
     }
     
     /** 
+     * sets the current showtime
      * @param showtime
      */
     public void setShowtime(Showtime showtime)
@@ -241,7 +279,8 @@ public class TicketManager {
 
     
     /** 
-     * @return ArrayList<Ticket>
+     * gets the list of ticket
+     * @return current ArrayList<Ticket>
      */
     public ArrayList<Ticket> getTicketArray()
     {
@@ -249,7 +288,8 @@ public class TicketManager {
     }
     
     /** 
-     * @return ArrayList<String>
+     * gets the list of confirmed seats
+     * @return current ArrayList<String>
      */
     public ArrayList<String> getCSArray()
     {
@@ -257,8 +297,9 @@ public class TicketManager {
     }
     
     /** 
+     * gets a confirmed seat
      * @param index
-     * @return String
+     * @return current string of confirmed seat
      */
     public String getCS(int index)
     {
@@ -266,7 +307,8 @@ public class TicketManager {
     }
     
     /** 
-     * @return Showtime
+     * gets the showtime
+     * @return current Showtime
      */
     public Showtime getShowtime()
     {
@@ -346,6 +388,7 @@ public class TicketManager {
 
     
     /** 
+     * sets the local holiday list
      * @param ArrayListHList
      */
     public void setHList(ArrayList<LocalDate>HList)
@@ -355,6 +398,7 @@ public class TicketManager {
 
     
     /** 
+     * gets the local holiday list
      * @return ArrayList<LocalDate>
      */
     public ArrayList<LocalDate> getHList()
@@ -365,6 +409,7 @@ public class TicketManager {
 
     
     /** 
+     * set the holiday list from csv
      * @param ListHList
      */
     public void setH(List<Holidays>HList)
@@ -374,6 +419,7 @@ public class TicketManager {
 
     
     /** 
+     * get the holidates
      * @return List<Holidays>
      */
     public List<Holidays> getH()
@@ -381,7 +427,9 @@ public class TicketManager {
         return this.holiDates;
     }
 
-
+    /**
+     * Add csv values from holidates to local list HList
+     */
     public void setHolidayDates()
     {
         for(Holidays h : getH())
