@@ -197,6 +197,13 @@ public class CustomerMovieManager {
 
 	}
 
+	/**
+	 * Function will search and shows the movie list from the cineplex selected by the user.
+	 * After user selected the movie from the movie list, the showtime will be shown to the user to select the showtime that they prefer
+	 * @param movieList list of movies
+	 * @param reviewList list of reviews
+	 * @return return the showtime that user have selected
+	 */
 	public ArrayList<Showtime> searchMovieShowtime(List<Movie> movieList, List<Review> reviewList)
     {
 		int i;
