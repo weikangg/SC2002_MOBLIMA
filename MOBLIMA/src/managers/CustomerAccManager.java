@@ -19,11 +19,19 @@ import java.io.FileNotFoundException;
 import java.time.format.DateTimeFormatter;
 @SuppressWarnings("unchecked")
 
+/**
+ * Function class that configures user account information
+ * @author Ling Hin
+ * @version 2.5
+ * @since 08-11-2022
+ */
+
 public class CustomerAccManager {
-    
+    /*
+     * 
+     */
     static String path = System.getProperty("user.dir") +"\\data\\accounts\\accounts.csv";
-    static String item_Separator = ",";	
-    static AccountManager accountManager = AccountManager.getInstance();
+    //static String item_Separator = ",";	
     private static Scanner scan = new Scanner(System.in);
 
     public static CustomerAcc createAcc(List<Account>accountList){
@@ -34,6 +42,7 @@ public class CustomerAccManager {
 		String password="";
         String pwStrength="Weak";
 
+        AccountManager accountManager = AccountManager.getInstance();
 
         //ask for user information and use try to check if name or email or mobile exists
         //to add exceptions
