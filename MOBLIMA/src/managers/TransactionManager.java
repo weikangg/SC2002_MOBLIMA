@@ -93,7 +93,7 @@ public class TransactionManager
                 {
                     case 1: //Make payment
                         setTotalPrice();
-                        System.out.println("Total payment will be $" + getTotalPrice());
+                        System.out.printf("Total payment will be $ %.2f \n", getTotalPrice());
                         enterUserInfo();
                         BookingManager.newBM().createBooking();
                         notQuit = false;
@@ -121,7 +121,7 @@ public class TransactionManager
     public void enterUserInfo()
     {        
         boolean checks = true;
-        System.out.println("Hello Customer " + BookingManager.newBM().getUser().getUsername());
+        System.out.println("Hello customer \033[1m" + BookingManager.newBM().getUser().getUsername() + "\033[0m");
         System.out.println(
             "===================  Information  =================\n" +
             "Username: " + BookingManager.newBM().getUser().getUsername() + "\n" +
@@ -144,7 +144,7 @@ public class TransactionManager
             }checks = false;
         }
         checks = true;
-        System.out.println("Paying...");
+        //System.out.println("Paying...");
         String userInfo = "Email: " + BookingManager.newBM().getUser().getEmail() +
         "\nMobile Number: (+65)" +  BookingManager.newBM().getUser().getMobile() + "\nName: " +
         name;
