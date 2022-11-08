@@ -17,7 +17,27 @@ import com.opencsv.*;
  * @version 3.0
  * @since 06-11-2022
  */
-public class Cinema extends Cineplex{
+public class Cinema {
+    
+    /**
+     * Name of Cineplex
+     */
+    private String name;
+
+    /**
+     * Location of Cineplex
+     */
+    private String location;
+
+     /**
+     * Number of Cinemas in Cineplex
+     */
+    private int numCinemas;
+
+    /**
+     * ID of Cineplex
+     */
+    private int cineplexID;
 
     /**
      * ID of Cinema
@@ -41,12 +61,19 @@ public class Cinema extends Cineplex{
 
     /**
      * Creates a new Cinema by inheriting from Cineplex, and also the Cinema's ID and Class
+     * @param name Name of Cineplex
+     * @param location Location of Cineplex
+     * @param numCinemas Location of Cineplex
+     * @param cineplexID ID of Cineplex
      * @param cinemaID Name of Cineplex
      * @param cinemaClass Location of Cineplex
      */
     public Cinema(String name, String location, int numCinemas, int cineplexID, int cinemaID, CinemaClass cinemaClass){
-        super(name, location, numCinemas, cineplexID);
-
+        
+        this.name = name;
+        this.location = location;
+        this.numCinemas = numCinemas;
+        this.cineplexID = cineplexID;
         this.cinemaID = cinemaID;
         this.cinemaClass = cinemaClass;
 
@@ -63,7 +90,7 @@ public class Cinema extends Cineplex{
         Showtime[] showtimes = new Showtime[numShowtimes]; //Creating object array for Movie objects
 
         for (int i = 0; i < numShowtimes; i++){
-            showtimes[i] = new Showtime(super.getName(), super.getLocation(), super.getNumCinema(),super.getCineplexID(),cinemaID,cinemaClass,i);
+            showtimes[i] = new Showtime(name, location, numCinemas, cineplexID, cinemaID, cinemaClass, i);
         }
 
         this.showtimes = showtimes;
@@ -94,7 +121,7 @@ public class Cinema extends Cineplex{
 
         try {
             //Create File
-            Path path = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes\\"+super.getName()+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+numShowtimes+".csv");
+            Path path = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes\\"+name+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+numShowtimes+".csv");
             
             String[] str = dateTime.toString().split("T",2);
             String strDateTime = str[0]+" "+str[1];
@@ -132,11 +159,11 @@ public class Cinema extends Cineplex{
 
             ArrayList<String[]> cineplexesFile = new ArrayList<String[]>(r);
             
-            String[] array= cineplexesFile.get(super.getCineplexID()+1);
+            String[] array= cineplexesFile.get(cineplexID+1);
             
             array[cinemaID+3] = Integer.toString(Integer.valueOf(array[cinemaID+3])+1);
 
-            cineplexesFile.set(super.getCineplexID()+1, array);
+            cineplexesFile.set(cineplexID+1, array);
 
             FileWriter filewriterTwo = new FileWriter(path.toAbsolutePath().toString()); //CSVReader Instantiation
             CSVWriter csvwriterTwo = new CSVWriter(filewriterTwo, 
@@ -173,7 +200,7 @@ public class Cinema extends Cineplex{
         }
 
         //Delete showtime csv file
-        Path path = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes\\"+super.getName()+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+showtimeID+".csv");
+        Path path = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes\\"+name+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+showtimeID+".csv");
         File file = new File(path.toAbsolutePath().toString());
 
         if (file.delete()) { 
@@ -194,11 +221,11 @@ public class Cinema extends Cineplex{
 
             ArrayList<String[]> cineplexesFile = new ArrayList<String[]>(r);
             
-            String[] array= cineplexesFile.get(super.getCineplexID()+1);
+            String[] array= cineplexesFile.get(cineplexID+1);
             
             array[cinemaID+3] = Integer.toString(Integer.valueOf(array[cinemaID+3])-1);
 
-            cineplexesFile.set(super.getCineplexID()+1, array);
+            cineplexesFile.set(cineplexID+1, array);
 
             FileWriter filewriterTwo = new FileWriter(path.toAbsolutePath().toString()); //CSVReader Instantiation
             CSVWriter csvwriterTwo = new CSVWriter(filewriterTwo, 
@@ -216,10 +243,10 @@ public class Cinema extends Cineplex{
 
         //Update filename of showtimes after and update numShowtimes
         for(int i = showtimeID + 1; i < numShowtimes; i++){
-            Path pathTwo = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes\\"+super.getName()+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+i+".csv");
+            Path pathTwo = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes\\"+name+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+i+".csv");
             File fileTwo = new File(pathTwo.toAbsolutePath().toString());
 
-            Path newPath = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes\\"+super.getName()+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+(i-1)+".csv");
+            Path newPath = Paths.get(System.getProperty("user.dir")+"\\data\\cineplexes\\"+name+ "\\hall"+Integer.toString(cinemaID+1)+ "\\"+(i-1)+".csv");
             File newFile = new File(newPath.toAbsolutePath().toString());
 
             fileTwo.renameTo(newFile);
@@ -232,6 +259,38 @@ public class Cinema extends Cineplex{
 
         System.out.println("Showtime Deleted");
 
+    }
+
+    /**
+     * Function to return the Name of the Cineplex
+     * @return Name of Cineplex
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Function to return the ID of the Cineplex
+     * @return ID of Cineplex
+     */
+    public int getCineplexID(){
+        return cineplexID;
+    }
+
+    /**
+     * Function to return the Location of the Cineplex
+     * @return Location of Cineplex
+     */
+    public String getLocation() {
+        return location;
+    }
+
+    /**
+     * Function to return the number of Cinemas in the Cineplex
+     * @return Number of Cinemas in Cineplex
+     */
+    public int getNumCinema() {
+        return numCinemas;
     }
 
     /**

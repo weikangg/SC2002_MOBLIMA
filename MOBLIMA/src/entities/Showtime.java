@@ -91,6 +91,12 @@ public class Showtime implements Serializable{
 
     /**
      * Creates a new Showtime by inheriting from Cinema, and also showtimeID
+     * @param name Name of Cineplex
+     * @param location Location of Cineplex
+     * @param numCinemas Location of Cineplex
+     * @param cineplexID ID of Cineplex
+     * @param cinemaID Name of Cineplex
+     * @param cinemaClass Location of Cineplex
      * @param showtimeID ID of Shotwime
      */
     public Showtime(String name, String location, int numCinemas, int cineplexID, int cinemaID, CinemaClass cinemaClass, int showtimeID){
@@ -98,6 +104,7 @@ public class Showtime implements Serializable{
         this.name = name;
         this.location = location;
         this.numCinemas = numCinemas;
+        this.cineplexID = cineplexID;
         this.cinemaID = cinemaID;
         this.cinemaClass = cinemaClass;
         this.showtimeID = showtimeID;
