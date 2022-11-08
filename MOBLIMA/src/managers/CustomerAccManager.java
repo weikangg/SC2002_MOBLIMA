@@ -16,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.io.FileNotFoundException;
+import java.time.format.DateTimeFormatter;
 @SuppressWarnings("unchecked")
 
 public class CustomerAccManager {
@@ -209,6 +210,8 @@ public class CustomerAccManager {
         String path = System.getProperty("user.dir") +"\\data\\bookings\\";
         String location = path + name +"/bookings.csv";
         int input = -1;
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         //String filename = ".csv";
         //String trans;
         //int fileCount;
@@ -233,14 +236,16 @@ public class CustomerAccManager {
                     System.out.println("Movie Title: " + b.getMovie());
                     System.out.println("Cineplex: " + b.getCineplexID());
                     System.out.println("Cinema: " + b.getCinemaID());
-                    System.out.println("Movie Date & Time: " + b.getShowtime());
+                    System.out.println("Movie Date: " + b.getShowtime().format(dateFormatter));
+                    System.out.println("Movie Time: " + b.getShowtime().format(timeFormatter));
                     System.out.println("Tickets:");
                     tix = b.getTicketList();
                     for(int i = 0; i < tix.size(); i++)
                     {
                         System.out.println("    Ticket " + (i+1) + " : " + " Row " + tix.get(i).getRow() + " Column " + tix.get(i).getCol() + " $" + String.format("%.2f", tix.get(i).getTicketPrice()));
                     }
-                    System.out.println("Transaction Time:" + b.getTransaction().getTranDateTime());
+                    System.out.println("Transaction Date: " + b.getTransaction().getTranDateTime().substring(0,4)  + "-" +  b.getTransaction().getTranDateTime().substring(4,6) + "-" +  b.getTransaction().getTranDateTime().substring(6,8));
+                    System.out.println("Transaction Time: " +  b.getTransaction().getTranDateTime().substring(8,10) + ":" +  b.getTransaction().getTranDateTime().substring(10));
                     System.out.println("Total Price: $" + String.format("%.2f", b.getTotalPrice()) );
                     System.out.println("========================================================");
                 }
