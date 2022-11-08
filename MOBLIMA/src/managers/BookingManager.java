@@ -475,7 +475,7 @@ public class BookingManager implements Serializable{
             }
             //System.out.println("Total Price of first booking is: " + userBookings.get(0).getTotalPrice());
             //System.out.println("Transaction Number: " + userBookings.get(0).getTransaction().getID());
-            System.out.println("User info: " + userBookings.get(0).getUserInfo());
+            //System.out.println("User info: " + userBookings.get(0).getUserInfo());
         }
         String userBooks = "B" + userBookings.size();
         Booking newB = new Booking(userBooks,TransactionManager.getInstance().getUserInfo(),TransactionManager.getInstance().getTotalPrice(),getShowtime().getMovieTitle(),
