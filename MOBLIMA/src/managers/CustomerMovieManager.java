@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import entities.*;
 
+/**
+ * Function class that display and output relevant information about the movies to the customers
+ * @author Ling Hin
+ * @version 2.5
+ * @since 08-11-2022
+ */
+
 public class CustomerMovieManager {
     	/**
 	 * The seperator for array of string in csv
