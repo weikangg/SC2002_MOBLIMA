@@ -147,6 +147,12 @@ public class TicketManager {
         double modifier = tp.getMappedMovieTypePrice().get(getShowtime().getMovieType());
         double sc = tp.getMappedSeatTypePrice().get(getShowtime().getSeatS()[row][col].getSeatType());
         price = price * modifier * cc * sc;
+        System.out.println(
+            "[" + tt + "] " +
+            "[" +  getShowtime().getCinemaClassCC() + "] " +
+            "[" + getShowtime().getMovieType() + "] " +
+            "[" + getShowtime().getSeatS()[row][col].getSeatType() + "]");
+        System.out.printf("Price is $%.2f \n",price);
         return price;
     }
 
@@ -182,6 +188,7 @@ public class TicketManager {
     {
         for(int i = 0; i<getCSArray().size(); i++)
         {
+            System.out.println("Ticket [" + (i+1) + "] is: ");
             String rowcol = getCS(i);
             String[] tokens = rowcol.split("/");
             int row = Integer.parseInt(tokens[0]);
@@ -391,6 +398,7 @@ public class TicketManager {
     public Boolean isHoliday()
     {
         LocalDate lDate = getShowtime().getDateTimeLDT().toLocalDate();
+        //System.out.println(dtf.format(now)); 
         for(LocalDate ld : getHList())
         {
             if(lDate.isEqual(ld))
