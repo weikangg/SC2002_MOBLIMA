@@ -15,7 +15,8 @@ import utils.IOUtils;
 
 /**
  * Function class that provides the booking and seat selection features for customers
- * @author 3.0
+ * @author Jovan Sie
+ * @version 3.0
  * @since 06-11-2022
  */
 public class BookingManager implements Serializable{
