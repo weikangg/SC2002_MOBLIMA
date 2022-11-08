@@ -3,9 +3,14 @@ package entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Transaction class
+ * @author Jovan Sie
+ * @version 3.0
+ * @since 06-11-2022
+ */
 public class Transaction implements Serializable{
     private String id;
-    //private String movieName;
     private String tranDateTime;
     private ArrayList<Ticket> tix;
     private double totalPrice = 0;
@@ -31,15 +36,6 @@ public class Transaction implements Serializable{
     public String getID(){
         return this.id;
     }
-    
-    /** 
-     * gets the movie name of the transaction
-     * @return String
-     */
-    /*public String getMovieName(){
-        return this.movieName;
-    }*/
-    
     
     /** 
      * gets the transaction's date and time
@@ -85,11 +81,7 @@ public class Transaction implements Serializable{
      * @param id
      */
     public void setID(String id) {this.id = id;}
-    /**
-     * sets the movie name of the transaction
-     * @param movname
-     */
-    //public void setMovieName(String movname) {this.movieName= movname;}
+
     /**
      * sets the date and time of the transaction
      * @param tdt
@@ -114,7 +106,6 @@ public class Transaction implements Serializable{
 
     public void printTransaction() {
     	System.out.println("ID: " +this.getID());
-		//System.out.println("Movie Title: " +this.getMovieName());
 		System.out.println("Date & Time: " + this.getTranDateTime());
 
         //print out the information for each ticket
