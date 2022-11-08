@@ -13,7 +13,7 @@ import entities.*;
  */
 
 public class CustomerMovieManager {
-    	/**
+    /**
 	 * The seperator for array of string in csv
 	 */
 	static String SplitBy = ";";
@@ -25,12 +25,35 @@ public class CustomerMovieManager {
 	 * The seperator that represent "," when stored in csv
 	 */
 	static String SplitByColon = ":";
+	/**
+	 * The scanner for reading input of user
+	 */
 	private static Scanner scan = new Scanner(System.in);
+	/**
+	 * For singleton pattern adherence. This StaffAccManager instance persists throughout runtime.
+	 */
+    private static CustomerMovieManager single_instance = null;
+	/**
+	 * For singleton pattern adherence. 
+	 * @return instance The static instance that persists throughout runtime.
+	 */
+    public static CustomerMovieManager getInstance()
+    {
+        if (single_instance == null)
+            single_instance = new CustomerMovieManager();
+        return single_instance;
+    }
 
 	// Displays all info about movie + limited 5 reviews on each movie. If <= 1  review with rating score higher than the limit, prints a placeholder message "na"
 	// Only shows info of movies which are preview or NOW SHOWING
 	// Shows reviews according to rating score limit pre-set by staff.
-	public static void printMovieList(List<Movie>mList, List<Review>rList) {
+	/**
+	 *  Function prints all the movies and ratings for each movie
+	 * Shows movie details such as movie title, showing status, synopsis, movie director, casts, genres, movie rating, duration, release date, movie type, rating scores and customers' rating
+	 * @param mList list with all the movies
+	 * @param rList list will all customers' reviews
+	 */
+	public void printMovieList(List<Movie>mList, List<Review>rList) {
 		int movieCount = 1;
 		System.out.println("#########################################################");
 		System.out.println("################## DISPLAYING MOVIES ####################");
@@ -102,7 +125,16 @@ public class CustomerMovieManager {
 	}
 
 	// if movie is end of showing or coming soon, will print a placeholder message instead of the movie info
-	public static int searchMovie(List<Movie>mList, List<Review> rList, String name){
+	
+	/**
+	 * Function search for movie inside movie list
+	 * If movie is found, function will print out movie informations such as 
+	 * @param mList list of movies
+	 * @param rList list of customers' reviews
+	 * @param name movie name that user is searching for
+	 * @return returns 1 if movie is found, returns 0 if movie is not found
+	 */
+	public int searchMovie(List<Movie>mList, List<Review> rList, String name){
 		int found = 0;
 		for(Movie m : mList){
 			String cast, genre;
@@ -165,7 +197,7 @@ public class CustomerMovieManager {
 
 	}
 
-	public static ArrayList<Showtime> searchMovieShowtime(List<Movie> movieList, List<Review> reviewList)
+	public ArrayList<Showtime> searchMovieShowtime(List<Movie> movieList, List<Review> reviewList)
     {
 		int i;
         String name;
@@ -231,8 +263,8 @@ public class CustomerMovieManager {
 
         
         
-        //ask user for movie
-        CustomerMovieManager.printMovieList(cineMovieList, reviewList);
+        //ask user for movie11
+        this.printMovieList(cineMovieList, reviewList);
         System.out.println("Please choose a movie:");
         name = scan.nextLine();
 

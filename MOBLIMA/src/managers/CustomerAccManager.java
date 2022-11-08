@@ -27,14 +27,43 @@ import java.time.format.DateTimeFormatter;
  */
 
 public class CustomerAccManager {
-    /*
-     * 
-     */
+    /**
+	 * The path to the CSV file that stores all the accounts
+	 */
     static String path = System.getProperty("user.dir") +"\\data\\accounts\\accounts.csv";
-    //static String item_Separator = ",";	
+    //static String item_Separator = ",";
+    /**
+	 * The scanner for reading input of user
+	 */
     private static Scanner scan = new Scanner(System.in);
 
-    public static CustomerAcc createAcc(List<Account>accountList){
+/**
+	 * For singleton pattern adherence. This StaffAccManager instance persists throughout runtime.
+	 */
+    private static CustomerAccManager single_instance = null;
+	/**
+	 * For singleton pattern adherence. 
+	 * @return instance The static instance that persists throughout runtime.
+	 */
+    public static CustomerAccManager getInstance()
+    {
+        if (single_instance == null)
+            single_instance = new CustomerAccManager();
+        return single_instance;
+    }
+
+    /**
+     * Function to create new user account
+     * Asks user for username and checks if username already exist in the list of accounts
+     * Ask user for email and checks if email entered is a valid email address using pre-defined regex function in accountManager class
+     * Ask user for mobile number and check if mobile number entered is a valid number using pre-defined regex function in accountManager class
+     * Ask user for age and check if age is valid
+     * Ask user for password and check if password is strong using function in utils/PasswordStrengthChecker class
+     * After getting information, all the information will be stored in acc and appended to the csv file with the list of accounts
+     * @param accountList existing list of accounts
+     * @return returns an instance of the customer account
+     */
+    public CustomerAcc createAcc(List<Account>accountList){
         String name;
         String email;
         int mobile;
@@ -171,7 +200,14 @@ public class CustomerAccManager {
         return acc;
     }
 
-	public static boolean checkLogin(String username , String password){
+    /**
+     * Function checks if customer's login information is correct
+     * Search and checks for customer's username and password in the csv that stores all the accounts
+     * @param username customer's username
+     * @param password customer's password
+     * @return returns true if customer's information are correct, else returns false
+     */
+	public boolean checkLogin(String username , String password){
         try{
             String line = "";
 
@@ -214,7 +250,12 @@ public class CustomerAccManager {
         return false;
     }
 
-    public static void checkHistory(Account user){
+    /**
+     * Opens the user's booking history csv file and extract the information
+     * Prints out all user's booking history information such as booking ID, movie name, cineplex, cinema, movie date and time, ticket seat and cost, transaction date and time and total amount paid
+     * @param user current logged in user account
+     */
+    public void checkHistory(Account user){
         String name = user.getUsername();
         String path = System.getProperty("user.dir") +"\\data\\bookings\\";
         String location = path + name +"/bookings.csv";
@@ -277,49 +318,5 @@ public class CustomerAccManager {
                 scan.nextLine();
             }
         }
-        
-        
-        
-
-        //File directory = new File(path + name);
-        //fileCount = directory.list().length;
-        //debug
-        //System.out.println(fileCount);
-
-        /*for(int i = 1; i <= fileCount; i++)//go through all the files in customer and print out the transaction information
-        {
-            
-            trans = location + i + filename;
-            System.out.println(trans);
-            System.out.println("========================================================");
-            
-            
-            try{
-                FileInputStream file = new FileInputStream(trans);
-                ObjectInputStream in = new ObjectInputStream(file);
-                book = (ArrayList<Booking>) in.readObject();
-
-                System.out.println(book);
-
-                for(Booking b : book)
-                {
-                    System.out.println("Booking ID: " + b.getbookingID());
-                    System.out.println("Movie Title: " + b.getMovie());
-                    System.out.println("Cineplex: " + b.getCineplexID());
-                    System.out.println("Cinema: " + b.getCinemaID());
-                    System.out.println("");
-
-                }
-                
-                in.close();
-                file.close();
-    
-            }catch(IOException ex){
-                System.out.println("IOException is caught");
-            } catch (ClassNotFoundException exp) {
-                System.out.println("Class not found");
-            }
-            System.out.println("========================================================");    
-        }*/
     }
 }

@@ -43,6 +43,8 @@ public class customerApp {
         List<Movie> movieList = MovieListManager.getInstance().getMovieList();
         List<Review> reviewList = ReviewListManager.getInstance().getReviewList();
         AccountManager accountManager = AccountManager.getInstance();
+        CustomerAccManager custAccManager = CustomerAccManager.getInstance();
+        CustomerMovieManager custMovieManager = CustomerMovieManager.getInstance();
         boolean exit = false;
         String strinput;
         int input;
@@ -94,14 +96,14 @@ public class customerApp {
 
                 case 2:
                     //ask user for information to create account
-                    CustomerAccManager.createAcc(accountManager.getAccountList());
+                    custAccManager.createAcc(accountManager.getAccountList());
                     break;
                 case 3:
                     int idx = 1;
                     Showtime movst;
                     List<Showtime> showtime;
 
-                    showtime = CustomerMovieManager.searchMovieShowtime(movieList, reviewList);
+                    showtime = custMovieManager.searchMovieShowtime(movieList, reviewList);
                     if(showtime.isEmpty())
                     {
                         break;
@@ -123,14 +125,14 @@ public class customerApp {
 
                     break;
                 case 4:
-                    CustomerMovieManager.printMovieList(movieList,reviewList);
+                    custMovieManager.printMovieList(movieList,reviewList);
                     break;
 
                 case 5:
                 //search
                     System.out.println("Please enter the movie name:");
                     strinput = scan.nextLine();
-                    if(CustomerMovieManager.searchMovie(movieList, reviewList, strinput) == 0){
+                    if(custMovieManager.searchMovie(movieList, reviewList, strinput) == 0){
                         System.out.println("Movie not found!");
                     }
                     break;
@@ -206,6 +208,7 @@ public class customerApp {
     public void customerLoggedInMenu(Account account){
         List<Movie> movieList = MovieListManager.getInstance().getMovieList();
         List<Review> reviewList = ReviewListManager.getInstance().getReviewList();
+        CustomerMovieManager custMovieManager = CustomerMovieManager.getInstance();
         boolean exit = false;
         String strinput;
         int input;
@@ -240,14 +243,14 @@ public class customerApp {
                     break;
 
                 case 2:
-                    CustomerMovieManager.printMovieList(movieList,reviewList);
+                    custMovieManager.printMovieList(movieList,reviewList);
                     break;
 
                 case 3:
                 //search
                     System.out.println("Please enter the movie name:");
                     strinput = scan.nextLine();
-                    if(CustomerMovieManager.searchMovie(movieList, reviewList, strinput) == 0){
+                    if(custMovieManager.searchMovie(movieList, reviewList, strinput) == 0){
                         System.out.println("Movie not found!");
                     }
                     break;
@@ -323,6 +326,8 @@ public class customerApp {
         boolean exit = false;
         List<Movie> movieList = MovieListManager.getInstance().getMovieList();
         List<Review> reviewList = ReviewListManager.getInstance().getReviewList();
+        CustomerAccManager custAccManager = CustomerAccManager.getInstance();
+        CustomerMovieManager custMovieManager = CustomerMovieManager.getInstance();
        
         do{
             //menu
@@ -350,7 +355,7 @@ public class customerApp {
                 List<Showtime> showtime;
 
                 //link the movie to showtime
-                showtime = CustomerMovieManager.searchMovieShowtime(movieList, reviewList);
+                showtime = custMovieManager.searchMovieShowtime(movieList, reviewList);
                 if(showtime.isEmpty())
                 {
                     break;
@@ -374,7 +379,7 @@ public class customerApp {
                 case 2:
                 //show booking history
                 System.out.println("=========================HISTORY=========================\n");
-                CustomerAccManager.checkHistory(user);
+                custAccManager.checkHistory(user);
                     break;
                     
                 case 3:
