@@ -160,11 +160,11 @@ public class CustomerMovieManager {
 
 	public static ArrayList<Showtime> searchMovieShowtime(List<Movie> movieList, List<Review> reviewList)
     {
-		
+		int i;
         String name;
-        char cineplex;
         int cineplexID;
-        List<Movie> cineMovieList;
+        List<Movie> cineMovieList = new ArrayList<>();
+		int [] movid = new int[movieList.size() + 1];
 
         //ask user for cineplex
         while(true){
@@ -188,46 +188,51 @@ public class CustomerMovieManager {
         
         //find movies that are in the cineplex
         cineplexID -= 1;
-        cineplex = (char)(cineplexID + 65);
         Cineplex[] cineplexes = CineplexManager.getInstance().configCineplexes(); 
         Cinema[] cinemas = cineplexes[cineplexID].getCinemas();
-        /*for(Cinema c : cinemas)
+		for(i = 0; i < movieList.size(); i++)
+		{
+			movid[i] = 0;
+		}
+        for(Cinema c : cinemas)
         {
-            Showtime [] st = c.getShowtimes();
-            for()
-        }*/
-        
-        //can get movie id from show time
-
-            //cineplex = scan.next().charAt(0);
-            //scan.nextLine();
-            //cineplexID = (int)cineplex;
-            //if((cineplexID < 65) || (cineplexID > 90 && cineplexID < 97) || (cineplexID > 122)){
-                //System.out.println("Please key in an alphabet");
-                //continue;
-            //}
-            //else{
-                //break;
-            //}
-
-        /*if(cineplexID > 90)
-        {
-            cineplexID -= (int)'a';
+            Showtime [] showtime = c.getShowtimes();
+			for(Showtime s : showtime)
+			{
+				movid[(s.getMovieID())-1] = 1;
+				//s.showInfo();
+			}
         }
-        else
-        {
-            cineplexID -= (int)'A';
-        }*/
+
+		for(i = 0; i < movieList.size() + 1; i++)
+		{
+			if(movid[i] == 1)
+			{
+				for(int j = 0; j < movieList.size(); j++)
+				{
+					if(movieList.get(j).getMovieID() == (i+1) )
+					{
+						System.out.println(movieList.get(j).getShowingStatus());
+						cineMovieList.add(movieList.get(j));
+					}
+				}
+				
+			}
+		}
+        
+		System.out.println("========================================================");
+
+        
         
         //ask user for movie
-        CustomerMovieManager.printMovieList(movieList, reviewList);
+        CustomerMovieManager.printMovieList(cineMovieList, reviewList);
         System.out.println("Please choose a movie:");
         name = scan.nextLine();
 
         //link the movie to showtime
         ArrayList<Showtime> list = new ArrayList<Showtime>();
         int id = -1;
-        for(Movie mov : movieList)
+        for(Movie mov : cineMovieList)
         {
             if(name.equals(mov.getMovieTitle()))
             {
@@ -236,13 +241,13 @@ public class CustomerMovieManager {
         }
         if(id == -1)
         {
-            System.out.println("Movie not found");
+            System.out.println("There are no existing showtimes for this movie in this cineplex for now!");
             return list;
         }
 
         
 
-        for(int i = 0; i < cinemas.length; i++)
+        for(i = 0; i < cinemas.length; i++)
         {
             Showtime[] showtimes = cinemas[i].getShowtimes();
             for(int j = 0; j < showtimes.length; j++)
