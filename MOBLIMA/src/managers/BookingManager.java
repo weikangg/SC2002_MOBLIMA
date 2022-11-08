@@ -519,7 +519,7 @@ public class BookingManager implements Serializable{
         setDone();
         TransactionManager.getInstance().deleteTransactionM();
         TicketManager.newTM().deleteTicketM();
-        System.out.println("Booking and payment success!\n Please view under booking history");
+        System.out.println("Booking and payment success!\nPlease view under booking history");
 
     }
     

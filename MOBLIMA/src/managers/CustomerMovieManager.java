@@ -258,7 +258,6 @@ public class CustomerMovieManager {
 				{
 					if(movieList.get(j).getMovieID() == (i+1) )
 					{
-						System.out.println(movieList.get(j).getShowingStatus());
 						cineMovieList.add(movieList.get(j));
 					}
 				}
