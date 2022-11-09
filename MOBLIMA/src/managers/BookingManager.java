@@ -587,6 +587,7 @@ public class BookingManager implements Serializable{
                 if(j == 5) System.out.print("  ");
                 if(getSeats()[i][j].getState() == 0) System.out.print("\u001B[32m" + seats[i][j].getSeatType().toString().charAt(0) + "\u001B[0m");
                 else if(getSeats()[i][j].getState() == 1) System.out.print("\u001B[31m" + "X" + "\u001B[0m");
+                else System.out.print("\u001B[34m" + "S" + "\u001B[0m");
             }
             System.out.println("  "+(char)(i+65));
         }
