@@ -218,6 +218,7 @@ public class CustomerMovieManager {
                                 "1. Cineplex A\n"+
                                 "2. Cineplex B\n"+
                                 "3. Cineplex C\n");
+			System.out.println("========================================================");
             System.out.println("Enter your choice:");
             cineplexID = scan.nextInt();
             scan.nextLine();
@@ -265,7 +266,7 @@ public class CustomerMovieManager {
 			}
 		}
         
-		System.out.println("========================================================");
+		
 
         
         
