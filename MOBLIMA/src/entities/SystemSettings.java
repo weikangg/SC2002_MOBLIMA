@@ -169,11 +169,11 @@ public class SystemSettings {
     public void top5Movies(List<Movie>mList){
         int choice = 0;
         while(true){
-            System.out.println("================== SHOW TOP 5 MOVIES ====================\n" +
-                               " 1. Top 5 Movies By Sales 						         \n" +
-                               " 2. Top 5 Movies By Ratings                              \n" +
-                               " 3. Exit                                                 \n" +
-                               "==========================================================");
+            System.out.print("================== SHOW TOP 5 MOVIES ====================\n" +
+                               " 1. Top 5 Movies By Sales\n" +
+                               " 2. Top 5 Movies By Ratings\n" +
+                               " 3. Exit\n" +
+                               "==========================================================\n");
             print("Choice:");
             try{
                 choice = sc.nextInt();
@@ -293,11 +293,11 @@ public class SystemSettings {
         int choice = 0;
         DecimalFormat df = new DecimalFormat("0.00");
         while(true){
-            System.out.println("================== SHOW TOP 5 MOVIES ====================\n" +
-                               " 1. Top 5 Movies By Sales 						         \n" +
-                               " 2. Top 5 Movies By Ratings                              \n" +
-                               " 3. Exit                                                 \n" +
-                               "==========================================================");
+            System.out.print("================== SHOW TOP 5 MOVIES ====================\n" +
+                               " 1. Top 5 Movies By Sales\n" +
+                               " 2. Top 5 Movies By Ratings\n" +
+                               " 3. Exit\n" +
+                               "==========================================================\n");
             print("Choice:");
             try{
                 choice = sc.nextInt();
@@ -382,11 +382,11 @@ public class SystemSettings {
         int choice = 0;
         DecimalFormat df = new DecimalFormat("0.0");
         while(true){
-            System.out.println("================== SHOW TOP 5 MOVIES ====================\n" +
-                               " 1. Top 5 Movies By Sales 						         \n" +
-                               " 2. Top 5 Movies By Ratings                              \n" +
-                               " 3. Exit                                                 \n" +
-                               "==========================================================");
+            System.out.print("================== SHOW TOP 5 MOVIES ====================\n" +
+                               " 1. Top 5 Movies By Sales\n" +
+                               " 2. Top 5 Movies By Ratings\n" +
+                               " 3. Exit\n" +
+                               "==========================================================\n");
             print("Choice:");
             try{
                 choice = sc.nextInt();
@@ -465,11 +465,11 @@ public class SystemSettings {
     public void viewNone(){
         int choice = 0;
         while(true){
-            System.out.println("================== SHOW TOP 5 MOVIES ====================\n" +
-                               " 1. Top 5 Movies By Sales 						         \n" +
-                               " 2. Top 5 Movies By Ratings                              \n" +
-                               " 3. Exit                                                 \n" +
-                               "==========================================================");
+            System.out.print("================== SHOW TOP 5 MOVIES ====================\n" +
+                               " 1. Top 5 Movies By Sales\n" +
+                               " 2. Top 5 Movies By Ratings\n" +
+                               " 3. Exit\n" +
+                               "==========================================================\n");
             print("Choice:");
             try{
                 choice = sc.nextInt();
