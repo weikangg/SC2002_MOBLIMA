@@ -19,7 +19,7 @@ public class movieTrailer {
                     Desktop.getDesktop().browse(new URI("https://www.youtube.com/watch?v=_Z3QKkl1WyM&ab_channel=MarvelEntertainment"));
                 }
                 break;
-            case "Another movie":
+            default:
                 break;
         }
     }
