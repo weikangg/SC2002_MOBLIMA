@@ -284,8 +284,8 @@ public class CustomerAccManager {
                 {
                     System.out.println("Booking ID: " + b.getbookingID());
                     System.out.println("Movie Title: " + b.getMovie());
-                    System.out.println("Cineplex: " + b.getCineplexID());
-                    System.out.println("Cinema: " + b.getCinemaID());
+                    System.out.println("Cineplex: " + (char)(b.getCineplexID()+65));
+                    System.out.println("Cinema: " + (b.getCinemaID()+1));
                     System.out.println("Movie Date: " + b.getShowtime().format(dateFormatter));
                     System.out.println("Movie Time: " + b.getShowtime().format(timeFormatter));
                     System.out.println("Tickets:");
