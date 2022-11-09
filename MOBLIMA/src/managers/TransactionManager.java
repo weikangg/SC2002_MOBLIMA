@@ -287,6 +287,7 @@ public class TransactionManager
      */
     public void usePromo()
     {
+        System.out.println("Applying 10% discount!");
         this.isPromo = true;
     }
 
