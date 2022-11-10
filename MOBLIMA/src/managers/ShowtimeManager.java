@@ -7,6 +7,7 @@ import view.adminApp;
 
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * Function Class that handles Showtime Management Options
@@ -82,7 +83,7 @@ public class ShowtimeManager {
                 cinema = CineplexManager.getInstance().configCineplexes()[inputs[0]].getCinemas()[inputs[1]];
                 movieID = promptMovieID();
                 if(movieID == -1) break;
-                dateTime = promptDateTime();
+                dateTime = promptDateTime(movieID);
                 if(dateTime == null) break;
                 movieType = promptMovieType();
                 if(movieType == null) break;
@@ -94,7 +95,7 @@ public class ShowtimeManager {
                 showtime = CineplexManager.getInstance().configCineplexes()[inputs[0]].getCinemas()[inputs[1]].getShowtimes()[inputs[2]];
                 movieID = promptMovieID();
                 if(movieID == -1) break;
-                dateTime = promptDateTime();
+                dateTime = promptDateTime(movieID);
                 if(dateTime == null) break;
                 movieType = promptMovieType();
                 if(movieType == null) break;
@@ -293,7 +294,7 @@ public class ShowtimeManager {
      * Function to prompt user for Date and Time
      * @return DateTime 
      */
-    public LocalDateTime promptDateTime(){
+    public LocalDateTime promptDateTime(int movieID){
         LocalDateTime dateTime;
         
         try {
@@ -305,6 +306,17 @@ public class ShowtimeManager {
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             dateTime = LocalDateTime.parse(str, formatter);
+
+            Movie movie = MovieListManager.getInstance().getMovie(movieID);
+            LocalDate endShowing = movie.getEndOfShowingDate();
+
+            if(dateTime.toLocalDate().isAfter(endShowing)){
+                System.out.println("Movie has ended showing on this date");
+                return null;
+            }else if(dateTime.isBefore(LocalDateTime.now())){
+                System.out.println("Cannot make showtime before today's date");
+            }
+
             
         } catch (Exception e) {
             // TODO: handle exception
