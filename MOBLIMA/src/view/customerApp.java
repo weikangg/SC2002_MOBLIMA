@@ -90,7 +90,8 @@ public class customerApp {
                         this.customerLoggedInMenu(user);
                     }
                     else{
-                        System.out.println("Wrong username/password");
+                        System.out.println("Incorrect Username/Password! Try again!");
+                        System.out.println("Create a new Customer Account by going into Customer Guest Menu?");
                     }
                     break;
 
