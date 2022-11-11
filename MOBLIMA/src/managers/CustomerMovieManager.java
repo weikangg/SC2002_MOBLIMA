@@ -3,6 +3,9 @@ package managers;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 import entities.*;
 
 /**
@@ -137,16 +140,23 @@ public class CustomerMovieManager {
 	public int searchMovie(List<Movie>mList, List<Review> rList, String name){
 		int found = 0;
 		for(Movie m : mList){
+			CharSequence cs;
 			String cast, genre;
 			String casttmp = m.getCast();
 			String genretmp = m.getGenres();
 			int count = 1, hasReviews = 0;
-			if(m.getMovieTitle().equalsIgnoreCase(name) 
+
+			//regex
+			cs = m.getMovieTitle();
+			Pattern p = Pattern.compile(name, Pattern.CASE_INSENSITIVE);
+			Matcher mat = p.matcher(cs);
+
+			if(/*m.getMovieTitle().equalsIgnoreCase(name)*/  mat.find()
 			&& !m.getShowingStatus().equals(ShowingStatus.FINISHED_SHOWING)
 			&& !m.getShowingStatus().equals(ShowingStatus.COMING_SOON))
 			{
 				found = 1;
-				System.out.println("Movie Title: "+ m.getMovieTitle());
+				System.out.println("\nMovie Title: "+ m.getMovieTitle());
 				System.out.println("Showing Status: "+ m.getShowingStatus());
 				System.out.println("Synopsis: " + m.getSynopsis());
 				System.out.println("Movie Director: "+ m.getMovieDirector());
@@ -177,7 +187,8 @@ public class CustomerMovieManager {
 					System.out.println("No reviews available for this movie right now!");
 				}
 				System.out.println("");
-				break;
+				System.out.println("--------------------------------------------------------------");
+				//break;
 				
 			}
 			else if(m.getMovieTitle().equalsIgnoreCase(name) && m.getShowingStatus().equals(ShowingStatus.FINISHED_SHOWING)){
