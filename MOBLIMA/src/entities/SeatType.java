@@ -6,9 +6,25 @@ package entities;
  * @since 06-11-2022
  */
 public enum SeatType {
+
+    /**
+     * Regular type seat
+     */
     REGULAR ("REGULAR"),
+
+    /**
+     * Elite type seat
+     */
     ELITE ("ELITE"),
+    
+    /**
+     * Couple type seat
+     */
     COUPLE ("COUPLE"),
+    
+    /**
+     * Ultimate type seat
+     */
     ULTIMATE ("ULTIMATE");
 
     private final String name;

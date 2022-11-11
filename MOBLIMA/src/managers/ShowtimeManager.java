@@ -19,6 +19,11 @@ public class ShowtimeManager {
     private static Scanner sc = new Scanner(System.in);
 
     private static ShowtimeManager single_instance = null;
+
+    /**
+     * Function to check if ShowtimeManager is already created and returns the object if it is
+     * @return the old or new ShowtimeManager object
+     */
     public static ShowtimeManager getInstance()
     {
         if (single_instance == null)
@@ -292,6 +297,7 @@ public class ShowtimeManager {
 
     /**
      * Function to prompt user for Date and Time
+     * @param movieID ID of movie showing
      * @return DateTime 
      */
     public LocalDateTime promptDateTime(int movieID){

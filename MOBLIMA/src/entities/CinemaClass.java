@@ -7,9 +7,25 @@ package entities;
  * @since 06-11-2022
  */
 public enum CinemaClass {
+
+    /**
+     * Silver Class
+     */
     SILVER ("SILVER"),
+
+    /**
+     * Gold Class
+     */
     GOLD ("GOLD"),
+
+    /**
+     * Platinum Class
+     */
     PLATINUM ("PLATINUM"),
+
+    /**
+     * Diamond Class
+     */
     DIAMOND ("DIAMOND");
 
     private final String name;
