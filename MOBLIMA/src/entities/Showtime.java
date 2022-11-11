@@ -310,6 +310,7 @@ public class Showtime implements Serializable{
      * Function that returns the type of the specified seat 
      * @param i Row of the Seat
      * @param j Column of the Seat
+     * @return Type of seat in the specified parameters
      */
     public SeatType getSeatType(int i, int j){
         return seats[i][j].getSeatType();
@@ -366,6 +367,10 @@ public class Showtime implements Serializable{
         return cinemaClass.toString();
     }
 
+    /**
+     * Function to return the Class of the Cinema Showtime is showing in as an object
+     * @return Class of Cinema Showtime is showing as an object
+     */
     public CinemaClass getCinemaClassCC(){
         return cinemaClass;
     }
