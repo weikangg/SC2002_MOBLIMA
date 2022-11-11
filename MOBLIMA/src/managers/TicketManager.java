@@ -16,6 +16,7 @@ import entities.Holidays;
 import entities.Seat;
 import entities.TicketType;
 import utils.IOUtils;
+import utils.deleteM;
 
 /**
  * Function class that provides the ticketing and calculation features for customers
@@ -23,7 +24,7 @@ import utils.IOUtils;
  * @version 3.0
  * @since 06-11-2022
  */
-public class TicketManager {
+public class TicketManager implements deleteM{
 
     /**
      * Scanner class
@@ -379,7 +380,7 @@ public class TicketManager {
     /**
      * Deletes the ticket manager instance
      */
-    public void deleteTicketM()
+    public void deleteM()
     {
         ticketList.clear();
         cS.clear();
