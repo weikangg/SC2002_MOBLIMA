@@ -34,7 +34,7 @@ public class customerApp {
 	 */
     Scanner scan = new Scanner(System.in);
 
-    /*
+    /**
      * Function to show guest menu to customer when they select to continue as guest
      * Guest customer can assess the log in page, create account or view movie and cinema informations
      */
@@ -201,10 +201,11 @@ public class customerApp {
         }while(exit == false);
     }
 
-    /*
+    /**
      * Function to show logged in user menu
      * Logged in users can make bookings, view movies, search movies, view top 5 and also give review
      * There is also a log out selection which will bring user back to the mainapp menu
+     * @param account account of user logged in
      */
     public void customerLoggedInMenu(Account account){
         List<Movie> movieList = MovieListManager.getInstance().getMovieList();
@@ -317,10 +318,12 @@ public class customerApp {
         }while(exit == false);
     }
 
-    /*
+    
+    /**
      * Function shows logged in user the booking menu when they have selected the booking option
      * User can choose to book and purchase tickets or look at their booking history
      * Selecting exit will log user out and bring them to the guest main menu
+     * @param user account of user booking movie
      */
     public void bookingAndReviewMenu(Account user){
         int input = 5;
