@@ -5,7 +5,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import boundaries.adminApp;
+import boundaries.AdminMenu;
 import boundaries.customerApp;
 import entities.*;
 
@@ -139,35 +139,33 @@ public class ReviewManager {
 	/**
 	 * Staff's Menu to manage reviews
      * Choose options to create, read, update, delete reviews of customers, delete own reviews, show all reviews, search for all reviews for a movie
-     * @param choice User's option
      * @param user User's account
 	 */
-    public void reviewMenuStaff(int choice, Account user){
+    public void reviewMenuStaff( Account user){
         int option = 0;
         try{
-            if(choice == 0){
-                System.out.println("================== REVIEW MENU (STAFF) ====================\n" +
-                                    " 1. Add Review 						    		       \n" +
-                                    " 2. Edit Review                                           \n" +
-                                    " 3. Delete Review (Customer)                              \n" +
-                                    " 4. Delete Review (Self)                                  \n" +
-                                    " 5. Show All Past Reviews      		                   \n" +
-                                    " 6. Search All Reviews for a movie                        \n" +
-                                    " 7. Go Back                                               \n" +
-                                    "==========================================================");
-                System.out.println("Enter choice: ");
-                option = sc.nextInt();
-                if(!(option >= 1 && option <=7)){
-                    System.out.println("Please only enter a number from 1-7.");
-                    sc.nextLine();
-                    reviewMenuStaff(0,user);
-                }
+            System.out.println("================== REVIEW MENU (STAFF) ====================\n" +
+                                " 1. Add Review 						    		       \n" +
+                                " 2. Edit Review                                           \n" +
+                                " 3. Delete Review (Customer)                              \n" +
+                                " 4. Delete Review (Self)                                  \n" +
+                                " 5. Show All Past Reviews      		                   \n" +
+                                " 6. Search All Reviews for a movie                        \n" +
+                                " 7. Go Back                                               \n" +
+                                "==========================================================");
+            System.out.println("Enter choice: ");
+            option = sc.nextInt();
+            if(!(option >= 1 && option <=7)){
+                System.out.println("Please only enter a number from 1-7.");
+                sc.nextLine();
+                reviewMenuStaff(user);
+            
             }
         }
         catch(InputMismatchException e){
             System.out.println("Invalid Input. Please input a number from 1-7 only!");
             sc.nextLine();
-            reviewMenuStaff(0,user);
+            reviewMenuStaff(user);
         }
         sc.nextLine();
         List<Account>accountList = AccountManager.getInstance().getAccountList();
@@ -235,14 +233,14 @@ public class ReviewManager {
                 break;
             case 7:
                 System.out.println("Returning to Customer Menu...");
-                adminApp.getInstance().displayLoggedInMenu(user);
+                AdminMenu.getInstance().display(user);
 
             default:
                 System.out.println("Invalid choice. Please enter a number between 1-7.");
                 break;
         }
 
-        reviewMenuStaff(0,user);
+        reviewMenuStaff(user);
     }
     
     // TO DO: CHECK AND PRINT THE MOVIES THAT HE HAS PREVIOUSLY WATCHED BEFORE.

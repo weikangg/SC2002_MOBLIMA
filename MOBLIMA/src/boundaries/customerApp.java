@@ -1,6 +1,7 @@
 package boundaries;
 
 import java.util.Scanner;
+
 import entities.*;
 import managers.*;
 import java.util.InputMismatchException;
@@ -28,7 +29,6 @@ public class customerApp {
         }
         return newInstance;
     }
-    //static AccountManager accountManager = AccountManager.getInstance();
     /**
 	 * The scanner for reading input of user
 	 */
@@ -190,7 +190,7 @@ public class customerApp {
                     break;
                 case 8:
                     System.out.println("Exiting customer interface...");
-                    mainApp.main(null);
+                    MainMenu.getInstance().display();
                     break;
                 
                 default:
@@ -306,7 +306,7 @@ public class customerApp {
                     break;
                 case 6:
                     System.out.println("Logging out...");
-                    mainApp.main(null);
+                    MainMenu.getInstance().display();
                     break;
                 
                 default:

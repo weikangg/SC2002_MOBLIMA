@@ -2,7 +2,7 @@ package managers;
 
 import java.util.*;
 
-import boundaries.adminApp;
+import boundaries.AdminMenu;
 import entities.*;
 
 /**
@@ -38,13 +38,11 @@ public class MovieManager {
 	/**
 	 * Staff's Menu to manage movies
      * Choose options to create, read, update, pseudo-delete movies, show top 5 movies, remove movies from database
-     * @param choice User's option
      * @param account User's account
 	 */
-    public void staffMenu(int choice,Account account){
+    public void staffMenu(Account account){
         int option = 0;
         try{
-            if(choice == 0){
                 System.out.println("=================== MOVIE MENU (STAFF) ==================\n" +
                                     " 1. Create Movies 						    		     \n" +
                                     " 2. View Full List Of Movies                            \n" +
@@ -60,14 +58,13 @@ public class MovieManager {
                 if(!(option >= 1 && option <=8)){
                     System.out.println("Please only enter a number from 1-8.");
                     sc.nextLine();
-                    staffMenu(0, account);
+                    staffMenu(account);
                 }
-            }
         }
         catch(InputMismatchException e){
             System.out.println("Invalid Input. Please input a number from 1-8 only!");
             sc.nextLine();
-            staffMenu(0, account);
+            staffMenu(account);
         }
         sc.nextLine();
         List<Movie>movieList = MovieListManager.getInstance().getMovieList();
@@ -147,13 +144,13 @@ public class MovieManager {
             
             case 8:
                 System.out.println("Back to StaffApp......");
-                adminApp.getInstance().displayLoggedInMenu(account);
+                AdminMenu.getInstance().display(account);
             default:
                 System.out.println("Invalid choice. Please enter a number between 1-8.");
                 break;
         }
 
-        staffMenu(0, account);
+        staffMenu(account);
     }
 
 }

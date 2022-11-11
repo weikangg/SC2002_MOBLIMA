@@ -1,6 +1,7 @@
 package boundaries;
 import java.util.Scanner;
 
+
 import entities.Account;
 
 import java.util.InputMismatchException;
@@ -20,11 +21,11 @@ import managers.StaffAccManager;
  * @since 01-11-2022
  */
 
-public class adminApp {
+public class AdminMenu implements BaseMenuWithAccount {
 	/**
 	 * For singleton pattern adherence. This MovieListManager instance persists throughout runtime.
 	 */
-    private static adminApp newInstance = null;
+    private static AdminMenu newInstance = null;
 	/**
 	 * The scanner for reading input of user
 	 */
@@ -32,15 +33,15 @@ public class adminApp {
 	/**
 	 * The default constructor for the adminApp class
 	 */
-    private adminApp(){}
+    private AdminMenu(){}
 
     /**
 	 * For singleton pattern adherence. 
 	 * @return instance The static instance that persists throughout runtime.
 	 */
-    public static adminApp getInstance(){
+    public static AdminMenu getInstance(){
         if (newInstance == null){
-            newInstance = new adminApp();
+            newInstance = new AdminMenu();
         }
         return newInstance;
     }
@@ -49,7 +50,7 @@ public class adminApp {
      * Function to display logged in menu after staff logs in
      * @param account Staff account
 	 */
-    public void displayLoggedInMenu(Account account){
+    public void display(Account account){
 
         int choice;
             do {
@@ -72,21 +73,21 @@ public class adminApp {
                     }catch(InputMismatchException e){
                         System.out.println("Invalid Input! Enter 1-7 only!");
                         sc.nextLine();
-                        displayLoggedInMenu(account);
+                        display(account);
                     }
                 }
                 switch(choice){
                     case 1:
-                        MovieManager.getInstance().staffMenu(0,account);
+                        MovieManager.getInstance().staffMenu(account);
                         break;
                     case 2:
-                        ReviewManager.getInstance().reviewMenuStaff(0,account);
+                        ReviewManager.getInstance().reviewMenuStaff(account);
                         break;
                     case 3:
-                        ShowtimeManager.getInstance().staffMenu(0,account);
+                        ShowtimeManager.getInstance().staffMenu(account);
                         break;
                     case 4:
-                        SystemSettingsManager.getInstance().staffMenu(0,account);
+                        SystemSettingsManager.getInstance().staffMenu(account);
                         break;
                     case 5:
                         if(account.getAccessLevel().equals("SA")){
@@ -122,7 +123,7 @@ public class adminApp {
                         continue;
                     case 7: 
                         System.out.println("Logging out from StaffApp, have a nice day!");
-                        mainApp.main(null);
+                        MainMenu.getInstance().display();
                         break;
                     
                     default:

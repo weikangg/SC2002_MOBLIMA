@@ -2,7 +2,7 @@ package managers;
 
 import java.util.*;
 
-import boundaries.adminApp;
+import boundaries.AdminMenu;
 import entities.*;
 
 import java.time.format.DateTimeFormatter;
@@ -36,14 +36,12 @@ public class ShowtimeManager {
 
     /**
      * Function to select and choose Showtime Options
-     * @param choice input choice by user
      * @param account Account of User, Staff or Customer
      */
-    public void staffMenu(int choice,Account account){
+    public void staffMenu(Account account){
         
         int option = 0;
         try{
-            if(choice == 0){
                 System.out.println("==================== SHOWTIME STAFF APP ====================\n" +
             					" 1. View Showtime Details                                      \n" +
                                 " 2. Add a Showtime                                             \n" + 
@@ -55,14 +53,14 @@ public class ShowtimeManager {
                 option = sc.nextInt();
                 if(!(option >= 1 && option <=5)){
                     System.out.println("Please only enter a number from 1-5.");
-                    staffMenu(0,account);
+                    staffMenu(account);
                 }
-            }
+
         }
         catch(InputMismatchException e){
             System.out.println("Invalid Input. Please enter a valid option from 1-5 only!");
             sc.nextLine();
-            staffMenu(0,account);
+            staffMenu(account);
         }
 
         Cinema cinema;
@@ -124,7 +122,7 @@ public class ShowtimeManager {
                 break;
             case 5:
                 System.out.println("Back to Staff App......");
-                adminApp.getInstance().displayLoggedInMenu(account);
+                AdminMenu.getInstance().display(account);
                 break;
             default:
                 System.out.println("Invalid choice. Please choose between 1-5.");

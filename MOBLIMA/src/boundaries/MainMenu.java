@@ -1,56 +1,40 @@
 package boundaries;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+
+import java.util.*;
 import entities.*;
-import managers.AccountManager;
-import java.io.File;
+import managers.*;
 
 /**
- * The class for our Main app to run 
- * Allows user to either run as Guest or Login to make bookings
- * @author Wei Kang
- * @version 2.5
- * @since 01-11-2022
+ * The main menu for all users
  */
- 
-public class mainApp {
-
-	/**
-	 * For singleton pattern adherence. This mainApp instance persists throughout runtime.
-	 */
-    private static mainApp newInstance = null;
+public class MainMenu implements BaseMenu {
 	/**
 	 * The scanner for reading input of user
 	 */
     private static Scanner sc = new Scanner(System.in); //Scanner Object Instantiation
+    	/**
+	 * For singleton pattern adherence. This mainApp instance persists throughout runtime.
+	 */
+    private static MainMenu newInstance = null;
     /**
 	 * For singleton pattern adherence. 
 	 * @return instance The static instance that persists throughout runtime.
 	 */
-    public static mainApp getInstance(){
+    public static MainMenu getInstance(){
         if (newInstance == null){
-            newInstance = new mainApp();
+            newInstance = new MainMenu();
         }
         return newInstance;
     }
     /**
-     * Main function to display main menu
+     * Main Menu
      * Login to go to either Staff or Customer Menu based on account's access level
      * Or simply continue as Guest
-     * @param args Arguments of main methods
-	 */
-    public static void main(String[] args){
+     */
+    @Override
+    public void display() {
 
-        File directory = new File("SC2002_OOP\\MOBLIMA").getAbsoluteFile();
-        if (directory.exists()) System.setProperty("user.dir", directory.getAbsolutePath());
-        directory = new File("MOBLIMA").getAbsoluteFile();
-        if (directory.exists()) System.setProperty("user.dir", directory.getAbsolutePath());
-        
-        // System.out.println(System.getProperty("user.dir"));
-        
-
-        int input = -1; //User Input
+        int input;
         while (true){
             System.out.println("======================= MOBLIMA APP =======================\n" + 
                                 "Please select an option: \n" +        
@@ -59,6 +43,7 @@ public class mainApp {
                                 "(3) Exit                 \n" +
                                 "===========================================================");
             System.out.print("Enter your choice: ");
+
 
 
             try { //Attempt User Input
@@ -113,7 +98,7 @@ public class mainApp {
                             customerApp.getInstance().customerLoggedInMenu(account);
                         }
                         else{
-                            adminApp.getInstance().displayLoggedInMenu(account);
+                            AdminMenu.getInstance().display(account);
                         }
                     }
                     else{
