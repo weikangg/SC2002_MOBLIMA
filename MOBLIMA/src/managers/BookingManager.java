@@ -11,7 +11,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import entities.*;
-import utils.IOUtils;
+import utils.*;
 
 /**
  * Function class that provides the booking and seat selection features for customers
@@ -19,7 +19,7 @@ import utils.IOUtils;
  * @version 3.0
  * @since 06-11-2022
  */
-public class BookingManager implements Serializable{
+public class BookingManager implements deleteM{
 	
 	//show available seats
 	//booking manager allows customer to pick a seat, if available, and book it.
@@ -126,7 +126,7 @@ public class BookingManager implements Serializable{
             {
                 case 0:
                     notQuit = false;
-                    deleteBM();
+                    deleteM();
                     break;
                 case 1: //Add seats to cart
                     addSeat();
@@ -145,7 +145,7 @@ public class BookingManager implements Serializable{
                         //notQuit = false;
                         if(getDone())
                         {
-                            deleteBM();
+                            deleteM();
                             return;
                         }
                     }
@@ -517,8 +517,8 @@ public class BookingManager implements Serializable{
         }
         TransactionManager.getInstance().updateTotalSales();
         setDone();
-        TransactionManager.getInstance().deleteTransactionM();
-        TicketManager.newTM().deleteTicketM();
+        TransactionManager.getInstance().deleteM();
+        TicketManager.newTM().deleteM();
         System.out.println("Booking and payment success!\nPlease view under booking history");
 
     }
@@ -544,7 +544,7 @@ public class BookingManager implements Serializable{
     /**
      * deletes the BookingManager instance
      */
-    public void deleteBM()
+    public void deleteM()
     {
         //private Scanner sc = new Scanner(System.in);
         //private int[][] seats;
