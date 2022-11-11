@@ -76,8 +76,8 @@ public class HolidayListManager {
 		return holidayList;
     }
 	/**
-	 * Appends the new movie to the existing list of movies and updates the list of movies in the database
-	 * @param movieList 		 Existing list of movies
+	 * Appends the new holiday to the existing list of holidays and updates the list of holidays in the database
+	 * @param holidayList 		 Existing list of holidays
 	 * @param holName            This is the name of the holiday
 	 * @param holDate            This is the date of the holiday
 	 */ 
