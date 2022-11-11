@@ -80,6 +80,7 @@ public class HolidayListManager {
 	 * @param holidayList 		 Existing list of holidays
 	 * @param holName            This is the name of the holiday
 	 * @param holDate            This is the date of the holiday
+	 * @return true if update was successful, false if update was unsuccessful
 	 */ 
     public boolean addHolidayList(List<Holidays> holidayList, String holName, LocalDate holDate) {
         Holidays newHol = new Holidays(holName, holDate);
