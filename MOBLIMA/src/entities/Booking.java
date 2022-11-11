@@ -53,14 +53,14 @@ public class Booking implements Serializable{
 	/**
 	 * Constructer class for Booking
 	 * Creates new Booking with necessary information
-	 * @param bookingID		The Booking ID
-	 * @param totalPrice	The Total Price of the booking
-	 * @param movie			The Booking's Movie
-	 * @param cinema		The booking's cinema
-	 * @param cineplexID	The booking's cineplexID
-	 * @param tt			The booking's ticket type
-	 * @param showtime		The booking's showtime
-	 * @param transaction	The booking's transaction
+	 * @param bookingID booking ID of the current booking
+	 * @param totalPrice total price of the tickets
+	 * @param movie title of the movie
+	 * @param cinema cinema number
+	 * @param cineplexID cineplex id
+	 * @param tt ticket array
+	 * @param showtime date and time of showtime
+	 * @param transaction transaction information
 	 */
 	public Booking(String bookingID, String userInfo, double totalPrice, String movie, int cinema, int cineplexID, ArrayList<Ticket> tt, LocalDateTime showtime, Transaction transaction)
 	{
@@ -75,6 +75,7 @@ public class Booking implements Serializable{
 		this.transaction = transaction;
 	}
 
+	
 	/**
 	 * Gets the booking ID
 	 * @return this booking's ID
@@ -107,14 +108,13 @@ public class Booking implements Serializable{
 	public ArrayList<Ticket> getTicketList() {return this.tt;}
 	/**
 	 * gets the specific tickets details
-	 * @param index
+	 * @param index index of the specific ticket
 	 * @return one of the booking's ticket
 	 */
 	public Ticket getTicket(int index) {return this.tt.get(index);}
 	//public User getUser() {return this.user;}
 	/**
 	 * get the date and time of the showtime
-	 * @param index 
 	 * @return the showtime for the booking
 	 */
 	public LocalDateTime getShowtime() {return this.showtime;}
@@ -132,61 +132,61 @@ public class Booking implements Serializable{
 
 	/**
 	 * change the booking id of this booking
-	 * @param bookingID
+	 * @param bookingID the string of the booking id. B1, B2
 	 */
 	public void setbookingID(String bookingID){this.bookingID = bookingID;}
 	/**
 	 * change the total price of this booking
-	 * @param totalPrice
+	 * @param totalPrice the total price of the booking
 	 */
 	public void setTotalPrice(double totalPrice){this.totalPrice = totalPrice;}
 	/**
 	 * change the movie title of this booking
-	 * @param movie
+	 * @param movie the name of the movie 
 	 */
 	public void setMovie(String movie){this.movieTitle = movie;}
 	/**
 	 * change the cinema identifier of this booking
-	 * @param cinema
+	 * @param cinema cinema id 
 	 */
 	public void setCinemaID(int cinema){this.cinemaID = cinema;}
 	/**
 	 * change the cineplex identifer of this booking
-	 * @param cineplex
+	 * @param cineplex cineplex id
 	 */
 	public void setCineplexID(int cineplex){this.cineplexID = cineplex;}
 	/**
 	 * change the list of tickets for this booking
-	 * @param tt
+	 * @param tt list of tickets from transaction
 	 */
 	public void setTicketList(ArrayList<Ticket> tt){this.tt = tt;}
 	/**
 	 * change a specific ticket for this booking
-	 * @param index
-	 * @param ticket
+	 * @param index index of the specific ticket
+	 * @param ticket ticket information
 	 */
 	public void setTicket(int index, Ticket ticket) {this.tt.set(index, ticket);}
 	//public void setUser(User user){this.user = user;}
 	/**
 	 * change the showtime for this booking
-	 * @param showtime
+	 * @param showtime date time of selected showtime
 	 */
 	public void setShowTime(LocalDateTime showtime){this.showtime = showtime;}
 	/**
 	 * change the transaction details for this booking
-	 * @param transaction
+	 * @param transaction current transaction class storing information
 	 */
 	public void setTransaction(Transaction transaction){this.transaction = transaction;}
 
 	/**
 	 * change the user info for this booking
-	 * @param transaction
+	 * @param userInfo string of user's email, mobile number and name
 	 */
 	public void setUserInfo(String userInfo){this.userInfo = userInfo;}
 
 	/**
 	 * Add a ticket to this booking's list of tickets
-	 * @param tt
+	 * @param tt adds this ticket to the array list
 	 */
 	public void addTicket(Ticket tt)
 	{
@@ -195,7 +195,7 @@ public class Booking implements Serializable{
 	
 	/**
 	 * remove a ticket from this booking's list of tickets
-	 * @param index
+	 * @param index index of ticket to remove
 	 */
 	public void removeTicket(int index)
 	{

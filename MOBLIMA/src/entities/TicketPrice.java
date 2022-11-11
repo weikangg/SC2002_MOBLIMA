@@ -158,12 +158,9 @@ public class TicketPrice implements Serializable{
 
 	
 
-	/**
-	 * getters
-	 */
 	/** 
 	 * Gets the price of the specific tickettype
-	 * @param index
+	 * @param index index of the specific ticket type price
 	 * @return Double
 	 */
 	public Double getPrice(int index)
@@ -173,7 +170,7 @@ public class TicketPrice implements Serializable{
 	
 	/** 
 	 * Gets the price of the specific movietype
-	 * @param index
+	 * @param index index of the specific movie type price
 	 * @return Double
 	 */
 	public Double getMtPrice(int index)
@@ -183,7 +180,7 @@ public class TicketPrice implements Serializable{
 	
 	/** 
 	 * Gets the price of the specific cinemaclass
-	 * @param index
+	 * @param index index of the specific cinema class price
 	 * @return Double
 	 */
 	public Double getCCPrice(int index)
@@ -193,7 +190,7 @@ public class TicketPrice implements Serializable{
 
 	/** 
 	 * Gets the price of the specific seattypes
-	 * @param index
+	 * @param index index of the specific seat type price
 	 * @return Double
 	 */
 	public Double getSTPrice(int index)
@@ -202,8 +199,8 @@ public class TicketPrice implements Serializable{
 	}
 	
 	/** 
-	 * Gets the prices of the tickettypes
-	 * @return ArrayList<Double>
+	 * Gets the prices of the ticket types
+	 * @return the current ticket type prices
 	 */
 	public ArrayList<Double> getPrices()
 	{
@@ -211,8 +208,8 @@ public class TicketPrice implements Serializable{
 	}
 	
 	/** 
-	 * Gets the mapped values of tickettype and its prices
-	 * @return EnumMap<TicketType, Double>
+	 * Gets the mapped values of ticket type and its prices
+	 * @return current enum map of ticket type and its prices
 	 */
 	public EnumMap<TicketType, Double> getMappedPrice()
 	{
@@ -220,8 +217,8 @@ public class TicketPrice implements Serializable{
 	}
 	
 	/** 
-	 * Gets the mapped values of movietype and its prices
-	 * @return EnumMap<MovieType, Double>
+	 * Gets the mapped values of movie type and its prices
+	 * @return current enum map of movie type and its prices
 	 */
 	public EnumMap<MovieType, Double> getMappedMovieTypePrice()
 	{
@@ -229,8 +226,8 @@ public class TicketPrice implements Serializable{
 	}
 	
 	/** 
-	 * Gets the prices of the movietypes
-	 * @return ArrayList<Double>
+	 * Gets the prices of the movie types
+	 * @return current prices of movie types
 	 */
 	public ArrayList<Double> getMtPriceList()
 	{
@@ -238,8 +235,8 @@ public class TicketPrice implements Serializable{
 	}
 	
 	/** 
-	 * Gets the mapped values of cinemaclass and its prices
-	 * @return EnumMap<CinemaClass, Double>
+	 * Gets the mapped values of cinema class and its prices
+	 * @return current enum map of cinema class and its prices
 	 */
 	public EnumMap<CinemaClass, Double> getMappedCinemaClassPrice()
 	{
@@ -247,8 +244,8 @@ public class TicketPrice implements Serializable{
 	}
 	
 	/** 
-	 * Gets the prices of the cinemaclasses
-	 * @return ArrayList<Double>
+	 * Gets the prices of the cinema classes
+	 * @return current cinema class prices
 	 */
 	public ArrayList<Double> getCCPriceList()
 	{
@@ -256,8 +253,8 @@ public class TicketPrice implements Serializable{
 	}
 
 	/** 
-	 * Gets the mapped values of seattype and its prices
-	 * @return EnumMap<SeatType, Double>
+	 * Gets the mapped values of seat type and its prices
+	 * @return current enum map of seat type and its prices
 	 */
 	public EnumMap<SeatType, Double> getMappedSeatTypePrice()
 	{
@@ -265,8 +262,8 @@ public class TicketPrice implements Serializable{
 	}
 
 	/** 
-	 * Gets the prices of the seattypes
-	 * @return ArrayList<Double>
+	 * Gets the prices of the seat types
+	 * @return the current prices of seat types
 	 */
 	public ArrayList<Double> getSTPriceList()
 	{
@@ -274,13 +271,10 @@ public class TicketPrice implements Serializable{
 	}
 
 
-	/**
-	 * setters
-	 */
 	/** 
 	 * Sets the price of a tickettype
-	 * @param index
-	 * @param price
+	 * @param index index of the specific ticket type
+	 * @param price new price of the specific ticket type
 	 */
 	public void setPrice(int index, Double price)
 	{
@@ -309,8 +303,8 @@ public class TicketPrice implements Serializable{
 	
 	/** 
 	 * Sets the price of a movietype
-	 * @param index
-	 * @param resoprice
+	 * @param index index of the specific movie type
+	 * @param resoprice new price of the specific movie tyoe
 	 */
 	public void setMtPrice(int index, Double resoprice)
 	{
@@ -342,8 +336,8 @@ public class TicketPrice implements Serializable{
 	
 	/** 
 	 * Sets the price of a cinema class
-	 * @param index
-	 * @param ccprice
+	 * @param index index of the specific cinema class
+	 * @param ccprice new price of the specific cinema class
 	 */
 	public void setCCPrice(int index, Double ccprice)
 	{
@@ -374,10 +368,10 @@ public class TicketPrice implements Serializable{
 	}
 
 
-		/** 
-	 * Sets the price of a cinema class
-	 * @param index
-	 * @param ccprice
+	/** 
+	 * Sets the price of a seat type
+	 * @param index index of the specific seat type
+	 * @param stprice price of the new seat type
 	 */
 	public void setSTPrice(int index, Double stprice)
 	{

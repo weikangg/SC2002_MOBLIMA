@@ -83,9 +83,9 @@ public class TicketManager implements deleteM{
      * Main function in TicketManager, asks the customer to check if they have selected the right tickets and give the customer the
      * ability to remove tickets if they do not want to purchase them. If the customer confirms the tickets, the calculate function
      * will be called and the user will be brought to the transaction manager page.
-     * @param showtime
-     * @param confirmedSeats
-     * @param plan
+     * @param showtime selected showtime
+     * @param confirmedSeats array list of confirmed seats from booking manager
+     * @param plan seat array from booking manager
      */
     public void ticketMenu(Showtime showtime, ArrayList<String> confirmedSeats, Seat[][] plan)
 	{
@@ -155,8 +155,8 @@ public class TicketManager implements deleteM{
     
     /** 
      * Deletes the ticket of the customers choice 
-     * @param index
-     * @param plan
+     * @param index index of the selected ticket
+     * @param plan current seat plan
      */
     public void deleteTicket(int index, Seat[][] plan)
     {
@@ -171,9 +171,9 @@ public class TicketManager implements deleteM{
     
     /** 
      * Calculate the price of a ticket, using the formula of Ticket Type's Price * Cinema Class's Price * Movie Type's Price * Seat Type's Price
-     * @param tt
-     * @param row
-     * @param col
+     * @param tt ticket type of selected ticket
+     * @param row row of selected ticket
+     * @param col column of selected ticket
      * @return double
      */
     public double calcTicketPrice(TicketType tt, int row, int col)
@@ -242,7 +242,7 @@ public class TicketManager implements deleteM{
     
     /** 
      * Add the created ticket to the ticket array
-     * @param ticket
+     * @param ticket new ticket
      */
     public void addToTicketArray(Ticket ticket)
     {
@@ -252,7 +252,7 @@ public class TicketManager implements deleteM{
     
     /** 
      * sets the current ticket list
-     * @param ticketList
+     * @param ticketList new ticket list
      */
     public void setTicketArray(ArrayList<Ticket> ticketList)
     {
@@ -261,7 +261,7 @@ public class TicketManager implements deleteM{
     
     /** 
      * sets the bookedseats from bookingmanager into confirmed seats
-     * @param confirmedSeat
+     * @param confirmedSeat new confirmed seat array
      */
     public void setCS(ArrayList<String> confirmedSeat)
     {
@@ -270,7 +270,7 @@ public class TicketManager implements deleteM{
     
     /** 
      * sets the current showtime
-     * @param showtime
+     * @param showtime new showtime
      */
     public void setShowtime(Showtime showtime)
     {
@@ -299,7 +299,7 @@ public class TicketManager implements deleteM{
     
     /** 
      * gets a confirmed seat
-     * @param index
+     * @param index index of the confirmed seat
      * @return current string of confirmed seat
      */
     public String getCS(int index)
@@ -390,7 +390,7 @@ public class TicketManager implements deleteM{
     
     /** 
      * sets the local holiday list
-     * @param HList
+     * @param HList new local holiday list
      */
     public void setHList(ArrayList<LocalDate>HList)
     {
@@ -411,7 +411,7 @@ public class TicketManager implements deleteM{
     
     /** 
      * set the holiday list from csv
-     * @param ListHList
+     * @param ListHList new holiday list from csv
      */
     public void setH(List<Holidays>HList)
     {

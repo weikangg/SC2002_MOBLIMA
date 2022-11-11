@@ -82,8 +82,8 @@ public class TransactionManager implements deleteM
      * make payment or apply voucher discount, once the customer chooses to make payment, it will call makeBooking()
      * function to end all instances. The customers email and mobile phone number is captured, along with the customers real name
      * which the system will ask for here
-     * @param showtime
-     * @param tickets
+     * @param showtime selected showtime
+     * @param tickets ticket array from ticket manager
      */
     public void transactionMenu(Showtime showtime, ArrayList<Ticket> tickets)
     {
@@ -242,7 +242,7 @@ public class TransactionManager implements deleteM
 
     
     /** sets the ticket array list with the ticketmanager's
-     * @param tList
+     * @param tList new ticket array list
      */
     public void setTList(ArrayList<Ticket>tList)
     {
@@ -251,7 +251,7 @@ public class TransactionManager implements deleteM
     
     /** 
      * sets the total number of tickets
-     * @param i
+     * @param i new total number of tickets
      */
     public void setNumberOfTickets(int i)
     {
@@ -260,7 +260,7 @@ public class TransactionManager implements deleteM
     
     /** 
      * sets the current showtime
-     * @param showtime
+     * @param showtime new current showtime
      */
     public void setShowtime(Showtime showtime)
     {
@@ -336,7 +336,7 @@ public class TransactionManager implements deleteM
     
     /** 
      * sets the transaction
-     * @param transaction
+     * @param transaction new transaction
      */
     public void setTransaction(Transaction transaction)
     {
