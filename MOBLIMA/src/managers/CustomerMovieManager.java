@@ -226,16 +226,16 @@ public class CustomerMovieManager {
         //ask user for cineplex
         while(true){
             System.out.print("====================CHOOSE A CINEPLEX====================\n"+
-                                "1. Cineplex A\n"+
-                                "2. Cineplex B\n"+
-                                "3. Cineplex C\n");
+                                "1. Cathay Cineplexes JEM\n"+
+                                "2. Cathay Cineplexes AMK\n"+
+                                "3. Cathay Cineplexes Cineleisure\n");
 			System.out.println("========================================================");
             System.out.println("Enter your choice:");
             cineplexID = scan.nextInt();
             scan.nextLine();
             if(cineplexID > 3 || cineplexID < 1)
             {
-                System.out.println("Please enter a valid option");
+                System.out.println("Please enter a valid option!");
                 continue;
             }
             else
