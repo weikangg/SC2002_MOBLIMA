@@ -1,8 +1,8 @@
-package managers;
+package boundaries;
 
 import java.util.*;
+import managers.*;
 
-import boundaries.AdminMenu;
 import entities.*;
 
 /**
@@ -11,7 +11,7 @@ import entities.*;
  * @version 2.5
  * @since 01-11-2022
  */
-public class MovieManager {    
+public class MovieManagerMenu implements BaseMenuWithAccount{    
 	/**
 	 * The scanner for reading input of user
 	 */
@@ -19,28 +19,28 @@ public class MovieManager {
 	/**
 	 * For singleton pattern adherence. This MovieManager instance persists throughout runtime.
 	 */
-    private static MovieManager single_instance = null;
+    private static MovieManagerMenu single_instance = null;
 	/**
 	 * For singleton pattern adherence. 
 	 * @return instance The static instance that persists throughout runtime.
 	 */
-    public static MovieManager getInstance()
+    public static MovieManagerMenu getInstance()
     {
         if (single_instance == null)
-            single_instance = new MovieManager();
+            single_instance = new MovieManagerMenu();
         return single_instance;
     }
 	/**
 	 * The default constructor for the MovieManager class
 	 */
-    private MovieManager(){
+    private MovieManagerMenu(){
     }
 	/**
 	 * Staff's Menu to manage movies
      * Choose options to create, read, update, pseudo-delete movies, show top 5 movies, remove movies from database
      * @param account User's account
 	 */
-    public void staffMenu(Account account){
+    public void display(Account account){
         int option = 0;
         try{
                 System.out.println("=================== MOVIE MENU (STAFF) ==================\n" +
@@ -58,13 +58,13 @@ public class MovieManager {
                 if(!(option >= 1 && option <=8)){
                     System.out.println("Please only enter a number from 1-8.");
                     sc.nextLine();
-                    staffMenu(account);
+                    display(account);
                 }
         }
         catch(InputMismatchException e){
             System.out.println("Invalid Input. Please input a number from 1-8 only!");
             sc.nextLine();
-            staffMenu(account);
+            display(account);
         }
         sc.nextLine();
         List<Movie>movieList = MovieListManager.getInstance().getMovieList();
@@ -150,7 +150,7 @@ public class MovieManager {
                 break;
         }
 
-        staffMenu(account);
+        display(account);
     }
 
 }

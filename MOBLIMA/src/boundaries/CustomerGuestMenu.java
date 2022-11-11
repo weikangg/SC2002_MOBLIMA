@@ -176,7 +176,7 @@ public class CustomerGuestMenu implements BaseMenu{
                     // Temporary Account will not be saved within database.
                     String userName = AccountManager.getInstance().randomNameGenerator();
                     Account guestAccount = new CustomerAcc(userName,"Guest Account", 0, 0, "Guest", "G");
-                    ReviewManager.getInstance().reviewMenuCustomer(0, guestAccount);
+                    CustomerReviewMenu.getInstance().display(guestAccount);
                     break;
                 case 8:
                     System.out.println("Exiting customer interface...");
