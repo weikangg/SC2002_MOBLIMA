@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.Map.Entry;
 
-import boundaries.AdminMenu;
+import boundaries.SystemSettingsMenu;
 import entities.*;
 
 import static utils.IOUtils.*;
@@ -50,57 +50,6 @@ public class SystemSettingsManager {
 	 * The separator for the columns in the csv file
 	 */
     private static String separator = ",";
-	/**
-	 * Staff's Menu to manage system settings
-     * Choose options to configure ticket prices, customer's access to view top 5 movies, holidays, rating score limit for movies
-     * @param account User's account
-	 */
-    public void staffMenu(Account account){
-        int option = 0;
-        
-        try{
-                System.out.println("==================== SYSTEM SETTINGS STAFF APP ====================\n" +
-            					" 1. Configure Ticket Prices                                           \n" +
-                                " 2. Configure Top 5 Movies Permissions                                \n" + 
-			            		" 3. Configure Holidays                                                \n" +
-                                " 4. Configure Rating Score Limit for Movies                           \n" +
-			                    " 5. Back to Staff App                                                 \n" +
-                                "=======================================================================");
-                System.out.println("Enter choice: ");
-                option = sc.nextInt();
-                if(!(option >= 1 && option <=5)){
-                    System.out.println("Please only enter a number from 1-5.");
-                    staffMenu( account);
-                }
-        }
-        catch(InputMismatchException e){
-            System.out.println("Invalid Input.");
-            sc.nextLine();
-            staffMenu(account);
-        }
-        switch (option) {
-            case 1: 
-                configureTicketPriceMenu(account);
-                break;
-            case 2:
-                configureTop5(account);
-                break;
-            case 3:
-                configureHolidays(account);
-                break;
-            case 4:
-                configureRatingScoreLimit(account);
-                break;
-            case 5:
-                System.out.println("Back to Staff App......");
-                sc.nextLine();
-                AdminMenu.getInstance().display(account);
-
-            default:
-                System.out.println("Invalid choice. Please choose between 1-4.");
-                staffMenu(account);
-        }
-    }
 
 	/**
 	 * Staff's Menu to manage configure ticket prices
@@ -143,14 +92,14 @@ public class SystemSettingsManager {
                     break;
                 case 5:
                     System.out.println("Back to System Settings......");
-                    this.staffMenu(account);
+                    SystemSettingsMenu.getInstance().display(account);
                 default:
                     System.out.println("Invalid choice. Please choose between 1-5 only.");
                     continue;
             }
             break;
         }
-        this.staffMenu(account);
+        SystemSettingsMenu.getInstance().display(account);
     }
     /**
 	 * Function to configure cinema class multipler
@@ -792,14 +741,14 @@ public class SystemSettingsManager {
                     break;
                 case 2:
                     System.out.println("Back to System Settings......");
-                    this.staffMenu(account);
+                    SystemSettingsMenu.getInstance().display(account);
                 default:
                     System.out.println("Invalid choice. Please choose between 1 or 2 only.");
                     continue;
             }
             break;
         }
-        this.staffMenu(account);
+        SystemSettingsMenu.getInstance().display(account);
     }
     /**
 	 * Function to configure top 5 movies settings
@@ -869,14 +818,14 @@ public class SystemSettingsManager {
                     break;
                 case 2:
                     System.out.println("Back to System Settings......");
-                    this.staffMenu(account);
+                    SystemSettingsMenu.getInstance().display(account);
                 default:
                     System.out.println("Invalid choice. Please choose between 1 or 2 only.");
                     continue;
             }
             break;
         }
-        this.staffMenu(account);
+        SystemSettingsMenu.getInstance().display(account);
     }
 
     /**
@@ -944,7 +893,7 @@ public class SystemSettingsManager {
                     break;
                 case 5:
                     System.out.println("Back to Systems Settings......");
-                    this.staffMenu(account);
+                    SystemSettingsMenu.getInstance().display(account);
                     break;
                 default:
                     System.out.println("Invalid choice. Please choose between 1-5.");
@@ -952,7 +901,7 @@ public class SystemSettingsManager {
             }
             break;
         }
-        this.staffMenu(account);
+        SystemSettingsMenu.getInstance().display(account);
     }
 	/**
 	 * Writes the existing system settings to the systemsettings.csv file for storage

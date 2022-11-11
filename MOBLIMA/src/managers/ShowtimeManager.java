@@ -1,10 +1,7 @@
 package managers;
 
 import java.util.*;
-
-import boundaries.AdminMenu;
 import entities.*;
-
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
@@ -33,102 +30,6 @@ public class ShowtimeManager {
 
     private ShowtimeManager() {}
 
-
-    /**
-     * Function to select and choose Showtime Options
-     * @param account Account of User, Staff or Customer
-     */
-    public void staffMenu(Account account){
-        
-        int option = 0;
-        try{
-                System.out.println("==================== SHOWTIME STAFF APP ====================\n" +
-            					" 1. View Showtime Details                                      \n" +
-                                " 2. Add a Showtime                                             \n" + 
-			            		" 3. Update a Showtime                                          \n" +
-			                    " 4. Remove a Showtime                                          \n" +
-			                    " 5. Go Back                                                    \n"+
-                                "==============================================================");
-                System.out.print("Enter choice: ");
-                option = sc.nextInt();
-                if(!(option >= 1 && option <=5)){
-                    System.out.println("Please only enter a number from 1-5.");
-                    staffMenu(account);
-                }
-
-        }
-        catch(InputMismatchException e){
-            System.out.println("Invalid Input. Please enter a valid option from 1-5 only!");
-            sc.nextLine();
-            staffMenu(account);
-        }
-
-        Cinema cinema;
-
-        Showtime showtime;
-        int[] inputs;
-        int movieID;
-        LocalDateTime dateTime;
-        MovieType movieType;
-        sc.nextLine();
-
-        switch (option) {
-            case 1:
-                inputs = promptShowtimeSelection();
-                if(inputs==null) break;
-                showtime = CineplexManager.getInstance().configCineplexes()[inputs[0]].getCinemas()[inputs[1]].getShowtimes()[inputs[2]];
-                showtime.showInfo();
-                showtime.showSeats();
-                break;
-            case 2:
-                inputs = promptCinemaSelection();
-                if(inputs==null) break;
-                cinema = CineplexManager.getInstance().configCineplexes()[inputs[0]].getCinemas()[inputs[1]];
-                movieID = promptMovieID();
-                if(movieID == -1) break;
-                dateTime = promptDateTime(movieID);
-                if(dateTime == null) break;
-                movieType = promptMovieType();
-                if(movieType == null) break;
-                cinema.addShowtime(movieID, dateTime, movieType);
-                break;
-            case 3:
-                inputs = promptShowtimeSelection();
-                if(inputs==null) break;
-                showtime = CineplexManager.getInstance().configCineplexes()[inputs[0]].getCinemas()[inputs[1]].getShowtimes()[inputs[2]];
-                movieID = promptMovieID();
-                if(movieID == -1) break;
-                dateTime = promptDateTime(movieID);
-                if(dateTime == null) break;
-                movieType = promptMovieType();
-                if(movieType == null) break;
-                showtime.setMovieID(movieID);
-                showtime.setDateTime(dateTime);
-                showtime.setMovieType(movieType);
-
-                System.out.println("Updated!");
-
-                break;
-            case 4:
-                
-                inputs = promptShowtimeSelection();
-
-                if(inputs==null) break;
-
-                cinema = CineplexManager.getInstance().configCineplexes()[inputs[0]].getCinemas()[inputs[1]];
-
-                cinema.deleteShowtime(inputs[2]);
-
-                break;
-            case 5:
-                System.out.println("Back to Staff App......");
-                AdminMenu.getInstance().display(account);
-                break;
-            default:
-                System.out.println("Invalid choice. Please choose between 1-5.");
-                break;
-            }
-    }
 
     /**
      * Function to prompt user for Selection of Cinema

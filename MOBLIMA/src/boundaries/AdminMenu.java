@@ -7,9 +7,7 @@ import entities.Account;
 import java.util.InputMismatchException;
 import java.util.List;
 
-import managers.SystemSettingsManager;
 import managers.AccountManager;
-import managers.ShowtimeManager;
 import managers.StaffAccManager;
 
 /**
@@ -82,10 +80,10 @@ public class AdminMenu implements BaseMenuWithAccount {
                         StaffReviewMenu.getInstance().display(account);
                         break;
                     case 3:
-                        ShowtimeManager.getInstance().staffMenu(account);
+                        StaffShowTimeManagerMenu.getInstance().display(account);
                         break;
                     case 4:
-                        SystemSettingsManager.getInstance().staffMenu(account);
+                        SystemSettingsMenu.getInstance().display(account);
                         break;
                     case 5:
                         if(account.getAccessLevel().equals("SA")){
