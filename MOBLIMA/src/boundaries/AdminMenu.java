@@ -9,8 +9,6 @@ import java.util.List;
 
 import managers.SystemSettingsManager;
 import managers.AccountManager;
-import managers.MovieManager;
-import managers.ReviewManager;
 import managers.ShowtimeManager;
 import managers.StaffAccManager;
 
@@ -78,10 +76,10 @@ public class AdminMenu implements BaseMenuWithAccount {
                 }
                 switch(choice){
                     case 1:
-                        MovieManager.getInstance().staffMenu(account);
+                        MovieManagerMenu.getInstance().display(account);
                         break;
                     case 2:
-                        ReviewManager.getInstance().reviewMenuStaff(account);
+                        StaffReviewMenu.getInstance().display(account);
                         break;
                     case 3:
                         ShowtimeManager.getInstance().staffMenu(account);

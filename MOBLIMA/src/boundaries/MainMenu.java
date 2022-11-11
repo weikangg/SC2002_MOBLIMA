@@ -95,7 +95,7 @@ public class MainMenu implements BaseMenu {
                         Account account = accountManager.getAccount(accountList, username, password);
                         String accessLevel = account.getAccessLevel();
                         if(accessLevel.equals("C")){
-                            customerApp.getInstance().customerLoggedInMenu(account);
+                            CustomerLoggedInMenu.getInstance().display(account);
                         }
                         else{
                             AdminMenu.getInstance().display(account);
@@ -107,7 +107,7 @@ public class MainMenu implements BaseMenu {
                         continue;
                     }
             case 2:
-                customerApp.getInstance().customerGuestMenu();
+                CustomerGuestMenu.getInstance().display();
                 break;
             case 3:
                 sc.close();

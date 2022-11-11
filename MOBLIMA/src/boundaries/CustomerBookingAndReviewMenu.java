@@ -92,7 +92,7 @@ public class CustomerBookingAndReviewMenu implements BaseMenuWithAccount{
                     
                 case 3:
                     System.out.println("Exiting Customer App...");
-                    customerApp.getInstance().customerGuestMenu();
+                    CustomerGuestMenu.getInstance().display();
                     break;
 
                 default:

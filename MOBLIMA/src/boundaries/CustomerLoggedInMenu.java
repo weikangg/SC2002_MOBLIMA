@@ -124,7 +124,7 @@ public class CustomerLoggedInMenu {
                     break;
                 case 5:
                     //review movie
-                    ReviewManager.getInstance().reviewMenuCustomer(0, account);
+                    CustomerReviewMenu.getInstance().display(account);
                     break;
                 case 6:
                     System.out.println("Logging out...");
