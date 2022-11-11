@@ -1,7 +1,8 @@
 package managers;
 
 import java.util.*;
-import view.adminApp;
+
+import boundaries.adminApp;
 import entities.*;
 
 /**

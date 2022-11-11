@@ -1,4 +1,4 @@
-package view;
+package boundaries;
 
 import java.util.Scanner;
 import entities.*;

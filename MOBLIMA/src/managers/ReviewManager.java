@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+
+import boundaries.adminApp;
+import boundaries.customerApp;
 import entities.*;
-import view.adminApp;
-import view.customerApp;
+
 import static utils.IOUtils.*;
 
 /**
