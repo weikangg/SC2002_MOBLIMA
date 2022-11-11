@@ -155,6 +155,7 @@ public class CustomerMovieManager {
 			&& !m.getShowingStatus().equals(ShowingStatus.COMING_SOON))
 			{
 				found = 1;
+				System.out.println("--------------------------------------------------------------");
 				System.out.println("\nMovie Title: "+ m.getMovieTitle());
 				System.out.println("Showing Status: "+ m.getShowingStatus());
 				System.out.println("Synopsis: " + m.getSynopsis());
@@ -186,7 +187,6 @@ public class CustomerMovieManager {
 					System.out.println("No reviews available for this movie right now!");
 				}
 				System.out.println("");
-				System.out.println("--------------------------------------------------------------");
 				//break;
 				
 			}
