@@ -25,7 +25,6 @@ import java.time.format.DateTimeFormatter;
  * @version 2.5
  * @since 08-11-2022
  */
-
 public class CustomerAccManager {
     /**
 	 * The path to the CSV file that stores all the accounts
@@ -245,7 +244,10 @@ public class CustomerAccManager {
         }
         return false;
     }
-
+    /**
+     * Function to check if the user is logged out
+     * @return returns false when the user is logged out
+     */
     public boolean userLogOut(){
         return false;
     }

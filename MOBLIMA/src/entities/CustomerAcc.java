@@ -18,8 +18,8 @@ public class CustomerAcc extends Account {
 	 * @param password	  This is the customer's password
 	 * @param accessLevel This is the customer's accessLevel
 	 */
-    public CustomerAcc(String name, String email, int mobile, int age, String password, String accessLevel)
+    public CustomerAcc(String username, String email, int mobile, int age, String password, String accessLevel)
     {
-        super(name,email,mobile,age,password,accessLevel);
+        super(username,email,mobile,age,password,accessLevel);
     }
 }

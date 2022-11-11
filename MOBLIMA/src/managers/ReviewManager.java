@@ -51,7 +51,7 @@ public class ReviewManager {
 	 * Customer's Menu to manage reviews
      * Choose options to create, read, update, delete reviews
      * @param choice User's option
-     * @param account User's account
+     * @param user User's account
 	 */
     public void reviewMenuCustomer(int choice, Account user){
         int option = 0;
@@ -138,7 +138,7 @@ public class ReviewManager {
 	 * Staff's Menu to manage reviews
      * Choose options to create, read, update, delete reviews of customers, delete own reviews, show all reviews, search for all reviews for a movie
      * @param choice User's option
-     * @param account User's account
+     * @param user User's account
 	 */
     public void reviewMenuStaff(int choice, Account user){
         int option = 0;
@@ -329,7 +329,6 @@ public class ReviewManager {
      * Checks if he has previously inputted a review for that movie. Only 1 review per movie is allowed.
      * Checks if the movie that he wants to review exists. User can only input review for existing movie
      * @param reviewList Existing List of reviews
-     * @param movieList  Existing List of movies
      * @param username   User's username
      * @return true if updating of review was successful, false if unsuccessful
 	 */

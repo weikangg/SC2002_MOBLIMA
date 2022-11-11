@@ -53,14 +53,14 @@ public class Booking implements Serializable{
 	/**
 	 * Constructer class for Booking
 	 * Creates new Booking with necessary information
-	 * @param bookingID
-	 * @param totalPrice
-	 * @param movie
-	 * @param cinema
-	 * @param cineplexID
-	 * @param tt
-	 * @param showtime
-	 * @param transaction
+	 * @param bookingID		The Booking ID
+	 * @param totalPrice	The Total Price of the booking
+	 * @param movie			The Booking's Movie
+	 * @param cinema		The booking's cinema
+	 * @param cineplexID	The booking's cineplexID
+	 * @param tt			The booking's ticket type
+	 * @param showtime		The booking's showtime
+	 * @param transaction	The booking's transaction
 	 */
 	public Booking(String bookingID, String userInfo, double totalPrice, String movie, int cinema, int cineplexID, ArrayList<Ticket> tt, LocalDateTime showtime, Transaction transaction)
 	{
@@ -75,7 +75,6 @@ public class Booking implements Serializable{
 		this.transaction = transaction;
 	}
 
-	
 	/**
 	 * Gets the booking ID
 	 * @return this booking's ID
@@ -115,6 +114,7 @@ public class Booking implements Serializable{
 	//public User getUser() {return this.user;}
 	/**
 	 * get the date and time of the showtime
+	 * @param index 
 	 * @return the showtime for the booking
 	 */
 	public LocalDateTime getShowtime() {return this.showtime;}

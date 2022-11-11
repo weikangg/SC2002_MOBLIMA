@@ -120,14 +120,14 @@ public class MovieListManager {
 	 * @return true if update was successful, false if update was unsuccessful
 	 */
     public boolean addMovieList(List<Movie> movieList, int movieID,String movieTitle, String synopsis,String movieDirector, String cast, String genres, int movieDuration, 
-									   ShowingStatus showingStatus, double profitEarned, MovieRating movieRating, double overallRatingScore, LocalDate releaseDateTime, LocalDate endOfShowingDate, MovieType movieType) {
-        Movie newMovie = new Movie(movieID, movieTitle,showingStatus,synopsis,movieDirector,cast, genres,movieRating,movieDuration,profitEarned,overallRatingScore,releaseDateTime, endOfShowingDate,movieType);
+									   ShowingStatus showingStatus, double profitEarned, MovieRating movieRating, double overallRatingScore, LocalDate releaseDate, LocalDate endOfShowingDate, MovieType movieType) {
+        Movie newMovie = new Movie(movieID, movieTitle,showingStatus,synopsis,movieDirector,cast, genres,movieRating,movieDuration,profitEarned,overallRatingScore,releaseDate, endOfShowingDate,movieType);
         movieList.add(newMovie);
         return updateMovieListCSV(movieList);
     }
 
     /**
-	 * Fetches all the rating scores from complete list of reviews, calculate the average rating score & sets it as the overall rating score for the movie.
+	 * Fetches all the rating scores from complete list of reviews, calculate the average rating score and sets it as the overall rating score for the movie.
 	 * If the movie has no rating, a default value of 0 is set for the overall Rating Score
 	 * @param movieList Existing list of movies
 	 * @param reviewList Existing list of reviews
