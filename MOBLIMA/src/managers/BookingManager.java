@@ -91,8 +91,8 @@ public class BookingManager implements deleteM{
     /** 
      * main page for users to book their seats. Shows the available seats, and calls ticket manager once user confirms
      * their seat selections
-     * @param showtime
-     * @param user
+     * @param showtime selected showtime
+     * @param user current user that is logged in
      */
     public void bookingMenu(Showtime showtime, Account user)
 	{
@@ -161,8 +161,8 @@ public class BookingManager implements deleteM{
     
     /** 
      * Checks if the seat is empty and available for selection
-     * @param row
-     * @param col
+     * @param row row of specific seat
+     * @param col column of specific seat
      * @return Boolean
      */
     public Boolean isSeatEmpty(int row, int col) //Check for showtime seats
@@ -275,7 +275,7 @@ public class BookingManager implements deleteM{
     
     /** 
      * Confirms the customers selections
-     * @param showtime
+     * @param showtime selected showtime
      * @return Boolean
      */
     public Boolean confirmSelection(Showtime showtime)
@@ -307,9 +307,9 @@ public class BookingManager implements deleteM{
     
     /** 
      * Updates the state of the seats to allow showSeat function to display accurate information
-     * @param row
-     * @param col
-     * @param choice
+     * @param row row of selected seat
+     * @param col column of selected seat
+     * @param choice 0,1,2 depending on removing,confirming or adding seat respectively
      */
     public void updateSeats(int row, int col, int choice)
     {
@@ -332,7 +332,7 @@ public class BookingManager implements deleteM{
     
     /** 
      * Returns the seat array
-     * @return int[][]
+     * @return current seat array
      */
     public Seat[][] getSeats()
     {
@@ -390,7 +390,7 @@ public class BookingManager implements deleteM{
     
     /** 
      * stores a new set of seats
-     * @param seats
+     * @param seats new seat array
      */
     public void setSeats(Seat[][] seats)
     {
@@ -399,7 +399,7 @@ public class BookingManager implements deleteM{
     
     /** 
      * stores a new array list of booked seats in string
-     * @param bookedSeats
+     * @param bookedSeats new booked seat array
      */
     public void setBookedSeats(ArrayList<String> bookedSeats)
     {
@@ -408,7 +408,7 @@ public class BookingManager implements deleteM{
     
     /** 
      * stores a new array of tickets
-     * @param bookedTickets
+     * @param bookedTickets new booked ticket array
      */
     public void setBookedTickets(ArrayList<Ticket> bookedTickets)
     {
@@ -417,7 +417,7 @@ public class BookingManager implements deleteM{
     
     /** 
      * stores the new booking class
-     * @param booking
+     * @param booking new booking class
      */
     public void setBooking(Booking booking)
     {
@@ -426,7 +426,7 @@ public class BookingManager implements deleteM{
     
     /** 
      * sets the current showtime
-     * @param showtime
+     * @param showtime selected showtime
      */
     public void setShowTime(Showtime showtime)
     {
@@ -435,7 +435,7 @@ public class BookingManager implements deleteM{
     
     /** 
      * sets the current user
-     * @param user
+     * @param user current logged in user
      */
     public void setUser(Account user)
     {
