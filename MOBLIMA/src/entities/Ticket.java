@@ -9,25 +9,50 @@ import java.time.LocalDateTime;
  * @since 06-11-2022
  */
 public class Ticket implements Serializable{
+	/**
+	 * local date time of the ticket
+	 */
 	private LocalDateTime date;
-	//private Boolean promotion;
+	/**
+	 * ticket price
+	 */
 	private double ticketPrice;
+	/**
+	 * ticket type
+	 */
 	private TicketType tt;
+	/**
+	 * movie type
+	 */
 	private MovieType mt;
+	/**
+	 * cinema class
+	 */
 	private CinemaClass cc;
+	/**
+	 * seat type
+	 */
 	private SeatType st;
+	/**
+	 * row of the seat
+	 */
 	private int row;
+	/**
+	 * column of the seat
+	 */
 	private int col;
 	
 	//constructor
 	/**
 	 * 
-	 * @param date
-	 * @param mt
-	 * @param tt
-	 * @param row
-	 * @param col
-	 * @param ticketPrice
+	 * @param date date of the ticket booking
+	 * @param mt type of movie, affects the price of ticket
+	 * @param tt ticket type, affects the price of the ticket
+	 * @param cc cinema class, affects the price of the ticket
+	 * @param st seat type, affects the price of the ticket
+	 * @param row seat row
+	 * @param col seat col
+	 * @param ticketPrice price of the ticket
 	 */
 	public Ticket(LocalDateTime date, MovieType mt, TicketType tt, CinemaClass cc, SeatType st, int row, int col, double ticketPrice)
 	{
@@ -45,7 +70,6 @@ public class Ticket implements Serializable{
 	 * Gets the date and time of the ticket
 	 * @return LocalDateTime
 	 */
-	//get
 	public LocalDateTime getDate()
 	{
 		return this.date;
@@ -55,10 +79,6 @@ public class Ticket implements Serializable{
 	 * Gets the ticket's type
 	 * @return TicketType
 	 */
-	/*public Boolean isPromo()
-	{
-		return this.promotion;
-	}*/	
 	public TicketType getTicketType()
 	{
 		return this.tt;
@@ -120,20 +140,16 @@ public class Ticket implements Serializable{
 	
 	/** 
 	 * sets the date for the ticket
-	 * @param date
+	 * @param date date of the showtime
 	 */
-	//set
 	public void setDate(LocalDateTime date)
 	{
 		this.date = date;
 	}
-	/*public void setPromo(Boolean promo)
-	{
-		this.promotion = promo;
-	}*/
+
 	/**
 	 * sets the ticket's type 
-	 * @param tt
+	 * @param tt new ticket type
 	 */
 	public void setTicketType(TicketType tt)
 	{
@@ -142,7 +158,7 @@ public class Ticket implements Serializable{
 	
 	/** 
 	 * sets the ticket's price
-	 * @param tp
+	 * @param tp new price
 	 */
 	public void setTicketPrice(double tp)
 	{
@@ -151,7 +167,7 @@ public class Ticket implements Serializable{
 	
 	/** 
 	 * set the movie of the ticket's type
-	 * @param mt
+	 * @param mt new movie type
 	 */
 	public void setMovieType(MovieType mt)
 	{
@@ -160,7 +176,7 @@ public class Ticket implements Serializable{
 
 	/** 
 	 * set the cinema class of the ticket
-	 * @param cc
+	 * @param cc new cinema class
 	 */
 	public void setCinemaClass(CinemaClass cc)
 	{
@@ -169,7 +185,7 @@ public class Ticket implements Serializable{
 
 	/** 
 	 * set the seat type of the ticket
-	 * @param st
+	 * @param st new seat type
 	 */
 	public void setSeatType(SeatType st)
 	{
