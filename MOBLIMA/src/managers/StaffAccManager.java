@@ -241,7 +241,7 @@ import static utils.IOUtils.*;
     }
     /**
 	 * Writes the list of accounts to the accounts.csv file for storage
-	 * @param reviewList Existing list of accounts
+	 * @param accountList Existing list of accounts
 	 * @return true if update was successful, false if update was unsuccessful
 	 */
     public boolean updateAccountListCSV(List<Account>accountList){

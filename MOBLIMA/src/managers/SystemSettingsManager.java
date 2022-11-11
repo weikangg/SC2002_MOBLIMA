@@ -106,7 +106,7 @@ public class SystemSettingsManager {
 
 	/**
 	 * Staff's Menu to manage configure ticket prices
-     * Choose options to configure ticket prices for different ticket types and multiplier rates for different movie types, seat types & cinema classes
+     * Choose options to configure ticket prices for different ticket types and multiplier rates for different movie types, seat types and cinema classes
      * @param account User's account
 	 */
     public void configureTicketPriceMenu(Account account){

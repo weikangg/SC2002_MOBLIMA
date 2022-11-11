@@ -985,6 +985,7 @@ public class StaffMovieCRUDManager {
      * @param mList   Existing List of movies
      * @param rList   Existing list of reviews
      * @param movieID ID of movie
+     * @return 1 if the movie was found and 0 if the movie was not found
 	 */
 	public int printMovieByID(List<Movie>mList, List<Review>rList, int movieID) {
 		int found = 0;
