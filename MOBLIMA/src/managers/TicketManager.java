@@ -281,7 +281,7 @@ public class TicketManager implements deleteM{
     
     /** 
      * gets the list of ticket
-     * @return current ArrayList<Ticket>
+     * @return current array list of tickets
      */
     public ArrayList<Ticket> getTicketArray()
     {
@@ -290,7 +290,7 @@ public class TicketManager implements deleteM{
     
     /** 
      * gets the list of confirmed seats
-     * @return current ArrayList<String>
+     * @return current array list of confirmed seats
      */
     public ArrayList<String> getCSArray()
     {
@@ -390,7 +390,7 @@ public class TicketManager implements deleteM{
     
     /** 
      * sets the local holiday list
-     * @param ArrayListHList
+     * @param HList
      */
     public void setHList(ArrayList<LocalDate>HList)
     {
@@ -400,7 +400,7 @@ public class TicketManager implements deleteM{
     
     /** 
      * gets the local holiday list
-     * @return ArrayList<LocalDate>
+     * @return current local holiday list
      */
     public ArrayList<LocalDate> getHList()
     {
@@ -421,7 +421,7 @@ public class TicketManager implements deleteM{
     
     /** 
      * get the holidates
-     * @return List<Holidays>
+     * @return the current holiday csv
      */
     public List<Holidays> getH()
     {

@@ -198,7 +198,7 @@ public class TransactionManager implements deleteM
     }
     
     /** gets the array list of tickets
-     * @return current ArrayList<Ticket>
+     * @return current array list of tickets
      */
     public ArrayList<Ticket> getTList()
     {
@@ -242,7 +242,7 @@ public class TransactionManager implements deleteM
 
     
     /** sets the ticket array list with the ticketmanager's
-     * @param ArrayListtList
+     * @param tList
      */
     public void setTList(ArrayList<Ticket>tList)
     {

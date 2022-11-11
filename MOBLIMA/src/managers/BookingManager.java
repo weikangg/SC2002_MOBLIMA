@@ -83,6 +83,11 @@ public class BookingManager implements deleteM{
      */
     private BookingManager(){}
 
+	
+
+
+	
+	
     /** 
      * main page for users to book their seats. Shows the available seats, and calls ticket manager once user confirms
      * their seat selections
@@ -336,7 +341,7 @@ public class BookingManager implements deleteM{
     
     /** 
      * return the list of booked seats
-     * @return ArrayList<String>
+     * @return the current string list of booked seats
      */
     public ArrayList<String> getBookedSeats()
     {
@@ -345,7 +350,7 @@ public class BookingManager implements deleteM{
     
     /** 
      * gets the list of tickets
-     * @return ArrayList<Ticket>
+     * @return the current ticket list
      */
     public ArrayList<Ticket> getBookedTickets()
     {
@@ -458,9 +463,8 @@ public class BookingManager implements deleteM{
     /**
      * Final function which creates the Booking and Transaction class and stores all the information into a csv file
      * update all necessary csv files and finally stop all instances
-     * @exception IOException,ClassNotFoundException
+     * @exception IOException
      */
-    @SuppressWarnings("unchecked")
     public void createBooking()
     {
         ArrayList<Booking> userBookings = new ArrayList<Booking>();
