@@ -60,7 +60,14 @@ public class IOUtils {
     public static void print(String message) {
         System.out.println(message);
     }
-
+	
+    /**
+     * Asks for user input within a specified range
+     * @param from starting range
+     * @param to ending range
+     * @param sc scanner class
+     * @return the user's choice
+     */
     public static int check(int from, int to, Scanner sc)
     {
         int choice;
