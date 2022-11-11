@@ -2,6 +2,7 @@ package managers;
 import java.util.*;
 import entities.Transaction;
 import utils.IOUtils;
+import utils.deleteM;
 import entities.Ticket;
 import entities.Movie;
 import entities.Showtime;
@@ -15,7 +16,7 @@ import java.time.format.DateTimeFormatter;
  * @version 3.0
  * @since 06-11-2022
  */
-public class TransactionManager
+public class TransactionManager implements deleteM
 {
     /**
      * stores the trans information
@@ -294,7 +295,7 @@ public class TransactionManager
     /**
      * clears up all information stored in TransactionManager
      */
-    public void deleteTransactionM()
+    public void deleteM()
     {
         trans = null;
         tList.clear();
