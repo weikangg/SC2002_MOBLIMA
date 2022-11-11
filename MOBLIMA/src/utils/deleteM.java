@@ -3,7 +3,7 @@ package utils;
  * An interface to reset self, abstract methods resetSelf.
  * @author Jovan
  * @version 1.0
- * @since 01-11-2022
+ * @since 11-11-2022
  */
 
 public interface deleteM {

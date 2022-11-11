@@ -3,19 +3,25 @@ package boundaries;
 import java.util.*;
 import entities.*;
 import managers.*;
+/**
+ * The class for the customer booking and review menu
+ * @author Wei Kang
+ * @version 3.0
+ * @since 11-11-2022
+ */
 
 public class CustomerBookingAndReviewMenu implements BaseMenuWithAccount{
     /**
-	 * For singleton pattern adherence. This MovieListManager instance persists throughout runtime.
+	 * For singleton pattern adherence. This CustomerBookingAndReviewMenu instance persists throughout runtime.
 	 */
-    private static CustomerGuestMenu newInstance = null;
+    private static CustomerBookingAndReviewMenu newInstance = null;
     /**
 	 * For singleton pattern adherence. 
 	 * @return instance The static instance that persists throughout runtime.
 	 */
-    public static CustomerGuestMenu getInstance(){
+    public static CustomerBookingAndReviewMenu getInstance(){
         if (newInstance == null){
-            newInstance = new CustomerGuestMenu();
+            newInstance = new CustomerBookingAndReviewMenu();
         }
         return newInstance;
     }
@@ -92,12 +98,15 @@ public class CustomerBookingAndReviewMenu implements BaseMenuWithAccount{
                     
                 case 3:
                     System.out.println("Exiting Customer App...");
-                    CustomerGuestMenu.getInstance().display();
+                    exit = true;
+                    CustomerLoggedInMenu.getInstance().display(user);
                     break;
 
                 default:
-                System.out.println("Please enter a valid option (1-3) only.");
+                    System.out.println("Please enter a valid option (1-3) only.");
+                    this.display(user);
             }
         }while(exit == false);
+        CustomerLoggedInMenu.getInstance().display(user);
     }
 }

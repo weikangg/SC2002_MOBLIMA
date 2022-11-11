@@ -3,10 +3,16 @@ package boundaries;
 import entities.*;
 import managers.*;
 import java.util.*;
+/**
+ * The class for the customer guest menu
+ * @author Wei Kang
+ * @version 3.0
+ * @since 11-11-2022
+ */
 
 public class CustomerGuestMenu implements BaseMenu{
     /**
-	 * For singleton pattern adherence. This MovieListManager instance persists throughout runtime.
+	 * For singleton pattern adherence. This CustomerGuestMenu instance persists throughout runtime.
 	 */
     private static CustomerGuestMenu newInstance = null;
     /**
@@ -187,7 +193,6 @@ public class CustomerGuestMenu implements BaseMenu{
                     System.out.println("Please enter a valid option");
                     this.display();
             }
-
         }while(exit == false);
     }
 }

@@ -3,6 +3,12 @@ package boundaries;
 import java.util.*;
 import entities.*;
 import managers.*;
+/**
+ * The class for the customer logged in menu
+ * @author Wei Kang
+ * @version 3.0
+ * @since 11-11-2022
+ */
 
 public class CustomerLoggedInMenu {
     /**
@@ -63,7 +69,7 @@ public class CustomerLoggedInMenu {
             //cases for each input
             switch(input){
                 case 1:
-                    CustomerBookingAndReviewMenu.getInstance().display();
+                    CustomerBookingAndReviewMenu.getInstance().display(account);
                     break;
 
                 case 2:
@@ -135,8 +141,6 @@ public class CustomerLoggedInMenu {
                     System.out.println("Please enter a valid option from 1-6 only!");
                     display(account);
             }
-
-
         }while(exit == false);
     }
 }

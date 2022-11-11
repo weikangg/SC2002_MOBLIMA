@@ -6,11 +6,12 @@ import managers.*;
 import entities.*;
 
 /**
- * A manager class for all actions related to the staff to manage movies
+ * The class for the movie manager menu
  * @author Wei Kang
- * @version 2.5
- * @since 01-11-2022
+ * @version 3.0
+ * @since 11-11-2022
  */
+
 public class MovieManagerMenu implements BaseMenuWithAccount{    
 	/**
 	 * The scanner for reading input of user

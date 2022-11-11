@@ -3,6 +3,12 @@ import java.time.LocalDateTime;
 import java.util.*;
 import entities.*;
 import managers.*;
+/**
+ * The class for the menu for the staff to manage showtimes
+ * @author Wei Kang
+ * @version 3.0
+ * @since 11-11-2022
+ */
 
 public class StaffShowTimeManagerMenu implements BaseMenuWithAccount{
      /**

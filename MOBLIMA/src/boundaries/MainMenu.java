@@ -5,8 +5,12 @@ import entities.*;
 import managers.*;
 
 /**
- * The main menu for all users
+ * The class for the main menu
+ * @author Wei Kang
+ * @version 3.0
+ * @since 11-11-2022
  */
+
 public class MainMenu implements BaseMenu {
 	/**
 	 * The scanner for reading input of user

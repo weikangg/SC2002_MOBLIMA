@@ -11,15 +11,15 @@ import managers.AccountManager;
 import managers.StaffAccManager;
 
 /**
- * The class for our adminApp 
+ * The class for the menu for our admin menu
  * @author Wei Kang
- * @version 2.5
- * @since 01-11-2022
+ * @version 3.0
+ * @since 11-11-2022
  */
 
 public class AdminMenu implements BaseMenuWithAccount {
 	/**
-	 * For singleton pattern adherence. This MovieListManager instance persists throughout runtime.
+	 * For singleton pattern adherence. This AdminMenu instance persists throughout runtime.
 	 */
     private static AdminMenu newInstance = null;
 	/**
@@ -27,7 +27,7 @@ public class AdminMenu implements BaseMenuWithAccount {
 	 */
     private static Scanner sc = new Scanner(System.in);
 	/**
-	 * The default constructor for the adminApp class
+	 * The default constructor for the AdminMenu class
 	 */
     private AdminMenu(){}
 

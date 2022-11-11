@@ -2,6 +2,14 @@ package boundaries;
 import java.util.*;
 import entities.*;
 import managers.*;
+
+/**
+ * The class for the customer review menu
+ * @author Wei Kang
+ * @version 3.0
+ * @since 11-11-2022
+ */
+
 public class CustomerReviewMenu implements BaseMenuWithAccount {
     /**
 	 * The scanner for reading input of user
