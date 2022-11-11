@@ -11,6 +11,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.EnumMap;
 
+/**
+ * Class that maps various enums to their prices
+ * @author Jovan Sie
+ * @version 1.0
+ * @since 06-11-2022
+ */
 public class TicketPrice implements Serializable{
 	/**
 	 * Maps TicketType enum to a price
