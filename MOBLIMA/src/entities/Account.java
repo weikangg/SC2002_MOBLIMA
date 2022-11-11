@@ -33,11 +33,17 @@ public class Account {
     private String accessLevel;
     
 	/**
-	 * The default constructor for the Account class
+	 * This constructor is used to create a new Account object
+     * @param username       This is the account's username
+	 * @param email	         This is the account holder's email
+	 * @param mobile	     This is the account holder's mobile
+	 * @param age		     This is the account holder's age
+	 * @param password	     This is the account's password
+	 * @param accessLevel    This is the account's accessLevel
 	 */
-	public Account(String name, String email, int mobile, int age, String password, String accessLevel)
+	public Account(String username, String email, int mobile, int age, String password, String accessLevel)
     {
-        this.username = name;
+        this.username = username;
         this.email = email;
         this.mobile = mobile;
         this.age = age;

@@ -22,10 +22,6 @@ public class SystemSettings {
 	 */
     private static Locale usa = new Locale("en", "US");
 	/**
-	 * Create a Currency instance for the Locale
-	 */
-    private static Currency dollars = Currency.getInstance(usa);
-	/**
 	 * Create a formatter given the Locale
 	 */
     private static NumberFormat dollarFormat = NumberFormat.getCurrencyInstance(usa);

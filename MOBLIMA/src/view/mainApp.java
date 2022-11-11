@@ -38,6 +38,7 @@ public class mainApp {
      * Main function to display main menu
      * Login to go to either Staff or Customer Menu based on account's access level
      * Or simply continue as Guest
+     * @param args Arguments of main methods
 	 */
     public static void main(String[] args){
 

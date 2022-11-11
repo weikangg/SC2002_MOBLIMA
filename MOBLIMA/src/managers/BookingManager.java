@@ -8,7 +8,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import entities.*;
 import utils.*;
@@ -84,11 +83,6 @@ public class BookingManager implements deleteM{
      */
     private BookingManager(){}
 
-	
-
-
-	
-	
     /** 
      * main page for users to book their seats. Shows the available seats, and calls ticket manager once user confirms
      * their seat selections
@@ -466,6 +460,7 @@ public class BookingManager implements deleteM{
      * update all necessary csv files and finally stop all instances
      * @exception IOException,ClassNotFoundException
      */
+    @SuppressWarnings("unchecked")
     public void createBooking()
     {
         ArrayList<Booking> userBookings = new ArrayList<Booking>();
