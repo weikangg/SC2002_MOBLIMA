@@ -142,7 +142,7 @@ public class ShowtimeManager {
             //Prompt Cineplexes
             Cineplex[] cineplexes = CineplexManager.getInstance().configCineplexes(); 
             for(int i = 0; i < cineplexes.length; i++){
-                System.out.println((i+1) + ": " + cineplexes[i].getName());
+                System.out.println((i+1) + ": " + cineplexes[i].getName().replace("_"," "));
             }
 
             System.out.println("");
@@ -198,7 +198,7 @@ public class ShowtimeManager {
             //Prompt Cineplexes
             Cineplex[] cineplexes = CineplexManager.getInstance().configCineplexes(); 
             for(int i = 0; i < cineplexes.length; i++){
-                System.out.println((i+1) + ": " + cineplexes[i].getName());
+                System.out.println((i+1) + ": " + cineplexes[i].getName().replace("_"," "));
             }
 
             System.out.println("");
