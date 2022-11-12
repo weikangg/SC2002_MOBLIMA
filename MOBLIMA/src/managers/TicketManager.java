@@ -412,7 +412,7 @@ public class TicketManager implements deleteM{
     
     /** 
      * set the holiday list from csv
-     * @param ListHList new holiday list from csv
+     * @param HList new holiday list from csv
      */
     public void setH(List<Holidays>HList)
     {
