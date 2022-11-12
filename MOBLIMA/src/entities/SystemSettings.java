@@ -109,7 +109,8 @@ public class SystemSettings {
         this.customerViewTop5OverallRating = permission;
     }
 	/**
-	 * Set Permission for Customers to view Top 5 movies by Sales . Public method.
+	 * Set Rating score limit for customers . Public method.
+     * Customers can only view reviews above this limit set by the staff. For e.g. if the limit is 3.0, then customers can only see reviews with a rating score > 3.
 	 * @param ratingScoreLimit double containing ratingScoreLimit.
 	 */
     public void setRatingScoreLimit(double ratingScoreLimit){
