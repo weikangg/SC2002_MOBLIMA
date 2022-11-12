@@ -83,8 +83,9 @@ public class StaffShowTimeManagerMenu implements BaseMenuWithAccount{
                 if(movieID == -1) break;
                 dateTime = ShowtimeManager.getInstance().promptDateTime(movieID);
                 if(dateTime == null) break;
-                movieType = ShowtimeManager.getInstance().promptMovieType();
-                if(movieType == null) break;
+                // movieType = ShowtimeManager.getInstance().promptMovieType();
+                // if(movieType == null) break;
+                movieType = MovieListManager.getInstance().getMovie(movieID).getMovieType();
                 cinema.addShowtime(movieID, dateTime, movieType);
                 break;
             case 3:
@@ -95,8 +96,9 @@ public class StaffShowTimeManagerMenu implements BaseMenuWithAccount{
                 if(movieID == -1) break;
                 dateTime = ShowtimeManager.getInstance().promptDateTime(movieID);
                 if(dateTime == null) break;
-                movieType = ShowtimeManager.getInstance().promptMovieType();
-                if(movieType == null) break;
+                // movieType = ShowtimeManager.getInstance().promptMovieType();
+                // if(movieType == null) break;
+                movieType = MovieListManager.getInstance().getMovie(movieID).getMovieType();
                 showtime.setMovieID(movieID);
                 showtime.setDateTime(dateTime);
                 showtime.setMovieType(movieType);

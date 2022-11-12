@@ -125,16 +125,17 @@ public class Showtime implements Serializable{
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
             this.dateTime = dateTime;
+            this.movieType = MovieListManager.getInstance().getMovie(movieID).getMovieType();
             
-            if(r.get(1)[2].equals("TWOD")){
-                this.movieType = MovieType.TWOD;
-            }else if(r.get(1)[2].equals("THREED")){
-                this.movieType = MovieType.THREED;
-            }else if(r.get(1)[2].equals("IMAX")){
-                this.movieType = MovieType.IMAX;
-            }else{
-                this.movieType = MovieType.BLOCKBUSTER;
-            }
+            // if(r.get(1)[2].equals("TWOD")){
+            //     this.movieType = MovieType.TWOD;
+            // }else if(r.get(1)[2].equals("THREED")){
+            //     this.movieType = MovieType.THREED;
+            // }else if(r.get(1)[2].equals("IMAX")){
+            //     this.movieType = MovieType.IMAX;
+            // }else{
+            //     this.movieType = MovieType.BLOCKBUSTER;
+            // }
 
             Seat[][] seats = new Seat[5][10];
 

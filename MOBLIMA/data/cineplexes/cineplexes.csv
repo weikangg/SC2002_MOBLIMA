@@ -1,4 +1,4 @@
 Name,Location,numCinemas,numShowtimes[],cinemaClass[]
-Cathay_Cineplexes_GEM,Location A,3,3,2,2,SILVER,GOLD,PLATINUM
+Cathay_Cineplexes_GEM,Location A,3,4,2,2,SILVER,GOLD,PLATINUM
 Cathay_Cineplexes_AMK,Location B,4,3,2,2,2,SILVER,GOLD,PLATINUM,DIAMOND
 Cathay_Cineplexes_Cineleisure,Location C,2,3,3,SILVER,PLATINUM
