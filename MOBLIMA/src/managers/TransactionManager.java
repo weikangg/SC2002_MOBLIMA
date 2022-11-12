@@ -283,7 +283,7 @@ public class TransactionManager implements deleteM
         }
         this.totalPrice = totalPrice;
     }
-    /*
+    /**
      * sets the isPromo to true;
      */
     public void usePromo()
