@@ -89,12 +89,12 @@ public class CustomerMovieManager {
 				System.out.println("Movie Rating: " + m.getMovieRating());
 				System.out.println("Movie Duration: " + m.getMovieDuration() + " minutes");
 				for(Review r: rList){
+					if(r.getMovieTitle().equalsIgnoreCase(m.getMovieTitle()) && r.getRatingScore() >= ratingScoreLimit){
+						reviewCount++;
+					}
 					if(reviewCount > 1 ){
 						printOverallRating = 1;
 						break;
-					}
-					if(r.getMovieTitle().equalsIgnoreCase(m.getMovieTitle()) && r.getRatingScore() >= ratingScoreLimit){
-						reviewCount++;
 					}
 				}
 				if(printOverallRating == 1){

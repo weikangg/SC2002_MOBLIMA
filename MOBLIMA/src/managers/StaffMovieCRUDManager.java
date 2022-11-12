@@ -16,6 +16,7 @@ import static managers.ReviewListManager.*;
 import static utils.IOUtils.*;
 import java.util.Scanner;
 
+
 /**
  * A manager class for all actions related to the staff to create, read, update and delete movies
  * @author Wei Kang
@@ -948,12 +949,12 @@ public class StaffMovieCRUDManager {
 				BigDecimal bd = new BigDecimal(profitEarned);
 				System.out.println("Profit Earned: " + dollarFormat.format(bd));
 				for(Review r: rList){
+                    if(r.getMovieTitle().equalsIgnoreCase(m.getMovieTitle())){
+						reviewCount++;
+					}
 					if(reviewCount > 1 ){
 						printOverallRating = 1;
 						break;
-					}
-					if(r.getMovieTitle().equalsIgnoreCase(m.getMovieTitle())){
-						reviewCount++;
 					}
 				}
 				if(printOverallRating == 1){
@@ -1023,12 +1024,12 @@ public class StaffMovieCRUDManager {
 				BigDecimal bd = new BigDecimal(profitEarned);
 				System.out.println("Profit Earned: " + dollarFormat.format(bd));
 				for(Review r: rList){
+                    if(r.getMovieTitle().equalsIgnoreCase(m.getMovieTitle())){
+						reviewCount++;
+					}
 					if(reviewCount > 1 ){
 						printOverallRating = 1;
 						break;
-					}
-					if(r.getMovieTitle().equalsIgnoreCase(m.getMovieTitle())){
-						reviewCount++;
 					}
 				}
 				if(printOverallRating == 1){
