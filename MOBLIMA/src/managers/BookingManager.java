@@ -1,6 +1,7 @@
 package managers;
 
 import java.util.Scanner;
+//import java.io.Console;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -462,7 +463,7 @@ public class BookingManager implements deleteM{
     /**
      * Final function which creates the Booking and Transaction class and stores all the information into a csv file
      * update all necessary csv files and finally stop all instances
-     * @exception IOException
+     * 
      */
     public void createBooking()
     {
