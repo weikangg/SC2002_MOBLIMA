@@ -1,6 +1,4 @@
 USERNAME,EMAIL,MOBILE,AGE,PASSWORD,ACCESS_LEVEL
-test,boblim@gmail.com,12345678,22,test,C
-1,1@gmail.com,12345678,1,1,SA
 WeiKang,wei1234@gmail.com,87635263,21,Weikang@1234,A
 SuperAdmin,superAdmin1234@gmail.com,83444567,21,SuperAdmin@1234,SA
 Jovan,jovan123@gmail.com,22,81234567,Jovan@2345,A
