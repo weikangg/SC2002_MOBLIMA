@@ -90,7 +90,7 @@ public class Showtime implements Serializable{
     private Movie movie;
 
     /**
-     * Creates a new Showtime by inheriting from Cinema, and also showtimeID
+     * Creates a new Showtime Object
      * @param name Name of Cineplex
      * @param location Location of Cineplex
      * @param numCinemas Location of Cineplex

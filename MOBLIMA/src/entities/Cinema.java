@@ -60,7 +60,7 @@ public class Cinema {
     private Showtime[] showtimes;
 
     /**
-     * Creates a new Cinema by inheriting from Cineplex, and also the Cinema's ID and Class
+     * Creates a new Cinema Object
      * @param name Name of Cineplex
      * @param location Location of Cineplex
      * @param numCinemas Location of Cineplex
