@@ -494,7 +494,7 @@ public class BookingManager implements deleteM{
             //System.out.println("Transaction Number: " + userBookings.get(0).getTransaction().getID());
             //System.out.println("User info: " + userBookings.get(0).getUserInfo());
         }
-        String userBooks = "B" + userBookings.size();
+        String userBooks = "B" + (userBookings.size()/2);
         Booking newB = new Booking(userBooks,TransactionManager.getInstance().getUserInfo(),TransactionManager.getInstance().getTotalPrice(),getShowtime().getMovieTitle(),
         getShowtime().getCinemaID(),getShowtime().getCineplexID(),TransactionManager.getInstance().getTList(),
         getShowtime().getDateTimeLDT(),TransactionManager.getInstance().getTransaction());

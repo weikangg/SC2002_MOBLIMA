@@ -82,9 +82,14 @@ public class CustomerBookingAndReviewMenu implements BaseMenuWithAccount{
                     idx++;
                 }
                 //ask user to choose a movie timing
-                System.out.println("Please choose a timing:");
-                input = scan.nextInt();
+                do{
+                    System.out.println("Please choose a timing:");
+                    input = scan.nextInt();
+                }while(input >= idx || input < 1);
+
+
                 movst = showtime.get(input - 1);
+
 
                 //call bookingmenu in booking manager
                 BookingManager.newBM().bookingMenu(movst, user);
