@@ -54,6 +54,7 @@ public class Booking implements Serializable{
 	 * Constructer class for Booking
 	 * Creates new Booking with necessary information
 	 * @param bookingID booking ID of the current booking
+	 * @param userInfo userInfo contains email, mobile number and name of the user combined in a string
 	 * @param totalPrice total price of the tickets
 	 * @param movie title of the movie
 	 * @param cinema cinema number
