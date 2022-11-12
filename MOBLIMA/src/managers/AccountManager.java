@@ -179,11 +179,11 @@ public class AccountManager {
 	 * Checks if the email input is valid based on pre-defined regex when creating new account
      * For the Local Part:
      * It allows numeric values from 0 to 9. Both uppercase and lowercase letters from a to z are allowed.
-     * Allowed are underscore “_”, hyphen “-“, and dot “.” Dot isn't allowed at the start and end of the local part.
+     * Allowed are underscore, hyphen, and dot. Dot isn't allowed at the start and end of the local part.
      * Consecutive dots aren't allowed. Maximum of 64 characters are allowed.
      * For the Domain part:
      * It allows numeric values from 0 to 9. We allow both uppercase and lowercase letters from a to z.
-     * Hyphen “-” and dot “.” aren't allowed at the start and end of the domain part. No consecutive dots.
+     * Hyphen and dot aren't allowed at the start and end of the domain part. No consecutive dots.
      * @param emailAddress Email to be checked for validity
 	 * @return  true if email is valid, false if email is not valid
 	 */
