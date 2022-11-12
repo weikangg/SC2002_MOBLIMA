@@ -76,6 +76,7 @@ public class CustomerMovieManager {
 				String genretmp = m.getGenres();
 				int reviewCount = 0, hasReviews = 0, printOverallRating = 0;;
 				System.out.printf("----------------- MOVIE %d -----------------\n", movieCount);
+				System.out.println("Movie ID: " + m.getMovieID());
 				System.out.println("Movie Title: "+ m.getMovieTitle());
 				System.out.println("Showing Status: "+ m.getShowingStatus());
 				System.out.println("Synopsis: " + m.getSynopsis());
@@ -102,6 +103,7 @@ public class CustomerMovieManager {
 					System.out.println("Overall Rating Score: NA");
 				}
 				System.out.println("Release Date: " + m.getReleaseDate().toString());
+				System.out.println("End of Showing Date: " + m.getEndOfShowingDate());
 				System.out.println("Movie Type: " + m.getMovieType());
 				System.out.println("");
 				System.out.println("Some Review Information of " + m.getMovieTitle() + ":");
@@ -169,6 +171,7 @@ public class CustomerMovieManager {
 				System.out.println("Movie Duration: " + m.getMovieDuration());
 				System.out.printf("Overall Rating Score: %.1f/5\n", m.getOverallRatingScore());
 				System.out.println("Release Date: " + m.getReleaseDate().toString());
+				System.out.println("End of Showing Date: " + m.getEndOfShowingDate());
 				System.out.println("Movie Type: " + m.getMovieType());
 				System.out.println("");
 
