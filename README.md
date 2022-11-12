@@ -25,7 +25,7 @@ We attempted to make use of Object Oriented concepts and SOLID design principles
 ## Our Collaborators
 - [Chong Wei Kang](https://github.com/weikangg)
 - [Aloysius Ng](https://github.com/metalalloy)
-- [Jovan Sie]
+- [Jovan Sie](https://github.com/jvnsjh)
 - [Lau Ling Hin]
 - [Andrew Leung]
 
