@@ -10,7 +10,7 @@ import managers.*;
  * @since 11-11-2022
  */
 
-public class CustomerLoggedInMenu {
+public class CustomerLoggedInMenu implements BaseMenuWithAccount {
     /**
 	 * For singleton pattern adherence. This MovieListManager instance persists throughout runtime.
 	 */
