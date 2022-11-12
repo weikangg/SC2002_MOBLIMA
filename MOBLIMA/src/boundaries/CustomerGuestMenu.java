@@ -113,8 +113,19 @@ public class CustomerGuestMenu implements BaseMenu{
                         idx++;
                     }
                     //ask user to choose a movie timing
-                    System.out.println("Please choose a timing:");
-                    input = scan.nextInt();
+                    do{
+                        try{
+                            System.out.println("Please choose a timing:");
+                            input = scan.nextInt();
+                            scan.nextLine();
+                            break;
+                        }catch(InputMismatchException e){
+                            scan.nextLine();
+                            System.out.println("Please enter a number!");
+                            continue;
+                        }
+                        
+                    }while(input >= idx || input < 1);
                     movst = showtime.get(input - 1);
     
                     //call bookingmenu in booking manager
