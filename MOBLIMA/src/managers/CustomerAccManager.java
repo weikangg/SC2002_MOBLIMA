@@ -17,7 +17,6 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.io.FileNotFoundException;
 import java.time.format.DateTimeFormatter;
-@SuppressWarnings("unchecked")
 
 /**
  * Function class that configures user account information
@@ -25,7 +24,7 @@ import java.time.format.DateTimeFormatter;
  * @version 2.5
  * @since 08-11-2022
  */
-
+@SuppressWarnings("unchecked")
 public class CustomerAccManager {
     /**
 	 * The path to the CSV file that stores all the accounts
