@@ -89,6 +89,7 @@ public class TicketManager implements deleteM{
      */
     public void ticketMenu(Showtime showtime, ArrayList<String> confirmedSeats, Seat[][] plan)
 	{
+	tp = new TicketPrice();
         //System.out.println("Inside Ticket Menu");
         setH(HolidayListManager.getInstance().getHolidayList());
         ArrayList<Ticket> ticketArray = new ArrayList<>();
