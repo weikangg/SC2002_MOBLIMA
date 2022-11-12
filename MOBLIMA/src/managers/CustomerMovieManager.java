@@ -2,6 +2,7 @@ package managers;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -233,8 +234,15 @@ public class CustomerMovieManager {
                                 "3. Cathay Cineplexes Cineleisure\n");
 			System.out.println("========================================================");
             System.out.println("Enter your choice:");
-            cineplexID = scan.nextInt();
-            scan.nextLine();
+            try{
+				cineplexID = scan.nextInt();
+				scan.nextLine();
+			}catch(InputMismatchException e){
+				System.out.println("Please enter a valid option from 1-3 only");
+				scan.nextLine();
+				continue;
+			}
+
             if(cineplexID > 3 || cineplexID < 1)
             {
                 System.out.println("Please enter a valid option!");

@@ -1,15 +1,15 @@
 REVIEW_ID,MOVIE_TITLE,REVIEWER,REVIEW_DESCRIPTION,RATING_SCORE
-1,Black Panther: wakanda forever,WeiKang,It was a good movie!,5.0
-2,Captain Marvel,WeiKang,Captain Marvel was amazing.,5.0
-3,Black Panther: Wakanda Forever,WeiKang,Action Packed and Funny at times!,4.8
-4,Harry Potter and the Philosopher's Stone,WeiKang,Everything I could have asked as a huge fan,4.9
-5,Titanic,Jovan,Much more than I expected,4.5
+1,Black Panther: wakanda forever,WeiKang,It was a bad movie!,2.0
+2,Captain Marvel,WeiKang,Captain Marvel was amazing.,2.5
+3,Black Panther: Wakanda Forever,WeiKang,Action Packed and Funny at times!,3.0
+4,Harry Potter and the Philosopher's Stone,WeiKang,Everything I could have asked as a huge fan,3.5
+5,Titanic,Jovan,Much more than I expected,3.5
 6,Jurassic Park,Jovan,Solid popcorn entertainment,4.0
-7,Shrek,Aloysius,Great visuals and lots of humour!,4.7
-8,Captain Marvel,Aloysius,Captain Marvel was really cool!,5.0
+7,Shrek,Aloysius,Poor visuals and lack of humour!,2.7
+8,Captain Marvel,Aloysius,Captain Marvel was not cool!,2.5
 9,Star Wars,LingHin,When Summer blockbusters go really wrong...,2.0
 10,Captain Marvel,LingHin,How could the MCU mess this up?,1.0
-11,Black Panther: Wakanda Forever,LingHin,the best action movie in awhile!,5.0
+11,Black Panther: Wakanda Forever,LingHin,the worst action movie in awhile!,1.5
 12,The Godfather,Andrew,Absolutely terrible movie.....,1.0
 13,Harry Potter and the Philosopher's Stone,Andrew,Exactly like the book; it's what i was looking for!,4.8
 14,Guardians of the Galaxy,Jovan,What a horrendous Movie... Not worth the buck!,3
