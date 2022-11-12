@@ -307,9 +307,9 @@ public class CustomerAccManager {
             file.close();
 
         }catch(IOException ex){
-            System.out.println("IOException is caught");
+            System.out.println("No bookings have been made yet");
         } catch (ClassNotFoundException exp) {
-            System.out.println("Class not found");
+            System.out.println("No bookings have been made yet");
         }
         while(input != 0)
         {
