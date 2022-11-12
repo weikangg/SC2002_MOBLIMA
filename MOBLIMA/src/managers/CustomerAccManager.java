@@ -294,7 +294,7 @@ public class CustomerAccManager {
                     tix = b.getTicketList();
                     for(int i = 0; i < tix.size(); i++)
                     {
-                        System.out.println("    Ticket " + (i+1) + " : " + " Row " + tix.get(i).getRow() + " Column " + tix.get(i).getCol() + " $" + String.format("%.2f", tix.get(i).getTicketPrice()));
+                        System.out.println("    Ticket " + (i+1) + " : " + " Row " +  + (char)(tix.get(i).getRow()+65) + " Column " + tix.get(i).getCol() + " $" + String.format("%.2f", tix.get(i).getTicketPrice()));
                     }
                     System.out.println("Transaction Date: " + b.getTransaction().getTranDateTime().substring(0,4)  + "-" +  b.getTransaction().getTranDateTime().substring(4,6) + "-" +  b.getTransaction().getTranDateTime().substring(6,8));
                     System.out.println("Transaction Time: " +  b.getTransaction().getTranDateTime().substring(8,10) + ":" +  b.getTransaction().getTranDateTime().substring(10));
