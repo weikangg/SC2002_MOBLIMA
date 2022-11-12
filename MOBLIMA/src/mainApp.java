@@ -2,6 +2,10 @@
 import java.io.File;
 
 import boundaries.MainMenu;
+import managers.CineplexManager;
+import entities.Cineplex;
+import entities.Showtime;
+import entities.Cinema;
 /**
  * The class for our Main app to run 
  * Allows user to either run as Guest or Login to make bookings
@@ -24,5 +28,7 @@ public class mainApp {
         if (directory.exists()) System.setProperty("user.dir", directory.getAbsolutePath());
         
         MainMenu.getInstance().display();
+
+        
     }
 }
