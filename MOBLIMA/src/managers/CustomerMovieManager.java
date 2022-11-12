@@ -143,11 +143,12 @@ public class CustomerMovieManager {
 		int found = 0;
 		for(Movie m : mList){
 			CharSequence cs;
+			SystemSettings systemSettings = SystemSettings.getInstance();
 			String cast, genre;
 			String casttmp = m.getCast();
 			String genretmp = m.getGenres();
-			int count = 1, hasReviews = 0;
-
+			int count = 1, hasReviews = 0, reviewCount = 0, printOverallRating = 0;
+			double ratingScoreLimit = systemSettings.getRatingScoreLimit();
 			//regex
 			cs = m.getMovieTitle();
 			Pattern p = Pattern.compile(name, Pattern.CASE_INSENSITIVE);
@@ -170,7 +171,21 @@ public class CustomerMovieManager {
 				System.out.println("Genres: "+ genre);
 				System.out.println("Movie Rating: " + m.getMovieRating());
 				System.out.println("Movie Duration: " + m.getMovieDuration());
-				System.out.printf("Overall Rating Score: %.1f/5\n", m.getOverallRatingScore());
+
+				for(Review r: rList){
+					if(r.getMovieTitle().equalsIgnoreCase(m.getMovieTitle()) && r.getRatingScore() >= ratingScoreLimit){
+						reviewCount++;
+					}
+					if(reviewCount > 1 ){
+						printOverallRating = 1;
+						break;
+					}
+				}
+				if(printOverallRating == 1){
+					System.out.printf("Overall Rating Score: %.1f/5\n" , m.getOverallRatingScore() );
+				}else{
+					System.out.println("Overall Rating Score: NA");
+				}
 				System.out.println("Release Date: " + m.getReleaseDate().toString());
 				System.out.println("End of Showing Date: " + m.getEndOfShowingDate());
 				System.out.println("Movie Type: " + m.getMovieType());
