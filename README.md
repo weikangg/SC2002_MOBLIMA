@@ -6,7 +6,7 @@ This is the repository for the SC2002 Object-Oriented Design &amp; Programming a
     <ol>
         <li><a href="#what-is-MOBLIMA">What is MOBLIMA?</a></li>
         <li><a href="#design-considerations">Design Considerations</a></li>
-        <li><a href="#Collaborators"> Our Collaborators</a></li>
+        <li><a href="#our-collaborators"> Our Collaborators</a></li>
     </ol>
 </details>
 
